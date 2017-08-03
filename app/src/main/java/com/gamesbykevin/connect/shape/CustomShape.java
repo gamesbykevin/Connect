@@ -13,7 +13,7 @@ import javax.microedition.khronos.opengles.GL10;
 
 public class CustomShape extends Entity implements ICommon {
 
-    private static final int DEFAULT_DIMENSION = 175;
+    public static final int DEFAULT_DIMENSION = 75;
 
     //are we rotating
     private boolean rotate = false;
@@ -26,14 +26,14 @@ public class CustomShape extends Entity implements ICommon {
      */
     public static final float ROTATE_VELOCITY_SQUARE = 6.0f;
     public static final float ROTATE_VELOCITY_HEXAGON = 4.0f;
-    public static final float ROTATE_VELOCITY_TRIANGLE = 8.0f;
+    public static final float ROTATE_VELOCITY_DIAMOND = 6.0f;
 
     /**
      * How many degrees is each rotation for the given shape
      */
     public static final float ROTATION_ANGLE_SQUARE = 90.0f;
     public static final float ROTATION_ANGLE_HEXAGON = 60.0f;
-    public static final float ROTATION_ANGLE_TRIANGLE = 120.0f;
+    public static final float ROTATION_ANGLE_DIAMOND = 90.0f;
 
     /**
      * The largest angle allowed
@@ -45,18 +45,45 @@ public class CustomShape extends Entity implements ICommon {
      */
     public static final float ANGLE_MIN = 0.0f;
 
+    public boolean connected = false;
+
     private final Board.Shape shape;
+
+    public enum Connections {
+        N(180), S(0), E(270), W(90),
+        NE(270), NW(180), SE(0), SW(90), NS(0), WE(90),
+        NSW(90), NSE(270), WEN(180), WES(0),
+        NSEW(0);
+
+        private final float angleAdjustment;
+
+        private Connections(float angleAdjustment) {
+            this.angleAdjustment = angleAdjustment;
+        }
+
+        public float getAngleAdjustment() {
+            return this.angleAdjustment;
+        }
+    }
+
+    private Connections connection;
 
     /**
      * Default constructor
      */
-    public CustomShape(final Board.Shape shape) {
+    public CustomShape(final Board.Shape shape, final Connections connection) {
+
         super();
 
         this.shape = shape;
+        this.connection = connection;
 
         super.setWidth(DEFAULT_DIMENSION);
         super.setHeight(DEFAULT_DIMENSION);
+    }
+
+    public Connections getConnection() {
+        return this.connection;
     }
 
     public Board.Shape getShape() {
@@ -75,6 +102,14 @@ public class CustomShape extends Entity implements ICommon {
         return true;
     }
 
+    public void setConnected(boolean connected) {
+        this.connected = connected;
+    }
+
+    public boolean isConnected() {
+        return this.connected;
+    }
+
     public void rotate() {
 
         //flag rotate true
@@ -90,8 +125,8 @@ public class CustomShape extends Entity implements ICommon {
                 setDestinationAngle(getAngle() + ROTATION_ANGLE_HEXAGON);
                 break;
 
-            case Triangle:
-                setDestinationAngle(getAngle() + ROTATION_ANGLE_TRIANGLE);
+            case Diamond:
+                setDestinationAngle(getAngle() + ROTATION_ANGLE_DIAMOND);
                 break;
 
             default:
@@ -149,8 +184,8 @@ public class CustomShape extends Entity implements ICommon {
                         setAngle(getAngle() + ROTATE_VELOCITY_HEXAGON);
                         break;
 
-                    case Triangle:
-                        setAngle(getAngle() + ROTATE_VELOCITY_TRIANGLE);
+                    case Diamond:
+                        setAngle(getAngle() + ROTATE_VELOCITY_DIAMOND);
                         break;
 
                     default:

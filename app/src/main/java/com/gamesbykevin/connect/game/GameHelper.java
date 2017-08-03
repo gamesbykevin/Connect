@@ -32,6 +32,8 @@ public final class GameHelper
         return entity;
     }
 
+    private static float angle = 0;
+
     /**
      * Render the game accordingly
      * @param openGL Place to write pixel data

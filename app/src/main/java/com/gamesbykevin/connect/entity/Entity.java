@@ -11,6 +11,6 @@ public class Entity extends com.gamesbykevin.androidframeworkv2.base.Entity {
 
     @Override
     public void dispose() {
-
+        //clean up anything here
     }
 }

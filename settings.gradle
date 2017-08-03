@@ -1,1 +1,1 @@
-include ':app', ':androidframeworkv2-release'
+include ':app', ':androidframeworkv2-debug'

@@ -54,7 +54,8 @@ public class Game implements IGame {
 
     }
 
-    public void reset() {
+
+    public void reset() throws Exception {
 
         if (getBoard() == null)
             board = new Board();
@@ -62,7 +63,7 @@ public class Game implements IGame {
         getBoard().reset();
     }
 
-    public void update() {
+    public void update() throws Exception {
 
         switch (STEP) {
 

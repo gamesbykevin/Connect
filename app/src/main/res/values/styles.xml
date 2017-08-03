@@ -77,15 +77,15 @@
     </style>
 
     <style name="RowMenu">
-        <item name="android:paddingBottom">10dp</item>
+        <item name="android:paddingBottom">5dp</item>
         <item name="android:paddingTop">0dp</item>
     </style>
 
     <style name="TableMenu">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_marginLeft">60dp</item>
-        <item name="android:layout_marginRight">60dp</item>
+        <item name="android:layout_marginLeft">50dp</item>
+        <item name="android:layout_marginRight">50dp</item>
         <item name="android:layout_marginTop">0dp</item>
         <item name="android:layout_marginBottom">0dp</item>
     </style>
@@ -101,7 +101,7 @@
 
     <style name="TableSocial">
         <item name="android:paddingTop">5dp</item>
-        <item name="android:paddingBottom">5dp</item>
+        <item name="android:paddingBottom">15dp</item>
         <item name="android:paddingLeft">5dp</item>
         <item name="android:paddingRight">5dp</item>
         <item name="android:layout_width">match_parent</item>
