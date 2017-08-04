@@ -18,6 +18,12 @@ public class Game implements IGame {
     //store activity reference
     private final GameActivity activity;
 
+    //our zoom ration should the user zoom in/out
+    public static float ZOOM_SCALE_RENDER_X, ZOOM_SCALE_RENDER_Y;
+
+    //store the zoom for motion events as well
+    public static float ZOOM_SCALE_MOTION_X, ZOOM_SCALE_MOTION_Y;
+
     //are we pressing on the screen
     private boolean press = false;
 
@@ -51,9 +57,8 @@ public class Game implements IGame {
     }
 
     public void pause() {
-
+        //do we need to pause anything here?
     }
-
 
     public void reset() throws Exception {
 

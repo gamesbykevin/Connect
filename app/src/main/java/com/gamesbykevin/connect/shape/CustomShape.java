@@ -1,9 +1,12 @@
 package com.gamesbykevin.connect.shape;
 
 import com.gamesbykevin.androidframeworkv2.base.Entity;
+import com.gamesbykevin.androidframeworkv2.maze.Room;
+import com.gamesbykevin.androidframeworkv2.maze.Room.Wall;
 import com.gamesbykevin.connect.activity.GameActivity;
 import com.gamesbykevin.connect.board.Board;
 import com.gamesbykevin.connect.common.ICommon;
+import com.gamesbykevin.connect.opengl.Textures;
 
 import javax.microedition.khronos.opengles.GL10;
 
@@ -49,41 +52,135 @@ public class CustomShape extends Entity implements ICommon {
 
     private final Board.Shape shape;
 
-    public enum Connections {
-        N(180), S(0), E(270), W(90),
-        NE(270), NW(180), SE(0), SW(90), NS(0), WE(90),
-        NSW(90), NSE(270), WEN(180), WES(0),
-        NSEW(0);
+    //what is open on this shape
+    private boolean west = false;
+    private boolean east = false;
+    private boolean north = false;
+    private boolean south = false;
 
-        private final float angleAdjustment;
-
-        private Connections(float angleAdjustment) {
-            this.angleAdjustment = angleAdjustment;
-        }
-
-        public float getAngleAdjustment() {
-            return this.angleAdjustment;
-        }
-    }
-
-    private Connections connection;
+    //how to render the pipe
+    private float anglePipe = 0.0f;
 
     /**
      * Default constructor
      */
-    public CustomShape(final Board.Shape shape, final Connections connection) {
+    public CustomShape(final Board.Shape shape) {
 
         super();
 
         this.shape = shape;
-        this.connection = connection;
 
         super.setWidth(DEFAULT_DIMENSION);
         super.setHeight(DEFAULT_DIMENSION);
     }
 
-    public Connections getConnection() {
-        return this.connection;
+    public boolean hasWest() {
+        return this.west;
+    }
+
+    public boolean hasEast() {
+        return this.east;
+    }
+
+    public boolean hasNorth() {
+        return this.north;
+    }
+
+    public boolean hasSouth() {
+        return this.south;
+    }
+
+    private void setWest(final boolean west) {
+        this.west = west;
+    }
+
+    private void setEast(final boolean east) {
+        this.east = east;
+    }
+
+    private void setSouth(final boolean south) {
+        this.south = south;
+    }
+
+    private void setNorth(final boolean north) {
+        this.north = north;
+    }
+
+    public void setBorders(final Room room) {
+        setNorth(!room.hasWall(Wall.North));
+        setSouth(!room.hasWall(Wall.South));
+        setWest(!room.hasWall(Wall.West));
+        setEast(!room.hasWall(Wall.East));
+    }
+
+    public int getTextureIdPipe() {
+
+        if (hasNorth() && !hasSouth() && !hasEast() && !hasWest()) { //n
+            return (isConnected() ? Textures.TEXTURE_ID_GREEN_PIPE_END : Textures.TEXTURE_ID_GRAY_PIPE_END);
+        } else if (!hasNorth() && hasSouth() && !hasEast() && !hasWest()) { //s
+            return (isConnected() ? Textures.TEXTURE_ID_GREEN_PIPE_END : Textures.TEXTURE_ID_GRAY_PIPE_END);
+        } else if (!hasNorth() && !hasSouth() && hasEast() && !hasWest()) { //e
+            return (isConnected() ? Textures.TEXTURE_ID_GREEN_PIPE_END : Textures.TEXTURE_ID_GRAY_PIPE_END);
+        } else if (!hasNorth() && !hasSouth() && !hasEast() && hasWest()) { //w
+            return (isConnected() ? Textures.TEXTURE_ID_GREEN_PIPE_END : Textures.TEXTURE_ID_GRAY_PIPE_END);
+        } else if (hasNorth() && !hasSouth() && hasEast() && !hasWest()) { //ne
+            return (isConnected() ? Textures.TEXTURE_ID_GREEN_PIPE_SE : Textures.TEXTURE_ID_GRAY_PIPE_SE);
+        } else if (hasNorth() && !hasSouth() && !hasEast() && hasWest()) { //nw
+            return (isConnected() ? Textures.TEXTURE_ID_GREEN_PIPE_SE : Textures.TEXTURE_ID_GRAY_PIPE_SE);
+        } else if (!hasNorth() && hasSouth() && hasEast() && !hasWest()) { //se
+            return (isConnected() ? Textures.TEXTURE_ID_GREEN_PIPE_SE : Textures.TEXTURE_ID_GRAY_PIPE_SE);
+        } else if (!hasNorth() && hasSouth() && !hasEast() && hasWest()) { //sw
+            return (isConnected() ? Textures.TEXTURE_ID_GREEN_PIPE_SE : Textures.TEXTURE_ID_GRAY_PIPE_SE);
+        } else if (hasNorth() && hasSouth() && !hasEast() && !hasWest()) { //ns
+            return (isConnected() ? Textures.TEXTURE_ID_GREEN_PIPE_NS : Textures.TEXTURE_ID_GRAY_PIPE_NS);
+        } else if (!hasNorth() && !hasSouth() && hasEast() && hasWest()) { //we
+            return (isConnected() ? Textures.TEXTURE_ID_GREEN_PIPE_NS : Textures.TEXTURE_ID_GRAY_PIPE_NS);
+        } else if (hasNorth() && hasSouth() && hasEast() && hasWest()) { //nsew
+            return (isConnected() ? Textures.TEXTURE_ID_GREEN_PIPE_NSEW : Textures.TEXTURE_ID_GRAY_PIPE_NSEW);
+        } else {
+            //NSW, NSE, WEN, WES
+            return (isConnected() ? Textures.TEXTURE_ID_GREEN_PIPE_WES : Textures.TEXTURE_ID_GRAY_PIPE_WES);
+        }
+    }
+
+    public float getAnglePipe() {
+        return this.anglePipe;
+    }
+
+    public void calculateAnglePipe() {
+        if (hasWest() && hasEast() && hasNorth() && hasSouth()) {
+            this.anglePipe = 0;   //wens
+        } else if (hasWest() && hasEast() && !hasNorth() && hasSouth()) {
+            this.anglePipe = 0;   //wes
+        } else if (hasWest() && hasEast() && hasNorth() && !hasSouth()) {
+            this.anglePipe = 180; //wen
+        } else if (!hasWest() && hasEast() && hasNorth() && hasSouth()) {
+            this.anglePipe = 270; //ens
+        } else if (hasWest() && !hasEast() && hasNorth() && hasSouth()) {
+            this.anglePipe = 90;  //wns
+        } else if (hasWest() && hasEast() && !hasNorth() && !hasSouth()) {
+            this.anglePipe = 90;  //we
+        } else if (!hasWest() && !hasEast() && hasNorth() && hasSouth()) {
+            this.anglePipe = 0;   //ns
+        } else if (hasWest() && !hasEast() && !hasNorth() && hasSouth()) {
+            this.anglePipe = 90;  //ws
+        } else if (!hasWest() && hasEast() && !hasNorth() && hasSouth()) {
+            this.anglePipe = 0;   //es
+        } else if (hasWest() && !hasEast() && hasNorth() && !hasSouth()) {
+            this.anglePipe = 180; //nw
+        } else if (!hasWest() && hasEast() && hasNorth() && !hasSouth()) {
+            this.anglePipe = 270; //en
+        } else if (!hasWest() && !hasEast() && hasNorth() && !hasSouth()) {
+            this.anglePipe = 180; //n
+        } else if (!hasWest() && !hasEast() && !hasNorth() && hasSouth()) {
+            this.anglePipe = 0;   //s
+        } else if (!hasWest() && hasEast() && !hasNorth() && !hasSouth()) {
+            this.anglePipe = 270; //e
+        } else if (hasWest() && !hasEast() && !hasNorth() && !hasSouth()) {
+            this.anglePipe=90;  //w
+        } else {
+            throw new RuntimeException("Angle not found west:" + west + ", east:" + east + ", north:" + north + ", south:" + south);
+        }
     }
 
     public Board.Shape getShape() {
@@ -112,6 +209,10 @@ public class CustomShape extends Entity implements ICommon {
 
     public void rotate() {
 
+        //we can't rotate again if we are currently
+        if (hasRotate())
+            return;
+
         //flag rotate true
         setRotate(true);
 
@@ -132,6 +233,30 @@ public class CustomShape extends Entity implements ICommon {
             default:
                 throw new RuntimeException("Shape not defined: " + getShape());
         }
+    }
+
+    /**
+     * Quickly finish the rotation
+     */
+    public void rotateFinish() {
+
+        //stop rotating
+        setRotate(false);
+
+        //update the destination angle
+        setAngle(getDestinationAngle());
+
+        //update the current borders
+        boolean oldNorth =  new Boolean(hasNorth());
+        boolean oldEast =   new Boolean(hasEast());
+        boolean oldSouth =  new Boolean(hasSouth());
+        boolean oldWest =   new Boolean(hasWest());
+
+        //rotate the borders along with the shape
+        setEast(oldNorth);
+        setSouth(oldEast);
+        setWest(oldSouth);
+        setNorth(oldWest);
     }
 
     private void setRotate(final boolean rotate) {
@@ -168,7 +293,7 @@ public class CustomShape extends Entity implements ICommon {
             if (getAngle() == getDestinationAngle()) {
 
                 //stop rotating
-                setRotate(false);
+                rotateFinish();
 
             } else {
 

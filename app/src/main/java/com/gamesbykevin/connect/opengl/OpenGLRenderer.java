@@ -4,12 +4,18 @@ import android.content.Context;
 import android.opengl.GLSurfaceView.Renderer;
 
 import com.gamesbykevin.androidframeworkv2.util.UtilityHelper;
+import com.gamesbykevin.connect.entity.Entity;
 
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
 
 import static com.gamesbykevin.androidframeworkv2.util.UtilityHelper.DEBUG;
 import static com.gamesbykevin.connect.activity.GameActivity.getGame;
+import static com.gamesbykevin.connect.game.Game.ZOOM_SCALE_RENDER_X;
+import static com.gamesbykevin.connect.game.Game.ZOOM_SCALE_RENDER_Y;
+import static com.gamesbykevin.connect.game.Game.ZOOM_SCALE_MOTION_X;
+import static com.gamesbykevin.connect.game.Game.ZOOM_SCALE_MOTION_Y;
+
 import static com.gamesbykevin.connect.opengl.OpenGLSurfaceView.FRAME_DURATION;
 import static com.gamesbykevin.connect.opengl.OpenGLSurfaceView.HEIGHT;
 import static com.gamesbykevin.connect.opengl.OpenGLSurfaceView.WIDTH;
@@ -19,11 +25,34 @@ import static com.gamesbykevin.connect.opengl.OpenGLSurfaceView.WIDTH;
  */
 public class OpenGLRenderer implements Renderer {
 
+    /**
+     * How far do we zoom in/out
+     */
+    private float zoomRatio = 1.0f;
+
+    /**
+     * How much can we adjust the zoom at one time
+     */
+    public static float ZOOM_RATIO_ADJUST = 0.1f;
+
+    /**
+     * The maximum amount we can zoom out
+     */
+    private static float ZOOM_RATIO_MAX = 2.75f;
+
+    /**
+     * The minimum amount we can zoom in
+     */
+    private static float ZOOM_RATIO_MIN = 0.33f;
+
     //get the ratio of the users screen compared to the default dimensions for the render
-    private float scaleRenderX, scaleRenderY;
+    private static float originalScaleRenderX, originalScaleRenderY;
 
     //get the ratio of the users screen compared to the default dimensions for the motion event
-    public float scaleMotionX = 0, scaleMotionY = 0;
+    private static float originalScaleMotionX = 0, originalScaleMotionY = 0;
+
+    //the actual dimensions of the users phone
+    private int screenWidth, screenHeight;
 
     /**
      * Have all textures been loaded?
@@ -35,6 +64,7 @@ public class OpenGLRenderer implements Renderer {
 
     public OpenGLRenderer(Context activity) {
 
+        //create object for reference to textures
         this.textures = new Textures(activity);
 
         //flag the textures loaded as false
@@ -61,6 +91,41 @@ public class OpenGLRenderer implements Renderer {
     }
 
     /**
+     * Restore the scale values as when the surface was first created
+     */
+    public static void resetZoom() {
+
+        //store the zoom variables as the same
+        ZOOM_SCALE_MOTION_X = originalScaleMotionX;
+        ZOOM_SCALE_MOTION_Y = originalScaleMotionY;
+        ZOOM_SCALE_RENDER_X = originalScaleRenderX;
+        ZOOM_SCALE_RENDER_Y = originalScaleRenderY;
+    }
+
+    /**
+     * Adjust the zoom
+     * @param adjust The ratio amount to adjust our screen dimensions
+     */
+    public void adjustZoom(final float adjust) {
+
+        this.zoomRatio += adjust;
+
+        //keep the zoom within the boundary
+        if (zoomRatio > ZOOM_RATIO_MAX)
+            this.zoomRatio = ZOOM_RATIO_MAX;
+        if (zoomRatio < ZOOM_RATIO_MIN)
+            this.zoomRatio = ZOOM_RATIO_MIN;
+
+        //store the ratio for the render
+        ZOOM_SCALE_RENDER_X = screenWidth / (float) (WIDTH * zoomRatio);
+        ZOOM_SCALE_RENDER_Y = screenHeight / (float) (HEIGHT * zoomRatio);
+
+        //store the ratio when touching the screen
+        ZOOM_SCALE_MOTION_X = (float) (WIDTH * zoomRatio) / screenWidth;
+        ZOOM_SCALE_MOTION_Y = (float) (HEIGHT * zoomRatio) / screenHeight;
+    }
+
+    /**
      *  Called if the geometry of the view changes.<br>
      *  For example when the device's screen orientation changes
      * @param gl OpenGL object
@@ -73,16 +138,22 @@ public class OpenGLRenderer implements Renderer {
         //flag that we have not yet loaded the textures
         LOADED = false;
 
+        this.screenWidth = width;
+        this.screenHeight = height;
+
         //store the ratio for the render
-        this.scaleRenderX = width / (float) WIDTH;
-        this.scaleRenderY = height / (float) HEIGHT;
+        this.originalScaleRenderX = screenWidth / (float) WIDTH;
+        this.originalScaleRenderY = screenHeight / (float) HEIGHT;
 
         //store the ratio when touching the screen
-        this.scaleMotionX = (float) WIDTH / width;
-        this.scaleMotionY = (float) HEIGHT / height;
+        this.originalScaleMotionX = (float) WIDTH / screenWidth;
+        this.originalScaleMotionY = (float) HEIGHT / screenHeight;
+
+        //set the zoom values same as original
+        resetZoom();
 
         //sets the current view port to the new size of the screen
-        gl.glViewport(0, 0, width, height);
+        gl.glViewport(0, 0, screenWidth, screenHeight);
 
         //reset the projection matrix back to its default state
         gl.glLoadIdentity();
@@ -91,7 +162,7 @@ public class OpenGLRenderer implements Renderer {
         gl.glMatrixMode(GL10.GL_PROJECTION);
 
         //set rendering dimensions
-        gl.glOrthof(0.0f, width, height, 0.0f, 1.0f, -1.0f);
+        gl.glOrthof(0.0f, screenWidth, screenHeight, 0.0f, 1.0f, -1.0f);
 
         //select the model view matrix
         gl.glMatrixMode(GL10.GL_MODELVIEW);
@@ -126,12 +197,13 @@ public class OpenGLRenderer implements Renderer {
         gl.glLoadIdentity();
 
         //scale to our game dimensions to match the users screen
-        gl.glScalef(scaleRenderX, scaleRenderY, 0.0f);
+        //gl.glScalef(scaleRenderX, scaleRenderY, 0.0f);
+        gl.glScalef(ZOOM_SCALE_RENDER_X, ZOOM_SCALE_RENDER_Y, 0.0f);
 
         //render game objects
         getGame().render(gl);
 
-        if (DEBUG) {
+        if (DEBUG && 1 == 2) {
 
             //calculate how long it took to render a single frame
             long duration = System.currentTimeMillis() - time;

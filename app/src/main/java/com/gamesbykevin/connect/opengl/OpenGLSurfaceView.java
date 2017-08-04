@@ -1,15 +1,21 @@
 package com.gamesbykevin.connect.opengl;
 
 import android.content.Context;
+import android.graphics.PixelFormat;
 import android.opengl.GLSurfaceView;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 
+import com.gamesbykevin.androidframeworkv2.base.Cell;
+import com.gamesbykevin.androidframeworkv2.base.Entity;
 import com.gamesbykevin.androidframeworkv2.util.UtilityHelper;
 
 import static com.gamesbykevin.androidframeworkv2.util.UtilityHelper.DEBUG;
 import static com.gamesbykevin.connect.activity.GameActivity.getGame;
+import static com.gamesbykevin.connect.game.Game.ZOOM_SCALE_MOTION_X;
+import static com.gamesbykevin.connect.game.Game.ZOOM_SCALE_MOTION_Y;
 import static com.gamesbykevin.connect.opengl.OpenGLRenderer.LOADED;
+import static com.gamesbykevin.connect.opengl.OpenGLRenderer.ZOOM_RATIO_ADJUST;
 
 /**
  * Created by Kevin on 6/1/2017.
@@ -20,6 +26,11 @@ public class OpenGLSurfaceView extends GLSurfaceView implements Runnable {
      * Frames per second
      */
     public static final int FPS = 90;
+
+    /**
+     * Can we zoom in/out of the game?
+     */
+    public static final boolean ZOOM_ENABLED = true;
 
     /**
      * The version of open GL we are using
@@ -75,6 +86,22 @@ public class OpenGLSurfaceView extends GLSurfaceView implements Runnable {
     //store context to access resources
     private final Context activity;
 
+    //how many fingers are touching the screen
+    private int fingers = 0;
+
+    /**
+     * How many fingers do we need to zoom in/out
+     */
+    private static final int FINGERS_ZOOM = 2;
+
+    //what is the distance between our finger coordinates
+    private double pinchDistance = 0;
+
+    /**
+     * The minimum distance required to be considered a valid pinch
+     */
+    private static final float PINCH_THRESHOLD = 10;
+
     public OpenGLSurfaceView(Context activity) {
 
         //call overloaded constructor
@@ -92,6 +119,9 @@ public class OpenGLSurfaceView extends GLSurfaceView implements Runnable {
         //create an OpenGL ES 1.0 context.
         setEGLContextClientVersion(OPEN_GL_VERSION);
 
+        //make open gl surface view background transparent
+        setEGLConfigChooser(8, 8, 8, 8, 16, 0);
+
         //create a new instance of our renderer
         this.openGlRenderer = new OpenGLRenderer(this.activity);
 
@@ -100,6 +130,9 @@ public class OpenGLSurfaceView extends GLSurfaceView implements Runnable {
 
         //set render mode to only draw when there is a change in the drawing data
         setRenderMode(GLSurfaceView.RENDERMODE_WHEN_DIRTY);
+
+        //make open gl surface view background transparent
+        getHolder().setFormat(PixelFormat.TRANSLUCENT);
     }
 
     /**
@@ -164,7 +197,6 @@ public class OpenGLSurfaceView extends GLSurfaceView implements Runnable {
         while (running) {
 
             try {
-
                 //get the current time
                 this.previous = System.currentTimeMillis();
 
@@ -248,12 +280,88 @@ public class OpenGLSurfaceView extends GLSurfaceView implements Runnable {
             if (!LOADED)
                 return true;
 
-            //adjust the coordinates where touch event occurred
-            final float x = event.getRawX() * getOpenGlRenderer().scaleMotionX;
-            final float y = event.getRawY() * getOpenGlRenderer().scaleMotionY;
+            //if zoom functionality is enabled, check for it
+            if (ZOOM_ENABLED) {
 
-            //update game accordingly
-            getGame().onTouchEvent(event.getAction(), x, y);
+                switch (event.getAction() & MotionEvent.ACTION_MASK) {
+
+                    //keep track of how many fingers are on the screen
+                    case MotionEvent.ACTION_DOWN:
+                    case MotionEvent.ACTION_POINTER_DOWN:
+                        fingers++;
+
+                        UtilityHelper.logEvent("fingers: " + fingers);
+
+                        //reset distance
+                        pinchDistance = 0;
+                        break;
+
+                    //keep track of how many fingers are on the screen
+                    case MotionEvent.ACTION_UP:
+                    case MotionEvent.ACTION_POINTER_UP:
+                        fingers--;
+
+                        UtilityHelper.logEvent("fingers: " + fingers);
+
+                        //reset distance
+                        pinchDistance = 0;
+                        break;
+
+                    case MotionEvent.ACTION_MOVE:
+
+                        //if there are 2 coordinates and we recorded 2 fingers
+                        if (fingers == 2 && event.getPointerCount() == 2) {
+
+                            //get the distance between the two points
+                            double distance = Entity.getDistance(event.getX(0), event.getY(0), event.getX(1), event.getY(1));
+
+                            UtilityHelper.logEvent("distance " + distance + ", old " + pinchDistance);
+
+                            if (pinchDistance == 0) {
+
+                                //store the previous distance for our zoom
+                                pinchDistance = distance;
+
+                            } else {
+
+                                //calculate the difference
+                                double diff = (distance > pinchDistance) ? distance - pinchDistance : pinchDistance - distance;
+
+                                //make sure the finger distance is great enough to be valid
+                                if (diff > PINCH_THRESHOLD) {
+
+                                    if (pinchDistance > distance) {
+
+                                        //if the distance is greater we are zooming in
+                                        getOpenGlRenderer().adjustZoom(ZOOM_RATIO_ADJUST);
+
+                                    } else {
+
+                                        //if the distance is shorter we are zooming out
+                                        getOpenGlRenderer().adjustZoom(-ZOOM_RATIO_ADJUST);
+                                    }
+
+                                    //reset pinch distance so if doesn't zoom too fast
+                                    pinchDistance = 0;
+                                }
+                            }
+
+                            return true;
+                        }
+                        break;
+                }
+            }
+
+            //adjust the coordinates where touch event occurred
+            final float x = event.getRawX() * ZOOM_SCALE_MOTION_X;
+            final float y = event.getRawY() * ZOOM_SCALE_MOTION_Y;
+
+            //make sure we aren't using too many fingers
+            if (fingers < 2) {
+
+                //update game accordingly
+                getGame().onTouchEvent(event.getAction(), x, y);
+            }
         }
         catch (Exception e)
         {

@@ -71,6 +71,7 @@ public class GameActivity extends BaseActivity implements Disposable {
 
         //obtain our open gl surface view object for reference
         this.glSurfaceView = (OpenGLSurfaceView)findViewById(R.id.openglView);
+        this.glSurfaceView.setZOrderOnTop(true);
 
         //add the layouts to our list
         this.layouts = new ArrayList<>();

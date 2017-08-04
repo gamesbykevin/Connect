@@ -35,6 +35,11 @@ public final class GameHelper
     private static float angle = 0;
 
     /**
+     * How far do we zoom in/out
+     */
+    private static float ZOOM_RATIO = 2.5f;
+
+    /**
      * Render the game accordingly
      * @param openGL Place to write pixel data
      * @throws Exception
@@ -44,13 +49,6 @@ public final class GameHelper
 		//make sure we are supporting alpha for transparency
 		openGL.glEnable(GL10.GL_BLEND);
 		openGL.glBlendFunc(GL10.GL_SRC_ALPHA, GL10.GL_ONE_MINUS_SRC_ALPHA);
-
-        getEntity().setTextureId(Textures.TEXTURE_ID_BACKGROUND);
-        getEntity().setX(0);
-        getEntity().setY(0);
-        getEntity().setWidth(WIDTH);
-        getEntity().setHeight(HEIGHT);
-        getEntity().render(openGL);
 
 		//render the pieces on the board
         getGame().getBoard().render(openGL);

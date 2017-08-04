@@ -1,5 +1,8 @@
 package com.gamesbykevin.connect.board;
 
+import android.printservice.CustomPrinterIconCallback;
+
+import com.gamesbykevin.androidframeworkv2.base.Cell;
 import com.gamesbykevin.androidframeworkv2.maze.Maze;
 import com.gamesbykevin.androidframeworkv2.maze.Room;
 import com.gamesbykevin.androidframeworkv2.maze.Room.Wall;
@@ -11,12 +14,17 @@ import com.gamesbykevin.connect.activity.GameActivity;
 import com.gamesbykevin.connect.common.ICommon;
 import com.gamesbykevin.connect.opengl.Textures;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.microedition.khronos.opengles.GL10;
+
+import static com.gamesbykevin.connect.shape.CustomShape.ANGLE_MAX;
+import static com.gamesbykevin.connect.shape.CustomShape.ROTATION_ANGLE_SQUARE;
 
 /**
  * Created by Kevin on 8/1/2017.
  */
-
 public class Board implements ICommon {
 
     private CustomShape[][] shapes;
@@ -31,7 +39,17 @@ public class Board implements ICommon {
     private Entity pipe = new Entity();
 
     public static final int BOARD_COLS = 5;
-    public static final int BOARD_ROWS = 7;
+    public static final int BOARD_ROWS = 5;
+
+    //base point that we will mark connected
+    public static final int ANCHOR_COL = (BOARD_COLS / 2);
+    public static final int ANCHOR_ROW = (BOARD_ROWS / 2);
+
+    //our array storing what shapes are connected
+    private boolean[][] tmpConnected;
+
+    //list of locations to check
+    private List<Cell> check;
 
     /**
      * Default constructor
@@ -52,9 +70,9 @@ public class Board implements ICommon {
         return this.maze;
     }
 
-    public final void addShape(Shape shape, CustomShape.Connections connection, float x, float y, int col, int row) {
+    public final void addShape(Shape shape, Room room, float x, float y, int col, int row) {
 
-        CustomShape tmp = new CustomShape(shape, connection);
+        CustomShape tmp = new CustomShape(shape);
 
         tmp.setX(x);
         tmp.setY(y);
@@ -77,29 +95,28 @@ public class Board implements ICommon {
                 throw new RuntimeException("Shape not defined: " + shape.toString());
         }
 
-        switch (GameActivity.getRandomObject().nextInt(4)) {
-
-            default:
-            case 0:
-                tmp.setAngle(tmp.getAngle() + 0);
-                break;
-
-            case 1:
-                tmp.setAngle(tmp.getAngle() + 90);
-                break;
-
-            case 2:
-                tmp.setAngle(tmp.getAngle() + 180);
-                break;
-
-            case 3:
-                tmp.setAngle(tmp.getAngle() + 270);
-                break;
-        }
-
-        if (col == 0 && row == 0)
+        if (col == ANCHOR_COL && row == ANCHOR_ROW)
             tmp.setConnected(true);
 
+        //open up the appropriate sides
+        tmp.setBorders(room);
+
+        //make sure we render the pipe correctly
+        tmp.calculateAnglePipe();
+
+        //how many rotations have we had
+        int rotations = 0;
+
+        //pick a random number of rotations to perform
+        int rotationsMax = GameActivity.getRandomObject().nextInt((int)(ANGLE_MAX / ROTATION_ANGLE_SQUARE));
+
+        while (rotations < rotationsMax) {
+            tmp.rotate();
+            tmp.rotateFinish();
+            rotations++;
+        }
+
+        //assign shape in array
         getShapes()[row][col] = tmp;
     }
 
@@ -125,14 +142,72 @@ public class Board implements ICommon {
 
     public void checkBoard() {
 
+        //create array if not instantiated
+        if (tmpConnected == null)
+            tmpConnected = new boolean[getMaze().getRows()][getMaze().getCols()];
+
+        //mark all shapes not connected at first
         for (int col = 0; col < getMaze().getCols(); col++) {
             for (int row = 0; row < getMaze().getRows(); row++) {
+                tmpConnected[row][col] = false;
+            }
+        }
 
+        if (this.check == null)
+            this.check = new ArrayList<>();
+
+        //add starting point
+        this.check.add(new Cell(ANCHOR_COL, ANCHOR_ROW));
+
+        //keep going as long as we have places to check
+        while (!this.check.isEmpty()) {
+
+            //get the first element
+            Cell cell = this.check.get(0);
+
+            //remove the object from the list
+            this.check.remove(0);
+
+            int col = (int)cell.getCol();
+            int row = (int)cell.getRow();
+
+            CustomShape shape = getShapes()[row][col];
+
+            //mark the current location as connected
+            tmpConnected[row][col] = true;
+
+            //check neighbor shapes
+            CustomShape shapeW = null;
+            CustomShape shapeE = null;
+            CustomShape shapeN = null;
+            CustomShape shapeS = null;
+
+            //get our neighbor shapes
+            if (col > 0)
+                shapeW = getShapes()[row][col - 1];
+            if (col < BOARD_COLS - 1)
+                shapeE = getShapes()[row][col + 1];
+            if (row > 0)
+                shapeN = getShapes()[row - 1][col];
+            if (row < BOARD_ROWS - 1)
+                shapeS = getShapes()[row + 1][col];
+
+            if (shapeW != null && shapeW.hasEast() && shape.hasWest() && !tmpConnected[row][col - 1])
+                this.check.add(new Cell(col - 1, row));
+            if (shapeE != null && shapeE.hasWest() && shape.hasEast() && !tmpConnected[row][col + 1])
+                this.check.add(new Cell(col + 1, row));
+            if (shapeN != null && shapeN.hasSouth() && shape.hasNorth() && !tmpConnected[row - 1][col])
+                this.check.add(new Cell(col, row - 1));
+            if (shapeS != null && shapeS.hasNorth() && shape.hasSouth() && !tmpConnected[row + 1][col])
+                this.check.add(new Cell(col, row + 1));
+        }
+
+        for (int col = 0; col < getMaze().getCols(); col++) {
+            for (int row = 0; row < getMaze().getRows(); row++) {
                 CustomShape shape = getShapes()[row][col];
 
-                if (col == 0 && row == 0) {
-                    shape.setConnected(true);
-                    continue;
+                if (shape != null) {
+                    shape.setConnected(tmpConnected[row][col]);
                 }
             }
         }
@@ -144,6 +219,7 @@ public class Board implements ICommon {
         if (getShapes() != null) {
             for (int col = 0; col < getMaze().getCols(); col++) {
                 for (int row = 0; row < getMaze().getRows(); row++) {
+
                     CustomShape shape = getShapes()[row][col];
 
                     if (shape != null) {
@@ -175,54 +251,15 @@ public class Board implements ICommon {
 
                     for (int row = 0; row < getMaze().getRows(); row++) {
 
-                        y = 50 + (row * CustomShape.DEFAULT_DIMENSION);
+                        y = 30 + (row * CustomShape.DEFAULT_DIMENSION);
 
-                        Room room = getMaze().getRoom(col, row);
-
-                        CustomShape.Connections connection = null;
-
-                        boolean hasW = !room.hasWall(Wall.West);
-                        boolean hasE = !room.hasWall(Wall.East);
-                        boolean hasN = !room.hasWall(Wall.North);
-                        boolean hasS = !room.hasWall(Wall.South);
-
-                        if (hasN && !hasS && !hasW && !hasE)
-                            connection = CustomShape.Connections.N;
-                        if (!hasN && hasS && !hasW && !hasE)
-                            connection = CustomShape.Connections.S;
-                        if (!hasN && !hasS && hasW && !hasE)
-                            connection = CustomShape.Connections.W;
-                        if (!hasN && !hasS && !hasW && hasE)
-                            connection = CustomShape.Connections.E;
-
-                        if (hasN && hasS && !hasW && !hasE)
-                            connection = CustomShape.Connections.NS;
-                        if (!hasN && !hasS && hasW && hasE)
-                            connection = CustomShape.Connections.WE;
-                        if (!hasN && hasS && !hasW && hasE)
-                            connection = CustomShape.Connections.SE;
-                        if (hasN && !hasS && hasW && !hasE)
-                            connection = CustomShape.Connections.NW;
-                        if (hasN && !hasS && !hasW && hasE)
-                            connection = CustomShape.Connections.NE;
-                        if (!hasN && hasS && hasW && !hasE)
-                            connection = CustomShape.Connections.SW;
-
-                        if (hasN && hasS && hasW && !hasE)
-                            connection = CustomShape.Connections.NSW;
-                        if (hasN && hasS && !hasW && hasE)
-                            connection = CustomShape.Connections.NSE;
-                        if (hasN && !hasS && hasW && hasE)
-                            connection = CustomShape.Connections.WEN;
-                        if (!hasN && hasS && hasW && hasE)
-                            connection = CustomShape.Connections.WES;
-
-                        if (hasN && hasS && hasW && hasE)
-                            connection = CustomShape.Connections.NSEW;
-
-                        addShape(Shape.Square, connection, x, y, col, row);
+                        addShape(Shape.Square, getMaze().getRoom(col, row), x, y, col, row);
                     }
                 }
+
+                //highlight the connected pipes
+                checkBoard();
+
             } else {
 
                 boolean done = false;
@@ -232,14 +269,14 @@ public class Board implements ICommon {
 
                         CustomShape shape = getShapes()[row][col];
 
+                        if (shape == null)
+                            continue;
+
                         if (shape.hasRotate()) {
                             shape.update(activity);
 
-                            if (shape.hasRotate()) {
-                                done = false;
-                            } else {
+                            if (!shape.hasRotate())
                                 done = true;
-                            }
                         }
                     }
                 }
@@ -263,7 +300,10 @@ public class Board implements ICommon {
 
             for (int col = 0; col < getMaze().getCols(); col++) {
                 for (int row = 0; row < getMaze().getRows(); row++) {
-                    getShapes()[row][col].reset();
+
+                    //reset if not null
+                    if (getShapes()[row][col] != null)
+                        getShapes()[row][col].reset();
                 }
             }
 
@@ -292,41 +332,12 @@ public class Board implements ICommon {
 
                 shape.render(openGL);
 
-                switch (shape.getConnection()) {
-                    case N:
-                    case S:
-                    case E:
-                    case W:
-                        pipe.setTextureId(shape.isConnected() ? Textures.TEXTURE_ID_GREEN_PIPE_END : Textures.TEXTURE_ID_GRAY_PIPE_END);
-                        break;
-
-                    case NE:
-                    case NW:
-                    case SE:
-                    case SW:
-                        pipe.setTextureId(shape.isConnected() ? Textures.TEXTURE_ID_GREEN_PIPE_SE : Textures.TEXTURE_ID_GRAY_PIPE_SE);
-                        break;
-
-                    case NS:
-                    case WE:
-                        pipe.setTextureId(shape.isConnected() ? Textures.TEXTURE_ID_GREEN_PIPE_NS : Textures.TEXTURE_ID_GRAY_PIPE_NS);
-                        break;
-
-                    case NSEW:
-                        pipe.setTextureId(shape.isConnected() ? Textures.TEXTURE_ID_GREEN_PIPE_NSEW : Textures.TEXTURE_ID_GRAY_PIPE_NSEW);
-                        break;
-
-                    case NSW:
-                    case NSE:
-                    case WEN:
-                    case WES:
-                        pipe.setTextureId(shape.isConnected() ? Textures.TEXTURE_ID_GREEN_PIPE_WES : Textures.TEXTURE_ID_GRAY_PIPE_WES);
-                        break;
-                }
+                //assign the pipe texture id
+                pipe.setTextureId(shape.getTextureIdPipe());
 
                 pipe.setX(shape);
                 pipe.setY(shape);
-                pipe.setAngle(shape.getAngle() + shape.getConnection().getAngleAdjustment());
+                pipe.setAngle(shape.getAngle() + shape.getAnglePipe());
                 pipe.render(openGL);
             }
         }
