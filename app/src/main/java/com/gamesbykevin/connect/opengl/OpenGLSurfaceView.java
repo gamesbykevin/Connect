@@ -6,7 +6,6 @@ import android.opengl.GLSurfaceView;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 
-import com.gamesbykevin.androidframeworkv2.base.Cell;
 import com.gamesbykevin.androidframeworkv2.base.Entity;
 import com.gamesbykevin.androidframeworkv2.util.UtilityHelper;
 
@@ -33,13 +32,21 @@ public class OpenGLSurfaceView extends GLSurfaceView implements Runnable {
     public static final boolean ZOOM_ENABLED = true;
 
     /**
+     * Default dimensions this game was designed for
+     */
+    public static final int WIDTH = 480;
+
+    /**
+     * Default dimensions this game was designed for
+     */
+    public static final int HEIGHT = 800;
+
+    /**
      * The version of open GL we are using
      */
     public static final int OPEN_GL_VERSION = 1;
 
-    /**
-     * Our object where we render our pixel data
-     */
+    //our object where we render our pixel data
     private OpenGLRenderer openGlRenderer;
 
     //our game mechanics will run on this thread
@@ -65,23 +72,11 @@ public class OpenGLSurfaceView extends GLSurfaceView implements Runnable {
      */
     public static final long MILLISECONDS_PER_SECOND = 1000L;
 
-    /**
-     * Count the number of frames for debugging purposes
-     */
+    //count the number of frames for debugging purposes
     private int frames = 0;
 
     //keep track of time for debug purposes
     private long timestamp = System.currentTimeMillis();
-
-    /**
-     * Default dimensions this game was designed for
-     */
-    public static final int WIDTH = 480;
-
-    /**
-     * Default dimensions this game was designed for
-     */
-    public static final int HEIGHT = 800;
 
     //store context to access resources
     private final Context activity;
@@ -101,6 +96,29 @@ public class OpenGLSurfaceView extends GLSurfaceView implements Runnable {
      * The minimum distance required to be considered a valid pinch
      */
     private static final float PINCH_THRESHOLD = 10;
+
+    /**
+     * The minimum pixel distance required to be considered a valid drag
+     */
+    private static final float DRAG_THRESHOLD = 15;
+
+    //where are we moving our finger
+    private float motionMoveX = 0.0f, motionMoveY = 0.0f;
+
+    //do we offset the render for our game
+    public static float OFFSET_X, OFFSET_Y;
+
+    //boundaries to stay within
+    public static int OFFSET_X_MIN = -WIDTH * 2;
+    public static int OFFSET_X_MAX = WIDTH * 2;
+    public static int OFFSET_Y_MIN = -HEIGHT * 2;
+    public static int OFFSET_Y_MAX = HEIGHT * 2;
+
+    //are we zooming?
+    private boolean zooming = false;
+
+    //are we dragging
+    private boolean dragging = false;
 
     public OpenGLSurfaceView(Context activity) {
 
@@ -288,23 +306,48 @@ public class OpenGLSurfaceView extends GLSurfaceView implements Runnable {
                     //keep track of how many fingers are on the screen
                     case MotionEvent.ACTION_DOWN:
                     case MotionEvent.ACTION_POINTER_DOWN:
-                        fingers++;
 
-                        UtilityHelper.logEvent("fingers: " + fingers);
+                        //keep track of how many fingers we have on screen
+                        fingers++;
 
                         //reset distance
                         pinchDistance = 0;
+
+                        //store the coordinates
+                        motionMoveX = event.getX();
+                        motionMoveY = event.getY();
                         break;
 
                     //keep track of how many fingers are on the screen
                     case MotionEvent.ACTION_UP:
                     case MotionEvent.ACTION_POINTER_UP:
-                        fingers--;
 
-                        UtilityHelper.logEvent("fingers: " + fingers);
+                        //keep track of how many fingers we have on screen
+                        fingers--;
 
                         //reset distance
                         pinchDistance = 0;
+
+                        //if we are zooming
+                        if (zooming) {
+
+                            //if no more fingers are touching the screen, flag zoom over
+                            if (fingers < 1)
+                                zooming = false;
+
+                            //don't continue because we don't want to update the game at this point
+                            return true;
+                        }
+
+                        //if we were dragging
+                        if (dragging) {
+
+                            //flag false
+                            dragging = false;
+
+                            //don't continue because we don't want to update the game at this point
+                            return true;
+                        }
                         break;
 
                     case MotionEvent.ACTION_MOVE:
@@ -312,10 +355,11 @@ public class OpenGLSurfaceView extends GLSurfaceView implements Runnable {
                         //if there are 2 coordinates and we recorded 2 fingers
                         if (fingers == 2 && event.getPointerCount() == 2) {
 
+                            //flag that we are zooming
+                            zooming = true;
+
                             //get the distance between the two points
                             double distance = Entity.getDistance(event.getX(0), event.getY(0), event.getX(1), event.getY(1));
-
-                            UtilityHelper.logEvent("distance " + distance + ", old " + pinchDistance);
 
                             if (pinchDistance == 0) {
 
@@ -346,6 +390,54 @@ public class OpenGLSurfaceView extends GLSurfaceView implements Runnable {
                                 }
                             }
 
+                            //don't interact with the game since that is not the intention
+                            return true;
+
+                        } else if (fingers == 1 && event.getPointerCount() == 1) {
+
+                            //if we are zooming we can't offset the board
+                            if (zooming)
+                                return true;
+
+                            //adjust the coordinates where touch event occurred
+                            final float x1 = event.getRawX();
+                            final float y1 = event.getRawY();
+                            final float x2 = motionMoveX;
+                            final float y2 = motionMoveY;
+
+                            //get our move difference
+                            float xDiff = ((x2 > x1) ? -(x2 - x1) : (x1 - x2));
+                            float yDiff = ((y2 > y1) ? -(y2 - y1) : (y1 - y2));
+
+                            //don't continue if we didn't move enough to register
+                            if (Math.abs(xDiff) < DRAG_THRESHOLD && Math.abs(yDiff) < DRAG_THRESHOLD)
+                                return true;
+
+                            //flag that we are dragging
+                            dragging = true;
+
+                            //if one finger is moved, offset the x,y coordinates
+                            if (OFFSET_X + xDiff < OFFSET_X_MIN) {
+                                OFFSET_X = OFFSET_X_MIN;
+                            } else if (OFFSET_X + xDiff > OFFSET_X_MAX) {
+                                OFFSET_X = OFFSET_X_MAX;
+                            } else {
+                                OFFSET_X += xDiff;
+                            }
+
+                            if (OFFSET_Y + yDiff < OFFSET_Y_MIN) {
+                                OFFSET_Y = OFFSET_Y_MIN;
+                            } else if (OFFSET_Y + yDiff > OFFSET_Y_MAX) {
+                                OFFSET_Y = OFFSET_Y_MAX;
+                            } else {
+                                OFFSET_Y += yDiff;
+                            }
+
+                            //update the coordinates
+                            motionMoveX = event.getX();
+                            motionMoveY = event.getY();
+
+                            //don't interact with the game since that is not the intention
                             return true;
                         }
                         break;
@@ -353,12 +445,11 @@ public class OpenGLSurfaceView extends GLSurfaceView implements Runnable {
             }
 
             //adjust the coordinates where touch event occurred
-            final float x = event.getRawX() * ZOOM_SCALE_MOTION_X;
-            final float y = event.getRawY() * ZOOM_SCALE_MOTION_Y;
+            final float x = (event.getRawX() * ZOOM_SCALE_MOTION_X) - (OFFSET_X * ZOOM_SCALE_MOTION_X);
+            final float y = (event.getRawY() * ZOOM_SCALE_MOTION_Y) - (OFFSET_Y * ZOOM_SCALE_MOTION_Y);
 
             //make sure we aren't using too many fingers
             if (fingers < 2) {
-
                 //update game accordingly
                 getGame().onTouchEvent(event.getAction(), x, y);
             }

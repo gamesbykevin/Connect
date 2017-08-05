@@ -9,6 +9,8 @@ import com.gamesbykevin.connect.board.Board;
 import javax.microedition.khronos.opengles.GL10;
 
 import static com.gamesbykevin.connect.opengl.OpenGLRenderer.LOADED;
+import static com.gamesbykevin.connect.opengl.OpenGLSurfaceView.HEIGHT;
+import static com.gamesbykevin.connect.opengl.OpenGLSurfaceView.WIDTH;
 
 /**
  * Created by Kevin on 7/19/2017.
@@ -86,8 +88,15 @@ public class Game implements IGame {
                 }
                 break;
 
-            //don't do anything
+            //once the ui is updated correctly we can continue
             case Start:
+
+                //if loading is still displayed, don't render anything
+                if (activity.getScreen() == Screen.Loading)
+                    return;
+
+                //all is good, we can start updating
+                STEP = Step.Updating;
                 break;
 
             //we are resetting the board
@@ -97,7 +106,7 @@ public class Game implements IGame {
                 reset();
 
                 //after resetting, next step is updating
-                STEP = Step.Updating;
+                STEP = Step.Start;
 
                 //we can go to ready now
                 activity.setScreen(Screen.Ready);
@@ -132,7 +141,7 @@ public class Game implements IGame {
 
     }
 
-    public boolean onTouchEvent(final int action, final float x, final float y) {
+    public boolean onTouchEvent(final int action, float x, float y) {
 
         //don't continue if we aren't ready yet
         if (STEP != Step.Updating && STEP != Step.Start)
@@ -141,13 +150,11 @@ public class Game implements IGame {
         if (action == MotionEvent.ACTION_UP)
         {
             //check the board for rotations
-            if (this.press) {
+            if (this.press)
                 getBoard().touch(x, y);
-            }
 
             //un-flag press
             this.press = false;
-
         }
         else if (action == MotionEvent.ACTION_DOWN)
         {

@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import static android.view.View.GONE;
 import static android.view.View.INVISIBLE;
 import static android.view.View.VISIBLE;
 import static com.gamesbykevin.androidframeworkv2.util.UtilityHelper.DEBUG;
@@ -160,30 +161,36 @@ public class GameActivity extends BaseActivity implements Disposable {
         //resume sound playing
         //super.playSong(R.raw.theme);
 
-        //if the game was previously paused create a new view
+        //if the game was previously paused we need to re-initialize the views
         if (this.paused) {
 
             //flag paused false
             this.paused = false;
 
+            //reset the content view
+            setContentView(R.layout.activity_game);
+
+            //hide the previous open gl surface view since we have to re-create the open gl context
+            glSurfaceView = (GLSurfaceView)findViewById(R.id.openglView);
+            glSurfaceView.setZOrderOnTop(false);
+            glSurfaceView.setVisibility(GONE);
+
+            //reset list and add layouts back
+            this.layouts.clear();
+            this.layouts.add((LinearLayout)findViewById(R.id.gameOverLayoutDefault));
+            this.layouts.add((LinearLayout)findViewById(R.id.loadingScreenLayout));
+
             //create a new OpenGL surface view
             glSurfaceView = new OpenGLSurfaceView(this);
+
+            //make sure surface view is displayed on top
+            glSurfaceView.setZOrderOnTop(true);
 
             //resume the game view
             glSurfaceView.onResume();
 
-            //remove layouts from the parent view
-            for (int i = 0; i < layouts.size(); i++) {
-                ((ViewGroup)layouts.get(i).getParent()).removeView(layouts.get(i));
-            }
-
-            //set the content view for our open gl surface view
-            setContentView(glSurfaceView);
-
-            //add the layouts to the current content view
-            for (int i = 0; i < layouts.size(); i++) {
-                super.addContentView(layouts.get(i), getLayoutParams());
-            }
+            //add the new surface view back to the layout
+            addContentView(glSurfaceView, getLayoutParams());
 
         } else {
 
@@ -201,16 +208,13 @@ public class GameActivity extends BaseActivity implements Disposable {
 
     public void setScreen(final Screen screen) {
 
-        //assign step
-        this.screen = screen;
-
         //default all layouts to hidden
         for (int i = 0; i < layouts.size(); i++) {
             setLayoutVisibility(layouts.get(i), false);
         }
 
         //only display the correct screens
-        switch (getScreen()) {
+        switch (screen) {
 
             //show loading screen
             case Loading:
@@ -227,10 +231,13 @@ public class GameActivity extends BaseActivity implements Disposable {
                 //setLayoutVisibility((ViewGroup)findViewById(R.id.levelSelectLayout), true);
                 break;
 
-            //don't re-enable any
+            //don't re-enable anything
             case Ready:
                 break;
         }
+
+        //assign screen to view
+        this.screen = screen;
     }
 
     private LinearLayout.LayoutParams getLayoutParams() {

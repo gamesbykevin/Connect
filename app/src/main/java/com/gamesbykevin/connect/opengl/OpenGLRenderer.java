@@ -4,7 +4,6 @@ import android.content.Context;
 import android.opengl.GLSurfaceView.Renderer;
 
 import com.gamesbykevin.androidframeworkv2.util.UtilityHelper;
-import com.gamesbykevin.connect.entity.Entity;
 
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
@@ -19,6 +18,8 @@ import static com.gamesbykevin.connect.game.Game.ZOOM_SCALE_MOTION_Y;
 import static com.gamesbykevin.connect.opengl.OpenGLSurfaceView.FRAME_DURATION;
 import static com.gamesbykevin.connect.opengl.OpenGLSurfaceView.HEIGHT;
 import static com.gamesbykevin.connect.opengl.OpenGLSurfaceView.WIDTH;
+import static com.gamesbykevin.connect.opengl.OpenGLSurfaceView.OFFSET_X;
+import static com.gamesbykevin.connect.opengl.OpenGLSurfaceView.OFFSET_Y;
 
 /**
  * Created by Kevin on 6/1/2017.
@@ -33,17 +34,17 @@ public class OpenGLRenderer implements Renderer {
     /**
      * How much can we adjust the zoom at one time
      */
-    public static float ZOOM_RATIO_ADJUST = 0.1f;
+    public static float ZOOM_RATIO_ADJUST = 0.05f;
 
     /**
      * The maximum amount we can zoom out
      */
-    private static float ZOOM_RATIO_MAX = 2.75f;
+    private static float ZOOM_RATIO_MAX = 2.0f;
 
     /**
      * The minimum amount we can zoom in
      */
-    private static float ZOOM_RATIO_MIN = 0.33f;
+    private static float ZOOM_RATIO_MIN = 0.5f;
 
     //get the ratio of the users screen compared to the default dimensions for the render
     private static float originalScaleRenderX, originalScaleRenderY;
@@ -100,6 +101,8 @@ public class OpenGLRenderer implements Renderer {
         ZOOM_SCALE_MOTION_Y = originalScaleMotionY;
         ZOOM_SCALE_RENDER_X = originalScaleRenderX;
         ZOOM_SCALE_RENDER_Y = originalScaleRenderY;
+        OFFSET_X = 0;
+        OFFSET_Y = 0;
     }
 
     /**
@@ -138,6 +141,7 @@ public class OpenGLRenderer implements Renderer {
         //flag that we have not yet loaded the textures
         LOADED = false;
 
+        //store screen dimensions
         this.screenWidth = width;
         this.screenHeight = height;
 
@@ -196,14 +200,16 @@ public class OpenGLRenderer implements Renderer {
         //reset the projection matrix
         gl.glLoadIdentity();
 
+        //offset the board in case the user is scrolling
+        gl.glTranslatef(OFFSET_X, OFFSET_Y, 0);
+
         //scale to our game dimensions to match the users screen
-        //gl.glScalef(scaleRenderX, scaleRenderY, 0.0f);
         gl.glScalef(ZOOM_SCALE_RENDER_X, ZOOM_SCALE_RENDER_Y, 0.0f);
 
         //render game objects
         getGame().render(gl);
 
-        if (DEBUG && 1 == 2) {
+        if (DEBUG && !true) {
 
             //calculate how long it took to render a single frame
             long duration = System.currentTimeMillis() - time;
