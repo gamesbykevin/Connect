@@ -14,10 +14,9 @@
     <string name="vibrate_off">Vibrate: Off</string>
     <string name="sound_on">Sound: On</string>
     <string name="sound_off">Sound: Off</string>
-    <string name="control_touch">Control: Touch</string>
-    <string name="control_tilt">Control: Tilt</string>
     <string name="text_header_level_select">Levels</string>
+    <string name="text_header_shape">Shape:&#160;</string>
 
-	<string translatable="false" name="game_stats_file_key">com.gamesbykevin.connect.GAME_STATS_FILE_KEY</string>	
-	
+	<string translatable="false" name="game_stats_file_key">com.gamesbykevin.connect.GAME_STATS_FILE_KEY</string>
+    <string translatable="false" name="game_shape_file_key">com.gamesbykevin.connect.SHAPE_FILE_KEY</string>
 </resources>

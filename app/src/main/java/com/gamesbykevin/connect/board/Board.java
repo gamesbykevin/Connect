@@ -9,6 +9,7 @@ import com.gamesbykevin.connect.shape.CustomShape;
 import com.gamesbykevin.connect.activity.GameActivity;
 import com.gamesbykevin.connect.common.ICommon;
 import com.gamesbykevin.connect.opengl.Textures;
+import com.gamesbykevin.connect.shape.Diamond;
 import com.gamesbykevin.connect.shape.Hexagon;
 import com.gamesbykevin.connect.shape.Square;
 
@@ -29,7 +30,7 @@ public class Board implements ICommon {
     }
 
     //what type of shape are we using
-    private Shape type = Shape.Square;
+    private Shape type = Shape.Hexagon;
 
     //our maze generation object
     private Prims maze;
@@ -37,7 +38,7 @@ public class Board implements ICommon {
     private Entity pipe = new Entity();
 
     public static final int BOARD_COLS = 5;
-    public static final int BOARD_ROWS = 10;
+    public static final int BOARD_ROWS = 5;
 
     //base point that we will mark connected
     public static final int ANCHOR_COL = (BOARD_COLS / 2);
@@ -53,19 +54,17 @@ public class Board implements ICommon {
      * Default constructor
      */
     public Board() throws Exception {
-        reset();
+        //do we need to do anything here?
     }
 
     public Maze getMaze() {
         return this.maze;
     }
 
-    private void addShapes(Shape shape) {
-
-        setType(shape);
+    private void addShapes() {
 
         int x = 0, y = 0;
-        int w = 0; int h = 0;
+        final int w, h;
 
         switch (getType()) {
 
@@ -80,16 +79,14 @@ public class Board implements ICommon {
                 break;
 
             default:
-                throw new RuntimeException("Shape not defined: " + shape.toString());
+                throw new RuntimeException("Shape not defined: " + getType().toString());
         }
 
         for (int col = 0; col < getMaze().getCols(); col++) {
 
             for (int row = 0; row < getMaze().getRows(); row++) {
 
-                int startX = START_X + (int)(col * (w * 1.5));
-
-                switch (shape) {
+                switch (getType()) {
 
                     case Square:
 
@@ -101,22 +98,19 @@ public class Board implements ICommon {
                     case Hexagon:
 
                         //calculate coordinates
-                        x = startX;
-                        y = START_Y + (row * (h / 2));
+                        x = START_X + (int)(col * (w * .875));
+                        y = START_Y + (int)(row * (h * .75));
 
-                        //offset the odd/even rows
-                        if (row % 2 != 0) {
-                            x += 64;
-                        } else {
-                            //x += 128;
-                        }
+                        //offset the odd rows
+                        if (row % 2 != 0)
+                            x += (w * .45);
                         break;
 
                     default:
-                        throw new RuntimeException("Shape not defined: " + shape.toString());
+                        throw new RuntimeException("Shape not defined: " + getType().toString());
                 }
 
-                addShape(shape, getMaze().getRoom(col, row), x, y, col, row);
+                addShape(getType(), getMaze().getRoom(col, row), x, y, col, row);
             }
         }
     }
@@ -138,6 +132,7 @@ public class Board implements ICommon {
                 break;
 
             case Diamond:
+                //tmp = new Diamond();
                 tmp.setTextureId(Textures.TEXTURE_ID_DIAMOND);
                 break;
 
@@ -240,7 +235,7 @@ public class Board implements ICommon {
                 }
 
                 //add the shapes to the board
-                addShapes(Shape.Hexagon);
+                addShapes();
 
                 //highlight the connected pipes
                 checkBoard(this);
@@ -312,7 +307,7 @@ public class Board implements ICommon {
         try {
 
             //create new instance of maze
-            this.maze = new Prims(true, BOARD_COLS, BOARD_ROWS);
+            this.maze = new Prims((getType() == Shape.Hexagon), BOARD_COLS, BOARD_ROWS);
 
             for (int col = 0; col < getMaze().getCols(); col++) {
                 for (int row = 0; row < getMaze().getRows(); row++) {

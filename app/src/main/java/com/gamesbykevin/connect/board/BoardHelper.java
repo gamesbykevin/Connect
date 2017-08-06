@@ -1,5 +1,6 @@
 package com.gamesbykevin.connect.board;
 
+import com.gamesbykevin.androidframeworkv2.maze.Room;
 import com.gamesbykevin.connect.shape.CustomShape;
 import com.gamesbykevin.connect.shape.Square;
 
@@ -62,33 +63,22 @@ public class BoardHelper {
             //mark the current location as connected
             tmpConnected[row][col] = true;
 
-            //check the neighbors around the current shape
-            for (int tmpCol = -1; tmpCol <= 1; tmpCol++) {
-                for (int tmpRow = -1; tmpRow <= 1; tmpRow++) {
+            for (int i = 0; i < Room.getAllWalls(board.getType() == Board.Shape.Hexagon).size(); i++) {
 
-                    //don't check self
-                    if (tmpCol == 0 && tmpRow == 0)
-                        continue;
+                Room.Wall wall = Room.getAllWalls(board.getType() == Board.Shape.Hexagon).get(i);
 
-                    //if not hexagon, don't check diagonal
-                    if (board.getType() != Board.Shape.Hexagon) {
-                        if (tmpCol != 0 && tmpRow != 0)
-                            continue;
-                    }
+                //stay in bounds
+                if (row + wall.getRow() < 0 || row + wall.getRow() >= BOARD_ROWS)
+                    continue;
+                if (col + wall.getCol() < 0 || col + wall.getCol() >= BOARD_COLS)
+                    continue;
 
-                    //stay in bounds
-                    if (row + tmpRow < 0 || row + tmpRow >= BOARD_ROWS)
-                        continue;
-                    if (col + tmpCol < 0 || col + tmpCol >= BOARD_COLS)
-                        continue;
+                //get the shape at the location
+                CustomShape tmpShape = board.getShapes()[row + wall.getRow()][col + wall.getCol()];
 
-                    //get the shape at the location
-                    CustomShape tmpShape = board.getShapes()[row + tmpRow][col + tmpCol];
-
-                    //if we can connect, add to list
-                    if (canConnect(shape, tmpShape, board.getType()) && !tmpConnected[row + tmpRow][col + tmpCol])
-                        check.add(tmpShape);
-                }
+                //if we can connect, add to list
+                if (canConnect(shape, tmpShape, board.getType()) && !tmpConnected[row + wall.getRow()][col + wall.getCol()])
+                    check.add(tmpShape);
             }
         }
 
@@ -129,31 +119,21 @@ public class BoardHelper {
         int col = (int)shape.getCol();
         int row = (int)shape.getRow();
 
-        for (int tmpCol = -1; tmpCol <= 1; tmpCol++) {
-            for (int tmpRow = -1; tmpRow <= 1; tmpRow++) {
+        for (int i = 0; i < Room.getAllWalls(board.getType() == Board.Shape.Hexagon).size(); i++) {
 
-                //don't check self
-                if (tmpCol == 0 && tmpRow == 0)
-                    continue;
+            Room.Wall wall = Room.getAllWalls(board.getType() == Board.Shape.Hexagon).get(i);
 
-                //if not hexagon, don't check diagonal
-                if (board.getType() != Board.Shape.Hexagon) {
-                    if (tmpCol != 0 && tmpRow != 0)
-                        continue;
-                }
+            //stay in bounds
+            if (row + wall.getRow() < 0 || row + wall.getRow() >= BOARD_ROWS)
+                continue;
+            if (col + wall.getCol() < 0 || col + wall.getCol() >= BOARD_COLS)
+                continue;
 
-                //stay in bounds
-                if (row + tmpRow < 0 || row + tmpRow >= BOARD_ROWS)
-                    continue;
-                if (col + tmpCol < 0 || col + tmpCol >= BOARD_COLS)
-                    continue;
+            //get the shape at the location
+            CustomShape tmpShape = board.getShapes()[row + wall.getRow()][col + wall.getCol()];
 
-                //get the shape at the location
-                CustomShape tmpShape = board.getShapes()[row + tmpRow][col + tmpCol];
-
-                if (canConnect(shape, tmpShape, board.getType()))
-                    return true;
-            }
+            if (canConnect(shape, tmpShape, board.getType()))
+                return true;
         }
 
         //we couldn't connect anything

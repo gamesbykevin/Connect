@@ -26,6 +26,14 @@
                 android:onClick="onClickSound"
                 android:checked="true" />
         </TableRow>
+        <TableRow style="@style/RowMenu">
+            <com.gamesbykevin.androidframeworkv2.ui.MultiStateToggleButton
+                style="@style/ButtonMenu"
+                android:id="@+id/ToggleButtonShape"
+                android:onClick="onClickShape"
+                android:checked="true" />
+        </TableRow>
+
     </TableLayout>
 
     <include layout="@layout/layout_social_icons" />

@@ -1,11 +1,13 @@
 package com.gamesbykevin.connect.activity;
 
+import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 
 import com.gamesbykevin.androidframeworkv2.util.UtilityHelper;
 import com.gamesbykevin.connect.R;
+import com.gamesbykevin.connect.board.Board;
 
 import java.util.HashMap;
 
@@ -37,6 +39,22 @@ public abstract class BaseActivity extends com.gamesbykevin.androidframeworkv2.a
             //create new list
             SOUND = new HashMap<>();
             //loadSound(R.raw.ballbounce);
+        }
+
+        //make sure all options are entered
+        setupDefaultOptions();
+    }
+
+    /**
+     * Setup default options if they don't exist yet
+     */
+    private void setupDefaultOptions() {
+
+        //store default shape, if not set yet
+        if (getObjectValue(R.string.game_shape_file_key, Board.Shape.class) == null) {
+            SharedPreferences.Editor edit = getSharedPreferences().edit();
+            edit.putString(getString(R.string.game_shape_file_key), GSON.toJson(Board.Shape.Square));
+            edit.commit();
         }
     }
 

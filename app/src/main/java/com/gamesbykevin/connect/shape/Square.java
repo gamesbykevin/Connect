@@ -112,6 +112,10 @@ public class Square extends CustomShape {
         setSouth(!room.hasWall(Wall.South));
         setWest(!room.hasWall(Wall.West));
         setEast(!room.hasWall(Wall.East));
+        setSouthEast(false);
+        setSouthWest(false);
+        setNorthEast(false);
+        setNorthWest(false);
     }
 
     @Override

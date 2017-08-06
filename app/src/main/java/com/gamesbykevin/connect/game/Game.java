@@ -2,6 +2,7 @@ package com.gamesbykevin.connect.game;
 
 import android.view.MotionEvent;
 
+import com.gamesbykevin.connect.R;
 import com.gamesbykevin.connect.activity.GameActivity;
 import com.gamesbykevin.connect.activity.GameActivity.Screen;
 import com.gamesbykevin.connect.board.Board;
@@ -78,6 +79,8 @@ public class Game implements IGame {
         if (getBoard() == null)
             board = new Board();
 
+        //set the type of shape we will be playing with
+        getBoard().setType((Board.Shape)activity.getObjectValue(R.string.game_shape_file_key, Board.Shape.class));
         getBoard().reset();
     }
 

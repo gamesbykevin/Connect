@@ -17,7 +17,7 @@ public class Hexagon extends CustomShape {
     /**
      * The size of the square
      */
-    public static int DIMENSION = 75;
+    public static int DIMENSION = 64;
 
     /**
      * How many degrees do we rotate the shape each time
@@ -40,242 +40,272 @@ public class Hexagon extends CustomShape {
 
     @Override
     public int getTextureIdPipe() {
-        if (hasNorth() && !hasNorthWest() && !hasNorthEast() && !hasSouthEast() && !hasSouth() && !hasSouthWest()) {
-            return (isConnected() ? Textures.TEXTURE_ID_HEXAGON_GREEN_PIPE_END : Textures.TEXTURE_ID_HEXAGON_GRAY_PIPE_END);
-        } else if (!hasNorth() && hasNorthWest() && !hasNorthEast() && !hasSouthEast() && !hasSouth() && !hasSouthWest()) {
-            return (isConnected() ? Textures.TEXTURE_ID_HEXAGON_GREEN_PIPE_END : Textures.TEXTURE_ID_HEXAGON_GRAY_PIPE_END);
-        } else if (!hasNorth() && !hasNorthWest() && hasNorthEast() && !hasSouthEast() && !hasSouth() && !hasSouthWest()) {
-            return (isConnected() ? Textures.TEXTURE_ID_HEXAGON_GREEN_PIPE_END : Textures.TEXTURE_ID_HEXAGON_GRAY_PIPE_END);
-        } else if (!hasNorth() && !hasNorthWest() && !hasNorthEast() && hasSouthEast() && !hasSouth() && !hasSouthWest()) {
-            return (isConnected() ? Textures.TEXTURE_ID_HEXAGON_GREEN_PIPE_END : Textures.TEXTURE_ID_HEXAGON_GRAY_PIPE_END);
-        } else if (!hasNorth() && !hasNorthWest() && !hasNorthEast() && !hasSouthEast() && hasSouth() && !hasSouthWest()) {
-            return (isConnected() ? Textures.TEXTURE_ID_HEXAGON_GREEN_PIPE_END : Textures.TEXTURE_ID_HEXAGON_GRAY_PIPE_END);
-        } else if (!hasNorth() && !hasNorthWest() && !hasNorthEast() && !hasSouthEast() && !hasSouth() && hasSouthWest()) {
-            return (isConnected() ? Textures.TEXTURE_ID_HEXAGON_GREEN_PIPE_END : Textures.TEXTURE_ID_HEXAGON_GRAY_PIPE_END);
-        } else if (hasNorth() && !hasNorthWest() && hasNorthEast() && !hasSouthEast() && !hasSouth() && !hasSouthWest()) {
-            return (isConnected() ? Textures.TEXTURE_ID_HEXAGON_GREEN_PIPE_N_NE : Textures.TEXTURE_ID_HEXAGON_GRAY_PIPE_N_NE);
-        } else if (!hasNorth() && !hasNorthWest() && hasNorthEast() && hasSouthEast() && !hasSouth() && !hasSouthWest()) {
-            return (isConnected() ? Textures.TEXTURE_ID_HEXAGON_GREEN_PIPE_N_NE : Textures.TEXTURE_ID_HEXAGON_GRAY_PIPE_N_NE);
-        } else if (!hasNorth() && !hasNorthWest() && !hasNorthEast() && hasSouthEast() && hasSouth() && !hasSouthWest()) {
-            return (isConnected() ? Textures.TEXTURE_ID_HEXAGON_GREEN_PIPE_N_NE : Textures.TEXTURE_ID_HEXAGON_GRAY_PIPE_N_NE);
-        } else if (!hasNorth() && !hasNorthWest() && !hasNorthEast() && !hasSouthEast() && hasSouth() && hasSouthWest()) {
-            return (isConnected() ? Textures.TEXTURE_ID_HEXAGON_GREEN_PIPE_N_NE : Textures.TEXTURE_ID_HEXAGON_GRAY_PIPE_N_NE);
-        } else if (!hasNorth() && hasNorthWest() && !hasNorthEast() && !hasSouthEast() && !hasSouth() && hasSouthWest()) {
-            return (isConnected() ? Textures.TEXTURE_ID_HEXAGON_GREEN_PIPE_N_NE : Textures.TEXTURE_ID_HEXAGON_GRAY_PIPE_N_NE);
-        } else if (hasNorth() && hasNorthWest() && !hasNorthEast() && !hasSouthEast() && !hasSouth() && !hasSouthWest()) {
-            return (isConnected() ? Textures.TEXTURE_ID_HEXAGON_GREEN_PIPE_N_NE : Textures.TEXTURE_ID_HEXAGON_GRAY_PIPE_N_NE);
-        } else if (hasNorth() && !hasNorthWest() && hasNorthEast() && !hasSouthEast() && hasSouth() && !hasSouthWest()) {
-            return (isConnected() ? Textures.TEXTURE_ID_HEXAGON_GREEN_PIPE_N_NE_S : Textures.TEXTURE_ID_HEXAGON_GRAY_PIPE_N_NE_S);
-        } else if (!hasNorth() && !hasNorthWest() && hasNorthEast() && hasSouthEast() && !hasSouth() && hasSouthWest()) {
-            return (isConnected() ? Textures.TEXTURE_ID_HEXAGON_GREEN_PIPE_N_NE_S : Textures.TEXTURE_ID_HEXAGON_GRAY_PIPE_N_NE_S);
-        } else if (!hasNorth() && hasNorthWest() && !hasNorthEast() && hasSouthEast() && hasSouth() && !hasSouthWest()) {
-            return (isConnected() ? Textures.TEXTURE_ID_HEXAGON_GREEN_PIPE_N_NE_S : Textures.TEXTURE_ID_HEXAGON_GRAY_PIPE_N_NE_S);
-        } else if (hasNorth() && !hasNorthWest() && !hasNorthEast() && !hasSouthEast() && hasSouth() && hasSouthWest()) {
-            return (isConnected() ? Textures.TEXTURE_ID_HEXAGON_GREEN_PIPE_N_NE_S : Textures.TEXTURE_ID_HEXAGON_GRAY_PIPE_N_NE_S);
-        } else if (!hasNorth() && hasNorthWest() && hasNorthEast() && !hasSouthEast() && !hasSouth() && hasSouthWest()) {
-            return (isConnected() ? Textures.TEXTURE_ID_HEXAGON_GREEN_PIPE_N_NE_S : Textures.TEXTURE_ID_HEXAGON_GRAY_PIPE_N_NE_S);
-        } else if (hasNorth() && hasNorthWest() && !hasNorthEast() && hasSouthEast() && !hasSouth() && !hasSouthWest()) {
-            return (isConnected() ? Textures.TEXTURE_ID_HEXAGON_GREEN_PIPE_N_NE_S : Textures.TEXTURE_ID_HEXAGON_GRAY_PIPE_N_NE_S);
-        } else if (hasNorth() && !hasNorthWest() && hasNorthEast() && !hasSouthEast() && hasSouth() && hasSouthWest()) {
-            return (isConnected() ? Textures.TEXTURE_ID_HEXAGON_GREEN_PIPE_N_NE_S_SW : Textures.TEXTURE_ID_HEXAGON_GRAY_PIPE_N_NE_S_SW);
-        } else if (!hasNorth() && hasNorthWest() && hasNorthEast() && hasSouthEast() && !hasSouth() && hasSouthWest()) {
-            return (isConnected() ? Textures.TEXTURE_ID_HEXAGON_GREEN_PIPE_N_NE_S_SW : Textures.TEXTURE_ID_HEXAGON_GRAY_PIPE_N_NE_S_SW);
-        } else if (hasNorth() && hasNorthWest() && !hasNorthEast() && hasSouthEast() && hasSouth() && !hasSouthWest()) {
-            return (isConnected() ? Textures.TEXTURE_ID_HEXAGON_GREEN_PIPE_N_NE_S_SW : Textures.TEXTURE_ID_HEXAGON_GRAY_PIPE_N_NE_S_SW);
-        } else if (hasNorth() && !hasNorthWest() && hasNorthEast() && hasSouthEast() && !hasSouth() && !hasSouthWest()) {
-            return (isConnected() ? Textures.TEXTURE_ID_HEXAGON_GREEN_PIPE_N_NE_SE : Textures.TEXTURE_ID_HEXAGON_GRAY_PIPE_N_NE_SE);
-        } else if (!hasNorth() && !hasNorthWest() && hasNorthEast() && hasSouthEast() && hasSouth() && !hasSouthWest()) {
-            return (isConnected() ? Textures.TEXTURE_ID_HEXAGON_GREEN_PIPE_N_NE_SE : Textures.TEXTURE_ID_HEXAGON_GRAY_PIPE_N_NE_SE);
-        } else if (!hasNorth() && !hasNorthWest() && !hasNorthEast() && hasSouthEast() && hasSouth() && hasSouthWest()) {
-            return (isConnected() ? Textures.TEXTURE_ID_HEXAGON_GREEN_PIPE_N_NE_SE : Textures.TEXTURE_ID_HEXAGON_GRAY_PIPE_N_NE_SE);
-        } else if (!hasNorth() && hasNorthWest() && !hasNorthEast() && !hasSouthEast() && hasSouth() && hasSouthWest()) {
-            return (isConnected() ? Textures.TEXTURE_ID_HEXAGON_GREEN_PIPE_N_NE_SE : Textures.TEXTURE_ID_HEXAGON_GRAY_PIPE_N_NE_SE);
-        } else if (hasNorth() && hasNorthWest() && !hasNorthEast() && !hasSouthEast() && !hasSouth() && hasSouthWest()) {
-            return (isConnected() ? Textures.TEXTURE_ID_HEXAGON_GREEN_PIPE_N_NE_SE : Textures.TEXTURE_ID_HEXAGON_GRAY_PIPE_N_NE_SE);
-        } else if (hasNorth() && hasNorthWest() && hasNorthEast() && !hasSouthEast() && !hasSouth() && !hasSouthWest()) {
-            return (isConnected() ? Textures.TEXTURE_ID_HEXAGON_GREEN_PIPE_N_NE_SE : Textures.TEXTURE_ID_HEXAGON_GRAY_PIPE_N_NE_SE);
-        } else if (hasNorth() && !hasNorthWest() && hasNorthEast() && hasSouthEast() && hasSouth() && !hasSouthWest()) {
-            return (isConnected() ? Textures.TEXTURE_ID_HEXAGON_GREEN_PIPE_N_NE_SE_S : Textures.TEXTURE_ID_HEXAGON_GRAY_PIPE_N_NE_SE_S);
-        } else if (!hasNorth() && !hasNorthWest() && hasNorthEast() && hasSouthEast() && hasSouth() && hasSouthWest()) {
-            return (isConnected() ? Textures.TEXTURE_ID_HEXAGON_GREEN_PIPE_N_NE_SE_S : Textures.TEXTURE_ID_HEXAGON_GRAY_PIPE_N_NE_SE_S);
-        } else if (!hasNorth() && hasNorthWest() && !hasNorthEast() && hasSouthEast() && hasSouth() && hasSouthWest()) {
-            return (isConnected() ? Textures.TEXTURE_ID_HEXAGON_GREEN_PIPE_N_NE_SE_S : Textures.TEXTURE_ID_HEXAGON_GRAY_PIPE_N_NE_SE_S);
-        } else if (hasNorth() && hasNorthWest() && !hasNorthEast() && !hasSouthEast() && hasSouth() && hasSouthWest()) {
-            return (isConnected() ? Textures.TEXTURE_ID_HEXAGON_GREEN_PIPE_N_NE_SE_S : Textures.TEXTURE_ID_HEXAGON_GRAY_PIPE_N_NE_SE_S);
-        } else if (hasNorth() && hasNorthWest() && hasNorthEast() && !hasSouthEast() && !hasSouth() && hasSouthWest()) {
-            return (isConnected() ? Textures.TEXTURE_ID_HEXAGON_GREEN_PIPE_N_NE_SE_S : Textures.TEXTURE_ID_HEXAGON_GRAY_PIPE_N_NE_SE_S);
-        } else if (hasNorth() && hasNorthWest() && hasNorthEast() && hasSouthEast() && !hasSouth() && !hasSouthWest()) {
-            return (isConnected() ? Textures.TEXTURE_ID_HEXAGON_GREEN_PIPE_N_NE_SE_S : Textures.TEXTURE_ID_HEXAGON_GRAY_PIPE_N_NE_SE_S);
-        } else if (hasNorth() && !hasNorthWest() && hasNorthEast() && hasSouthEast() && hasSouth() && hasSouthWest()) {
-            return (isConnected() ? Textures.TEXTURE_ID_HEXAGON_GREEN_PIPE_N_NE_SE_S_SW : Textures.TEXTURE_ID_HEXAGON_GRAY_PIPE_N_NE_SE_S_SW);
-        } else if (!hasNorth() && hasNorthWest() && hasNorthEast() && hasSouthEast() && hasSouth() && hasSouthWest()) {
-            return (isConnected() ? Textures.TEXTURE_ID_HEXAGON_GREEN_PIPE_N_NE_SE_S_SW : Textures.TEXTURE_ID_HEXAGON_GRAY_PIPE_N_NE_SE_S_SW);
-        } else if (hasNorth() && hasNorthWest() && !hasNorthEast() && hasSouthEast() && hasSouth() && hasSouthWest()) {
-            return (isConnected() ? Textures.TEXTURE_ID_HEXAGON_GREEN_PIPE_N_NE_SE_S_SW : Textures.TEXTURE_ID_HEXAGON_GRAY_PIPE_N_NE_SE_S_SW);
-        } else if (hasNorth() && hasNorthWest() && hasNorthEast() && !hasSouthEast() && hasSouth() && hasSouthWest()) {
-            return (isConnected() ? Textures.TEXTURE_ID_HEXAGON_GREEN_PIPE_N_NE_SE_S_SW : Textures.TEXTURE_ID_HEXAGON_GRAY_PIPE_N_NE_SE_S_SW);
-        } else if (hasNorth() && hasNorthWest() && hasNorthEast() && hasSouthEast() && !hasSouth() && hasSouthWest()) {
-            return (isConnected() ? Textures.TEXTURE_ID_HEXAGON_GREEN_PIPE_N_NE_SE_S_SW : Textures.TEXTURE_ID_HEXAGON_GRAY_PIPE_N_NE_SE_S_SW);
-        } else if (hasNorth() && hasNorthWest() && hasNorthEast() && hasSouthEast() && hasSouth() && !hasSouthWest()) {
-            return (isConnected() ? Textures.TEXTURE_ID_HEXAGON_GREEN_PIPE_N_NE_SE_S_SW : Textures.TEXTURE_ID_HEXAGON_GRAY_PIPE_N_NE_SE_S_SW);
-        } else if (hasNorth() && !hasNorthWest() && hasNorthEast() && !hasSouthEast() && !hasSouth() && hasSouthWest()) {
-            return (isConnected() ? Textures.TEXTURE_ID_HEXAGON_GREEN_PIPE_N_NE_SW : Textures.TEXTURE_ID_HEXAGON_GRAY_PIPE_N_NE_SW);
-        } else if (!hasNorth() && hasNorthWest() && hasNorthEast() && hasSouthEast() && !hasSouth() && !hasSouthWest()) {
-            return (isConnected() ? Textures.TEXTURE_ID_HEXAGON_GREEN_PIPE_N_NE_SW : Textures.TEXTURE_ID_HEXAGON_GRAY_PIPE_N_NE_SW);
-        } else if (hasNorth() && !hasNorthWest() && !hasNorthEast() && hasSouthEast() && hasSouth() && !hasSouthWest()) {
-            return (isConnected() ? Textures.TEXTURE_ID_HEXAGON_GREEN_PIPE_N_NE_SW : Textures.TEXTURE_ID_HEXAGON_GRAY_PIPE_N_NE_SW);
-        } else if (!hasNorth() && !hasNorthWest() && hasNorthEast() && !hasSouthEast() && hasSouth() && hasSouthWest()) {
-            return (isConnected() ? Textures.TEXTURE_ID_HEXAGON_GREEN_PIPE_N_NE_SW : Textures.TEXTURE_ID_HEXAGON_GRAY_PIPE_N_NE_SW);
-        } else if (!hasNorth() && hasNorthWest() && !hasNorthEast() && hasSouthEast() && !hasSouth() && hasSouthWest()) {
-            return (isConnected() ? Textures.TEXTURE_ID_HEXAGON_GREEN_PIPE_N_NE_SW : Textures.TEXTURE_ID_HEXAGON_GRAY_PIPE_N_NE_SW);
-        } else if (hasNorth() && hasNorthWest() && !hasNorthEast() && !hasSouthEast() && hasSouth() && !hasSouthWest()) {
-            return (isConnected() ? Textures.TEXTURE_ID_HEXAGON_GREEN_PIPE_N_NE_SW : Textures.TEXTURE_ID_HEXAGON_GRAY_PIPE_N_NE_SW);
-        } else if (hasNorth() && !hasNorthWest() && !hasNorthEast() && !hasSouthEast() && !hasSouth() && hasSouthWest()) {
-            return (isConnected() ? Textures.TEXTURE_ID_HEXAGON_GREEN_PIPE_N_SW : Textures.TEXTURE_ID_HEXAGON_GRAY_PIPE_N_SW);
-        } else if (!hasNorth() && hasNorthWest() && hasNorthEast() && !hasSouthEast() && !hasSouth() && !hasSouthWest()) {
-            return (isConnected() ? Textures.TEXTURE_ID_HEXAGON_GREEN_PIPE_N_SW : Textures.TEXTURE_ID_HEXAGON_GRAY_PIPE_N_SW);
-        } else if (hasNorth() && !hasNorthWest() && !hasNorthEast() && hasSouthEast() && !hasSouth() && !hasSouthWest()) {
-            return (isConnected() ? Textures.TEXTURE_ID_HEXAGON_GREEN_PIPE_N_SW : Textures.TEXTURE_ID_HEXAGON_GRAY_PIPE_N_SW);
-        } else if (!hasNorth() && !hasNorthWest() && hasNorthEast() && !hasSouthEast() && hasSouth() && !hasSouthWest()) {
-            return (isConnected() ? Textures.TEXTURE_ID_HEXAGON_GREEN_PIPE_N_SW : Textures.TEXTURE_ID_HEXAGON_GRAY_PIPE_N_SW);
-        } else if (!hasNorth() && !hasNorthWest() && !hasNorthEast() && hasSouthEast() && !hasSouth() && hasSouthWest()) {
-            return (isConnected() ? Textures.TEXTURE_ID_HEXAGON_GREEN_PIPE_N_SW : Textures.TEXTURE_ID_HEXAGON_GRAY_PIPE_N_SW);
-        } else if (!hasNorth() && hasNorthWest() && !hasNorthEast() && !hasSouthEast() && hasSouth() && !hasSouthWest()) {
-            return (isConnected() ? Textures.TEXTURE_ID_HEXAGON_GREEN_PIPE_N_SW : Textures.TEXTURE_ID_HEXAGON_GRAY_PIPE_N_SW);
-        } else if (hasNorth() && !hasNorthWest() && !hasNorthEast() && !hasSouthEast() && hasSouth() && !hasSouthWest()) {
-            return (isConnected() ? Textures.TEXTURE_ID_HEXAGON_GREEN_PIPE_NS : Textures.TEXTURE_ID_HEXAGON_GRAY_PIPE_NS);
-        } else if (!hasNorth() && !hasNorthWest() && hasNorthEast() && !hasSouthEast() && !hasSouth() && hasSouthWest()) {
-            return (isConnected() ? Textures.TEXTURE_ID_HEXAGON_GREEN_PIPE_NS : Textures.TEXTURE_ID_HEXAGON_GRAY_PIPE_NS);
-        } else if (!hasNorth() && hasNorthWest() && !hasNorthEast() && hasSouthEast() && !hasSouth() && !hasSouthWest()) {
-            return (isConnected() ? Textures.TEXTURE_ID_HEXAGON_GREEN_PIPE_NS : Textures.TEXTURE_ID_HEXAGON_GRAY_PIPE_NS);
+        if (hasNorthWest() && hasNorthEast() && hasEast() && hasSouthEast() && hasSouthWest() && hasWest()) {
+            return (isConnected()) ? Textures.TEXTURE_ID_HEXAGON_GREEN_PIPE_ALL : Textures.TEXTURE_ID_HEXAGON_GRAY_PIPE_ALL;
+        } else if (!hasNorthWest() && hasNorthEast() && !hasEast() && !hasSouthEast() && !hasSouthWest() && !hasWest()) {
+            return (isConnected()) ? Textures.TEXTURE_ID_HEXAGON_GREEN_PIPE_END : Textures.TEXTURE_ID_HEXAGON_GRAY_PIPE_END;
+        } else if (!hasNorthWest() && !hasNorthEast() && hasEast() && !hasSouthEast() && !hasSouthWest() && !hasWest()) {
+            return (isConnected()) ? Textures.TEXTURE_ID_HEXAGON_GREEN_PIPE_END : Textures.TEXTURE_ID_HEXAGON_GRAY_PIPE_END;
+        } else if (!hasNorthWest() && !hasNorthEast() && !hasEast() && hasSouthEast() && !hasSouthWest() && !hasWest()) {
+            return (isConnected()) ? Textures.TEXTURE_ID_HEXAGON_GREEN_PIPE_END : Textures.TEXTURE_ID_HEXAGON_GRAY_PIPE_END;
+        } else if (!hasNorthWest() && !hasNorthEast() && !hasEast() && !hasSouthEast() && hasSouthWest() && !hasWest()) {
+            return (isConnected()) ? Textures.TEXTURE_ID_HEXAGON_GREEN_PIPE_END : Textures.TEXTURE_ID_HEXAGON_GRAY_PIPE_END;
+        } else if (!hasNorthWest() && !hasNorthEast() && !hasEast() && !hasSouthEast() && !hasSouthWest() && hasWest()) {
+            return (isConnected()) ? Textures.TEXTURE_ID_HEXAGON_GREEN_PIPE_END : Textures.TEXTURE_ID_HEXAGON_GRAY_PIPE_END;
+        } else if (hasNorthWest() && !hasNorthEast() && !hasEast() && !hasSouthEast() && !hasSouthWest() && !hasWest()) {
+            return (isConnected()) ? Textures.TEXTURE_ID_HEXAGON_GREEN_PIPE_END : Textures.TEXTURE_ID_HEXAGON_GRAY_PIPE_END;
+        } else if (!hasNorthWest() && hasNorthEast() && hasEast() && !hasSouthEast() && !hasSouthWest() && !hasWest()) {
+            return (isConnected()) ? Textures.TEXTURE_ID_HEXAGON_GREEN_PIPE_NE_E : Textures.TEXTURE_ID_HEXAGON_GRAY_PIPE_NE_E;
+        } else if (!hasNorthWest() && !hasNorthEast() && hasEast() && hasSouthEast() && !hasSouthWest() && !hasWest()) {
+            return (isConnected()) ? Textures.TEXTURE_ID_HEXAGON_GREEN_PIPE_NE_E : Textures.TEXTURE_ID_HEXAGON_GRAY_PIPE_NE_E;
+        } else if (!hasNorthWest() && !hasNorthEast() && !hasEast() && hasSouthEast() && hasSouthWest() && !hasWest()) {
+            return (isConnected()) ? Textures.TEXTURE_ID_HEXAGON_GREEN_PIPE_NE_E : Textures.TEXTURE_ID_HEXAGON_GRAY_PIPE_NE_E;
+        } else if (!hasNorthWest() && !hasNorthEast() && !hasEast() && !hasSouthEast() && hasSouthWest() && hasWest()) {
+            return (isConnected()) ? Textures.TEXTURE_ID_HEXAGON_GREEN_PIPE_NE_E : Textures.TEXTURE_ID_HEXAGON_GRAY_PIPE_NE_E;
+        } else if (hasNorthWest() && !hasNorthEast() && !hasEast() && !hasSouthEast() && !hasSouthWest() && hasWest()) {
+            return (isConnected()) ? Textures.TEXTURE_ID_HEXAGON_GREEN_PIPE_NE_E : Textures.TEXTURE_ID_HEXAGON_GRAY_PIPE_NE_E;
+        } else if (hasNorthWest() && hasNorthEast() && !hasEast() && !hasSouthEast() && !hasSouthWest() && !hasWest()) {
+            return (isConnected()) ? Textures.TEXTURE_ID_HEXAGON_GREEN_PIPE_NE_E : Textures.TEXTURE_ID_HEXAGON_GRAY_PIPE_NE_E;
+        } else if (!hasNorthWest() && hasNorthEast() && hasEast() && hasSouthEast() && !hasSouthWest() && !hasWest()) {
+            return (isConnected()) ? Textures.TEXTURE_ID_HEXAGON_GREEN_PIPE_NE_E_SE : Textures.TEXTURE_ID_HEXAGON_GRAY_PIPE_NE_E_SE;
+        } else if (!hasNorthWest() && !hasNorthEast() && hasEast() && hasSouthEast() && hasSouthWest() && !hasWest()) {
+            return (isConnected()) ? Textures.TEXTURE_ID_HEXAGON_GREEN_PIPE_NE_E_SE : Textures.TEXTURE_ID_HEXAGON_GRAY_PIPE_NE_E_SE;
+        } else if (!hasNorthWest() && !hasNorthEast() && !hasEast() && hasSouthEast() && hasSouthWest() && hasWest()) {
+            return (isConnected()) ? Textures.TEXTURE_ID_HEXAGON_GREEN_PIPE_NE_E_SE : Textures.TEXTURE_ID_HEXAGON_GRAY_PIPE_NE_E_SE;
+        } else if (hasNorthWest() && !hasNorthEast() && !hasEast() && !hasSouthEast() && hasSouthWest() && hasWest()) {
+            return (isConnected()) ? Textures.TEXTURE_ID_HEXAGON_GREEN_PIPE_NE_E_SE : Textures.TEXTURE_ID_HEXAGON_GRAY_PIPE_NE_E_SE;
+        } else if (hasNorthWest() && hasNorthEast() && !hasEast() && !hasSouthEast() && !hasSouthWest() && hasWest()) {
+            return (isConnected()) ? Textures.TEXTURE_ID_HEXAGON_GREEN_PIPE_NE_E_SE : Textures.TEXTURE_ID_HEXAGON_GRAY_PIPE_NE_E_SE;
+        } else if (hasNorthWest() && hasNorthEast() && hasEast() && !hasSouthEast() && !hasSouthWest() && !hasWest()) {
+            return (isConnected()) ? Textures.TEXTURE_ID_HEXAGON_GREEN_PIPE_NE_E_SE : Textures.TEXTURE_ID_HEXAGON_GRAY_PIPE_NE_E_SE;
+        } else if (!hasNorthWest() && hasNorthEast() && hasEast() && hasSouthEast() && hasSouthWest() && !hasWest()) {
+            return (isConnected()) ? Textures.TEXTURE_ID_HEXAGON_GREEN_PIPE_NE_E_SE_SW : Textures.TEXTURE_ID_HEXAGON_GRAY_PIPE_NE_E_SE_SW;
+        } else if (!hasNorthWest() && !hasNorthEast() && hasEast() && hasSouthEast() && hasSouthWest() && hasWest()) {
+            return (isConnected()) ? Textures.TEXTURE_ID_HEXAGON_GREEN_PIPE_NE_E_SE_SW : Textures.TEXTURE_ID_HEXAGON_GRAY_PIPE_NE_E_SE_SW;
+        } else if (hasNorthWest() && !hasNorthEast() && !hasEast() && hasSouthEast() && hasSouthWest() && hasWest()) {
+            return (isConnected()) ? Textures.TEXTURE_ID_HEXAGON_GREEN_PIPE_NE_E_SE_SW : Textures.TEXTURE_ID_HEXAGON_GRAY_PIPE_NE_E_SE_SW;
+        } else if (hasNorthWest() && hasNorthEast() && !hasEast() && !hasSouthEast() && hasSouthWest() && hasWest()) {
+            return (isConnected()) ? Textures.TEXTURE_ID_HEXAGON_GREEN_PIPE_NE_E_SE_SW : Textures.TEXTURE_ID_HEXAGON_GRAY_PIPE_NE_E_SE_SW;
+        } else if (hasNorthWest() && hasNorthEast() && hasEast() && !hasSouthEast() && !hasSouthWest() && hasWest()) {
+            return (isConnected()) ? Textures.TEXTURE_ID_HEXAGON_GREEN_PIPE_NE_E_SE_SW : Textures.TEXTURE_ID_HEXAGON_GRAY_PIPE_NE_E_SE_SW;
+        } else if (hasNorthWest() && hasNorthEast() && hasEast() && hasSouthEast() && !hasSouthWest() && !hasWest()) {
+            return (isConnected()) ? Textures.TEXTURE_ID_HEXAGON_GREEN_PIPE_NE_E_SE_SW : Textures.TEXTURE_ID_HEXAGON_GRAY_PIPE_NE_E_SE_SW;
+        } else if (!hasNorthWest() && hasNorthEast() && hasEast() && hasSouthEast() && hasSouthWest() && hasWest()) {
+            return (isConnected()) ? Textures.TEXTURE_ID_HEXAGON_GREEN_PIPE_NE_E_SE_SW_W : Textures.TEXTURE_ID_HEXAGON_GRAY_PIPE_NE_E_SE_SW_W;
+        } else if (hasNorthWest() && !hasNorthEast() && hasEast() && hasSouthEast() && hasSouthWest() && hasWest()) {
+            return (isConnected()) ? Textures.TEXTURE_ID_HEXAGON_GREEN_PIPE_NE_E_SE_SW_W : Textures.TEXTURE_ID_HEXAGON_GRAY_PIPE_NE_E_SE_SW_W;
+        } else if (hasNorthWest() && hasNorthEast() && !hasEast() && hasSouthEast() && hasSouthWest() && hasWest()) {
+            return (isConnected()) ? Textures.TEXTURE_ID_HEXAGON_GREEN_PIPE_NE_E_SE_SW_W : Textures.TEXTURE_ID_HEXAGON_GRAY_PIPE_NE_E_SE_SW_W;
+        } else if (hasNorthWest() && hasNorthEast() && hasEast() && !hasSouthEast() && hasSouthWest() && hasWest()) {
+            return (isConnected()) ? Textures.TEXTURE_ID_HEXAGON_GREEN_PIPE_NE_E_SE_SW_W : Textures.TEXTURE_ID_HEXAGON_GRAY_PIPE_NE_E_SE_SW_W;
+        } else if (hasNorthWest() && hasNorthEast() && hasEast() && hasSouthEast() && !hasSouthWest() && hasWest()) {
+            return (isConnected()) ? Textures.TEXTURE_ID_HEXAGON_GREEN_PIPE_NE_E_SE_SW_W : Textures.TEXTURE_ID_HEXAGON_GRAY_PIPE_NE_E_SE_SW_W;
+        } else if (hasNorthWest() && hasNorthEast() && hasEast() && hasSouthEast() && hasSouthWest() && !hasWest()) {
+            return (isConnected()) ? Textures.TEXTURE_ID_HEXAGON_GREEN_PIPE_NE_E_SE_SW_W : Textures.TEXTURE_ID_HEXAGON_GRAY_PIPE_NE_E_SE_SW_W;
+        } else if (!hasNorthWest() && hasNorthEast() && hasEast() && !hasSouthEast() && hasSouthWest() && !hasWest()) {
+            return (isConnected()) ? Textures.TEXTURE_ID_HEXAGON_GREEN_PIPE_NE_E_SW : Textures.TEXTURE_ID_HEXAGON_GRAY_PIPE_NE_E_SW;
+        } else if (!hasNorthWest() && !hasNorthEast() && hasEast() && hasSouthEast() && !hasSouthWest() && hasWest()) {
+            return (isConnected()) ? Textures.TEXTURE_ID_HEXAGON_GREEN_PIPE_NE_E_SW : Textures.TEXTURE_ID_HEXAGON_GRAY_PIPE_NE_E_SW;
+        } else if (hasNorthWest() && !hasNorthEast() && !hasEast() && hasSouthEast() && hasSouthWest() && !hasWest()) {
+            return (isConnected()) ? Textures.TEXTURE_ID_HEXAGON_GREEN_PIPE_NE_E_SW : Textures.TEXTURE_ID_HEXAGON_GRAY_PIPE_NE_E_SW;
+        } else if (!hasNorthWest() && hasNorthEast() && !hasEast() && !hasSouthEast() && hasSouthWest() && hasWest()) {
+            return (isConnected()) ? Textures.TEXTURE_ID_HEXAGON_GREEN_PIPE_NE_E_SW : Textures.TEXTURE_ID_HEXAGON_GRAY_PIPE_NE_E_SW;
+        } else if (hasNorthWest() && !hasNorthEast() && hasEast() && !hasSouthEast() && !hasSouthWest() && hasWest()) {
+            return (isConnected()) ? Textures.TEXTURE_ID_HEXAGON_GREEN_PIPE_NE_E_SW : Textures.TEXTURE_ID_HEXAGON_GRAY_PIPE_NE_E_SW;
+        } else if (hasNorthWest() && hasNorthEast() && !hasEast() && hasSouthEast() && !hasSouthWest() && !hasWest()) {
+            return (isConnected()) ? Textures.TEXTURE_ID_HEXAGON_GREEN_PIPE_NE_E_SW : Textures.TEXTURE_ID_HEXAGON_GRAY_PIPE_NE_E_SW;
+        } else if (!hasNorthWest() && hasNorthEast() && hasEast() && !hasSouthEast() && !hasSouthWest() && hasWest()) {
+            return (isConnected()) ? Textures.TEXTURE_ID_HEXAGON_GREEN_PIPE_NE_E_W : Textures.TEXTURE_ID_HEXAGON_GRAY_PIPE_NE_E_W;
+        } else if (hasNorthWest() && !hasNorthEast() && hasEast() && hasSouthEast() && !hasSouthWest() && !hasWest()) {
+            return (isConnected()) ? Textures.TEXTURE_ID_HEXAGON_GREEN_PIPE_NE_E_W : Textures.TEXTURE_ID_HEXAGON_GRAY_PIPE_NE_E_W;
+        } else if (!hasNorthWest() && hasNorthEast() && !hasEast() && hasSouthEast() && hasSouthWest() && !hasWest()) {
+            return (isConnected()) ? Textures.TEXTURE_ID_HEXAGON_GREEN_PIPE_NE_E_W : Textures.TEXTURE_ID_HEXAGON_GRAY_PIPE_NE_E_W;
+        } else if (!hasNorthWest() && !hasNorthEast() && hasEast() && !hasSouthEast() && hasSouthWest() && hasWest()) {
+            return (isConnected()) ? Textures.TEXTURE_ID_HEXAGON_GREEN_PIPE_NE_E_W : Textures.TEXTURE_ID_HEXAGON_GRAY_PIPE_NE_E_W;
+        } else if (hasNorthWest() && !hasNorthEast() && !hasEast() && hasSouthEast() && !hasSouthWest() && hasWest()) {
+            return (isConnected()) ? Textures.TEXTURE_ID_HEXAGON_GREEN_PIPE_NE_E_W : Textures.TEXTURE_ID_HEXAGON_GRAY_PIPE_NE_E_W;
+        } else if (hasNorthWest() && hasNorthEast() && !hasEast() && !hasSouthEast() && hasSouthWest() && !hasWest()) {
+            return (isConnected()) ? Textures.TEXTURE_ID_HEXAGON_GREEN_PIPE_NE_E_W : Textures.TEXTURE_ID_HEXAGON_GRAY_PIPE_NE_E_W;
+        } else if (!hasNorthWest() && hasNorthEast() && !hasEast() && hasSouthEast() && !hasSouthWest() && !hasWest()) {
+            return (isConnected()) ? Textures.TEXTURE_ID_HEXAGON_GREEN_PIPE_NE_SE : Textures.TEXTURE_ID_HEXAGON_GRAY_PIPE_NE_SE;
+        } else if (!hasNorthWest() && !hasNorthEast() && hasEast() && !hasSouthEast() && hasSouthWest() && !hasWest()) {
+            return (isConnected()) ? Textures.TEXTURE_ID_HEXAGON_GREEN_PIPE_NE_SE : Textures.TEXTURE_ID_HEXAGON_GRAY_PIPE_NE_SE;
+        } else if (!hasNorthWest() && !hasNorthEast() && !hasEast() && hasSouthEast() && !hasSouthWest() && hasWest()) {
+            return (isConnected()) ? Textures.TEXTURE_ID_HEXAGON_GREEN_PIPE_NE_SE : Textures.TEXTURE_ID_HEXAGON_GRAY_PIPE_NE_SE;
+        } else if (hasNorthWest() && !hasNorthEast() && !hasEast() && !hasSouthEast() && hasSouthWest() && !hasWest()) {
+            return (isConnected()) ? Textures.TEXTURE_ID_HEXAGON_GREEN_PIPE_NE_SE : Textures.TEXTURE_ID_HEXAGON_GRAY_PIPE_NE_SE;
+        } else if (!hasNorthWest() && hasNorthEast() && !hasEast() && !hasSouthEast() && !hasSouthWest() && hasWest()) {
+            return (isConnected()) ? Textures.TEXTURE_ID_HEXAGON_GREEN_PIPE_NE_SE : Textures.TEXTURE_ID_HEXAGON_GRAY_PIPE_NE_SE;
+        } else if (hasNorthWest() && !hasNorthEast() && hasEast() && !hasSouthEast() && !hasSouthWest() && !hasWest()) {
+            return (isConnected()) ? Textures.TEXTURE_ID_HEXAGON_GREEN_PIPE_NE_SE : Textures.TEXTURE_ID_HEXAGON_GRAY_PIPE_NE_SE;
+        } else if (!hasNorthWest() && hasNorthEast() && !hasEast() && !hasSouthEast() && hasSouthWest() && !hasWest()) {
+            return (isConnected()) ? Textures.TEXTURE_ID_HEXAGON_GREEN_PIPE_NE_SW : Textures.TEXTURE_ID_HEXAGON_GRAY_PIPE_NE_SW;
+        } else if (!hasNorthWest() && !hasNorthEast() && hasEast() && !hasSouthEast() && !hasSouthWest() && hasWest()) {
+            return (isConnected()) ? Textures.TEXTURE_ID_HEXAGON_GREEN_PIPE_NE_SW : Textures.TEXTURE_ID_HEXAGON_GRAY_PIPE_NE_SW;
+        } else if (hasNorthWest() && !hasNorthEast() && !hasEast() && hasSouthEast() && !hasSouthWest() && !hasWest()) {
+            return (isConnected()) ? Textures.TEXTURE_ID_HEXAGON_GREEN_PIPE_NE_SW : Textures.TEXTURE_ID_HEXAGON_GRAY_PIPE_NE_SW;
+        } else if (!hasNorthWest() && !hasNorthEast() && !hasEast() && !hasSouthEast() && !hasSouthWest() && !hasWest()) {
+            return (isConnected()) ? Textures.TEXTURE_ID_HEXAGON_GREEN_PIPE_NE_W : Textures.TEXTURE_ID_HEXAGON_GRAY_PIPE_NE_W;
+        } else if (hasNorthWest() && !hasNorthEast() && hasEast() && !hasSouthEast() && !hasSouthWest() && !hasWest()) {
+            return (isConnected()) ? Textures.TEXTURE_ID_HEXAGON_GREEN_PIPE_NE_W : Textures.TEXTURE_ID_HEXAGON_GRAY_PIPE_NE_W;
+        } else if (!hasNorthWest() && hasNorthEast() && !hasEast() && hasSouthEast() && !hasSouthWest() && !hasWest()) {
+            return (isConnected()) ? Textures.TEXTURE_ID_HEXAGON_GREEN_PIPE_NE_W : Textures.TEXTURE_ID_HEXAGON_GRAY_PIPE_NE_W;
+        } else if (!hasNorthWest() && !hasNorthEast() && hasEast() && !hasSouthEast() && hasSouthWest() && !hasWest()) {
+            return (isConnected()) ? Textures.TEXTURE_ID_HEXAGON_GREEN_PIPE_NE_W : Textures.TEXTURE_ID_HEXAGON_GRAY_PIPE_NE_W;
+        } else if (!hasNorthWest() && !hasNorthEast() && !hasEast() && hasSouthEast() && !hasSouthWest() && hasWest()) {
+            return (isConnected()) ? Textures.TEXTURE_ID_HEXAGON_GREEN_PIPE_NE_W : Textures.TEXTURE_ID_HEXAGON_GRAY_PIPE_NE_W;
+        } else if (hasNorthWest() && !hasNorthEast() && !hasEast() && !hasSouthEast() && hasSouthWest() && !hasWest()) {
+            return (isConnected()) ? Textures.TEXTURE_ID_HEXAGON_GREEN_PIPE_NE_W : Textures.TEXTURE_ID_HEXAGON_GRAY_PIPE_NE_W;
+        } else if (hasNorthWest() && hasNorthEast() && !hasEast() && hasSouthEast() && hasSouthWest() && !hasWest()) {
+            return (isConnected()) ? Textures.TEXTURE_ID_HEXAGON_GREEN_PIPE_NW_NE_SE_SW : Textures.TEXTURE_ID_HEXAGON_GRAY_PIPE_NW_NE_SE_SW;
+        } else if (!hasNorthWest() && hasNorthEast() && hasEast() && !hasSouthEast() && hasSouthWest() && hasWest()) {
+            return (isConnected()) ? Textures.TEXTURE_ID_HEXAGON_GREEN_PIPE_NW_NE_SE_SW : Textures.TEXTURE_ID_HEXAGON_GRAY_PIPE_NW_NE_SE_SW;
+        } else if (hasNorthWest() && !hasNorthEast() && hasEast() && hasSouthEast() && !hasSouthWest() && hasWest()) {
+            return (isConnected()) ? Textures.TEXTURE_ID_HEXAGON_GREEN_PIPE_NW_NE_SE_SW : Textures.TEXTURE_ID_HEXAGON_GRAY_PIPE_NW_NE_SE_SW;
         } else {
-            return (isConnected() ? Textures.TEXTURE_ID_HEXAGON_GREEN_PIPE_ALL : Textures.TEXTURE_ID_HEXAGON_GRAY_PIPE_ALL);
+            throw new RuntimeException("Texture id not found NW:" + hasNorthWest() + " NE:" + hasNorthEast() + " E:" + hasEast() + " SE:" + hasSouthEast() + " SW:" + hasSouthWest() + " W:" + hasWest());
         }
     }
 
     @Override
     public void calculateAnglePipe() {
-        if (hasNorth() && !hasNorthWest() && !hasNorthEast() && !hasSouthEast() && !hasSouth() && !hasSouthWest()) {
+        if (hasNorthWest() && hasNorthEast() && hasEast() && hasSouthEast() && hasSouthWest() && hasWest()) {
             setAnglePipe(0);
-        } else if (!hasNorth() && hasNorthWest() && !hasNorthEast() && !hasSouthEast() && !hasSouth() && !hasSouthWest()) {
+        } else if (!hasNorthWest() && hasNorthEast() && !hasEast() && !hasSouthEast() && !hasSouthWest() && !hasWest()) {
+            setAnglePipe(0);
+        } else if (!hasNorthWest() && !hasNorthEast() && hasEast() && !hasSouthEast() && !hasSouthWest() && !hasWest()) {
             setAnglePipe(60);
-        } else if (!hasNorth() && !hasNorthWest() && hasNorthEast() && !hasSouthEast() && !hasSouth() && !hasSouthWest()) {
+        } else if (!hasNorthWest() && !hasNorthEast() && !hasEast() && hasSouthEast() && !hasSouthWest() && !hasWest()) {
             setAnglePipe(120);
-        } else if (!hasNorth() && !hasNorthWest() && !hasNorthEast() && hasSouthEast() && !hasSouth() && !hasSouthWest()) {
+        } else if (!hasNorthWest() && !hasNorthEast() && !hasEast() && !hasSouthEast() && hasSouthWest() && !hasWest()) {
             setAnglePipe(180);
-        } else if (!hasNorth() && !hasNorthWest() && !hasNorthEast() && !hasSouthEast() && hasSouth() && !hasSouthWest()) {
+        } else if (!hasNorthWest() && !hasNorthEast() && !hasEast() && !hasSouthEast() && !hasSouthWest() && hasWest()) {
             setAnglePipe(240);
-        } else if (!hasNorth() && !hasNorthWest() && !hasNorthEast() && !hasSouthEast() && !hasSouth() && hasSouthWest()) {
+        } else if (hasNorthWest() && !hasNorthEast() && !hasEast() && !hasSouthEast() && !hasSouthWest() && !hasWest()) {
             setAnglePipe(300);
-        } else if (hasNorth() && !hasNorthWest() && hasNorthEast() && !hasSouthEast() && !hasSouth() && !hasSouthWest()) {
+        } else if (!hasNorthWest() && hasNorthEast() && hasEast() && !hasSouthEast() && !hasSouthWest() && !hasWest()) {
             setAnglePipe(0);
-        } else if (!hasNorth() && !hasNorthWest() && hasNorthEast() && hasSouthEast() && !hasSouth() && !hasSouthWest()) {
+        } else if (!hasNorthWest() && !hasNorthEast() && hasEast() && hasSouthEast() && !hasSouthWest() && !hasWest()) {
             setAnglePipe(60);
-        } else if (!hasNorth() && !hasNorthWest() && !hasNorthEast() && hasSouthEast() && hasSouth() && !hasSouthWest()) {
+        } else if (!hasNorthWest() && !hasNorthEast() && !hasEast() && hasSouthEast() && hasSouthWest() && !hasWest()) {
             setAnglePipe(120);
-        } else if (!hasNorth() && !hasNorthWest() && !hasNorthEast() && !hasSouthEast() && hasSouth() && hasSouthWest()) {
+        } else if (!hasNorthWest() && !hasNorthEast() && !hasEast() && !hasSouthEast() && hasSouthWest() && hasWest()) {
             setAnglePipe(180);
-        } else if (!hasNorth() && hasNorthWest() && !hasNorthEast() && !hasSouthEast() && !hasSouth() && hasSouthWest()) {
+        } else if (hasNorthWest() && !hasNorthEast() && !hasEast() && !hasSouthEast() && !hasSouthWest() && hasWest()) {
             setAnglePipe(240);
-        } else if (hasNorth() && hasNorthWest() && !hasNorthEast() && !hasSouthEast() && !hasSouth() && !hasSouthWest()) {
+        } else if (hasNorthWest() && hasNorthEast() && !hasEast() && !hasSouthEast() && !hasSouthWest() && !hasWest()) {
             setAnglePipe(300);
-        } else if (hasNorth() && !hasNorthWest() && hasNorthEast() && !hasSouthEast() && hasSouth() && !hasSouthWest()) {
+        } else if (!hasNorthWest() && hasNorthEast() && hasEast() && hasSouthEast() && !hasSouthWest() && !hasWest()) {
             setAnglePipe(0);
-        } else if (!hasNorth() && !hasNorthWest() && hasNorthEast() && hasSouthEast() && !hasSouth() && hasSouthWest()) {
+        } else if (!hasNorthWest() && !hasNorthEast() && hasEast() && hasSouthEast() && hasSouthWest() && !hasWest()) {
             setAnglePipe(60);
-        } else if (!hasNorth() && hasNorthWest() && !hasNorthEast() && hasSouthEast() && hasSouth() && !hasSouthWest()) {
+        } else if (!hasNorthWest() && !hasNorthEast() && !hasEast() && hasSouthEast() && hasSouthWest() && hasWest()) {
             setAnglePipe(120);
-        } else if (hasNorth() && !hasNorthWest() && !hasNorthEast() && !hasSouthEast() && hasSouth() && hasSouthWest()) {
+        } else if (hasNorthWest() && !hasNorthEast() && !hasEast() && !hasSouthEast() && hasSouthWest() && hasWest()) {
             setAnglePipe(180);
-        } else if (!hasNorth() && hasNorthWest() && hasNorthEast() && !hasSouthEast() && !hasSouth() && hasSouthWest()) {
+        } else if (hasNorthWest() && hasNorthEast() && !hasEast() && !hasSouthEast() && !hasSouthWest() && hasWest()) {
             setAnglePipe(240);
-        } else if (hasNorth() && hasNorthWest() && !hasNorthEast() && hasSouthEast() && !hasSouth() && !hasSouthWest()) {
+        } else if (hasNorthWest() && hasNorthEast() && hasEast() && !hasSouthEast() && !hasSouthWest() && !hasWest()) {
             setAnglePipe(300);
-        } else if (hasNorth() && !hasNorthWest() && hasNorthEast() && !hasSouthEast() && hasSouth() && hasSouthWest()) {
+        } else if (!hasNorthWest() && hasNorthEast() && hasEast() && hasSouthEast() && hasSouthWest() && !hasWest()) {
             setAnglePipe(0);
-        } else if (!hasNorth() && hasNorthWest() && hasNorthEast() && hasSouthEast() && !hasSouth() && hasSouthWest()) {
+        } else if (!hasNorthWest() && !hasNorthEast() && hasEast() && hasSouthEast() && hasSouthWest() && hasWest()) {
             setAnglePipe(60);
-        } else if (hasNorth() && hasNorthWest() && !hasNorthEast() && hasSouthEast() && hasSouth() && !hasSouthWest()) {
+        } else if (hasNorthWest() && !hasNorthEast() && !hasEast() && hasSouthEast() && hasSouthWest() && hasWest()) {
             setAnglePipe(120);
-        } else if (hasNorth() && !hasNorthWest() && hasNorthEast() && hasSouthEast() && !hasSouth() && !hasSouthWest()) {
-            setAnglePipe(0);
-        } else if (!hasNorth() && !hasNorthWest() && hasNorthEast() && hasSouthEast() && hasSouth() && !hasSouthWest()) {
-            setAnglePipe(60);
-        } else if (!hasNorth() && !hasNorthWest() && !hasNorthEast() && hasSouthEast() && hasSouth() && hasSouthWest()) {
-            setAnglePipe(120);
-        } else if (!hasNorth() && hasNorthWest() && !hasNorthEast() && !hasSouthEast() && hasSouth() && hasSouthWest()) {
+        } else if (hasNorthWest() && hasNorthEast() && !hasEast() && !hasSouthEast() && hasSouthWest() && hasWest()) {
             setAnglePipe(180);
-        } else if (hasNorth() && hasNorthWest() && !hasNorthEast() && !hasSouthEast() && !hasSouth() && hasSouthWest()) {
+        } else if (hasNorthWest() && hasNorthEast() && hasEast() && !hasSouthEast() && !hasSouthWest() && hasWest()) {
             setAnglePipe(240);
-        } else if (hasNorth() && hasNorthWest() && hasNorthEast() && !hasSouthEast() && !hasSouth() && !hasSouthWest()) {
+        } else if (hasNorthWest() && hasNorthEast() && hasEast() && hasSouthEast() && !hasSouthWest() && !hasWest()) {
             setAnglePipe(300);
-        } else if (hasNorth() && !hasNorthWest() && hasNorthEast() && hasSouthEast() && hasSouth() && !hasSouthWest()) {
+        } else if (!hasNorthWest() && hasNorthEast() && hasEast() && hasSouthEast() && hasSouthWest() && hasWest()) {
             setAnglePipe(0);
-        } else if (!hasNorth() && !hasNorthWest() && hasNorthEast() && hasSouthEast() && hasSouth() && hasSouthWest()) {
+        } else if (hasNorthWest() && !hasNorthEast() && hasEast() && hasSouthEast() && hasSouthWest() && hasWest()) {
             setAnglePipe(60);
-        } else if (!hasNorth() && hasNorthWest() && !hasNorthEast() && hasSouthEast() && hasSouth() && hasSouthWest()) {
+        } else if (hasNorthWest() && hasNorthEast() && !hasEast() && hasSouthEast() && hasSouthWest() && hasWest()) {
             setAnglePipe(120);
-        } else if (hasNorth() && hasNorthWest() && !hasNorthEast() && !hasSouthEast() && hasSouth() && hasSouthWest()) {
+        } else if (hasNorthWest() && hasNorthEast() && hasEast() && !hasSouthEast() && hasSouthWest() && hasWest()) {
             setAnglePipe(180);
-        } else if (hasNorth() && hasNorthWest() && hasNorthEast() && !hasSouthEast() && !hasSouth() && hasSouthWest()) {
+        } else if (hasNorthWest() && hasNorthEast() && hasEast() && hasSouthEast() && !hasSouthWest() && hasWest()) {
             setAnglePipe(240);
-        } else if (hasNorth() && hasNorthWest() && hasNorthEast() && hasSouthEast() && !hasSouth() && !hasSouthWest()) {
+        } else if (hasNorthWest() && hasNorthEast() && hasEast() && hasSouthEast() && hasSouthWest() && !hasWest()) {
             setAnglePipe(300);
-        } else if (hasNorth() && !hasNorthWest() && hasNorthEast() && hasSouthEast() && hasSouth() && hasSouthWest()) {
+        } else if (!hasNorthWest() && hasNorthEast() && hasEast() && !hasSouthEast() && hasSouthWest() && !hasWest()) {
             setAnglePipe(0);
-        } else if (!hasNorth() && hasNorthWest() && hasNorthEast() && hasSouthEast() && hasSouth() && hasSouthWest()) {
+        } else if (!hasNorthWest() && !hasNorthEast() && hasEast() && hasSouthEast() && !hasSouthWest() && hasWest()) {
             setAnglePipe(60);
-        } else if (hasNorth() && hasNorthWest() && !hasNorthEast() && hasSouthEast() && hasSouth() && hasSouthWest()) {
+        } else if (hasNorthWest() && !hasNorthEast() && !hasEast() && hasSouthEast() && hasSouthWest() && !hasWest()) {
             setAnglePipe(120);
-        } else if (hasNorth() && hasNorthWest() && hasNorthEast() && !hasSouthEast() && hasSouth() && hasSouthWest()) {
+        } else if (!hasNorthWest() && hasNorthEast() && !hasEast() && !hasSouthEast() && hasSouthWest() && hasWest()) {
             setAnglePipe(180);
-        } else if (hasNorth() && hasNorthWest() && hasNorthEast() && hasSouthEast() && !hasSouth() && hasSouthWest()) {
+        } else if (hasNorthWest() && !hasNorthEast() && hasEast() && !hasSouthEast() && !hasSouthWest() && hasWest()) {
             setAnglePipe(240);
-        } else if (hasNorth() && hasNorthWest() && hasNorthEast() && hasSouthEast() && hasSouth() && !hasSouthWest()) {
+        } else if (hasNorthWest() && hasNorthEast() && !hasEast() && hasSouthEast() && !hasSouthWest() && !hasWest()) {
             setAnglePipe(300);
-        } else if (hasNorth() && !hasNorthWest() && hasNorthEast() && !hasSouthEast() && !hasSouth() && hasSouthWest()) {
+        } else if (!hasNorthWest() && hasNorthEast() && hasEast() && !hasSouthEast() && !hasSouthWest() && hasWest()) {
             setAnglePipe(0);
-        } else if (!hasNorth() && hasNorthWest() && hasNorthEast() && hasSouthEast() && !hasSouth() && !hasSouthWest()) {
+        } else if (hasNorthWest() && !hasNorthEast() && hasEast() && hasSouthEast() && !hasSouthWest() && !hasWest()) {
             setAnglePipe(60);
-        } else if (hasNorth() && !hasNorthWest() && !hasNorthEast() && hasSouthEast() && hasSouth() && !hasSouthWest()) {
+        } else if (!hasNorthWest() && hasNorthEast() && !hasEast() && hasSouthEast() && hasSouthWest() && !hasWest()) {
             setAnglePipe(120);
-        } else if (!hasNorth() && !hasNorthWest() && hasNorthEast() && !hasSouthEast() && hasSouth() && hasSouthWest()) {
+        } else if (!hasNorthWest() && !hasNorthEast() && hasEast() && !hasSouthEast() && hasSouthWest() && hasWest()) {
             setAnglePipe(180);
-        } else if (!hasNorth() && hasNorthWest() && !hasNorthEast() && hasSouthEast() && !hasSouth() && hasSouthWest()) {
+        } else if (hasNorthWest() && !hasNorthEast() && !hasEast() && hasSouthEast() && !hasSouthWest() && hasWest()) {
             setAnglePipe(240);
-        } else if (hasNorth() && hasNorthWest() && !hasNorthEast() && !hasSouthEast() && hasSouth() && !hasSouthWest()) {
+        } else if (hasNorthWest() && hasNorthEast() && !hasEast() && !hasSouthEast() && hasSouthWest() && !hasWest()) {
             setAnglePipe(300);
-        } else if (hasNorth() && !hasNorthWest() && !hasNorthEast() && !hasSouthEast() && !hasSouth() && hasSouthWest()) {
+        } else if (!hasNorthWest() && hasNorthEast() && !hasEast() && hasSouthEast() && !hasSouthWest() && !hasWest()) {
             setAnglePipe(0);
-        } else if (!hasNorth() && hasNorthWest() && hasNorthEast() && !hasSouthEast() && !hasSouth() && !hasSouthWest()) {
+        } else if (!hasNorthWest() && !hasNorthEast() && hasEast() && !hasSouthEast() && hasSouthWest() && !hasWest()) {
             setAnglePipe(60);
-        } else if (hasNorth() && !hasNorthWest() && !hasNorthEast() && hasSouthEast() && !hasSouth() && !hasSouthWest()) {
+        } else if (!hasNorthWest() && !hasNorthEast() && !hasEast() && hasSouthEast() && !hasSouthWest() && hasWest()) {
             setAnglePipe(120);
-        } else if (!hasNorth() && !hasNorthWest() && hasNorthEast() && !hasSouthEast() && hasSouth() && !hasSouthWest()) {
+        } else if (hasNorthWest() && !hasNorthEast() && !hasEast() && !hasSouthEast() && hasSouthWest() && !hasWest()) {
             setAnglePipe(180);
-        } else if (!hasNorth() && !hasNorthWest() && !hasNorthEast() && hasSouthEast() && !hasSouth() && hasSouthWest()) {
+        } else if (!hasNorthWest() && hasNorthEast() && !hasEast() && !hasSouthEast() && !hasSouthWest() && hasWest()) {
             setAnglePipe(240);
-        } else if (!hasNorth() && hasNorthWest() && !hasNorthEast() && !hasSouthEast() && hasSouth() && !hasSouthWest()) {
+        } else if (hasNorthWest() && !hasNorthEast() && hasEast() && !hasSouthEast() && !hasSouthWest() && !hasWest()) {
             setAnglePipe(300);
-        } else if (hasNorth() && !hasNorthWest() && !hasNorthEast() && !hasSouthEast() && hasSouth() && !hasSouthWest()) {
+        } else if (!hasNorthWest() && hasNorthEast() && !hasEast() && !hasSouthEast() && hasSouthWest() && !hasWest()) {
             setAnglePipe(0);
-        } else if (!hasNorth() && !hasNorthWest() && hasNorthEast() && !hasSouthEast() && !hasSouth() && hasSouthWest()) {
+        } else if (!hasNorthWest() && !hasNorthEast() && hasEast() && !hasSouthEast() && !hasSouthWest() && hasWest()) {
             setAnglePipe(60);
-        } else if (!hasNorth() && hasNorthWest() && !hasNorthEast() && hasSouthEast() && !hasSouth() && !hasSouthWest()) {
+        } else if (hasNorthWest() && !hasNorthEast() && !hasEast() && hasSouthEast() && !hasSouthWest() && !hasWest()) {
+            setAnglePipe(120);
+        } else if (!hasNorthWest() && !hasNorthEast() && !hasEast() && !hasSouthEast() && !hasSouthWest() && !hasWest()) {
+            setAnglePipe(0);
+        } else if (hasNorthWest() && !hasNorthEast() && hasEast() && !hasSouthEast() && !hasSouthWest() && !hasWest()) {
+            setAnglePipe(60);
+        } else if (!hasNorthWest() && hasNorthEast() && !hasEast() && hasSouthEast() && !hasSouthWest() && !hasWest()) {
+            setAnglePipe(120);
+        } else if (!hasNorthWest() && !hasNorthEast() && hasEast() && !hasSouthEast() && hasSouthWest() && !hasWest()) {
+            setAnglePipe(180);
+        } else if (!hasNorthWest() && !hasNorthEast() && !hasEast() && hasSouthEast() && !hasSouthWest() && hasWest()) {
+            setAnglePipe(240);
+        } else if (hasNorthWest() && !hasNorthEast() && !hasEast() && !hasSouthEast() && hasSouthWest() && !hasWest()) {
+            setAnglePipe(300);
+        } else if (hasNorthWest() && hasNorthEast() && !hasEast() && hasSouthEast() && hasSouthWest() && !hasWest()) {
+            setAnglePipe(0);
+        } else if (!hasNorthWest() && hasNorthEast() && hasEast() && !hasSouthEast() && hasSouthWest() && hasWest()) {
+            setAnglePipe(60);
+        } else if (hasNorthWest() && !hasNorthEast() && hasEast() && hasSouthEast() && !hasSouthWest() && hasWest()) {
             setAnglePipe(120);
         } else {
-            setAnglePipe(0);
+            throw new RuntimeException("Angle not set NW:" + hasNorthWest() + " NE:" + hasNorthEast() + " E:" + hasEast() + " SE:" + hasSouthEast() + " SW:" + hasSouthWest() + " W:" + hasWest());
         }
     }
 
     @Override
     public void setBorders(final Room room) {
-        setNorth(!room.hasWall(Wall.North));
         setNorthWest(!room.hasWall(Wall.NorthWest));
         setNorthEast(!room.hasWall(Wall.NorthEast));
-        setSouth(!room.hasWall(Wall.South));
-        setSouthWest(!room.hasWall(Wall.SouthWest));
+        setEast(!room.hasWall(Wall.East));
         setSouthEast(!room.hasWall(Wall.SouthEast));
+        setSouthWest(!room.hasWall(Wall.SouthWest));
+        setWest(!room.hasWall(Wall.West));
+        setNorth(false);
+        setSouth(false);
     }
 
     @Override
@@ -316,20 +346,20 @@ public class Hexagon extends CustomShape {
         setAngle(getDestinationAngle());
 
         //update the current borders
-        boolean oldNorth     =  new Boolean(hasNorth());
         boolean oldNorthWest =  new Boolean(hasNorthWest());
         boolean oldNorthEast =  new Boolean(hasNorthEast());
-        boolean oldSouth     =  new Boolean(hasSouth());
-        boolean oldSouthWest =  new Boolean(hasSouthWest());
+        boolean oldEast      =  new Boolean(hasEast());
         boolean oldSouthEast =  new Boolean(hasSouthEast());
+        boolean oldSouthWest =  new Boolean(hasSouthWest());
+        boolean oldWest      =  new Boolean(hasWest());
 
         //rotate the borders along with the shape
-        setNorthWest(oldSouthWest);
-        setNorth(oldNorthWest);
-        setNorthEast(oldNorth);
-        setSouthEast(oldNorthEast);
-        setSouth(oldSouthEast);
-        setSouthWest(oldSouth);
+        setNorthWest(oldWest);
+        setNorthEast(oldNorthWest);
+        setEast(oldNorthEast);
+        setSouthEast(oldEast);
+        setSouthWest(oldSouthEast);
+        setWest(oldSouthWest);
     }
 
     @Override

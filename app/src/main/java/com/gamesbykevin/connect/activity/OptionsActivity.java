@@ -5,13 +5,17 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ToggleButton;
 
+import com.gamesbykevin.androidframeworkv2.ui.MultiStateToggleButton;
 import com.gamesbykevin.androidframeworkv2.util.UtilityHelper;
 import com.gamesbykevin.connect.R;
+import com.gamesbykevin.connect.board.Board;
 
 public class OptionsActivity extends BaseActivity {
 
     //has the activity been paused
     private boolean paused = false;
+
+    private MultiStateToggleButton buttonShape;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,9 +28,15 @@ public class OptionsActivity extends BaseActivity {
         ToggleButton buttonSound = (ToggleButton)findViewById(R.id.ToggleButtonSound);
         ToggleButton buttonVibrate = (ToggleButton)findViewById(R.id.ToggleButtonVibrate);
 
+        //populate shape options
+        this.buttonShape = (MultiStateToggleButton)findViewById(R.id.ToggleButtonShape);
+        this.buttonShape.setOptions(Board.Shape.values());
+        this.buttonShape.setHeader(getString(R.string.text_header_shape));
+
         //update our buttons accordingly
         buttonSound.setChecked(getBooleanValue(R.string.sound_file_key));
         buttonVibrate.setChecked(getBooleanValue(R.string.vibrate_file_key));
+        buttonShape.setIndex(getObjectValue(R.string.game_shape_file_key, Board.Shape.class));
     }
 
     @Override
@@ -68,6 +78,9 @@ public class OptionsActivity extends BaseActivity {
             //store the vibrate setting based on the toggle button
             editor.putBoolean(getString(R.string.vibrate_file_key), ((ToggleButton)findViewById(R.id.ToggleButtonVibrate)).isChecked());
 
+            //store the shape setting as well
+            editor.putString(getString(R.string.game_shape_file_key), GSON.toJson(buttonShape.getValue()));
+
             //make it final by committing the change
             editor.commit();
 
@@ -99,5 +112,11 @@ public class OptionsActivity extends BaseActivity {
 
         if (!button.isChecked())
             super.stopSound();
+    }
+
+    public void onClickShape(View view) {
+
+        //move to the next option
+        this.buttonShape.select();
     }
 }
