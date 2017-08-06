@@ -1,11 +1,7 @@
 package com.gamesbykevin.connect.board;
 
-import android.printservice.CustomPrinterIconCallback;
-
-import com.gamesbykevin.androidframeworkv2.base.Cell;
 import com.gamesbykevin.androidframeworkv2.maze.Maze;
 import com.gamesbykevin.androidframeworkv2.maze.Room;
-import com.gamesbykevin.androidframeworkv2.maze.Room.Wall;
 import com.gamesbykevin.androidframeworkv2.maze.algorithm.Prims;
 import com.gamesbykevin.androidframeworkv2.util.UtilityHelper;
 import com.gamesbykevin.connect.entity.Entity;
@@ -13,14 +9,13 @@ import com.gamesbykevin.connect.shape.CustomShape;
 import com.gamesbykevin.connect.activity.GameActivity;
 import com.gamesbykevin.connect.common.ICommon;
 import com.gamesbykevin.connect.opengl.Textures;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.gamesbykevin.connect.shape.Hexagon;
+import com.gamesbykevin.connect.shape.Square;
 
 import javax.microedition.khronos.opengles.GL10;
 
-import static com.gamesbykevin.connect.shape.CustomShape.ANGLE_MAX;
-import static com.gamesbykevin.connect.shape.CustomShape.ROTATION_ANGLE_SQUARE;
+import static com.gamesbykevin.connect.activity.GameActivity.getRandomObject;
+import static com.gamesbykevin.connect.board.BoardHelper.checkBoard;
 
 /**
  * Created by Kevin on 8/1/2017.
@@ -39,17 +34,14 @@ public class Board implements ICommon {
     private Entity pipe = new Entity();
 
     public static final int BOARD_COLS = 5;
-    public static final int BOARD_ROWS = 5;
+    public static final int BOARD_ROWS = 10;
 
     //base point that we will mark connected
     public static final int ANCHOR_COL = (BOARD_COLS / 2);
     public static final int ANCHOR_ROW = (BOARD_ROWS / 2);
 
-    //our array storing what shapes are connected
-    private boolean[][] tmpConnected;
-
-    //list of locations to check
-    private List<Cell> check;
+    //do we rotate until we connect to something?
+    private boolean magnet = false;
 
     /**
      * Default constructor
@@ -58,10 +50,6 @@ public class Board implements ICommon {
         //addShape(Shape.Square, 0, 50);
         //addShape(Shape.Hexagon, 0, 400);
         //addShape(Shape.Diamond, 200, 250);
-
-        this.pipe = new Entity();
-        this.pipe.setWidth(CustomShape.DEFAULT_DIMENSION);
-        this.pipe.setHeight(CustomShape.DEFAULT_DIMENSION);
 
         reset();
     }
@@ -72,18 +60,17 @@ public class Board implements ICommon {
 
     public final void addShape(Shape shape, Room room, float x, float y, int col, int row) {
 
-        CustomShape tmp = new CustomShape(shape);
+        CustomShape tmp = null;
 
-        tmp.setX(x);
-        tmp.setY(y);
-
-        switch (tmp.getShape()) {
+        switch (shape) {
 
             case Square:
+                tmp = new Square();
                 tmp.setTextureId(Textures.TEXTURE_ID_SQUARE);
                 break;
 
             case Hexagon:
+                tmp = new Hexagon();
                 tmp.setTextureId(Textures.TEXTURE_ID_HEXAGON);
                 break;
 
@@ -95,21 +82,31 @@ public class Board implements ICommon {
                 throw new RuntimeException("Shape not defined: " + shape.toString());
         }
 
+        //assign x, y coordinates
+        tmp.setX(x);
+        tmp.setY(y);
+
+        //mark the anchor shape as connected
         if (col == ANCHOR_COL && row == ANCHOR_ROW)
             tmp.setConnected(true);
 
         //open up the appropriate sides
         tmp.setBorders(room);
 
-        //make sure we render the pipe correctly
+        //assign the location
+        tmp.setCol(col);
+        tmp.setRow(row);
+
+        //make sure we render the pipe(s) correctly
         tmp.calculateAnglePipe();
 
         //how many rotations have we had
         int rotations = 0;
 
         //pick a random number of rotations to perform
-        int rotationsMax = GameActivity.getRandomObject().nextInt((int)(ANGLE_MAX / ROTATION_ANGLE_SQUARE));
+        int rotationsMax = getRandomObject().nextInt(tmp.getRotationCountMax());
 
+        //rotate the shape a random number of times
         while (rotations < rotationsMax) {
             tmp.rotate();
             tmp.rotateFinish();
@@ -120,7 +117,7 @@ public class Board implements ICommon {
         getShapes()[row][col] = tmp;
     }
 
-    private CustomShape[][] getShapes() {
+    protected CustomShape[][] getShapes() {
 
         if (this.shapes == null)
             this.shapes = new CustomShape[BOARD_ROWS][BOARD_COLS];
@@ -128,86 +125,20 @@ public class Board implements ICommon {
         return this.shapes;
     }
 
+    /**
+     * Touch the board and rotate the selected shape
+     * @param x x-coordinate
+     * @param y y-coordinate
+     */
     public void touch(float x, float y) {
 
         for (int col = 0; col < getMaze().getCols(); col++) {
             for (int row = 0; row < getMaze().getRows(); row++) {
                 CustomShape shape = getShapes()[row][col];
 
-                if (shape != null && shape.contains(x, y) && !shape.hasRotate())
+                if (shape != null && shape.contains(x, y) && !shape.hasRotate()) {
+                    shape.setRotationCount(0);
                     shape.rotate();
-            }
-        }
-    }
-
-    public void checkBoard() {
-
-        //create array if not instantiated
-        if (tmpConnected == null)
-            tmpConnected = new boolean[getMaze().getRows()][getMaze().getCols()];
-
-        //mark all shapes not connected at first
-        for (int col = 0; col < getMaze().getCols(); col++) {
-            for (int row = 0; row < getMaze().getRows(); row++) {
-                tmpConnected[row][col] = false;
-            }
-        }
-
-        if (this.check == null)
-            this.check = new ArrayList<>();
-
-        //add starting point
-        this.check.add(new Cell(ANCHOR_COL, ANCHOR_ROW));
-
-        //keep going as long as we have places to check
-        while (!this.check.isEmpty()) {
-
-            //get the first element
-            Cell cell = this.check.get(0);
-
-            //remove the object from the list
-            this.check.remove(0);
-
-            int col = (int)cell.getCol();
-            int row = (int)cell.getRow();
-
-            CustomShape shape = getShapes()[row][col];
-
-            //mark the current location as connected
-            tmpConnected[row][col] = true;
-
-            //check neighbor shapes
-            CustomShape shapeW = null;
-            CustomShape shapeE = null;
-            CustomShape shapeN = null;
-            CustomShape shapeS = null;
-
-            //get our neighbor shapes
-            if (col > 0)
-                shapeW = getShapes()[row][col - 1];
-            if (col < BOARD_COLS - 1)
-                shapeE = getShapes()[row][col + 1];
-            if (row > 0)
-                shapeN = getShapes()[row - 1][col];
-            if (row < BOARD_ROWS - 1)
-                shapeS = getShapes()[row + 1][col];
-
-            if (shapeW != null && shapeW.hasEast() && shape.hasWest() && !tmpConnected[row][col - 1])
-                this.check.add(new Cell(col - 1, row));
-            if (shapeE != null && shapeE.hasWest() && shape.hasEast() && !tmpConnected[row][col + 1])
-                this.check.add(new Cell(col + 1, row));
-            if (shapeN != null && shapeN.hasSouth() && shape.hasNorth() && !tmpConnected[row - 1][col])
-                this.check.add(new Cell(col, row - 1));
-            if (shapeS != null && shapeS.hasNorth() && shape.hasSouth() && !tmpConnected[row + 1][col])
-                this.check.add(new Cell(col, row + 1));
-        }
-
-        for (int col = 0; col < getMaze().getCols(); col++) {
-            for (int row = 0; row < getMaze().getRows(); row++) {
-                CustomShape shape = getShapes()[row][col];
-
-                if (shape != null) {
-                    shape.setConnected(tmpConnected[row][col]);
                 }
             }
         }
@@ -217,6 +148,7 @@ public class Board implements ICommon {
     public void dispose() {
 
         if (getShapes() != null) {
+
             for (int col = 0; col < getMaze().getCols(); col++) {
                 for (int row = 0; row < getMaze().getRows(); row++) {
 
@@ -236,29 +168,19 @@ public class Board implements ICommon {
     @Override
     public void update(GameActivity activity) {
         try {
+
             if (!getMaze().isGenerated()) {
 
                 //keep generating until generated
                 while (!getMaze().isGenerated()) {
-                    getMaze().update(GameActivity.getRandomObject());
+                    getMaze().update(getRandomObject());
                 }
 
-                int x = 0, y = 0;
-
-                for (int col = 0; col < getMaze().getCols(); col++) {
-
-                    x = 40 + (col * CustomShape.DEFAULT_DIMENSION);
-
-                    for (int row = 0; row < getMaze().getRows(); row++) {
-
-                        y = 30 + (row * CustomShape.DEFAULT_DIMENSION);
-
-                        addShape(Shape.Square, getMaze().getRoom(col, row), x, y, col, row);
-                    }
-                }
+                //add the shapes to the board
+                addShapes(Shape.Hexagon);
 
                 //highlight the connected pipes
-                checkBoard();
+                //checkBoard(this);
 
             } else {
 
@@ -272,21 +194,81 @@ public class Board implements ICommon {
                         if (shape == null)
                             continue;
 
-                        if (shape.hasRotate()) {
-                            shape.update(activity);
+                        //ignore this shape if it doesn't need to rotate
+                        if (!shape.hasRotate())
+                            continue;
 
-                            if (!shape.hasRotate())
+                        //update rotation
+                        shape.update(activity);
+
+                        //if we still need to rotate continue
+                        if (shape.hasRotate())
+                            continue;
+
+                        //if magnet is enabled, check if we still need to rotate
+                        if (magnet) {
+
+                            if (!BoardHelper.canConnect(this, (Square)shape)) {
+
+                                if (shape.getRotationCount() >= shape.getRotationCountMax()) {
+                                    done = true;
+                                } else {
+                                    shape.rotate();
+                                    done = false;
+                                }
+                            } else {
                                 done = true;
+                            }
+
+                        } else {
+                            done = true;
                         }
                     }
                 }
 
-                if (done)
-                    checkBoard();
+                //if (done)
+                //    checkBoard(this);
             }
             
         } catch (Exception e) {
             UtilityHelper.handleException(e);
+        }
+    }
+
+    private void addShapes(Shape shape) {
+
+        int x = 0, y = 0;
+        int w = 0; int h = 0;
+
+        switch (shape) {
+
+            case Square:
+                w = Square.DIMENSION;
+                h = Square.DIMENSION;
+                break;
+
+            case Hexagon:
+                w = Hexagon.DIMENSION;
+                h = Hexagon.DIMENSION;
+                break;
+
+            case Diamond:
+                break;
+
+            default:
+                throw new RuntimeException("Shape not defined: " + shape.toString());
+        }
+
+        for (int col = 0; col < getMaze().getCols(); col++) {
+
+            x = 40 + (col * w);
+
+            for (int row = 0; row < getMaze().getRows(); row++) {
+
+                y = 30 + (row * h);
+
+                addShape(shape, getMaze().getRoom(col, row), x, y, col, row);
+            }
         }
     }
 
@@ -296,7 +278,7 @@ public class Board implements ICommon {
         try {
 
             //create new instance of maze
-            this.maze = new Prims(BOARD_COLS, BOARD_ROWS);
+            this.maze = new Prims(true, BOARD_COLS, BOARD_ROWS);
 
             for (int col = 0; col < getMaze().getCols(); col++) {
                 for (int row = 0; row < getMaze().getRows(); row++) {
@@ -335,8 +317,11 @@ public class Board implements ICommon {
                 //assign the pipe texture id
                 pipe.setTextureId(shape.getTextureIdPipe());
 
+                //render the pipe as well
                 pipe.setX(shape);
                 pipe.setY(shape);
+                pipe.setWidth(shape);
+                pipe.setHeight(shape);
                 pipe.setAngle(shape.getAngle() + shape.getAnglePipe());
                 pipe.render(openGL);
             }

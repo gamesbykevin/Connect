@@ -8,6 +8,7 @@ import android.view.MotionEvent;
 
 import com.gamesbykevin.androidframeworkv2.base.Entity;
 import com.gamesbykevin.androidframeworkv2.util.UtilityHelper;
+import com.gamesbykevin.connect.game.Game;
 
 import static com.gamesbykevin.androidframeworkv2.util.UtilityHelper.DEBUG;
 import static com.gamesbykevin.connect.activity.GameActivity.getGame;
@@ -137,9 +138,6 @@ public class OpenGLSurfaceView extends GLSurfaceView implements Runnable {
         //create an OpenGL ES 1.0 context.
         setEGLContextClientVersion(OPEN_GL_VERSION);
 
-        //make open gl surface view background transparent
-        setEGLConfigChooser(8, 8, 8, 8, 16, 0);
-
         //create a new instance of our renderer
         this.openGlRenderer = new OpenGLRenderer(this.activity);
 
@@ -148,9 +146,6 @@ public class OpenGLSurfaceView extends GLSurfaceView implements Runnable {
 
         //set render mode to only draw when there is a change in the drawing data
         setRenderMode(GLSurfaceView.RENDERMODE_WHEN_DIRTY);
-
-        //make open gl surface view background transparent
-        getHolder().setFormat(PixelFormat.TRANSLUCENT);
     }
 
     /**
@@ -294,6 +289,10 @@ public class OpenGLSurfaceView extends GLSurfaceView implements Runnable {
 
         try
         {
+            //if we aren't updating the game
+            if (getGame().STEP != Game.Step.Updating)
+                return true;
+
             //we can't continue if the textures have not yet loaded
             if (!LOADED)
                 return true;

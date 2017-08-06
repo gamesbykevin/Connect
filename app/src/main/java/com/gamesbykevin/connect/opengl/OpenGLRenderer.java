@@ -4,17 +4,20 @@ import android.content.Context;
 import android.opengl.GLSurfaceView.Renderer;
 
 import com.gamesbykevin.androidframeworkv2.util.UtilityHelper;
+import com.gamesbykevin.connect.game.GameHelper;
 
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
 
 import static com.gamesbykevin.androidframeworkv2.util.UtilityHelper.DEBUG;
 import static com.gamesbykevin.connect.activity.GameActivity.getGame;
+import static com.gamesbykevin.connect.game.Game.RESET_ZOOM;
 import static com.gamesbykevin.connect.game.Game.ZOOM_SCALE_RENDER_X;
 import static com.gamesbykevin.connect.game.Game.ZOOM_SCALE_RENDER_Y;
 import static com.gamesbykevin.connect.game.Game.ZOOM_SCALE_MOTION_X;
 import static com.gamesbykevin.connect.game.Game.ZOOM_SCALE_MOTION_Y;
 
+import static com.gamesbykevin.connect.game.GameHelper.getEntity;
 import static com.gamesbykevin.connect.opengl.OpenGLSurfaceView.FRAME_DURATION;
 import static com.gamesbykevin.connect.opengl.OpenGLSurfaceView.HEIGHT;
 import static com.gamesbykevin.connect.opengl.OpenGLSurfaceView.WIDTH;
@@ -103,6 +106,9 @@ public class OpenGLRenderer implements Renderer {
         ZOOM_SCALE_RENDER_Y = originalScaleRenderY;
         OFFSET_X = 0;
         OFFSET_Y = 0;
+
+        //flag false
+        RESET_ZOOM = false;
     }
 
     /**
@@ -154,7 +160,8 @@ public class OpenGLRenderer implements Renderer {
         this.originalScaleMotionY = (float) HEIGHT / screenHeight;
 
         //set the zoom values same as original
-        resetZoom();
+        if (RESET_ZOOM)
+            resetZoom();
 
         //sets the current view port to the new size of the screen
         gl.glViewport(0, 0, screenWidth, screenHeight);
@@ -197,7 +204,10 @@ public class OpenGLRenderer implements Renderer {
         //clears the screen and depth buffer.
         gl.glClear(GL10.GL_COLOR_BUFFER_BIT | GL10.GL_DEPTH_BUFFER_BIT);
 
-        //reset the projection matrix
+        //render game background image
+        renderBackground(gl);
+
+        //reset the project matrix for the game objects
         gl.glLoadIdentity();
 
         //offset the board in case the user is scrolling
@@ -218,5 +228,22 @@ public class OpenGLRenderer implements Renderer {
             if (duration > FRAME_DURATION)
                 UtilityHelper.logEvent("Single render duration: " + (System.currentTimeMillis() - time));
         }
+    }
+
+    private void renderBackground(GL10 openGL) {
+
+        //reset the projection matrix
+        openGL.glLoadIdentity();
+
+        //scale to screen size for background
+        openGL.glScalef(originalScaleRenderX, originalScaleRenderY, 0.0f);
+
+        //render background image
+        getEntity().setX(0);
+        getEntity().setY(0);
+        getEntity().setWidth(WIDTH);
+        getEntity().setHeight(HEIGHT);
+        getEntity().setTextureId(Textures.TEXTURE_ID_BACKGROUND);
+        getEntity().render(openGL);
     }
 }

@@ -15,17 +15,9 @@ import static com.gamesbykevin.connect.opengl.OpenGLSurfaceView.WIDTH;
  */
 public final class GameHelper 
 {
-    /**
-     * Check if the game is over
-     */
-    protected final static boolean isGameOver()
-	{
-		return false;
-	}
-
 	private static Entity entity = null;
 
-    private static Entity getEntity() {
+    public static Entity getEntity() {
         if (entity == null)
             entity = new Entity();
 
@@ -38,6 +30,8 @@ public final class GameHelper
      * How far do we zoom in/out
      */
     private static float ZOOM_RATIO = 2.5f;
+
+    public static boolean GAME_OVER = false;
 
     /**
      * Render the game accordingly

@@ -5,9 +5,11 @@ import android.view.MotionEvent;
 import com.gamesbykevin.connect.activity.GameActivity;
 import com.gamesbykevin.connect.activity.GameActivity.Screen;
 import com.gamesbykevin.connect.board.Board;
+import com.gamesbykevin.connect.opengl.OpenGLRenderer;
 
 import javax.microedition.khronos.opengles.GL10;
 
+import static com.gamesbykevin.connect.game.GameHelper.GAME_OVER;
 import static com.gamesbykevin.connect.opengl.OpenGLRenderer.LOADED;
 import static com.gamesbykevin.connect.opengl.OpenGLSurfaceView.HEIGHT;
 import static com.gamesbykevin.connect.opengl.OpenGLSurfaceView.WIDTH;
@@ -25,6 +27,10 @@ public class Game implements IGame {
 
     //store the zoom for motion events as well
     public static float ZOOM_SCALE_MOTION_X, ZOOM_SCALE_MOTION_Y;
+
+    //do we reset the zoom factor
+    public static boolean RESET_ZOOM = true;
+
 
     //are we pressing on the screen
     private boolean press = false;
@@ -58,8 +64,13 @@ public class Game implements IGame {
         return this.board;
     }
 
-    public void pause() {
+    public void onPause() {
         //do we need to pause anything here?
+        RESET_ZOOM = false;
+    }
+
+    public void onResume() {
+        //do we need to resume anything
     }
 
     public void reset() throws Exception {
@@ -102,6 +113,12 @@ public class Game implements IGame {
             //we are resetting the board
             case Reset:
 
+                //flag game over false
+                GAME_OVER = false;
+
+                //reset the zoom for a new level
+                OpenGLRenderer.resetZoom();
+
                 //reset level
                 reset();
 
@@ -115,7 +132,7 @@ public class Game implements IGame {
             case Updating:
 
                 //if the game is over, move to the next step
-                if (GameHelper.isGameOver()) {
+                if (GAME_OVER) {
 
                     //move to game over step
                     STEP = Step.GameOver;
@@ -129,7 +146,9 @@ public class Game implements IGame {
 
             case GameOver:
 
-                activity.setScreen(Screen.GameOver);
+                //switch to game over if not already game over
+                if (activity.getScreen() != Screen.GameOver)
+                    activity.setScreen(Screen.GameOver);
                 break;
         }
     }
