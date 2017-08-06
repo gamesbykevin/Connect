@@ -29,14 +29,6 @@ public class Hexagon extends CustomShape {
      */
     public static final float ROTATION_ANGLE = 60.0f;
 
-    //what is open on this shape
-    private boolean north = false;
-    private boolean northWest = false;
-    private boolean northEast = false;
-    private boolean south = false;
-    private boolean southWest = false;
-    private boolean southEast = false;
-
     public Hexagon() {
         super(DIMENSION, DIMENSION);
     }
@@ -274,54 +266,6 @@ public class Hexagon extends CustomShape {
         } else {
             setAnglePipe(0);
         }
-    }
-
-    public boolean hasNorthWest() {
-        return this.northWest;
-    }
-
-    public boolean hasNorthEast() {
-        return this.northEast;
-    }
-
-    public boolean hasSouthWest() {
-        return this.southWest;
-    }
-
-    public boolean hasSouthEast() {
-        return this.southEast;
-    }
-
-    public boolean hasNorth() {
-        return this.north;
-    }
-
-    public boolean hasSouth() {
-        return this.south;
-    }
-
-    public void setNorthWest(final boolean northWest) {
-        this.northWest = northWest;
-    }
-
-    public void setNorthEast(final boolean northEast) {
-        this.northEast = northEast;
-    }
-
-    public void setSouthWest(final boolean southWest) {
-        this.southWest = southWest;
-    }
-
-    public void setSouthEast(final boolean southEast) {
-        this.southEast = southEast;
-    }
-
-    private void setSouth(final boolean south) {
-        this.south = south;
-    }
-
-    private void setNorth(final boolean north) {
-        this.north = north;
     }
 
     @Override

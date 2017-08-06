@@ -28,6 +28,9 @@ public class Board implements ICommon {
         Square, Hexagon, Diamond
     }
 
+    //what type of shape are we using
+    private Shape type = Shape.Square;
+
     //our maze generation object
     private Prims maze;
 
@@ -43,19 +46,79 @@ public class Board implements ICommon {
     //do we rotate until we connect to something?
     private boolean magnet = false;
 
+    public static final int START_X = 30;
+    public static final int START_Y = 25;
+
     /**
      * Default constructor
      */
     public Board() throws Exception {
-        //addShape(Shape.Square, 0, 50);
-        //addShape(Shape.Hexagon, 0, 400);
-        //addShape(Shape.Diamond, 200, 250);
-
         reset();
     }
 
     public Maze getMaze() {
         return this.maze;
+    }
+
+    private void addShapes(Shape shape) {
+
+        setType(shape);
+
+        int x = 0, y = 0;
+        int w = 0; int h = 0;
+
+        switch (getType()) {
+
+            case Square:
+                w = Square.DIMENSION;
+                h = Square.DIMENSION;
+                break;
+
+            case Hexagon:
+                w = Hexagon.DIMENSION;
+                h = Hexagon.DIMENSION;
+                break;
+
+            default:
+                throw new RuntimeException("Shape not defined: " + shape.toString());
+        }
+
+        for (int col = 0; col < getMaze().getCols(); col++) {
+
+            for (int row = 0; row < getMaze().getRows(); row++) {
+
+                int startX = START_X + (int)(col * (w * 1.5));
+
+                switch (shape) {
+
+                    case Square:
+
+                        //calculate coordinates
+                        x = START_X + (col * w);
+                        y = START_Y + (row * h);
+                        break;
+
+                    case Hexagon:
+
+                        //calculate coordinates
+                        x = startX;
+                        y = START_Y + (row * (h / 2));
+
+                        //offset the odd/even rows
+                        if (row % 2 != 0) {
+                            x += 64;
+                        } else {
+                            //x += 128;
+                        }
+                        break;
+
+                    default:
+                        throw new RuntimeException("Shape not defined: " + shape.toString());
+                }
+
+                addShape(shape, getMaze().getRoom(col, row), x, y, col, row);
+            }
+        }
     }
 
     public final void addShape(Shape shape, Room room, float x, float y, int col, int row) {
@@ -180,7 +243,7 @@ public class Board implements ICommon {
                 addShapes(Shape.Hexagon);
 
                 //highlight the connected pipes
-                //checkBoard(this);
+                checkBoard(this);
 
             } else {
 
@@ -208,8 +271,8 @@ public class Board implements ICommon {
                         //if magnet is enabled, check if we still need to rotate
                         if (magnet) {
 
-                            if (!BoardHelper.canConnect(this, (Square)shape)) {
-
+                            //if we can't connect and the magnet is enabled, what do we do?
+                            if (!BoardHelper.canConnect(this, shape)) {
                                 if (shape.getRotationCount() >= shape.getRotationCountMax()) {
                                     done = true;
                                 } else {
@@ -226,8 +289,8 @@ public class Board implements ICommon {
                     }
                 }
 
-                //if (done)
-                //    checkBoard(this);
+                if (done)
+                    checkBoard(this);
             }
             
         } catch (Exception e) {
@@ -235,41 +298,12 @@ public class Board implements ICommon {
         }
     }
 
-    private void addShapes(Shape shape) {
+    public void setType(final Shape type) {
+        this.type = type;
+    }
 
-        int x = 0, y = 0;
-        int w = 0; int h = 0;
-
-        switch (shape) {
-
-            case Square:
-                w = Square.DIMENSION;
-                h = Square.DIMENSION;
-                break;
-
-            case Hexagon:
-                w = Hexagon.DIMENSION;
-                h = Hexagon.DIMENSION;
-                break;
-
-            case Diamond:
-                break;
-
-            default:
-                throw new RuntimeException("Shape not defined: " + shape.toString());
-        }
-
-        for (int col = 0; col < getMaze().getCols(); col++) {
-
-            x = 40 + (col * w);
-
-            for (int row = 0; row < getMaze().getRows(); row++) {
-
-                y = 30 + (row * h);
-
-                addShape(shape, getMaze().getRoom(col, row), x, y, col, row);
-            }
-        }
+    public Shape getType() {
+        return this.type;
     }
 
     @Override

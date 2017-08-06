@@ -29,12 +29,6 @@ public class Square extends CustomShape {
      */
     public static final float ROTATION_ANGLE = 90.0f;
 
-    //what is open on this shape
-    private boolean west = false;
-    private boolean east = false;
-    private boolean north = false;
-    private boolean south = false;
-
     public Square() {
         super(DIMENSION, DIMENSION);
     }
@@ -110,38 +104,6 @@ public class Square extends CustomShape {
         } else {
             throw new RuntimeException("Angle not found west:" + hasWest() + ", east:" + hasEast() + ", north:" + hasNorth() + ", south:" + hasSouth());
         }
-    }
-
-    public boolean hasWest() {
-        return this.west;
-    }
-
-    public boolean hasEast() {
-        return this.east;
-    }
-
-    public boolean hasNorth() {
-        return this.north;
-    }
-
-    public boolean hasSouth() {
-        return this.south;
-    }
-
-    private void setWest(final boolean west) {
-        this.west = west;
-    }
-
-    private void setEast(final boolean east) {
-        this.east = east;
-    }
-
-    private void setSouth(final boolean south) {
-        this.south = south;
-    }
-
-    private void setNorth(final boolean north) {
-        this.north = north;
     }
 
     @Override

@@ -51,7 +51,7 @@ public class BoardHelper {
         while (!check.isEmpty()) {
 
             //get the first shape
-            Square shape = (Square)check.get(0);
+            CustomShape shape = check.get(0);
 
             //remove the object from the list
             check.remove(0);
@@ -62,31 +62,34 @@ public class BoardHelper {
             //mark the current location as connected
             tmpConnected[row][col] = true;
 
-            //check neighbor shapes
-            Square shapeW = null;
-            Square shapeE = null;
-            Square shapeN = null;
-            Square shapeS = null;
+            //check the neighbors around the current shape
+            for (int tmpCol = -1; tmpCol <= 1; tmpCol++) {
+                for (int tmpRow = -1; tmpRow <= 1; tmpRow++) {
 
-            //get our neighbor shapes
-            if (col > 0)
-                shapeW = (Square)board.getShapes()[row][col - 1];
-            if (col < BOARD_COLS - 1)
-                shapeE = (Square)board.getShapes()[row][col + 1];
-            if (row > 0)
-                shapeN = (Square)board.getShapes()[row - 1][col];
-            if (row < BOARD_ROWS - 1)
-                shapeS = (Square)board.getShapes()[row + 1][col];
+                    //don't check self
+                    if (tmpCol == 0 && tmpRow == 0)
+                        continue;
 
-            //if the opening is there and not already connected these are new spots to connect
-            if (canConnect(shape, shapeW) && !tmpConnected[row][col - 1])
-                check.add(shapeW);
-            if (canConnect(shape, shapeE) && !tmpConnected[row][col + 1])
-                check.add(shapeE);
-            if (canConnect(shape, shapeN) && !tmpConnected[row - 1][col])
-                check.add(shapeN);
-            if (canConnect(shape, shapeS) && !tmpConnected[row + 1][col])
-                check.add(shapeS);
+                    //if not hexagon, don't check diagonal
+                    if (board.getType() != Board.Shape.Hexagon) {
+                        if (tmpCol != 0 && tmpRow != 0)
+                            continue;
+                    }
+
+                    //stay in bounds
+                    if (row + tmpRow < 0 || row + tmpRow >= BOARD_ROWS)
+                        continue;
+                    if (col + tmpCol < 0 || col + tmpCol >= BOARD_COLS)
+                        continue;
+
+                    //get the shape at the location
+                    CustomShape tmpShape = board.getShapes()[row + tmpRow][col + tmpCol];
+
+                    //if we can connect, add to list
+                    if (canConnect(shape, tmpShape, board.getType()) && !tmpConnected[row + tmpRow][col + tmpCol])
+                        check.add(tmpShape);
+                }
+            }
         }
 
         //did we solve the board
@@ -121,48 +124,43 @@ public class BoardHelper {
      * @param shape The base shape
      * @return true if we can connect to any neighbor, false otherwise
      */
-    protected static boolean canConnect(Board board, Square shape) {
+    protected static boolean canConnect(Board board, CustomShape shape) {
 
         int col = (int)shape.getCol();
         int row = (int)shape.getRow();
 
-        //check neighbor shapes
-        Square shapeW = null;
-        Square shapeE = null;
-        Square shapeN = null;
-        Square shapeS = null;
+        for (int tmpCol = -1; tmpCol <= 1; tmpCol++) {
+            for (int tmpRow = -1; tmpRow <= 1; tmpRow++) {
 
-        //get our neighbor shapes
-        if (col > 0)
-            shapeW = (Square)board.getShapes()[row][col - 1];
-        if (col < BOARD_COLS - 1)
-            shapeE = (Square)board.getShapes()[row][col + 1];
-        if (row > 0)
-            shapeN = (Square)board.getShapes()[row - 1][col];
-        if (row < BOARD_ROWS - 1)
-            shapeS = (Square)board.getShapes()[row + 1][col];
+                //don't check self
+                if (tmpCol == 0 && tmpRow == 0)
+                    continue;
 
-        //if any of these work, return true
-        if (canConnect(shape, shapeW))
-            return true;
-        if (canConnect(shape, shapeE))
-            return true;
-        if (canConnect(shape, shapeN))
-            return true;
-        if (canConnect(shape, shapeS))
-            return true;
+                //if not hexagon, don't check diagonal
+                if (board.getType() != Board.Shape.Hexagon) {
+                    if (tmpCol != 0 && tmpRow != 0)
+                        continue;
+                }
+
+                //stay in bounds
+                if (row + tmpRow < 0 || row + tmpRow >= BOARD_ROWS)
+                    continue;
+                if (col + tmpCol < 0 || col + tmpCol >= BOARD_COLS)
+                    continue;
+
+                //get the shape at the location
+                CustomShape tmpShape = board.getShapes()[row + tmpRow][col + tmpCol];
+
+                if (canConnect(shape, tmpShape, board.getType()))
+                    return true;
+            }
+        }
 
         //we couldn't connect anything
         return false;
     }
 
-    /**
-     * Can this shape connect to its neighbor
-     * @param shape The base shape
-     * @param neighbor The neighbor we want to connect to
-     * @return true if these shapes are connected, false otherwise
-     */
-    protected static boolean canConnect(Square shape, Square neighbor) {
+    protected static boolean canConnect(CustomShape shape, CustomShape neighbor, Board.Shape type) {
 
         //if the neighbor doesn't exist we can't connect
         if (neighbor == null)
@@ -174,18 +172,37 @@ public class BoardHelper {
 
         if (shape.getCol() > neighbor.getCol()) {
             if (shape.hasWest() && neighbor.hasEast())
-                return true;
+                return true;    //WEST
         } else if (shape.getCol() < neighbor.getCol()) {
             if (shape.hasEast() && neighbor.hasWest())
-                return true;
+                return true;    //EAST
         }
 
         if (shape.getRow() > neighbor.getRow()) {
             if (shape.hasNorth() && neighbor.hasSouth())
-                return true;
+                return true;    //NORTH
         } else if (shape.getRow() < neighbor.getRow()) {
             if (shape.hasSouth() && neighbor.hasNorth())
-                return true;
+                return true;    //SOUTH
+        }
+
+        //check these if the shape is a hexagon
+        if (type == Board.Shape.Hexagon) {
+            if (shape.getRow() > neighbor.getRow() && shape.getCol() > neighbor.getCol()) {
+                if (shape.hasNorth() && neighbor.hasSouth() && shape.hasWest() && neighbor.hasEast())
+                    return true;    //NORTH WEST
+            } else if (shape.getRow() > neighbor.getRow() && shape.getCol() < neighbor.getCol()) {
+                if (shape.hasNorth() && neighbor.hasSouth() && shape.hasEast() && neighbor.hasWest())
+                    return true;    //NORTH EAST
+            }
+
+            if (shape.getRow() < neighbor.getRow() && shape.getCol() > neighbor.getCol()) {
+                if (shape.hasSouth() && neighbor.hasNorth() && shape.hasWest() && neighbor.hasEast())
+                    return true;    //SOUTH WEST
+            } else if (shape.getRow() < neighbor.getRow() && shape.getCol() < neighbor.getCol()) {
+                if (shape.hasSouth() && neighbor.hasNorth() && shape.hasEast() && neighbor.hasWest())
+                    return true;    //SOUTH EAST
+            }
         }
 
         //we don't have a connection

@@ -49,4 +49,22 @@ interface ICustomShape extends ICommon {
     void setAnglePipe(final float anglePipe);
 
     float getAnglePipe();
+
+    boolean hasWest();
+    boolean hasEast();
+    boolean hasNorth();
+    boolean hasSouth();
+    boolean hasNorthWest();
+    boolean hasNorthEast();
+    boolean hasSouthWest();
+    boolean hasSouthEast();
+
+    void setWest(final boolean west);
+    void setEast(final boolean east);
+    void setSouth(final boolean south);
+    void setNorth(final boolean north);
+    void setNorthWest(final boolean northWest);
+    void setNorthEast(final boolean northEast);
+    void setSouthWest(final boolean southWest);
+    void setSouthEast(final boolean southEast);    
 }

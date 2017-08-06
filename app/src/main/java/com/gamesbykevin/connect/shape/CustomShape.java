@@ -25,6 +25,16 @@ public abstract class CustomShape extends Entity implements ICustomShape {
     public static final float ROTATE_VELOCITY_DIAMOND = 6.0f;
     public static final float ROTATION_ANGLE_DIAMOND = 90.0f;
 
+    //what is open on this shape
+    private boolean west = false;
+    private boolean east = false;
+    private boolean north = false;
+    private boolean south = false;
+    private boolean northWest = false;
+    private boolean northEast = false;
+    private boolean southWest = false;
+    private boolean southEast = false;
+
     /**
      * The largest angle allowed
      */
@@ -112,5 +122,85 @@ public abstract class CustomShape extends Entity implements ICustomShape {
     @Override
     public float getAnglePipe() {
         return this.anglePipe;
+    }
+
+    @Override
+    public boolean hasWest() {
+        return this.west;
+    }
+
+    @Override
+    public boolean hasEast() {
+        return this.east;
+    }
+
+    @Override
+    public boolean hasNorth() {
+        return this.north;
+    }
+
+    @Override
+    public boolean hasSouth() {
+        return this.south;
+    }
+
+    @Override
+    public boolean hasNorthWest() {
+        return this.northWest;
+    }
+
+    @Override
+    public boolean hasNorthEast() {
+        return this.northEast;
+    }
+
+    @Override
+    public boolean hasSouthWest() {
+        return this.southWest;
+    }
+
+    @Override
+    public boolean hasSouthEast() {
+        return this.southEast;
+    }
+
+    @Override
+    public void setWest(final boolean west) {
+        this.west = west;
+    }
+
+    @Override
+    public void setEast(final boolean east) {
+        this.east = east;
+    }
+
+    @Override
+    public void setSouth(final boolean south) {
+        this.south = south;
+    }
+
+    @Override
+    public void setNorth(final boolean north) {
+        this.north = north;
+    }
+
+    @Override
+    public void setNorthWest(final boolean northWest) {
+        this.northWest = northWest;
+    }
+
+    @Override
+    public void setNorthEast(final boolean northEast) {
+        this.northEast = northEast;
+    }
+
+    @Override
+    public void setSouthWest(final boolean southWest) {
+        this.southWest = southWest;
+    }
+
+    @Override
+    public void setSouthEast(final boolean southEast) {
+        this.southEast = southEast;
     }
 }
