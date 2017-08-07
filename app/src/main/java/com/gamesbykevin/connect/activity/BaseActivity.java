@@ -30,6 +30,9 @@ public abstract class BaseActivity extends com.gamesbykevin.androidframeworkv2.a
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
+        //flag debug true
+        UtilityHelper.DEBUG = true;
+
         //call parent
         super.onCreate(savedInstanceState);
 

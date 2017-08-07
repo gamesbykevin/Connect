@@ -30,7 +30,7 @@ public class Board implements ICommon {
     }
 
     //what type of shape are we using
-    private Shape type = Shape.Hexagon;
+    private Shape type = null;
 
     //our maze generation object
     private Prims maze;
@@ -38,14 +38,14 @@ public class Board implements ICommon {
     private Entity pipe = new Entity();
 
     public static final int BOARD_COLS = 5;
-    public static final int BOARD_ROWS = 5;
+    public static final int BOARD_ROWS = 10;
 
     //base point that we will mark connected
     public static final int ANCHOR_COL = (BOARD_COLS / 2);
     public static final int ANCHOR_ROW = (BOARD_ROWS / 2);
 
     //do we rotate until we connect to something?
-    private boolean magnet = false;
+    private boolean magnet = true;
 
     public static final int START_X = 30;
     public static final int START_Y = 25;
@@ -221,6 +221,12 @@ public class Board implements ICommon {
 
             shapes = null;
         }
+
+        if (getMaze() != null) {
+            getMaze().dispose();
+            this.maze = null;
+        }
+
     }
 
     @Override
@@ -305,7 +311,6 @@ public class Board implements ICommon {
     public void reset() {
 
         try {
-
             //create new instance of maze
             this.maze = new Prims((getType() == Shape.Hexagon), BOARD_COLS, BOARD_ROWS);
 

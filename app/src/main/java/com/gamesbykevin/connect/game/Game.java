@@ -76,8 +76,11 @@ public class Game implements IGame {
 
     public void reset() throws Exception {
 
+        if (getBoard() != null)
+            getBoard().dispose();
+
         //create a new board
-        board = new Board();
+        this.board = new Board();
 
         //set the type of shape we will be playing with
         getBoard().setType((Board.Shape)activity.getObjectValue(R.string.game_shape_file_key, Board.Shape.class));

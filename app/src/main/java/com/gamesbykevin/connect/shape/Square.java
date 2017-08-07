@@ -17,7 +17,7 @@ public class Square extends CustomShape {
     /**
      * The size of the square
      */
-    public static int DIMENSION = 75;
+    public static int DIMENSION = 70;
 
     /**
      * How many degrees do we rotate the shape each time
