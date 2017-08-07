@@ -63,21 +63,64 @@ public class BoardHelper {
             //mark the current location as connected
             tmpConnected[row][col] = true;
 
+            //check all neighbors
             for (int i = 0; i < Room.getAllWalls(board.getType() == Board.Shape.Hexagon).size(); i++) {
-
                 Room.Wall wall = Room.getAllWalls(board.getType() == Board.Shape.Hexagon).get(i);
 
+                int tmpCol = wall.getCol();
+                int tmpRow = wall.getRow();
+
+                if (board.getType() == Board.Shape.Hexagon) {
+                    switch (wall) {
+                        case NorthWest:
+                            if (row % 2 == 0) {
+                                tmpCol = -1;
+                            } else {
+                                tmpCol = 0;
+                            }
+                            break;
+
+                        case NorthEast:
+                            if (row % 2 == 0) {
+                                tmpCol = 0;
+                            } else {
+                                tmpCol = 1;
+                            }
+                            break;
+
+                        case SouthWest:
+                            if (row % 2 == 0) {
+                                tmpCol = -1;
+                            } else {
+                                tmpCol = 0;
+                            }
+                            break;
+
+                        case SouthEast:
+                            if (row % 2 == 0) {
+                                tmpCol = 0;
+                            } else {
+                                tmpCol = 1;
+                            }
+                            break;
+                    }
+                }
+
                 //stay in bounds
-                if (row + wall.getRow() < 0 || row + wall.getRow() >= BOARD_ROWS)
+                if (row + tmpRow < 0 || row + tmpRow >= BOARD_ROWS)
                     continue;
-                if (col + wall.getCol() < 0 || col + wall.getCol() >= BOARD_COLS)
+                if (col + tmpCol < 0 || col + tmpCol >= BOARD_COLS)
+                    continue;
+
+                //don't check this shape again if it is already connected
+                if (tmpConnected[row + tmpRow][col + tmpCol])
                     continue;
 
                 //get the shape at the location
-                CustomShape tmpShape = board.getShapes()[row + wall.getRow()][col + wall.getCol()];
+                CustomShape tmpShape = board.getShapes()[row + tmpRow][col + tmpCol];
 
-                //if we can connect, add to list
-                if (canConnect(shape, tmpShape, board.getType()) && !tmpConnected[row + wall.getRow()][col + wall.getCol()])
+                //if the shapes can connect
+                if (canConnect(shape, tmpShape, board.getType()))
                     check.add(tmpShape);
             }
         }
@@ -119,19 +162,59 @@ public class BoardHelper {
         int col = (int)shape.getCol();
         int row = (int)shape.getRow();
 
+        //check all neighbors
         for (int i = 0; i < Room.getAllWalls(board.getType() == Board.Shape.Hexagon).size(); i++) {
-
             Room.Wall wall = Room.getAllWalls(board.getType() == Board.Shape.Hexagon).get(i);
 
+            int tmpCol = wall.getCol();
+            int tmpRow = wall.getRow();
+
+            if (board.getType() == Board.Shape.Hexagon) {
+                switch (wall) {
+                    case NorthWest:
+                        if (row % 2 == 0) {
+                            tmpCol = -1;
+                        } else {
+                            tmpCol = 0;
+                        }
+                        break;
+
+                    case NorthEast:
+                        if (row % 2 == 0) {
+                            tmpCol = 0;
+                        } else {
+                            tmpCol = 1;
+                        }
+                        break;
+
+                    case SouthWest:
+                        if (row % 2 == 0) {
+                            tmpCol = -1;
+                        } else {
+                            tmpCol = 0;
+                        }
+                        break;
+
+                    case SouthEast:
+                        if (row % 2 == 0) {
+                            tmpCol = 0;
+                        } else {
+                            tmpCol = 1;
+                        }
+                        break;
+                }
+            }
+
             //stay in bounds
-            if (row + wall.getRow() < 0 || row + wall.getRow() >= BOARD_ROWS)
+            if (row + tmpRow < 0 || row + tmpRow >= BOARD_ROWS)
                 continue;
-            if (col + wall.getCol() < 0 || col + wall.getCol() >= BOARD_COLS)
+            if (col + tmpCol < 0 || col + tmpCol >= BOARD_COLS)
                 continue;
 
             //get the shape at the location
-            CustomShape tmpShape = board.getShapes()[row + wall.getRow()][col + wall.getCol()];
+            CustomShape tmpShape = board.getShapes()[row + tmpRow][col + tmpCol];
 
+            //if the shapes can connect return true
             if (canConnect(shape, tmpShape, board.getType()))
                 return true;
         }
@@ -150,38 +233,95 @@ public class BoardHelper {
         if (shape == null)
             return false;
 
-        if (shape.getCol() > neighbor.getCol()) {
-            if (shape.hasWest() && neighbor.hasEast())
-                return true;    //WEST
-        } else if (shape.getCol() < neighbor.getCol()) {
-            if (shape.hasEast() && neighbor.hasWest())
-                return true;    //EAST
-        }
-
-        if (shape.getRow() > neighbor.getRow()) {
-            if (shape.hasNorth() && neighbor.hasSouth())
-                return true;    //NORTH
-        } else if (shape.getRow() < neighbor.getRow()) {
-            if (shape.hasSouth() && neighbor.hasNorth())
-                return true;    //SOUTH
-        }
-
-        //check these if the shape is a hexagon
-        if (type == Board.Shape.Hexagon) {
-            if (shape.getRow() > neighbor.getRow() && shape.getCol() > neighbor.getCol()) {
-                if (shape.hasNorth() && neighbor.hasSouth() && shape.hasWest() && neighbor.hasEast())
-                    return true;    //NORTH WEST
-            } else if (shape.getRow() > neighbor.getRow() && shape.getCol() < neighbor.getCol()) {
-                if (shape.hasNorth() && neighbor.hasSouth() && shape.hasEast() && neighbor.hasWest())
-                    return true;    //NORTH EAST
+        if (type != Board.Shape.Hexagon) {
+            if (shape.getCol() > neighbor.getCol()) {
+                if (shape.hasWest() && neighbor.hasEast())
+                    return true;    //WEST
+            } else if (shape.getCol() < neighbor.getCol()) {
+                if (shape.hasEast() && neighbor.hasWest())
+                    return true;    //EAST
             }
 
-            if (shape.getRow() < neighbor.getRow() && shape.getCol() > neighbor.getCol()) {
-                if (shape.hasSouth() && neighbor.hasNorth() && shape.hasWest() && neighbor.hasEast())
-                    return true;    //SOUTH WEST
-            } else if (shape.getRow() < neighbor.getRow() && shape.getCol() < neighbor.getCol()) {
-                if (shape.hasSouth() && neighbor.hasNorth() && shape.hasEast() && neighbor.hasWest())
-                    return true;    //SOUTH EAST
+            if (shape.getRow() > neighbor.getRow()) {
+                if (shape.hasNorth() && neighbor.hasSouth())
+                    return true;    //NORTH
+            } else if (shape.getRow() < neighbor.getRow()) {
+                if (shape.hasSouth() && neighbor.hasNorth())
+                    return true;    //SOUTH
+            }
+
+        } else {
+
+            //north east
+            if (shape.getRow() > neighbor.getRow()) {
+                if (shape.getRow() % 2 == 0) {
+                    if (shape.getCol() == neighbor.getCol()) {
+                        if (shape.hasNorthEast() && neighbor.hasSouthWest())
+                            return true;
+                    }
+                } else {
+                    if (shape.getCol() < neighbor.getCol()) {
+                        if (shape.hasNorthEast() && neighbor.hasSouthWest())
+                            return true;
+                    }
+                }
+            }
+
+            //south east
+            if (shape.getRow() < neighbor.getRow()) {
+                if (shape.getRow() % 2 == 0) {
+                    if (shape.getCol() == neighbor.getCol()) {
+                        if (shape.hasSouthEast() && neighbor.hasNorthWest())
+                            return true;
+                    }
+                } else {
+                    if (shape.getCol() < neighbor.getCol()) {
+                        if (shape.hasSouthEast() && neighbor.hasNorthWest())
+                            return true;
+                    }
+                }
+            }
+
+            //west
+            if (shape.getRow() == neighbor.getRow() && shape.getCol() > neighbor.getCol()) {
+                if (shape.hasWest() && neighbor.hasEast())
+                    return true;
+            }
+
+            //east
+            if (shape.getRow() == neighbor.getRow() && shape.getCol() < neighbor.getCol()) {
+                if (shape.hasEast() && neighbor.hasWest())
+                    return true;
+            }
+
+            //north west
+            if (shape.getRow() > neighbor.getRow()) {
+                if (shape.getRow() % 2 == 0) {
+                    if (shape.getCol() > neighbor.getCol()) {
+                        if (shape.hasNorthWest() && neighbor.hasSouthEast())
+                            return true;
+                    }
+                } else {
+                    if (shape.getCol() == neighbor.getCol()) {
+                        if (shape.hasNorthWest() && neighbor.hasSouthEast())
+                            return true;
+                    }
+                }
+            }
+
+            //south west
+            if (shape.getRow() < neighbor.getRow()) {
+                if (shape.getRow() % 2 == 0) {
+                    if (shape.getCol() > neighbor.getCol()) {
+                        if (shape.hasSouthWest() && neighbor.hasNorthEast())
+                            return true;
+                    }
+                } else {
+                    if (shape.getCol() == neighbor.getCol()) {
+                        if (shape.hasSouthWest() && neighbor.hasNorthEast())
+                            return true;
+                    }
+                }
             }
         }
 

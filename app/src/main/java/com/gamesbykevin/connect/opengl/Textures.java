@@ -52,6 +52,9 @@ public class Textures {
     public static int TEXTURE_ID_HEXAGON_GRAY_PIPE_NE_SW = 0;
     public static int TEXTURE_ID_HEXAGON_GRAY_PIPE_NE_W = 0;
     public static int TEXTURE_ID_HEXAGON_GRAY_PIPE_NW_NE_SE_SW = 0;
+    public static int TEXTURE_ID_HEXAGON_GRAY_PIPE_NW_NE_E_SW = 0;
+    public static int TEXTURE_ID_HEXAGON_GRAY_PIPE_NW_E_SW = 0;
+
 
     public static int TEXTURE_ID_HEXAGON_GREEN_PIPE_ALL = 0;
     public static int TEXTURE_ID_HEXAGON_GREEN_PIPE_END = 0;
@@ -65,6 +68,8 @@ public class Textures {
     public static int TEXTURE_ID_HEXAGON_GREEN_PIPE_NE_SW = 0;
     public static int TEXTURE_ID_HEXAGON_GREEN_PIPE_NE_W = 0;
     public static int TEXTURE_ID_HEXAGON_GREEN_PIPE_NW_NE_SE_SW = 0;
+    public static int TEXTURE_ID_HEXAGON_GREEN_PIPE_NW_NE_E_SW = 0;
+    public static int TEXTURE_ID_HEXAGON_GREEN_PIPE_NW_E_SW = 0;
 
 
     //store reference to access resources
@@ -78,7 +83,7 @@ public class Textures {
         this.activity = activity;
 
         //create array containing all the texture ids
-        IDS = new int[38];
+        IDS = new int[42];
     }
 
     /**
@@ -124,6 +129,8 @@ public class Textures {
         TEXTURE_ID_HEXAGON_GRAY_PIPE_NE_SW = loadTexture(BitmapFactory.decodeResource(activity.getResources(), R.drawable.hexagon_pipe_gray_ne_sw), openGL);
         TEXTURE_ID_HEXAGON_GRAY_PIPE_NE_W = loadTexture(BitmapFactory.decodeResource(activity.getResources(), R.drawable.hexagon_pipe_gray_ne_w), openGL);
         TEXTURE_ID_HEXAGON_GRAY_PIPE_NW_NE_SE_SW = loadTexture(BitmapFactory.decodeResource(activity.getResources(), R.drawable.hexagon_pipe_gray_nw_ne_se_sw), openGL);
+        TEXTURE_ID_HEXAGON_GRAY_PIPE_NW_NE_E_SW = loadTexture(BitmapFactory.decodeResource(activity.getResources(), R.drawable.hexagon_pipe_gray_nw_ne_e_sw), openGL);
+        TEXTURE_ID_HEXAGON_GRAY_PIPE_NW_E_SW = loadTexture(BitmapFactory.decodeResource(activity.getResources(), R.drawable.hexagon_pipe_gray_nw_e_sw), openGL);
 
         TEXTURE_ID_HEXAGON_GREEN_PIPE_ALL = loadTexture(BitmapFactory.decodeResource(activity.getResources(), R.drawable.hexagon_pipe_green_all), openGL);
         TEXTURE_ID_HEXAGON_GREEN_PIPE_END = loadTexture(BitmapFactory.decodeResource(activity.getResources(), R.drawable.hexagon_pipe_green_end), openGL);
@@ -137,6 +144,8 @@ public class Textures {
         TEXTURE_ID_HEXAGON_GREEN_PIPE_NE_SW = loadTexture(BitmapFactory.decodeResource(activity.getResources(), R.drawable.hexagon_pipe_green_ne_sw), openGL);
         TEXTURE_ID_HEXAGON_GREEN_PIPE_NE_W = loadTexture(BitmapFactory.decodeResource(activity.getResources(), R.drawable.hexagon_pipe_green_ne_w), openGL);
         TEXTURE_ID_HEXAGON_GREEN_PIPE_NW_NE_SE_SW = loadTexture(BitmapFactory.decodeResource(activity.getResources(), R.drawable.hexagon_pipe_green_nw_ne_se_sw), openGL);
+        TEXTURE_ID_HEXAGON_GREEN_PIPE_NW_NE_E_SW = loadTexture(BitmapFactory.decodeResource(activity.getResources(), R.drawable.hexagon_pipe_green_nw_ne_e_sw), openGL);
+        TEXTURE_ID_HEXAGON_GREEN_PIPE_NW_E_SW = loadTexture(BitmapFactory.decodeResource(activity.getResources(), R.drawable.hexagon_pipe_green_nw_e_sw), openGL);
     }
 
     /**

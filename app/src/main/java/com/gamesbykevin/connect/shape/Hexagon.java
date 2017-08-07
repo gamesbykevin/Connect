@@ -162,6 +162,24 @@ public class Hexagon extends CustomShape {
             return (isConnected()) ? Textures.TEXTURE_ID_HEXAGON_GREEN_PIPE_NW_NE_SE_SW : Textures.TEXTURE_ID_HEXAGON_GRAY_PIPE_NW_NE_SE_SW;
         } else if (hasNorthWest() && !hasNorthEast() && hasEast() && hasSouthEast() && !hasSouthWest() && hasWest()) {
             return (isConnected()) ? Textures.TEXTURE_ID_HEXAGON_GREEN_PIPE_NW_NE_SE_SW : Textures.TEXTURE_ID_HEXAGON_GRAY_PIPE_NW_NE_SE_SW;
+        } else if (hasNorthWest() && hasNorthEast() && hasEast() && !hasSouthEast() && hasSouthWest() && !hasWest()) {
+            return (isConnected()) ? Textures.TEXTURE_ID_HEXAGON_GREEN_PIPE_NW_NE_E_SW : Textures.TEXTURE_ID_HEXAGON_GRAY_PIPE_NW_NE_E_SW;
+        } else if (!hasNorthWest() && hasNorthEast() && hasEast() && hasSouthEast() && !hasSouthWest() && hasWest()) {
+            return (isConnected()) ? Textures.TEXTURE_ID_HEXAGON_GREEN_PIPE_NW_NE_E_SW : Textures.TEXTURE_ID_HEXAGON_GRAY_PIPE_NW_NE_E_SW;
+        } else if (hasNorthWest() && !hasNorthEast() && hasEast() && hasSouthEast() && hasSouthWest() && !hasWest()) {
+            return (isConnected()) ? Textures.TEXTURE_ID_HEXAGON_GREEN_PIPE_NW_NE_E_SW : Textures.TEXTURE_ID_HEXAGON_GRAY_PIPE_NW_NE_E_SW;
+        } else if (!hasNorthWest() && hasNorthEast() && !hasEast() && hasSouthEast() && hasSouthWest() && hasWest()) {
+            return (isConnected()) ? Textures.TEXTURE_ID_HEXAGON_GREEN_PIPE_NW_NE_E_SW : Textures.TEXTURE_ID_HEXAGON_GRAY_PIPE_NW_NE_E_SW;
+        } else if (hasNorthWest() && !hasNorthEast() && hasEast() && !hasSouthEast() && hasSouthWest() && hasWest()) {
+            return (isConnected()) ? Textures.TEXTURE_ID_HEXAGON_GREEN_PIPE_NW_NE_E_SW : Textures.TEXTURE_ID_HEXAGON_GRAY_PIPE_NW_NE_E_SW;
+        } else if (hasNorthWest() && hasNorthEast() && !hasEast() && hasSouthEast() && !hasSouthWest() && hasWest()) {
+            return (isConnected()) ? Textures.TEXTURE_ID_HEXAGON_GREEN_PIPE_NW_NE_E_SW : Textures.TEXTURE_ID_HEXAGON_GRAY_PIPE_NW_NE_E_SW;
+        } else if (hasNorthWest() && !hasNorthEast() && hasEast() && !hasSouthEast() && hasSouthWest() && !hasWest()) {
+            return (isConnected()) ? Textures.TEXTURE_ID_HEXAGON_GREEN_PIPE_NW_E_SW : Textures.TEXTURE_ID_HEXAGON_GRAY_PIPE_NW_E_SW;
+        } else if (!hasNorthWest() && hasNorthEast() && !hasEast() && hasSouthEast() && !hasSouthWest() && hasWest()) {
+            return (isConnected()) ? Textures.TEXTURE_ID_HEXAGON_GREEN_PIPE_NW_E_SW : Textures.TEXTURE_ID_HEXAGON_GRAY_PIPE_NW_E_SW;
+
+
         } else {
             throw new RuntimeException("Texture id not found NW:" + hasNorthWest() + " NE:" + hasNorthEast() + " E:" + hasEast() + " SE:" + hasSouthEast() + " SW:" + hasSouthWest() + " W:" + hasWest());
         }
@@ -291,6 +309,24 @@ public class Hexagon extends CustomShape {
             setAnglePipe(60);
         } else if (hasNorthWest() && !hasNorthEast() && hasEast() && hasSouthEast() && !hasSouthWest() && hasWest()) {
             setAnglePipe(120);
+        } else if (hasNorthWest() && hasNorthEast() && hasEast() && !hasSouthEast() && hasSouthWest() && !hasWest()) {
+            setAnglePipe(0);
+        } else if (!hasNorthWest() && hasNorthEast() && hasEast() && hasSouthEast() && !hasSouthWest() && hasWest()) {
+            setAnglePipe(60);
+        } else if (hasNorthWest() && !hasNorthEast() && hasEast() && hasSouthEast() && hasSouthWest() && !hasWest()) {
+            setAnglePipe(120);
+        } else if (!hasNorthWest() && hasNorthEast() && !hasEast() && hasSouthEast() && hasSouthWest() && hasWest()) {
+            setAnglePipe(180);
+        } else if (hasNorthWest() && !hasNorthEast() && hasEast() && !hasSouthEast() && hasSouthWest() && hasWest()) {
+            setAnglePipe(240);
+        } else if (hasNorthWest() && hasNorthEast() && !hasEast() && hasSouthEast() && !hasSouthWest() && hasWest()) {
+            setAnglePipe(300);
+        } else if (hasNorthWest() && !hasNorthEast() && hasEast() && !hasSouthEast() && hasSouthWest() && !hasWest()) {
+            setAnglePipe(0);
+        } else if (!hasNorthWest() && hasNorthEast() && !hasEast() && hasSouthEast() && !hasSouthWest() && hasWest()) {
+            setAnglePipe(60);
+
+
         } else {
             throw new RuntimeException("Angle not set NW:" + hasNorthWest() + " NE:" + hasNorthEast() + " E:" + hasEast() + " SE:" + hasSouthEast() + " SW:" + hasSouthWest() + " W:" + hasWest());
         }
