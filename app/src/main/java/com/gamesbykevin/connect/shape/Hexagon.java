@@ -352,7 +352,19 @@ public class Hexagon extends CustomShape {
         if (y < getY() || y > getY() + getHeight())
             return false;
 
-        //this coordinate is contained within
+        //calculate the corners
+        final double n = getY() + (getHeight() * .25);
+        final double s = getY() + (getHeight() * .75);
+        final double w = getX() + (getWidth() * .07);
+        final double e = getX() + getWidth() - (getWidth() * .07);
+
+        //have to be within the boundaries
+        if (y < n || y > s)
+            return false;
+        if (x < w || x > e)
+            return false;
+
+        //we are inside the square of the hexagon
         return true;
     }
 
@@ -382,20 +394,20 @@ public class Hexagon extends CustomShape {
         setAngle(getDestinationAngle());
 
         //update the current borders
-        boolean oldNorthWest =  new Boolean(hasNorthWest());
-        boolean oldNorthEast =  new Boolean(hasNorthEast());
-        boolean oldEast      =  new Boolean(hasEast());
-        boolean oldSouthEast =  new Boolean(hasSouthEast());
-        boolean oldSouthWest =  new Boolean(hasSouthWest());
-        boolean oldWest      =  new Boolean(hasWest());
+        final int oldNW = hasNorthWest() ? 0 : 1;
+        final int oldNE = hasNorthEast() ? 0 : 1;
+        final int oldE  = hasEast() ? 0 : 1;
+        final int oldSE = hasSouthEast() ? 0 : 1;
+        final int oldSW = hasSouthWest() ? 0 : 1;
+        final int oldW  = hasWest() ? 0 : 1;
 
         //rotate the borders along with the shape
-        setNorthWest(oldWest);
-        setNorthEast(oldNorthWest);
-        setEast(oldNorthEast);
-        setSouthEast(oldEast);
-        setSouthWest(oldSouthEast);
-        setWest(oldSouthWest);
+        setNorthWest(oldW == 0);
+        setNorthEast(oldNW == 0);
+        setEast(oldNE == 0);
+        setSouthEast(oldE == 0);
+        setSouthWest(oldSE == 0);
+        setWest(oldSW == 0);
     }
 
     @Override
@@ -424,19 +436,5 @@ public class Hexagon extends CustomShape {
                     setAngle(ANGLE_MIN);
             }
         }
-    }
-
-    @Override
-    public void reset() {
-        //what do we do here?
-    }
-
-    /**
-     * Render the shape on the board
-     * @param openGL Object used to render pixel data
-     */
-    @Override
-    public void render(GL10 openGL) {
-        super.render(openGL);
     }
 }

@@ -6,11 +6,14 @@ import com.gamesbykevin.connect.R;
 import com.gamesbykevin.connect.activity.GameActivity;
 import com.gamesbykevin.connect.activity.GameActivity.Screen;
 import com.gamesbykevin.connect.board.Board;
+import com.gamesbykevin.connect.board.BoardHelper;
 import com.gamesbykevin.connect.opengl.OpenGLRenderer;
 
 import javax.microedition.khronos.opengles.GL10;
 
+import static com.gamesbykevin.connect.game.GameHelper.FRAMES;
 import static com.gamesbykevin.connect.game.GameHelper.GAME_OVER;
+import static com.gamesbykevin.connect.game.GameHelper.GAME_OVER_DELAY_FRAMES;
 import static com.gamesbykevin.connect.opengl.OpenGLRenderer.LOADED;
 import static com.gamesbykevin.connect.opengl.OpenGLSurfaceView.HEIGHT;
 import static com.gamesbykevin.connect.opengl.OpenGLSurfaceView.WIDTH;
@@ -31,7 +34,6 @@ public class Game implements IGame {
 
     //do we reset the zoom factor
     public static boolean RESET_ZOOM = true;
-
 
     //are we pressing on the screen
     private boolean press = false;
@@ -140,11 +142,18 @@ public class Game implements IGame {
                 //if the game is over, move to the next step
                 if (GAME_OVER) {
 
+                    //reset frames count
+                    FRAMES = 0;
+
                     //move to game over step
                     STEP = Step.GameOver;
 
+                    //hide board background
+                    BoardHelper.setVisible(getBoard(), false);
+
                     //vibrate the phone
                     activity.vibrate();
+
                 } else {
                     getBoard().update(activity);
                 }
@@ -152,8 +161,11 @@ public class Game implements IGame {
 
             case GameOver:
 
-                //switch to game over if not already game over
-                if (activity.getScreen() != Screen.GameOver)
+                //keep track of elapsed frames
+                FRAMES++;
+
+                //switch to game over screen if enough time passed and we haven't set yet
+                if (FRAMES >= GAME_OVER_DELAY_FRAMES && activity.getScreen() != Screen.GameOver)
                     activity.setScreen(Screen.GameOver);
                 break;
         }

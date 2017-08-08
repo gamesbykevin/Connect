@@ -17,7 +17,7 @@ public class Square extends CustomShape {
     /**
      * The size of the square
      */
-    public static int DIMENSION = 70;
+    public static int DIMENSION = 64;
 
     /**
      * How many degrees do we rotate the shape each time
@@ -158,16 +158,16 @@ public class Square extends CustomShape {
         setAngle(getDestinationAngle());
 
         //update the current borders
-        boolean oldNorth =  new Boolean(hasNorth());
-        boolean oldEast =   new Boolean(hasEast());
-        boolean oldSouth =  new Boolean(hasSouth());
-        boolean oldWest =   new Boolean(hasWest());
+        final int oldN = (hasNorth()) ? 0 : 1;
+        final int oldE = (hasEast()) ? 0 : 1;
+        final int oldS = (hasSouth()) ? 0 : 1;
+        final int oldW = (hasWest()) ? 0 : 1;
 
         //rotate the borders along with the shape
-        setEast(oldNorth);
-        setSouth(oldEast);
-        setWest(oldSouth);
-        setNorth(oldWest);
+        setEast(oldN == 0);
+        setSouth(oldE == 0);
+        setWest(oldS == 0);
+        setNorth(oldW == 0);
     }
 
     @Override
@@ -196,19 +196,5 @@ public class Square extends CustomShape {
                     setAngle(ANGLE_MIN);
             }
         }
-    }
-
-    @Override
-    public void reset() {
-        //what do we do here?
-    }
-
-    /**
-     * Render the shape on the board
-     * @param openGL Object used to render pixel data
-     */
-    @Override
-    public void render(GL10 openGL) {
-        super.render(openGL);
     }
 }

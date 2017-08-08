@@ -12,6 +12,8 @@ import static com.gamesbykevin.connect.board.Board.ANCHOR_ROW;
 import static com.gamesbykevin.connect.board.Board.BOARD_COLS;
 import static com.gamesbykevin.connect.board.Board.BOARD_ROWS;
 import static com.gamesbykevin.connect.game.GameHelper.GAME_OVER;
+import static com.gamesbykevin.connect.opengl.OpenGLSurfaceView.HEIGHT;
+import static com.gamesbykevin.connect.opengl.OpenGLSurfaceView.WIDTH;
 
 /**
  * Created by Kevin on 8/5/2017.
@@ -327,5 +329,100 @@ public class BoardHelper {
 
         //we don't have a connection
         return false;
+    }
+
+    protected static int getX(Board.Shape type, final int col, final int row, final int w, final int h) {
+        switch(type) {
+
+            case Square:
+                return (col * w);
+
+            case Hexagon:
+
+                //offset the odd rows
+                if (row % 2 != 0) {
+                    return (int)(col * (w * .875) + (w * .45));
+                } else {
+                    return (int)(col * (w * .875));
+                }
+
+            case Diamond:
+                return (col * (w / 2)) - (row * (w / 2));
+
+            default:
+                throw new RuntimeException("Type not handled here: " + type.toString());
+        }
+    }
+
+    protected static int getY(Board.Shape type, final int col, final int row, final int w, final int h) {
+        switch(type) {
+
+            case Square:
+                return (row * h);
+
+            case Hexagon:
+                return (int)(row * (h * .75));
+
+            case Diamond:
+                return (col * (h / 2)) + (row * (h / 2));
+
+            default:
+                throw new RuntimeException("Type not handled here: " + type.toString());
+        }
+    }
+
+    protected static int getStartX(Board.Shape type, final int cols, final int rows, final int w, final int h) {
+
+        //middle coordinate
+        final int mx = (WIDTH / 2);
+
+        switch(type) {
+
+            case Square:
+                return mx - ((cols * w) / 2);
+
+            case Hexagon:
+                return mx - ((cols * w) / 2);
+
+            case Diamond:
+                return mx + (((rows - cols) * (w / 2)) / 2) - (w / 2);
+
+            default:
+                throw new RuntimeException("Type not handled here: " + type.toString());
+        }
+    }
+
+    protected static int getStartY(Board.Shape type, final int cols, final int rows, final int w, final int h) {
+
+        //middle coordinate
+        final int my = (HEIGHT / 2);
+
+        switch(type) {
+
+            case Square:
+                return my - ((rows * h) / 2);
+
+            case Hexagon:
+                return my - ((rows * h) / 2);
+
+            case Diamond:
+                return my - ((rows * (h / 2)) + (cols * (w / 2))) / 2;
+
+            default:
+                throw new RuntimeException("Type not handled here: " + type.toString());
+        }
+    }
+
+    /**
+     * Mark the shapes on the board visible...
+     * @param board The board containing our shapes
+     * @param visible Do we want the shape background to be visible
+     */
+    public static void setVisible(final Board board, final boolean visible) {
+        for (int col = 0; col < board.getShapes()[0].length; col++) {
+            for (int row = 0; row < board.getShapes().length; row++) {
+                board.getShapes()[row][col].setVisible(visible);
+            }
+        }
     }
 }

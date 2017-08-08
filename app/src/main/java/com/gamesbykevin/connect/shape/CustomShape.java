@@ -54,6 +54,9 @@ public abstract class CustomShape extends Entity implements ICustomShape {
     //how to render the pipe
     private float anglePipe = 0.0f;
 
+    //do we render the shape background
+    private boolean visible = true;
+
     /**
      * Default constructor
      */
@@ -63,6 +66,14 @@ public abstract class CustomShape extends Entity implements ICustomShape {
 
         super.setWidth(w);
         super.setHeight(h);
+    }
+
+    public void setVisible(final boolean visible) {
+        this.visible = visible;
+    }
+
+    public boolean isVisible() {
+        return this.visible;
     }
 
     @Override
@@ -202,5 +213,17 @@ public abstract class CustomShape extends Entity implements ICustomShape {
     @Override
     public void setSouthEast(final boolean southEast) {
         this.southEast = southEast;
+    }
+
+    @Override
+    public void reset() {
+        setVisible(true);
+    }
+
+    @Override
+    public void render(GL10 openGL) {
+
+        if (isVisible())
+            super.render(openGL);
     }
 }

@@ -40,6 +40,18 @@ public class Textures {
     public static int TEXTURE_ID_SQUARE_GREEN_PIPE_NSEW = 0;
     public static int TEXTURE_ID_SQUARE_GREEN_PIPE_END = 0;
 
+    public static int TEXTURE_ID_DIAMOND_GRAY_PIPE_NS = 0;
+    public static int TEXTURE_ID_DIAMOND_GRAY_PIPE_SE = 0;
+    public static int TEXTURE_ID_DIAMOND_GRAY_PIPE_WES = 0;
+    public static int TEXTURE_ID_DIAMOND_GRAY_PIPE_NSEW = 0;
+    public static int TEXTURE_ID_DIAMOND_GRAY_PIPE_END = 0;
+
+    public static int TEXTURE_ID_DIAMOND_GREEN_PIPE_NS = 0;
+    public static int TEXTURE_ID_DIAMOND_GREEN_PIPE_SE = 0;
+    public static int TEXTURE_ID_DIAMOND_GREEN_PIPE_WES = 0;
+    public static int TEXTURE_ID_DIAMOND_GREEN_PIPE_NSEW = 0;
+    public static int TEXTURE_ID_DIAMOND_GREEN_PIPE_END = 0;
+
     public static int TEXTURE_ID_HEXAGON_GRAY_PIPE_ALL = 0;
     public static int TEXTURE_ID_HEXAGON_GRAY_PIPE_END = 0;
     public static int TEXTURE_ID_HEXAGON_GRAY_PIPE_NE_E = 0;
@@ -83,7 +95,7 @@ public class Textures {
         this.activity = activity;
 
         //create array containing all the texture ids
-        IDS = new int[42];
+        IDS = new int[52];
     }
 
     /**
@@ -116,6 +128,18 @@ public class Textures {
         TEXTURE_ID_SQUARE_GREEN_PIPE_WES = loadTexture(BitmapFactory.decodeResource(activity.getResources(), R.drawable.square_pipe_wes_green), openGL);
         TEXTURE_ID_SQUARE_GREEN_PIPE_NSEW = loadTexture(BitmapFactory.decodeResource(activity.getResources(), R.drawable.square_pipe_nsew_green), openGL);
         TEXTURE_ID_SQUARE_GREEN_PIPE_END = loadTexture(BitmapFactory.decodeResource(activity.getResources(), R.drawable.square_pipe_end_green), openGL);
+
+        TEXTURE_ID_DIAMOND_GRAY_PIPE_NS = loadTexture(BitmapFactory.decodeResource(activity.getResources(), R.drawable.diamond_pipe_ns_gray), openGL);
+        TEXTURE_ID_DIAMOND_GRAY_PIPE_SE = loadTexture(BitmapFactory.decodeResource(activity.getResources(), R.drawable.diamond_pipe_se_gray), openGL);
+        TEXTURE_ID_DIAMOND_GRAY_PIPE_WES = loadTexture(BitmapFactory.decodeResource(activity.getResources(), R.drawable.diamond_pipe_wes_gray), openGL);
+        TEXTURE_ID_DIAMOND_GRAY_PIPE_NSEW = loadTexture(BitmapFactory.decodeResource(activity.getResources(), R.drawable.diamond_pipe_nsew_gray), openGL);
+        TEXTURE_ID_DIAMOND_GRAY_PIPE_END = loadTexture(BitmapFactory.decodeResource(activity.getResources(), R.drawable.diamond_pipe_end_gray), openGL);
+
+        TEXTURE_ID_DIAMOND_GREEN_PIPE_NS = loadTexture(BitmapFactory.decodeResource(activity.getResources(), R.drawable.diamond_pipe_ns_green), openGL);
+        TEXTURE_ID_DIAMOND_GREEN_PIPE_SE = loadTexture(BitmapFactory.decodeResource(activity.getResources(), R.drawable.diamond_pipe_se_green), openGL);
+        TEXTURE_ID_DIAMOND_GREEN_PIPE_WES = loadTexture(BitmapFactory.decodeResource(activity.getResources(), R.drawable.diamond_pipe_wes_green), openGL);
+        TEXTURE_ID_DIAMOND_GREEN_PIPE_NSEW = loadTexture(BitmapFactory.decodeResource(activity.getResources(), R.drawable.diamond_pipe_nsew_green), openGL);
+        TEXTURE_ID_DIAMOND_GREEN_PIPE_END = loadTexture(BitmapFactory.decodeResource(activity.getResources(), R.drawable.diamond_pipe_end_green), openGL);
 
         TEXTURE_ID_HEXAGON_GRAY_PIPE_ALL = loadTexture(BitmapFactory.decodeResource(activity.getResources(), R.drawable.hexagon_pipe_gray_all), openGL);
         TEXTURE_ID_HEXAGON_GRAY_PIPE_END = loadTexture(BitmapFactory.decodeResource(activity.getResources(), R.drawable.hexagon_pipe_gray_end), openGL);

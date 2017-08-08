@@ -5,6 +5,7 @@ import com.gamesbykevin.androidframeworkv2.maze.Room;
 import com.gamesbykevin.androidframeworkv2.maze.algorithm.Prims;
 import com.gamesbykevin.androidframeworkv2.util.UtilityHelper;
 import com.gamesbykevin.connect.entity.Entity;
+import com.gamesbykevin.connect.opengl.OpenGLSurfaceView;
 import com.gamesbykevin.connect.shape.CustomShape;
 import com.gamesbykevin.connect.activity.GameActivity;
 import com.gamesbykevin.connect.common.ICommon;
@@ -17,6 +18,9 @@ import javax.microedition.khronos.opengles.GL10;
 
 import static com.gamesbykevin.connect.activity.GameActivity.getRandomObject;
 import static com.gamesbykevin.connect.board.BoardHelper.checkBoard;
+import static com.gamesbykevin.connect.game.GameHelper.GAME_OVER;
+import static com.gamesbykevin.connect.opengl.OpenGLSurfaceView.HEIGHT;
+import static com.gamesbykevin.connect.opengl.OpenGLSurfaceView.WIDTH;
 
 /**
  * Created by Kevin on 8/1/2017.
@@ -37,7 +41,7 @@ public class Board implements ICommon {
 
     private Entity pipe = new Entity();
 
-    public static final int BOARD_COLS = 5;
+    public static final int BOARD_COLS = 10;
     public static final int BOARD_ROWS = 10;
 
     //base point that we will mark connected
@@ -47,8 +51,8 @@ public class Board implements ICommon {
     //do we rotate until we connect to something?
     private boolean magnet = true;
 
-    public static final int START_X = 30;
-    public static final int START_Y = 25;
+    //the current rotating shape
+    private CustomShape rotationShape = null;
 
     /**
      * Default constructor
@@ -69,47 +73,43 @@ public class Board implements ICommon {
         switch (getType()) {
 
             case Square:
+
+                //assign dimensions
                 w = Square.DIMENSION;
                 h = Square.DIMENSION;
                 break;
 
             case Hexagon:
+
+                //assign dimensions
                 w = Hexagon.DIMENSION;
                 h = Hexagon.DIMENSION;
+                break;
+
+            case Diamond:
+
+                //assign dimensions
+                w = Diamond.DIMENSION;
+                h = Diamond.DIMENSION;
                 break;
 
             default:
                 throw new RuntimeException("Shape not defined: " + getType().toString());
         }
 
+        //start coordinates
+        final int sx = BoardHelper.getStartX(getType(), maze.getCols(), maze.getRows(), w, h);
+        final int sy = BoardHelper.getStartY(getType(), maze.getCols(), maze.getRows(), w, h);
+
         for (int col = 0; col < getMaze().getCols(); col++) {
 
             for (int row = 0; row < getMaze().getRows(); row++) {
 
-                switch (getType()) {
+                //calculate coordinates
+                x = sx + BoardHelper.getX(getType(), col, row, w, h);
+                y = sy + BoardHelper.getY(getType(), col, row, w, h);
 
-                    case Square:
-
-                        //calculate coordinates
-                        x = START_X + (col * w);
-                        y = START_Y + (row * h);
-                        break;
-
-                    case Hexagon:
-
-                        //calculate coordinates
-                        x = START_X + (int)(col * (w * .875));
-                        y = START_Y + (int)(row * (h * .75));
-
-                        //offset the odd rows
-                        if (row % 2 != 0)
-                            x += (w * .45);
-                        break;
-
-                    default:
-                        throw new RuntimeException("Shape not defined: " + getType().toString());
-                }
-
+                //add shape
                 addShape(getType(), getMaze().getRoom(col, row), x, y, col, row);
             }
         }
@@ -132,7 +132,7 @@ public class Board implements ICommon {
                 break;
 
             case Diamond:
-                //tmp = new Diamond();
+                tmp = new Diamond();
                 tmp.setTextureId(Textures.TEXTURE_ID_DIAMOND);
                 break;
 
@@ -190,13 +190,23 @@ public class Board implements ICommon {
      */
     public void touch(float x, float y) {
 
+        //if we are already rotating don't check again
+        if (getRotationShape() != null)
+            return;
+
         for (int col = 0; col < getMaze().getCols(); col++) {
             for (int row = 0; row < getMaze().getRows(); row++) {
                 CustomShape shape = getShapes()[row][col];
 
-                if (shape != null && shape.contains(x, y) && !shape.hasRotate()) {
+                if (shape != null && !shape.hasRotate() && shape.contains(x, y)) {
                     shape.setRotationCount(0);
                     shape.rotate();
+                    setRotationShape(shape);
+
+                    //no need to continue checking
+                    row = getMaze().getRows();
+                    col = getMaze().getCols();
+                    break;
                 }
             }
         }
@@ -227,6 +237,8 @@ public class Board implements ICommon {
             this.maze = null;
         }
 
+        //flag null
+        setRotationShape(null);
     }
 
     @Override
@@ -248,55 +260,48 @@ public class Board implements ICommon {
 
             } else {
 
-                boolean done = false;
+                if (getRotationShape() != null) {
 
-                for (int col = 0; col < getMaze().getCols(); col++) {
-                    for (int row = 0; row < getMaze().getRows(); row++) {
+                    //update the rotation
+                    getRotationShape().update(activity);
 
-                        CustomShape shape = getShapes()[row][col];
+                    //if we still need to rotate don't go any further
+                    if (getRotationShape().hasRotate())
+                        return;
 
-                        if (shape == null)
-                            continue;
+                    //if magnet is enabled, check if we still need to rotate
+                    if (magnet) {
 
-                        //ignore this shape if it doesn't need to rotate
-                        if (!shape.hasRotate())
-                            continue;
-
-                        //update rotation
-                        shape.update(activity);
-
-                        //if we still need to rotate continue
-                        if (shape.hasRotate())
-                            continue;
-
-                        //if magnet is enabled, check if we still need to rotate
-                        if (magnet) {
-
-                            //if we can't connect and the magnet is enabled, what do we do?
-                            if (!BoardHelper.canConnect(this, shape)) {
-                                if (shape.getRotationCount() >= shape.getRotationCountMax()) {
-                                    done = true;
-                                } else {
-                                    shape.rotate();
-                                    done = false;
-                                }
+                        //if we can't connect and the magnet is enabled, what do we do?
+                        if (!BoardHelper.canConnect(this, getRotationShape())) {
+                            if (getRotationShape().getRotationCount() >= getRotationShape().getRotationCountMax()) {
+                                checkBoard(this);
+                                setRotationShape(null);
                             } else {
-                                done = true;
+                                getRotationShape().rotate();
                             }
-
                         } else {
-                            done = true;
+                            checkBoard(this);
+                            setRotationShape(null);
                         }
+                    } else {
+                        checkBoard(this);
+                        setRotationShape(null);
                     }
                 }
-
-                if (done)
-                    checkBoard(this);
             }
             
         } catch (Exception e) {
             UtilityHelper.handleException(e);
         }
+    }
+
+    private CustomShape getRotationShape() {
+        return this.rotationShape;
+    }
+
+    private void setRotationShape(CustomShape rotationShape) {
+        this.rotationShape = rotationShape;
     }
 
     public void setType(final Shape type) {
@@ -314,6 +319,10 @@ public class Board implements ICommon {
             //create new instance of maze
             this.maze = new Prims((getType() == Shape.Hexagon), BOARD_COLS, BOARD_ROWS);
 
+            //flag the rotation shape null
+            setRotationShape(null);
+
+            //reset the shapes
             for (int col = 0; col < getMaze().getCols(); col++) {
                 for (int row = 0; row < getMaze().getRows(); row++) {
 
@@ -335,29 +344,38 @@ public class Board implements ICommon {
     @Override
     public void render(GL10 openGL) {
 
+        //if these are null we can't continue
         if (getShapes() == null)
+            return;
+        if (getMaze() == null)
             return;
 
         for (int col = 0; col < getMaze().getCols(); col++) {
             for (int row = 0; row < getMaze().getRows(); row++) {
 
-                CustomShape shape = getShapes()[row][col];
+                try {
+                    CustomShape shape = getShapes()[row][col];
 
-                if (shape == null || pipe == null)
-                    return;
+                    if (shape == null || pipe == null)
+                        return;
 
-                shape.render(openGL);
+                    //render the shape
+                    shape.render(openGL);
 
-                //assign the pipe texture id
-                pipe.setTextureId(shape.getTextureIdPipe());
+                    //assign the pipe texture id
+                    pipe.setTextureId(shape.getTextureIdPipe());
 
-                //render the pipe as well
-                pipe.setX(shape);
-                pipe.setY(shape);
-                pipe.setWidth(shape);
-                pipe.setHeight(shape);
-                pipe.setAngle(shape.getAngle() + shape.getAnglePipe());
-                pipe.render(openGL);
+                    //render the pipe as well
+                    pipe.setX(shape);
+                    pipe.setY(shape);
+                    pipe.setWidth(shape);
+                    pipe.setHeight(shape);
+                    pipe.setAngle(shape.getAngle() + shape.getAnglePipe());
+                    pipe.render(openGL);
+
+                } catch (Exception e) {
+                    UtilityHelper.handleException(e);
+                }
             }
         }
     }
