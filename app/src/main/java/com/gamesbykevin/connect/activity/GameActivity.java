@@ -1,11 +1,15 @@
 package com.gamesbykevin.connect.activity;
 
 import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.opengl.GLSurfaceView;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.ToggleButton;
 
 import com.gamesbykevin.androidframeworkv2.base.Disposable;
 import com.gamesbykevin.androidframeworkv2.util.UtilityHelper;
@@ -58,6 +62,9 @@ public class GameActivity extends BaseActivity implements Disposable {
     //current screen we are on
     private Screen screen = Screen.Loading;
 
+    //our auto rotate button reference
+    private ToggleButton buttonAutoRotate;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -73,10 +80,14 @@ public class GameActivity extends BaseActivity implements Disposable {
         //obtain our open gl surface view object for reference
         this.glSurfaceView = (OpenGLSurfaceView)findViewById(R.id.openglView);
 
+        //get our button reference
+        this.buttonAutoRotate = (ToggleButton)findViewById(R.id.ButtonAutoRotate);
+
         //add the layouts to our list
         this.layouts = new ArrayList<>();
         this.layouts.add((LinearLayout)findViewById(R.id.gameOverLayoutDefault));
         this.layouts.add((LinearLayout)findViewById(R.id.loadingScreenLayout));
+        this.layouts.add((LinearLayout)findViewById(R.id.layoutGameControls));
     }
 
     public static Game getGame() {
@@ -229,6 +240,7 @@ public class GameActivity extends BaseActivity implements Disposable {
 
             //don't re-enable anything
             case Ready:
+                setLayoutVisibility((ViewGroup)findViewById(R.id.layoutGameControls), true);
                 break;
         }
 
@@ -272,6 +284,29 @@ public class GameActivity extends BaseActivity implements Disposable {
 
             //no need to continue here
             return;
+        }
+    }
+
+    public void onClickAutoRotate(View view) {
+
+        if (this.buttonAutoRotate != null) {
+
+            //set auto rotate
+            getGame().getBoard().setAutoRotate(buttonAutoRotate.isChecked());
+
+            if (this.buttonAutoRotate.isChecked()) {
+                this.buttonAutoRotate.setBackgroundResource(R.drawable.rotate_on);
+            } else {
+                this.buttonAutoRotate.setBackgroundResource(R.drawable.rotate_off);
+            }
+        }
+    }
+
+    public boolean hasAutoRotate() {
+        if (this.buttonAutoRotate != null) {
+            return this.buttonAutoRotate.isChecked();
+        } else {
+            return false;
         }
     }
 

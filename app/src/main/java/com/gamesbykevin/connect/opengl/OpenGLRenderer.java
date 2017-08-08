@@ -47,7 +47,7 @@ public class OpenGLRenderer implements Renderer {
     /**
      * The minimum amount we can zoom in
      */
-    private static float ZOOM_RATIO_MIN = 0.5f;
+    private static float ZOOM_RATIO_MIN = 0.4f;
 
     //get the ratio of the users screen compared to the default dimensions for the render
     private static float originalScaleRenderX, originalScaleRenderY;
@@ -219,7 +219,7 @@ public class OpenGLRenderer implements Renderer {
         //render game objects
         getGame().render(gl);
 
-        if (DEBUG && !true) {
+        if (DEBUG && !false) {
 
             //calculate how long it took to render a single frame
             long duration = System.currentTimeMillis() - time;

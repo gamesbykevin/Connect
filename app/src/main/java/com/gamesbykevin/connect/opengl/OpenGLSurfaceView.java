@@ -486,6 +486,7 @@ public class OpenGLSurfaceView extends GLSurfaceView implements Runnable {
         this.previousDraw = System.currentTimeMillis();
 
         try {
+
             //render game objects
             requestRender();
 

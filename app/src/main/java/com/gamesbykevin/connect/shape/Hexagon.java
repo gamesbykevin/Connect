@@ -353,8 +353,8 @@ public class Hexagon extends CustomShape {
             return false;
 
         //calculate the corners
-        final double n = getY() + (getHeight() * .25);
-        final double s = getY() + (getHeight() * .75);
+        final double n = getY() + (getHeight() * .22);
+        final double s = getY() + (getHeight() * .77);
         final double w = getX() + (getWidth() * .07);
         final double e = getX() + getWidth() - (getWidth() * .07);
 

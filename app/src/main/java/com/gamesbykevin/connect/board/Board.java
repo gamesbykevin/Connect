@@ -5,7 +5,6 @@ import com.gamesbykevin.androidframeworkv2.maze.Room;
 import com.gamesbykevin.androidframeworkv2.maze.algorithm.Prims;
 import com.gamesbykevin.androidframeworkv2.util.UtilityHelper;
 import com.gamesbykevin.connect.entity.Entity;
-import com.gamesbykevin.connect.opengl.OpenGLSurfaceView;
 import com.gamesbykevin.connect.shape.CustomShape;
 import com.gamesbykevin.connect.activity.GameActivity;
 import com.gamesbykevin.connect.common.ICommon;
@@ -18,9 +17,6 @@ import javax.microedition.khronos.opengles.GL10;
 
 import static com.gamesbykevin.connect.activity.GameActivity.getRandomObject;
 import static com.gamesbykevin.connect.board.BoardHelper.checkBoard;
-import static com.gamesbykevin.connect.game.GameHelper.GAME_OVER;
-import static com.gamesbykevin.connect.opengl.OpenGLSurfaceView.HEIGHT;
-import static com.gamesbykevin.connect.opengl.OpenGLSurfaceView.WIDTH;
 
 /**
  * Created by Kevin on 8/1/2017.
@@ -41,15 +37,15 @@ public class Board implements ICommon {
 
     private Entity pipe = new Entity();
 
-    public static final int BOARD_COLS = 10;
-    public static final int BOARD_ROWS = 10;
+    public static final int BOARD_COLS = 5;
+    public static final int BOARD_ROWS = 5;
 
     //base point that we will mark connected
     public static final int ANCHOR_COL = (BOARD_COLS / 2);
     public static final int ANCHOR_ROW = (BOARD_ROWS / 2);
 
     //do we rotate until we connect to something?
-    private boolean magnet = true;
+    private boolean autoRotate = true;
 
     //the current rotating shape
     private CustomShape rotationShape = null;
@@ -63,6 +59,14 @@ public class Board implements ICommon {
 
     public Maze getMaze() {
         return this.maze;
+    }
+
+    public void setAutoRotate(final boolean autoRotate) {
+        this.autoRotate = autoRotate;
+    }
+
+    public boolean hasAutoRotate() {
+        return this.autoRotate;
     }
 
     private void addShapes() {
@@ -270,7 +274,7 @@ public class Board implements ICommon {
                         return;
 
                     //if magnet is enabled, check if we still need to rotate
-                    if (magnet) {
+                    if (hasAutoRotate()) {
 
                         //if we can't connect and the magnet is enabled, what do we do?
                         if (!BoardHelper.canConnect(this, getRotationShape())) {
@@ -362,16 +366,8 @@ public class Board implements ICommon {
                     //render the shape
                     shape.render(openGL);
 
-                    //assign the pipe texture id
-                    pipe.setTextureId(shape.getTextureIdPipe());
-
                     //render the pipe as well
-                    pipe.setX(shape);
-                    pipe.setY(shape);
-                    pipe.setWidth(shape);
-                    pipe.setHeight(shape);
-                    pipe.setAngle(shape.getAngle() + shape.getAnglePipe());
-                    pipe.render(openGL);
+                    pipe.render(shape, openGL);
 
                 } catch (Exception e) {
                     UtilityHelper.handleException(e);
