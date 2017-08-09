@@ -57,6 +57,8 @@ public abstract class CustomShape extends Entity implements ICustomShape {
     //do we render the shape background
     private boolean visible = true;
 
+    private int textureIdPipeGray = -1, textureIdPipeGreen = -1;
+
     /**
      * Default constructor
      */
@@ -215,9 +217,30 @@ public abstract class CustomShape extends Entity implements ICustomShape {
         this.southEast = southEast;
     }
 
+    protected void setTextureIdPipeGray(final int textureIdPipeGray) {
+        this.textureIdPipeGray = textureIdPipeGray;
+    }
+
+    protected void setTextureIdPipeGreen(final int textureIdPipeGreen) {
+        this.textureIdPipeGreen = textureIdPipeGreen;
+    }
+
+    protected int getTextureIdPipeGray() {
+        return this.textureIdPipeGray;
+    }
+
+    protected int getTextureIdPipeGreen() {
+        return this.textureIdPipeGreen;
+    }
+
+    //need logic implemented to assign the texture
+    public abstract void assignTextureIdPipe();
+
     @Override
     public void reset() {
         setVisible(true);
+        setTextureIdPipeGreen(-1);
+        setTextureIdPipeGray(-1);
     }
 
     @Override

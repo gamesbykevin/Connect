@@ -35,10 +35,10 @@ public class Board implements ICommon {
     //our maze generation object
     private Prims maze;
 
-    private Entity pipe = new Entity();
+    private Entity entity = new Entity();
 
-    public static final int BOARD_COLS = 5;
-    public static final int BOARD_ROWS = 5;
+    public static final int BOARD_COLS = 10;
+    public static final int BOARD_ROWS = 10;
 
     //base point that we will mark connected
     public static final int ANCHOR_COL = (BOARD_COLS / 2);
@@ -161,6 +161,9 @@ public class Board implements ICommon {
 
         //make sure we render the pipe(s) correctly
         tmp.calculateAnglePipe();
+
+        //assign the texture id for the pipe on the shape
+        tmp.assignTextureIdPipe();
 
         //how many rotations have we had
         int rotations = 0;
@@ -360,14 +363,11 @@ public class Board implements ICommon {
                 try {
                     CustomShape shape = getShapes()[row][col];
 
-                    if (shape == null || pipe == null)
+                    if (shape == null || entity == null)
                         return;
 
-                    //render the shape
-                    shape.render(openGL);
-
-                    //render the pipe as well
-                    pipe.render(shape, openGL);
+                    //render the background with pipe here
+                    entity.render(shape, openGL, shape.getTextureIdPipe());
 
                 } catch (Exception e) {
                     UtilityHelper.handleException(e);

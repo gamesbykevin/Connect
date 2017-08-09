@@ -6,6 +6,17 @@ import com.gamesbykevin.connect.opengl.Textures;
 
 import javax.microedition.khronos.opengles.GL10;
 
+import static com.gamesbykevin.connect.opengl.Textures.TEXTURE_ID_DIAMOND_GRAY_PIPE_END;
+import static com.gamesbykevin.connect.opengl.Textures.TEXTURE_ID_DIAMOND_GRAY_PIPE_NS;
+import static com.gamesbykevin.connect.opengl.Textures.TEXTURE_ID_DIAMOND_GRAY_PIPE_NSEW;
+import static com.gamesbykevin.connect.opengl.Textures.TEXTURE_ID_DIAMOND_GRAY_PIPE_SE;
+import static com.gamesbykevin.connect.opengl.Textures.TEXTURE_ID_DIAMOND_GRAY_PIPE_WES;
+import static com.gamesbykevin.connect.opengl.Textures.TEXTURE_ID_DIAMOND_GREEN_PIPE_END;
+import static com.gamesbykevin.connect.opengl.Textures.TEXTURE_ID_DIAMOND_GREEN_PIPE_NS;
+import static com.gamesbykevin.connect.opengl.Textures.TEXTURE_ID_DIAMOND_GREEN_PIPE_NSEW;
+import static com.gamesbykevin.connect.opengl.Textures.TEXTURE_ID_DIAMOND_GREEN_PIPE_SE;
+import static com.gamesbykevin.connect.opengl.Textures.TEXTURE_ID_DIAMOND_GREEN_PIPE_WES;
+
 /**
  * Created by Kevin on 8/5/2017.
  */
@@ -39,31 +50,53 @@ public class Diamond extends CustomShape {
     @Override
     public int getTextureIdPipe() {
 
+        //assign the values if they don't exist
+        if (getTextureIdPipeGray() < 0 || getTextureIdPipeGreen() < 0)
+            assignTextureIdPipe();
+
+        //return the correct value
+        return isConnected() ? getTextureIdPipeGreen() : getTextureIdPipeGray();
+    }
+
+    @Override
+    public void assignTextureIdPipe() {
         if (hasNorth() && !hasSouth() && !hasEast() && !hasWest()) { //n
-            return (isConnected() ? Textures.TEXTURE_ID_DIAMOND_GREEN_PIPE_END : Textures.TEXTURE_ID_DIAMOND_GRAY_PIPE_END);
+            setTextureIdPipeGray(TEXTURE_ID_DIAMOND_GRAY_PIPE_END);
+            setTextureIdPipeGreen(TEXTURE_ID_DIAMOND_GREEN_PIPE_END);
         } else if (!hasNorth() && hasSouth() && !hasEast() && !hasWest()) { //s
-            return (isConnected() ? Textures.TEXTURE_ID_DIAMOND_GREEN_PIPE_END : Textures.TEXTURE_ID_DIAMOND_GRAY_PIPE_END);
+            setTextureIdPipeGray(TEXTURE_ID_DIAMOND_GRAY_PIPE_END);
+            setTextureIdPipeGreen(TEXTURE_ID_DIAMOND_GREEN_PIPE_END);
         } else if (!hasNorth() && !hasSouth() && hasEast() && !hasWest()) { //e
-            return (isConnected() ? Textures.TEXTURE_ID_DIAMOND_GREEN_PIPE_END : Textures.TEXTURE_ID_DIAMOND_GRAY_PIPE_END);
+            setTextureIdPipeGray(TEXTURE_ID_DIAMOND_GRAY_PIPE_END);
+            setTextureIdPipeGreen(TEXTURE_ID_DIAMOND_GREEN_PIPE_END);
         } else if (!hasNorth() && !hasSouth() && !hasEast() && hasWest()) { //w
-            return (isConnected() ? Textures.TEXTURE_ID_DIAMOND_GREEN_PIPE_END : Textures.TEXTURE_ID_DIAMOND_GRAY_PIPE_END);
+            setTextureIdPipeGray(TEXTURE_ID_DIAMOND_GRAY_PIPE_END);
+            setTextureIdPipeGreen(TEXTURE_ID_DIAMOND_GREEN_PIPE_END);
         } else if (hasNorth() && !hasSouth() && hasEast() && !hasWest()) { //ne
-            return (isConnected() ? Textures.TEXTURE_ID_DIAMOND_GREEN_PIPE_SE : Textures.TEXTURE_ID_DIAMOND_GRAY_PIPE_SE);
+            setTextureIdPipeGray(TEXTURE_ID_DIAMOND_GRAY_PIPE_SE);
+            setTextureIdPipeGreen(TEXTURE_ID_DIAMOND_GREEN_PIPE_SE);
         } else if (hasNorth() && !hasSouth() && !hasEast() && hasWest()) { //nw
-            return (isConnected() ? Textures.TEXTURE_ID_DIAMOND_GREEN_PIPE_SE : Textures.TEXTURE_ID_DIAMOND_GRAY_PIPE_SE);
+            setTextureIdPipeGray(TEXTURE_ID_DIAMOND_GRAY_PIPE_SE);
+            setTextureIdPipeGreen(TEXTURE_ID_DIAMOND_GREEN_PIPE_SE);
         } else if (!hasNorth() && hasSouth() && hasEast() && !hasWest()) { //se
-            return (isConnected() ? Textures.TEXTURE_ID_DIAMOND_GREEN_PIPE_SE : Textures.TEXTURE_ID_DIAMOND_GRAY_PIPE_SE);
+            setTextureIdPipeGray(TEXTURE_ID_DIAMOND_GRAY_PIPE_SE);
+            setTextureIdPipeGreen(TEXTURE_ID_DIAMOND_GREEN_PIPE_SE);
         } else if (!hasNorth() && hasSouth() && !hasEast() && hasWest()) { //sw
-            return (isConnected() ? Textures.TEXTURE_ID_DIAMOND_GREEN_PIPE_SE : Textures.TEXTURE_ID_DIAMOND_GRAY_PIPE_SE);
+            setTextureIdPipeGray(TEXTURE_ID_DIAMOND_GRAY_PIPE_SE);
+            setTextureIdPipeGreen(TEXTURE_ID_DIAMOND_GREEN_PIPE_SE);
         } else if (hasNorth() && hasSouth() && !hasEast() && !hasWest()) { //ns
-            return (isConnected() ? Textures.TEXTURE_ID_DIAMOND_GREEN_PIPE_NS : Textures.TEXTURE_ID_DIAMOND_GRAY_PIPE_NS);
+            setTextureIdPipeGray(TEXTURE_ID_DIAMOND_GRAY_PIPE_NS);
+            setTextureIdPipeGreen(TEXTURE_ID_DIAMOND_GREEN_PIPE_NS);
         } else if (!hasNorth() && !hasSouth() && hasEast() && hasWest()) { //we
-            return (isConnected() ? Textures.TEXTURE_ID_DIAMOND_GREEN_PIPE_NS : Textures.TEXTURE_ID_DIAMOND_GRAY_PIPE_NS);
+            setTextureIdPipeGray(TEXTURE_ID_DIAMOND_GRAY_PIPE_NS);
+            setTextureIdPipeGreen(TEXTURE_ID_DIAMOND_GREEN_PIPE_NS);
         } else if (hasNorth() && hasSouth() && hasEast() && hasWest()) { //nsew
-            return (isConnected() ? Textures.TEXTURE_ID_DIAMOND_GREEN_PIPE_NSEW : Textures.TEXTURE_ID_DIAMOND_GRAY_PIPE_NSEW);
+            setTextureIdPipeGray(TEXTURE_ID_DIAMOND_GRAY_PIPE_NSEW);
+            setTextureIdPipeGreen(TEXTURE_ID_DIAMOND_GREEN_PIPE_NSEW);
         } else {
             //NSW, NSE, WEN, WES
-            return (isConnected() ? Textures.TEXTURE_ID_DIAMOND_GREEN_PIPE_WES : Textures.TEXTURE_ID_DIAMOND_GRAY_PIPE_WES);
+            setTextureIdPipeGray(TEXTURE_ID_DIAMOND_GRAY_PIPE_WES);
+            setTextureIdPipeGreen(TEXTURE_ID_DIAMOND_GREEN_PIPE_WES);
         }
     }
 

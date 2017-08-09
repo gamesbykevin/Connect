@@ -18,8 +18,8 @@ public class Entity extends com.gamesbykevin.androidframeworkv2.base.Entity {
         //clean up anything here
     }
 
-    public void render(CustomShape shape, GL10 openGL) {
-        super.setTextureId(shape.getTextureIdPipe());
+    public void render(CustomShape shape, GL10 openGL, int textureId) {
+        super.setTextureId(textureId);
         super.setX(shape);
         super.setY(shape);
         super.setWidth(shape);

@@ -66,5 +66,7 @@ interface ICustomShape extends ICommon {
     void setNorthWest(final boolean northWest);
     void setNorthEast(final boolean northEast);
     void setSouthWest(final boolean southWest);
-    void setSouthEast(final boolean southEast);    
+    void setSouthEast(final boolean southEast);
+
+    void assignTextureIdPipe();
 }
