@@ -52,7 +52,11 @@ public class Game implements IGame {
     //what is the current step that we are on
     public static Step STEP = Step.Loading;
 
+    //the board containing all our pieces
     private Board board;
+
+    //do we rotate until we connect to something?
+    public static boolean AUTO_ROTATE = false;
 
     public Game(GameActivity activity) {
 
@@ -86,9 +90,6 @@ public class Game implements IGame {
 
         //set the type of shape we will be playing with
         getBoard().setType((Board.Shape)activity.getObjectValue(R.string.game_shape_file_key, Board.Shape.class));
-
-        //do we auto rotate
-        getBoard().setAutoRotate(activity.hasAutoRotate());
 
         //reset the board
         getBoard().reset();

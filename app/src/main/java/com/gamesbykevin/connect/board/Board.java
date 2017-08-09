@@ -17,6 +17,7 @@ import javax.microedition.khronos.opengles.GL10;
 
 import static com.gamesbykevin.connect.activity.GameActivity.getRandomObject;
 import static com.gamesbykevin.connect.board.BoardHelper.checkBoard;
+import static com.gamesbykevin.connect.game.Game.AUTO_ROTATE;
 
 /**
  * Created by Kevin on 8/1/2017.
@@ -44,9 +45,6 @@ public class Board implements ICommon {
     public static final int ANCHOR_COL = (BOARD_COLS / 2);
     public static final int ANCHOR_ROW = (BOARD_ROWS / 2);
 
-    //do we rotate until we connect to something?
-    private boolean autoRotate = true;
-
     //the current rotating shape
     private CustomShape rotationShape = null;
 
@@ -61,14 +59,6 @@ public class Board implements ICommon {
         return this.maze;
     }
 
-    public void setAutoRotate(final boolean autoRotate) {
-        this.autoRotate = autoRotate;
-    }
-
-    public boolean hasAutoRotate() {
-        return this.autoRotate;
-    }
-
     private void addShapes() {
 
         int x = 0, y = 0;
@@ -81,6 +71,7 @@ public class Board implements ICommon {
                 //assign dimensions
                 w = Square.DIMENSION;
                 h = Square.DIMENSION;
+                CustomShape.ROTATION_ANGLE = Square.ROTATION_ANGLE_DEFAULT;
                 break;
 
             case Hexagon:
@@ -88,6 +79,7 @@ public class Board implements ICommon {
                 //assign dimensions
                 w = Hexagon.DIMENSION;
                 h = Hexagon.DIMENSION;
+                CustomShape.ROTATION_ANGLE = Hexagon.ROTATION_ANGLE_DEFAULT;
                 break;
 
             case Diamond:
@@ -95,6 +87,7 @@ public class Board implements ICommon {
                 //assign dimensions
                 w = Diamond.DIMENSION;
                 h = Diamond.DIMENSION;
+                CustomShape.ROTATION_ANGLE = Diamond.ROTATION_ANGLE_DEFAULT;
                 break;
 
             default:
@@ -127,17 +120,14 @@ public class Board implements ICommon {
 
             case Square:
                 tmp = new Square();
-                tmp.setTextureId(Textures.TEXTURE_ID_SQUARE);
                 break;
 
             case Hexagon:
                 tmp = new Hexagon();
-                tmp.setTextureId(Textures.TEXTURE_ID_HEXAGON);
                 break;
 
             case Diamond:
                 tmp = new Diamond();
-                tmp.setTextureId(Textures.TEXTURE_ID_DIAMOND);
                 break;
 
             default:
@@ -206,6 +196,25 @@ public class Board implements ICommon {
                 CustomShape shape = getShapes()[row][col];
 
                 if (shape != null && !shape.hasRotate() && shape.contains(x, y)) {
+
+                    //determine how fast the shape rotates
+                    switch(getType()) {
+                        case Square:
+                            shape.setRotateVelocity(AUTO_ROTATE ? Square.ROTATE_VELOCITY_FAST : Square.ROTATE_VELOCITY);
+                            break;
+
+                        case Hexagon:
+                            shape.setRotateVelocity(AUTO_ROTATE ? Hexagon.ROTATE_VELOCITY_FAST : Hexagon.ROTATE_VELOCITY);
+                            break;
+
+                        case Diamond:
+                            shape.setRotateVelocity(AUTO_ROTATE ? Diamond.ROTATE_VELOCITY_FAST : Diamond.ROTATE_VELOCITY);
+                            break;
+
+                        default:
+                            throw new RuntimeException("Type not defined: " + getType().toString());
+                    }
+
                     shape.setRotationCount(0);
                     shape.rotate();
                     setRotationShape(shape);
@@ -277,7 +286,7 @@ public class Board implements ICommon {
                         return;
 
                     //if magnet is enabled, check if we still need to rotate
-                    if (hasAutoRotate()) {
+                    if (AUTO_ROTATE) {
 
                         //if we can't connect and the magnet is enabled, what do we do?
                         if (!BoardHelper.canConnect(this, getRotationShape())) {

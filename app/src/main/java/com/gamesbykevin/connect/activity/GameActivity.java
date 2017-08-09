@@ -1,14 +1,11 @@
 package com.gamesbykevin.connect.activity;
 
 import android.content.Intent;
-import android.graphics.BitmapFactory;
 import android.opengl.GLSurfaceView;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.ToggleButton;
 
 import com.gamesbykevin.androidframeworkv2.base.Disposable;
@@ -21,7 +18,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import static android.view.View.GONE;
 import static android.view.View.INVISIBLE;
 import static android.view.View.VISIBLE;
 import static com.gamesbykevin.androidframeworkv2.util.UtilityHelper.DEBUG;
@@ -80,8 +76,8 @@ public class GameActivity extends BaseActivity implements Disposable {
         //obtain our open gl surface view object for reference
         this.glSurfaceView = (OpenGLSurfaceView)findViewById(R.id.openglView);
 
-        //get our button reference
-        this.buttonAutoRotate = (ToggleButton)findViewById(R.id.ButtonAutoRotate);
+        //update button according to boolean value setting
+        updateAutoRotateButton();
 
         //add the layouts to our list
         this.layouts = new ArrayList<>();
@@ -291,22 +287,23 @@ public class GameActivity extends BaseActivity implements Disposable {
 
         if (this.buttonAutoRotate != null) {
 
-            //set auto rotate
-            getGame().getBoard().setAutoRotate(buttonAutoRotate.isChecked());
+            //assign auto rotate value
+            getGame().AUTO_ROTATE = buttonAutoRotate.isChecked();
 
-            if (this.buttonAutoRotate.isChecked()) {
-                this.buttonAutoRotate.setBackgroundResource(R.drawable.rotate_on);
-            } else {
-                this.buttonAutoRotate.setBackgroundResource(R.drawable.rotate_off);
-            }
+            //update button according to boolean value setting
+            updateAutoRotateButton();
         }
     }
 
-    public boolean hasAutoRotate() {
-        if (this.buttonAutoRotate != null) {
-            return this.buttonAutoRotate.isChecked();
-        } else {
-            return false;
+    private void updateAutoRotateButton() {
+
+        //get the button if not existing
+        if (buttonAutoRotate == null)
+            buttonAutoRotate = (ToggleButton)findViewById(R.id.ButtonAutoRotate);
+
+        if (buttonAutoRotate != null) {
+            buttonAutoRotate.setChecked(getGame().AUTO_ROTATE);
+            buttonAutoRotate.setBackgroundResource((buttonAutoRotate.isChecked()) ? R.drawable.rotate_on : R.drawable.rotate_off);
         }
     }
 

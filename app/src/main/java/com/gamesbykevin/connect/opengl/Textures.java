@@ -22,12 +22,9 @@ public class Textures {
     //array containing all the texture ids
     public static int[] IDS;
 
-    //texture id for each shape
-    public static int TEXTURE_ID_SQUARE = 0;
-    public static int TEXTURE_ID_HEXAGON = 0;
-    public static int TEXTURE_ID_DIAMOND = 0;
     public static int TEXTURE_ID_BACKGROUND = 0;
 
+    //texture id for each shape
     public static int TEXTURE_ID_SQUARE_GRAY_PIPE_NS = 0;
     public static int TEXTURE_ID_SQUARE_GRAY_PIPE_SE = 0;
     public static int TEXTURE_ID_SQUARE_GRAY_PIPE_WES = 0;
@@ -95,7 +92,7 @@ public class Textures {
         this.activity = activity;
 
         //create array containing all the texture ids
-        IDS = new int[52];
+        IDS = new int[49];
     }
 
     /**
@@ -112,9 +109,6 @@ public class Textures {
         //Bitmap ball = Bitmap.createBitmap(sheet, (Ball.DIMENSIONS * i), 0, Ball.DIMENSIONS, Ball.DIMENSIONS);
 
         //load the texture
-        TEXTURE_ID_SQUARE = loadTexture(BitmapFactory.decodeResource(activity.getResources(), R.drawable.square_orange), openGL);
-        TEXTURE_ID_HEXAGON = loadTexture(BitmapFactory.decodeResource(activity.getResources(), R.drawable.hexagon), openGL);
-        TEXTURE_ID_DIAMOND = loadTexture(BitmapFactory.decodeResource(activity.getResources(), R.drawable.diamond), openGL);
         TEXTURE_ID_BACKGROUND = loadTexture(BitmapFactory.decodeResource(activity.getResources(), R.drawable.background), openGL);
 
         TEXTURE_ID_SQUARE_GRAY_PIPE_NS = loadTexture(BitmapFactory.decodeResource(activity.getResources(), R.drawable.square_pipe_ns_gray), openGL);

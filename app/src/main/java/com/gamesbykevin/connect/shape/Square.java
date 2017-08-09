@@ -38,7 +38,12 @@ public class Square extends CustomShape {
     /**
      * How many degrees is each rotation for the given shape
      */
-    public static final float ROTATION_ANGLE = 90.0f;
+    public static final float ROTATION_ANGLE_DEFAULT = 90.0f;
+
+    /**
+     * How many degrees do we rotate the shape each time when auto rotating
+     */
+    public static final float ROTATE_VELOCITY_FAST = (ROTATION_ANGLE_DEFAULT / 10);
 
     public Square() {
         super(DIMENSION, DIMENSION);
@@ -164,22 +169,6 @@ public class Square extends CustomShape {
         return true;
     }
 
-    @Override
-    public void rotate() {
-
-        //we can't rotate again if we are currently
-        if (hasRotate())
-            return;
-
-        //keep track of our rotations
-        setRotationCount(getRotationCount() + 1);
-
-        //flag rotate true
-        setRotate(true);
-
-        //set next destination
-        setDestinationAngle(getAngle() + ROTATION_ANGLE);
-    }
 
     @Override
     public void rotateFinish() {
@@ -201,33 +190,5 @@ public class Square extends CustomShape {
         setSouth(oldE == 0);
         setWest(oldS == 0);
         setNorth(oldW == 0);
-    }
-
-    @Override
-    public void dispose() {
-        //clean up
-    }
-
-    @Override
-    public void update(GameActivity activity) {
-
-        //if we are rotating
-        if (hasRotate()) {
-
-            //if we hit the destination
-            if (getAngle() == getDestinationAngle()) {
-
-                //stop rotating
-                rotateFinish();
-
-            } else {
-
-                setAngle(getAngle() + ROTATE_VELOCITY);
-
-                //make sure we stay within range
-                if (getAngle() >= ANGLE_MAX)
-                    setAngle(ANGLE_MIN);
-            }
-        }
     }
 }

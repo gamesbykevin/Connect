@@ -1,12 +1,7 @@
 package com.gamesbykevin.connect.shape;
 
 import com.gamesbykevin.androidframeworkv2.base.Entity;
-import com.gamesbykevin.androidframeworkv2.maze.Room;
-import com.gamesbykevin.androidframeworkv2.maze.Room.Wall;
 import com.gamesbykevin.connect.activity.GameActivity;
-import com.gamesbykevin.connect.board.Board;
-import com.gamesbykevin.connect.common.ICommon;
-import com.gamesbykevin.connect.opengl.Textures;
 
 import javax.microedition.khronos.opengles.GL10;
 
@@ -21,9 +16,6 @@ public abstract class CustomShape extends Entity implements ICustomShape {
 
     //where do we want to rotate to
     private float destinationAngle;
-
-    public static final float ROTATE_VELOCITY_DIAMOND = 6.0f;
-    public static final float ROTATION_ANGLE_DIAMOND = 90.0f;
 
     //what is open on this shape
     private boolean west = false;
@@ -57,7 +49,14 @@ public abstract class CustomShape extends Entity implements ICustomShape {
     //do we render the shape background
     private boolean visible = true;
 
+    //the texture id of both pipes (connected/not connected)
     private int textureIdPipeGray = -1, textureIdPipeGreen = -1;
+
+    //how fast can we rotate the shape
+    private float rotateVelocity = 0.0f;
+
+    //# of degrees for a single rotation
+    public static float ROTATION_ANGLE;
 
     /**
      * Default constructor
@@ -76,6 +75,11 @@ public abstract class CustomShape extends Entity implements ICustomShape {
 
     public boolean isVisible() {
         return this.visible;
+    }
+
+    @Override
+    public void dispose() {
+        //clean up anything?
     }
 
     @Override
@@ -241,6 +245,64 @@ public abstract class CustomShape extends Entity implements ICustomShape {
         setVisible(true);
         setTextureIdPipeGreen(-1);
         setTextureIdPipeGray(-1);
+    }
+
+    public void setRotateVelocity(final float rotateVelocity) {
+        this.rotateVelocity = rotateVelocity;
+    }
+
+    public float getRotateVelocity() {
+        return this.rotateVelocity;
+    }
+
+    @Override
+    public void rotate() {
+
+        //we can't rotate again if we are currently
+        if (hasRotate())
+            return;
+
+        //keep track of our rotations
+        setRotationCount(getRotationCount() + 1);
+
+        //flag rotate true
+        setRotate(true);
+
+        //set next destination
+        setDestinationAngle(getAngle() + ROTATION_ANGLE);
+    }
+
+    @Override
+    public void update(GameActivity activity) {
+
+        //if we are rotating
+        if (hasRotate()) {
+
+            //if we hit the destination
+            if (getAngle() == getDestinationAngle()) {
+
+                //stop rotating
+                rotateFinish();
+
+            } else {
+
+                setAngle(getAngle() + getRotateVelocity());
+
+                //make sure we stay within range
+                if (getAngle() >= ANGLE_MAX)
+                    setAngle(ANGLE_MIN);
+            }
+        }
+    }
+
+    protected double getDistance(float x, float y) {
+
+        //calculate the center
+        float mx = getX() + (getWidth() / 2);
+        float my = getY() + (getHeight() / 2);
+
+        //return the distance
+        return Math.sqrt(Math.pow((x - mx), 2) + Math.pow((y - my), 2));
     }
 
     @Override

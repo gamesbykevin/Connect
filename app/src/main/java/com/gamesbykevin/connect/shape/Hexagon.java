@@ -2,7 +2,6 @@ package com.gamesbykevin.connect.shape;
 
 import com.gamesbykevin.androidframeworkv2.maze.Room;
 import com.gamesbykevin.androidframeworkv2.maze.Room.Wall;
-import com.gamesbykevin.connect.activity.GameActivity;
 import com.gamesbykevin.connect.opengl.Textures;
 
 import static com.gamesbykevin.connect.opengl.Textures.TEXTURE_ID_HEXAGON_GRAY_PIPE_END;
@@ -50,7 +49,13 @@ public class Hexagon extends CustomShape {
     /**
      * How many degrees is each rotation for the given shape
      */
-    public static final float ROTATION_ANGLE = 60.0f;
+    public static final float ROTATION_ANGLE_DEFAULT = 60.0f;
+
+    /**
+     * How many degrees do we rotate the shape each time when auto rotating
+     */
+    public static final float ROTATE_VELOCITY_FAST = (ROTATION_ANGLE_DEFAULT / 10);
+
 
     public Hexagon() {
         super(DIMENSION, DIMENSION);
@@ -445,43 +450,9 @@ public class Hexagon extends CustomShape {
 
     @Override
     public boolean contains(final float x, final float y) {
-        //if the coordinate is not in range return false
-        if (x < getX() || x > getX() + getWidth())
-            return false;
-        if (y < getY() || y > getY() + getHeight())
-            return false;
 
-        //calculate the corners
-        final double n = getY() + (getHeight() * .22);
-        final double s = getY() + (getHeight() * .77);
-        final double w = getX() + (getWidth() * .07);
-        final double e = getX() + getWidth() - (getWidth() * .07);
-
-        //have to be within the boundaries
-        if (y < n || y > s)
-            return false;
-        if (x < w || x > e)
-            return false;
-
-        //we are inside the square of the hexagon
-        return true;
-    }
-
-    @Override
-    public void rotate() {
-
-        //we can't rotate again if we are currently
-        if (hasRotate())
-            return;
-
-        //keep track of our rotations
-        setRotationCount(getRotationCount() + 1);
-
-        //flag rotate true
-        setRotate(true);
-
-        //set next destination
-        setDestinationAngle(getAngle() + ROTATION_ANGLE);
+        //if we are close enough to the center return true
+        return (super.getDistance(x, y) < getWidth() / 2);
     }
 
     @Override
@@ -507,33 +478,5 @@ public class Hexagon extends CustomShape {
         setSouthEast(oldE == 0);
         setSouthWest(oldSE == 0);
         setWest(oldSW == 0);
-    }
-
-    @Override
-    public void dispose() {
-        //clean up
-    }
-
-    @Override
-    public void update(GameActivity activity) {
-
-        //if we are rotating
-        if (hasRotate()) {
-
-            //if we hit the destination
-            if (getAngle() == getDestinationAngle()) {
-
-                //stop rotating
-                rotateFinish();
-
-            } else {
-
-                setAngle(getAngle() + ROTATE_VELOCITY);
-
-                //make sure we stay within range
-                if (getAngle() >= ANGLE_MAX)
-                    setAngle(ANGLE_MIN);
-            }
-        }
     }
 }
