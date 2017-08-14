@@ -16,6 +16,7 @@ import static com.gamesbykevin.connect.activity.GameActivity.getRandomObject;
 import static com.gamesbykevin.connect.board.BoardHelper.checkBoard;
 import static com.gamesbykevin.connect.game.Game.AUTO_ROTATE;
 import static com.gamesbykevin.connect.game.GameHelper.getSquare;
+import static com.gamesbykevin.connect.opengl.OpenGLSurfaceView.HEIGHT;
 
 /**
  * Created by Kevin on 8/1/2017.
@@ -134,7 +135,7 @@ public class Board implements ICommon {
 
         //assign x, y coordinates
         tmp.setX(x);
-        tmp.setY(y);
+        tmp.setY(HEIGHT - y);
 
         //mark the anchor shape as connected
         if (col == ANCHOR_COL && row == ANCHOR_ROW)
@@ -367,6 +368,7 @@ public class Board implements ICommon {
             for (int row = 0; row < getMaze().getRows(); row++) {
 
                 try {
+
                     CustomShape shape = getShapes()[row][col];
 
                     if (shape == null || entity == null)
@@ -374,9 +376,6 @@ public class Board implements ICommon {
 
                     //render the shape
                     getSquare().render(shape, m);
-
-                    //render the background with pipe here
-                    //entity.render(shape, shape.getTextureIdPipe());
 
                 } catch (Exception e) {
                     UtilityHelper.handleException(e);

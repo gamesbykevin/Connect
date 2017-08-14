@@ -3,6 +3,7 @@ package com.gamesbykevin.connect.opengl;
 import android.opengl.GLES20;
 
 import com.gamesbykevin.connect.entity.Entity;
+import com.gamesbykevin.connect.shape.CustomShape;
 
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
@@ -49,6 +50,7 @@ public class Square {
     }
 
     private void setupTriangle() {
+
         // The order of vertex rendering for a quad
         indices = new short[] {0, 1, 2, 0, 2, 3};
 
@@ -78,6 +80,21 @@ public class Square {
 
     private int getTextureId() {
         return this.textureId;
+    }
+
+    public void render(final CustomShape shape, final float[] m) {
+
+        //store the current angle rotation
+        final float angle = shape.getAngle();
+
+        //offset for the pipe animation
+        shape.setAngle(angle + shape.getAnglePipe());
+
+        update(shape);
+        render(m);
+
+        //restore the angle
+        shape.setAngle(angle);
     }
 
     public void render(final Entity entity, final float[] m) {

@@ -17,6 +17,7 @@ import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
 
 import static com.gamesbykevin.androidframeworkv2.util.UtilityHelper.DEBUG;
+import static com.gamesbykevin.connect.activity.GameActivity.getGame;
 import static com.gamesbykevin.connect.game.Game.RESET_ZOOM;
 import static com.gamesbykevin.connect.game.Game.ZOOM_SCALE_RENDER_X;
 import static com.gamesbykevin.connect.game.Game.ZOOM_SCALE_RENDER_Y;
@@ -201,7 +202,7 @@ public class OpenGLRenderer implements Renderer {
         }
 
         // Setup our screen width and height for normal sprite translation.
-        Matrix.orthoM(mtrxProjection, 0, 0f, screenWidth, 0.0f, screenHeight, 0, 50);
+        Matrix.orthoM(mtrxProjection, 0, 0f, screenWidth, screenHeight, 0f, 0, 50f);
 
         // Set the camera position (View matrix)
         Matrix.setLookAtM(mtrxView, 0, 0f, 0f, 1f, 0f, 0f, 0f, 0f, 1.0f, 0.0f);
@@ -237,6 +238,8 @@ public class OpenGLRenderer implements Renderer {
         setupBackground();
         getSquare().render(getEntity(), mtrxProjectionAndView);
 
+        getGame().render(mtrxProjectionAndView);
+
         if (DEBUG && !false) {
 
             //calculate how long it took to render a single frame
@@ -254,9 +257,9 @@ public class OpenGLRenderer implements Renderer {
     private void setupBackground() {
         getEntity().setTextureId(Textures.TEXTURE_ID_BACKGROUND);
         getEntity().setAngle(0f);
+        getEntity().setX(0);
+        getEntity().setY(0);
         getEntity().setWidth(WIDTH);
         getEntity().setHeight(HEIGHT);
-        getEntity().setX(getEntity().getWidth() / 2);
-        getEntity().setY(getEntity().getHeight() / 2);
     }
 }

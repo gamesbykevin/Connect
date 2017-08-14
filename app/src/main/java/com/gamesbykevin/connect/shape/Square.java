@@ -55,17 +55,6 @@ public class Square extends CustomShape {
     }
 
     @Override
-    public int getTextureIdPipe() {
-
-        //assign the values if they don't exist
-        if (getTextureIdPipeGray() < 0 || getTextureIdPipeGreen() < 0)
-            assignTextureIdPipe();
-
-        //return the correct value
-        return isConnected() ? getTextureIdPipeGreen() : getTextureIdPipeGray();
-    }
-
-    @Override
     public void assignTextureIdPipe() {
         if (hasNorth() && !hasSouth() && !hasEast() && !hasWest()) { //n
             setTextureIdPipeGray(TEXTURE_ID_SQUARE_GRAY_PIPE_END);

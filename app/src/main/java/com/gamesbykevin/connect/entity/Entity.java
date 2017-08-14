@@ -5,6 +5,8 @@ import android.graphics.RectF;
 
 import com.gamesbykevin.androidframeworkv2.base.Cell;
 
+import static com.gamesbykevin.connect.opengl.OpenGLSurfaceView.HEIGHT;
+
 
 /**
  * Created by Kevin on 8/1/2017.
@@ -256,15 +258,19 @@ public class Entity extends Cell {
         float y2 = getBase().top * scale;
 
         //we now detach from our Rect because when rotating,
-        //we need the separate points, so we do so in opengl order
+        //we need the separate points, so we do so in open gl order
         nw.x = x1; nw.y = y2;
         sw.x = x1; sw.y = y1;
         se.x = x2; se.y = y1;
         ne.x = x2; ne.y = y2;
 
+        double radians = Math.toRadians(getAngle());
+
         //we create the sin and cos function once, so we do not have calculate them each time.
-        float s = (float) Math.sin(getAngle());
-        float c = (float) Math.cos(getAngle());
+        float s = (float) Math.sin(radians);
+        float c = (float) Math.cos(radians);
+        //float s = (float) Math.sin(getAngle());
+        //float c = (float) Math.cos(getAngle());
 
         //rotate each point
         nw.x = x1 * c - y2 * s; nw.y = x1 * s + y2 * c;
@@ -272,11 +278,15 @@ public class Entity extends Cell {
         se.x = x2 * c - y1 * s; se.y = x2 * s + y1 * c;
         ne.x = x2 * c - y2 * s; ne.y = x2 * s + y2 * c;
 
+        //offset translation coordinates to make this easier
+        final float x = (getWidth() / 2) + translation.x;
+        final float y = (getHeight() / 2) + translation.y;
+
         //translate the entity to its correct position.
-        nw.x += translation.x; nw.y += translation.y;
-        sw.x += translation.x; sw.y += translation.y;
-        se.x += translation.x; se.y += translation.y;
-        ne.x += translation.x; ne.y += translation.y;
+        nw.x += x; nw.y += y;
+        sw.x += x; sw.y += y;
+        se.x += x; se.y += y;
+        ne.x += x; ne.y += y;
 
         //update our vertices with the new coordinates
         this.vertices[0] = nw.x; this.vertices[1] = nw.y; this.vertices[2] = 0.0f;

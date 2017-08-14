@@ -32,13 +32,6 @@ public final class GameHelper
         return square;
     }
 
-    private static float angle = 0;
-
-    /**
-     * How far do we zoom in/out
-     */
-    private static float ZOOM_RATIO = 2.5f;
-
     //did we flag the game over?
     public static boolean GAME_OVER = false;
 
