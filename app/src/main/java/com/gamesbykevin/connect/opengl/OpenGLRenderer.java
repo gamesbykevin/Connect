@@ -1,16 +1,22 @@
 package com.gamesbykevin.connect.opengl;
 
 import android.content.Context;
+import android.opengl.GLES20;
 import android.opengl.GLSurfaceView.Renderer;
+import android.opengl.Matrix;
 
 import com.gamesbykevin.androidframeworkv2.util.UtilityHelper;
-import com.gamesbykevin.connect.game.GameHelper;
+import com.gamesbykevin.connect.entity.Entity;
+
+import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
+import java.nio.FloatBuffer;
+import java.nio.ShortBuffer;
 
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
 
 import static com.gamesbykevin.androidframeworkv2.util.UtilityHelper.DEBUG;
-import static com.gamesbykevin.connect.activity.GameActivity.getGame;
 import static com.gamesbykevin.connect.game.Game.RESET_ZOOM;
 import static com.gamesbykevin.connect.game.Game.ZOOM_SCALE_RENDER_X;
 import static com.gamesbykevin.connect.game.Game.ZOOM_SCALE_RENDER_Y;
@@ -18,6 +24,7 @@ import static com.gamesbykevin.connect.game.Game.ZOOM_SCALE_MOTION_X;
 import static com.gamesbykevin.connect.game.Game.ZOOM_SCALE_MOTION_Y;
 
 import static com.gamesbykevin.connect.game.GameHelper.getEntity;
+import static com.gamesbykevin.connect.game.GameHelper.getSquare;
 import static com.gamesbykevin.connect.opengl.OpenGLSurfaceView.FRAME_DURATION;
 import static com.gamesbykevin.connect.opengl.OpenGLSurfaceView.HEIGHT;
 import static com.gamesbykevin.connect.opengl.OpenGLSurfaceView.WIDTH;
@@ -66,6 +73,11 @@ public class OpenGLRenderer implements Renderer {
     //object containing all the texture ids
     private Textures textures;
 
+    //our matrices
+    private final float[] mtrxProjection = new float[16];
+    private final float[] mtrxView = new float[16];
+    private final float[] mtrxProjectionAndView = new float[16];
+
     public OpenGLRenderer(Context activity) {
 
         //create object for reference to textures
@@ -81,17 +93,6 @@ public class OpenGLRenderer implements Renderer {
 
     public void onResume() {
         //re-load the textures if needed?
-    }
-
-    /**
-     * Called once to set up the view's OpenGL ES environment
-     * @param gl Open gl object for rendering
-     * @param config
-     */
-    @Override
-    public void onSurfaceCreated(GL10 gl, EGLConfig config) {
-        //display the version of open gl
-        //UtilityHelper.logEvent("OpenGL Version: " + gl.glGetString(GL10.GL_VERSION));
     }
 
     /**
@@ -135,21 +136,78 @@ public class OpenGLRenderer implements Renderer {
     }
 
     /**
-     *  Called if the geometry of the view changes.<br>
-     *  For example when the device's screen orientation changes
-     * @param gl OpenGL object
-     * @param width pixel width of surface
-     * @param height pixel height of surface
+     * Called once to set up the view's OpenGL ES environment
      */
     @Override
-    public void onSurfaceChanged(GL10 gl, int width, int height) {
+    public void onSurfaceCreated(GL10 unused, EGLConfig config) {
+
+        //init square used for rendering
+        getSquare();
+
+        //set the clear color to black
+        GLES20.glClearColor(0.0f, 0.0f, 0.0f, 1);
+
+        //create the shaders, solid color
+        int vertexShader = riGraphicTools.loadShader(GLES20.GL_VERTEX_SHADER, riGraphicTools.vs_SolidColor);
+        int fragmentShader = riGraphicTools.loadShader(GLES20.GL_FRAGMENT_SHADER, riGraphicTools.fs_SolidColor);
+        riGraphicTools.sp_SolidColor = GLES20.glCreateProgram();    // create empty OpenGL ES Program
+        GLES20.glAttachShader(riGraphicTools.sp_SolidColor, vertexShader);   // add the vertex shader to program
+        GLES20.glAttachShader(riGraphicTools.sp_SolidColor, fragmentShader); // add the fragment shader to program
+        GLES20.glLinkProgram(riGraphicTools.sp_SolidColor);                  // creates OpenGL ES program executables
+
+        //create the shaders, images
+        vertexShader = riGraphicTools.loadShader(GLES20.GL_VERTEX_SHADER, riGraphicTools.vs_Image);
+        fragmentShader = riGraphicTools.loadShader(GLES20.GL_FRAGMENT_SHADER, riGraphicTools.fs_Image);
+        riGraphicTools.sp_Image = GLES20.glCreateProgram();             // create empty OpenGL ES Program
+        GLES20.glAttachShader(riGraphicTools.sp_Image, vertexShader);   // add the vertex shader to program
+        GLES20.glAttachShader(riGraphicTools.sp_Image, fragmentShader); // add the fragment shader to program
+        GLES20.glLinkProgram(riGraphicTools.sp_Image);                  // creates OpenGL ES program executables
+
+        //set our shader program
+        GLES20.glUseProgram(riGraphicTools.sp_Image);
 
         //flag that we have not yet loaded the textures
         LOADED = false;
 
+        //load our textures
+        this.textures.loadTextures();
+
+        //flag that we have loaded the textures
+        LOADED = true;
+    }
+
+    /**
+     *  Called if the geometry of the view changes.<br>
+     *  For example when the device's screen orientation changes
+     * @param width pixel width of surface
+     * @param height pixel height of surface
+     */
+    @Override
+    public void onSurfaceChanged(GL10 unused, int width, int height) {
+
         //store screen dimensions
         this.screenWidth = width;
         this.screenHeight = height;
+
+        // Redo the Viewport, making it fullscreen.
+        GLES20.glViewport(0, 0, (int)screenWidth, (int)screenHeight);
+
+        // Clear our matrices
+        for(int i=0;i<16;i++)
+        {
+            mtrxProjection[i] = 0.0f;
+            mtrxView[i] = 0.0f;
+            mtrxProjectionAndView[i] = 0.0f;
+        }
+
+        // Setup our screen width and height for normal sprite translation.
+        Matrix.orthoM(mtrxProjection, 0, 0f, screenWidth, 0.0f, screenHeight, 0, 50);
+
+        // Set the camera position (View matrix)
+        Matrix.setLookAtM(mtrxView, 0, 0f, 0f, 1f, 0f, 0f, 0f, 0f, 1.0f, 0.0f);
+
+        // Calculate the projection and view transformation
+        Matrix.multiplyMM(mtrxProjectionAndView, 0, mtrxProjection, 0, mtrxView, 0);
 
         //store the ratio for the render
         this.originalScaleRenderX = screenWidth / (float) WIDTH;
@@ -162,62 +220,22 @@ public class OpenGLRenderer implements Renderer {
         //set the zoom values same as original
         if (RESET_ZOOM)
             resetZoom();
-
-        //sets the current view port to the new size of the screen
-        gl.glViewport(0, 0, screenWidth, screenHeight);
-
-        //reset the projection matrix back to its default state
-        gl.glLoadIdentity();
-
-        //select the projection matrix
-        gl.glMatrixMode(GL10.GL_PROJECTION);
-
-        //set rendering dimensions
-        gl.glOrthof(0.0f, screenWidth, screenHeight, 0.0f, 1.0f, -1.0f);
-
-        //select the model view matrix
-        gl.glMatrixMode(GL10.GL_MODELVIEW);
-
-        //enable 2d textures
-        gl.glEnable(GL10.GL_TEXTURE_2D);
-
-        //enable smooth shading
-        gl.glEnableClientState(GL10.GL_SMOOTH);
-
-        //load our textures
-        this.textures.loadTextures(gl);
-
-        //flag that we have loaded the textures
-        LOADED = true;
     }
 
     /**
      * Called for each redraw of the view
-     * @param gl Object used for rendering textures
      */
     @Override
-    public void onDrawFrame(GL10 gl) {
+    public void onDrawFrame(GL10 unused) {
 
         //get the current time
         long time = System.currentTimeMillis();
 
-        //clears the screen and depth buffer.
-        gl.glClear(GL10.GL_COLOR_BUFFER_BIT | GL10.GL_DEPTH_BUFFER_BIT);
+        //clear the screen and depth buffer, we have set the clear color as black.
+        GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT | GLES20.GL_DEPTH_BUFFER_BIT);
 
-        //render game background image
-        renderBackground(gl);
-
-        //reset the project matrix for the game objects
-        gl.glLoadIdentity();
-
-        //offset the board in case the user is scrolling
-        gl.glTranslatef(OFFSET_X, OFFSET_Y, 0);
-
-        //scale to our game dimensions to match the users screen
-        gl.glScalef(ZOOM_SCALE_RENDER_X, ZOOM_SCALE_RENDER_Y, 0.0f);
-
-        //render game objects
-        getGame().render(gl);
+        setupBackground();
+        getSquare().render(getEntity(), mtrxProjectionAndView);
 
         if (DEBUG && !false) {
 
@@ -230,20 +248,15 @@ public class OpenGLRenderer implements Renderer {
         }
     }
 
-    private void renderBackground(GL10 openGL) {
-
-        //reset the projection matrix
-        openGL.glLoadIdentity();
-
-        //scale to screen size for background
-        openGL.glScalef(originalScaleRenderX, originalScaleRenderY, 0.0f);
-
-        //render background image
-        getEntity().setX(0);
-        getEntity().setY(0);
+    /**
+     * Setup the background to be rendered
+     */
+    private void setupBackground() {
+        getEntity().setTextureId(Textures.TEXTURE_ID_BACKGROUND);
+        getEntity().setAngle(0f);
         getEntity().setWidth(WIDTH);
         getEntity().setHeight(HEIGHT);
-        getEntity().setTextureId(Textures.TEXTURE_ID_BACKGROUND);
-        getEntity().render(openGL);
+        getEntity().setX(getEntity().getWidth() / 2);
+        getEntity().setY(getEntity().getHeight() / 2);
     }
 }

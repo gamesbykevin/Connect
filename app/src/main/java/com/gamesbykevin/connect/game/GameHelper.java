@@ -1,14 +1,12 @@
 package com.gamesbykevin.connect.game;
 
-import com.gamesbykevin.connect.entity.Entity;
-import com.gamesbykevin.connect.opengl.Textures;
+import android.opengl.GLES20;
 
-import javax.microedition.khronos.opengles.GL10;
+import com.gamesbykevin.connect.entity.Entity;
+import com.gamesbykevin.connect.opengl.Square;
 
 import static com.gamesbykevin.connect.activity.GameActivity.getGame;
 import static com.gamesbykevin.connect.opengl.OpenGLSurfaceView.FPS;
-import static com.gamesbykevin.connect.opengl.OpenGLSurfaceView.HEIGHT;
-import static com.gamesbykevin.connect.opengl.OpenGLSurfaceView.WIDTH;
 
 /**
  * Game helper methods
@@ -23,6 +21,15 @@ public final class GameHelper
             entity = new Entity();
 
         return entity;
+    }
+
+    private static Square square = null;
+
+    public static Square getSquare() {
+        if (square == null)
+            square = new Square();
+
+        return square;
     }
 
     private static float angle = 0;
@@ -43,16 +50,18 @@ public final class GameHelper
 
     /**
      * Render the game accordingly
-     * @param openGL Place to write pixel data
      * @throws Exception
      */
-    public static final void render(final GL10 openGL)
-    {
+    public static final void render(float[] m) {
+
 		//make sure we are supporting alpha for transparency
-		openGL.glEnable(GL10.GL_BLEND);
-		openGL.glBlendFunc(GL10.GL_SRC_ALPHA, GL10.GL_ONE_MINUS_SRC_ALPHA);
+        GLES20.glEnable(GLES20.GL_BLEND);
+        GLES20.glBlendFunc(GLES20.GL_ONE, GLES20.GL_ONE_MINUS_SRC_ALPHA);
 
 		//render the pieces on the board
-        getGame().getBoard().render(openGL);
+        getGame().getBoard().render(m);
+
+        //we can now disable alpha transparency
+        GLES20.glDisable(GLES20.GL_BLEND);
     }
 }

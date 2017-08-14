@@ -143,7 +143,7 @@ public class GameActivity extends BaseActivity implements Disposable {
         super.onPause();
 
         //pause the game
-        getGame().onPause();;
+        getGame().onPause();
 
         //flag paused true
         this.paused = true;

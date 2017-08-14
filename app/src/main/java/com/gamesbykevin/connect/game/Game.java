@@ -1,7 +1,6 @@
 package com.gamesbykevin.connect.game;
 
 import android.view.MotionEvent;
-
 import com.gamesbykevin.connect.R;
 import com.gamesbykevin.connect.activity.GameActivity;
 import com.gamesbykevin.connect.activity.GameActivity.Screen;
@@ -9,14 +8,10 @@ import com.gamesbykevin.connect.board.Board;
 import com.gamesbykevin.connect.board.BoardHelper;
 import com.gamesbykevin.connect.opengl.OpenGLRenderer;
 
-import javax.microedition.khronos.opengles.GL10;
-
 import static com.gamesbykevin.connect.game.GameHelper.FRAMES;
 import static com.gamesbykevin.connect.game.GameHelper.GAME_OVER;
 import static com.gamesbykevin.connect.game.GameHelper.GAME_OVER_DELAY_FRAMES;
 import static com.gamesbykevin.connect.opengl.OpenGLRenderer.LOADED;
-import static com.gamesbykevin.connect.opengl.OpenGLSurfaceView.HEIGHT;
-import static com.gamesbykevin.connect.opengl.OpenGLSurfaceView.WIDTH;
 
 /**
  * Created by Kevin on 7/19/2017.
@@ -214,13 +209,13 @@ public class Game implements IGame {
         return true;
     }
 
-    public void render(GL10 openGL) {
+    public void render(float[] m) {
 
         //don't display if we are still loading
         if (STEP != Step.Updating && STEP != Step.GameOver)
             return;
 
         //render everything on screen
-        GameHelper.render(openGL);
+        GameHelper.render(m);
     }
 }

@@ -1,7 +1,7 @@
 package com.gamesbykevin.connect.shape;
 
-import com.gamesbykevin.androidframeworkv2.base.Entity;
 import com.gamesbykevin.connect.activity.GameActivity;
+import com.gamesbykevin.connect.entity.Entity;
 
 import javax.microedition.khronos.opengles.GL10;
 
@@ -81,9 +81,6 @@ public abstract class CustomShape extends Entity implements ICustomShape {
     public void dispose() {
         //clean up anything?
     }
-
-    @Override
-    public abstract int getTextureIdPipe();
 
     @Override
     public void setConnected(boolean connected) {
@@ -241,6 +238,17 @@ public abstract class CustomShape extends Entity implements ICustomShape {
     public abstract void assignTextureIdPipe();
 
     @Override
+    public int getTextureId() {
+
+        //assign the values if they don't exist
+        if (getTextureIdPipeGray() < 0 || getTextureIdPipeGreen() < 0)
+            assignTextureIdPipe();
+
+        //return the correct value
+        return isConnected() ? getTextureIdPipeGreen() : getTextureIdPipeGray();
+    }
+
+    @Override
     public void reset() {
         setVisible(true);
         setTextureIdPipeGreen(-1);
@@ -303,12 +311,5 @@ public abstract class CustomShape extends Entity implements ICustomShape {
 
         //return the distance
         return Math.sqrt(Math.pow((x - mx), 2) + Math.pow((y - my), 2));
-    }
-
-    @Override
-    public void render(GL10 openGL) {
-
-        if (isVisible())
-            super.render(openGL);
     }
 }

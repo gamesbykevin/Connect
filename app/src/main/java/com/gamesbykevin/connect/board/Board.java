@@ -8,16 +8,14 @@ import com.gamesbykevin.connect.entity.Entity;
 import com.gamesbykevin.connect.shape.CustomShape;
 import com.gamesbykevin.connect.activity.GameActivity;
 import com.gamesbykevin.connect.common.ICommon;
-import com.gamesbykevin.connect.opengl.Textures;
 import com.gamesbykevin.connect.shape.Diamond;
 import com.gamesbykevin.connect.shape.Hexagon;
 import com.gamesbykevin.connect.shape.Square;
 
-import javax.microedition.khronos.opengles.GL10;
-
 import static com.gamesbykevin.connect.activity.GameActivity.getRandomObject;
 import static com.gamesbykevin.connect.board.BoardHelper.checkBoard;
 import static com.gamesbykevin.connect.game.Game.AUTO_ROTATE;
+import static com.gamesbykevin.connect.game.GameHelper.getSquare;
 
 /**
  * Created by Kevin on 8/1/2017.
@@ -34,12 +32,12 @@ public class Board implements ICommon {
     private Shape type = null;
 
     //our maze generation object
-    private Prims maze;
+    private Maze maze;
 
     private Entity entity = new Entity();
 
-    public static final int BOARD_COLS = 10;
-    public static final int BOARD_ROWS = 10;
+    public static final int BOARD_COLS = 3;
+    public static final int BOARD_ROWS = 3;
 
     //base point that we will mark connected
     public static final int ANCHOR_COL = (BOARD_COLS / 2);
@@ -332,6 +330,7 @@ public class Board implements ICommon {
     public void reset() {
 
         try {
+
             //create new instance of maze
             this.maze = new Prims((getType() == Shape.Hexagon), BOARD_COLS, BOARD_ROWS);
 
@@ -355,10 +354,8 @@ public class Board implements ICommon {
 
     /**
      * Render all objects part of the board
-     * @param openGL
      */
-    @Override
-    public void render(GL10 openGL) {
+    public void render(float[] m) {
 
         //if these are null we can't continue
         if (getShapes() == null)
@@ -375,8 +372,11 @@ public class Board implements ICommon {
                     if (shape == null || entity == null)
                         return;
 
+                    //render the shape
+                    getSquare().render(shape, m);
+
                     //render the background with pipe here
-                    entity.render(shape, openGL, shape.getTextureIdPipe());
+                    //entity.render(shape, shape.getTextureIdPipe());
 
                 } catch (Exception e) {
                     UtilityHelper.handleException(e);

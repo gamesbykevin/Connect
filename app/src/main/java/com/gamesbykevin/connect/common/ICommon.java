@@ -5,7 +5,7 @@ import com.gamesbykevin.connect.activity.GameActivity;
 
 import javax.microedition.khronos.opengles.GL10;
 
-public interface ICommon extends com.gamesbykevin.androidframeworkv2.common.ICommon
+public interface ICommon extends Disposable
 {
 	/**
 	 * Update the entity

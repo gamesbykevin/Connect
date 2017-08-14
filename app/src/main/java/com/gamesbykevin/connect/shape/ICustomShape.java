@@ -9,8 +9,6 @@ import com.gamesbykevin.connect.common.ICommon;
 
 interface ICustomShape extends ICommon {
 
-    int getTextureIdPipe();
-
     void calculateAnglePipe();
 
     void setBorders(final Room room);

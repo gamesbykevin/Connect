@@ -45,7 +45,7 @@ public class OpenGLSurfaceView extends GLSurfaceView implements Runnable {
     /**
      * The version of open GL we are using
      */
-    public static final int OPEN_GL_VERSION = 1;
+    public static final int OPEN_GL_VERSION = 2;
 
     //our object where we render our pixel data
     private OpenGLRenderer openGlRenderer;
@@ -137,6 +137,9 @@ public class OpenGLSurfaceView extends GLSurfaceView implements Runnable {
 
         //create an OpenGL ES 1.0 context.
         setEGLContextClientVersion(OPEN_GL_VERSION);
+
+        //preserve the context on pause (not guaranteed to work)
+        setPreserveEGLContextOnPause(true);
 
         //create a new instance of our renderer
         this.openGlRenderer = new OpenGLRenderer(this.activity);
