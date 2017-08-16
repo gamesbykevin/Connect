@@ -33,12 +33,13 @@ public class Square {
     }
 
     private void setupImage() {
+
         //create our UV coordinates meaning we are going to render the entire texture
         uvs = new float[]{
-                0.0f, 0.0f,
-                0.0f, 1.0f,
-                1.0f, 1.0f,
-                1.0f, 0.0f
+            0.0f, 0.0f,
+            0.0f, 1.0f,
+            1.0f, 1.0f,
+            1.0f, 0.0f
         };
 
         // The texture buffer

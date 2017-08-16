@@ -190,7 +190,7 @@ public class OpenGLRenderer implements Renderer {
         this.screenWidth = width;
         this.screenHeight = height;
 
-        // Redo the Viewport, making it fullscreen.
+        //make the viewport fullscreen
         GLES20.glViewport(0, 0, (int)screenWidth, (int)screenHeight);
 
         // Clear our matrices
@@ -201,8 +201,8 @@ public class OpenGLRenderer implements Renderer {
             mtrxProjectionAndView[i] = 0.0f;
         }
 
-        // Setup our screen width and height for normal sprite translation.
-        Matrix.orthoM(mtrxProjection, 0, 0f, screenWidth, screenHeight, 0f, 0, 50f);
+        //setup our screen width and height for normal sprite translation.
+        Matrix.orthoM(mtrxProjection, 0, 0f, screenWidth, screenHeight, 0f, 0f, 50f);
 
         // Set the camera position (View matrix)
         Matrix.setLookAtM(mtrxView, 0, 0f, 0f, 1f, 0f, 0f, 0f, 0f, 1.0f, 0.0f);

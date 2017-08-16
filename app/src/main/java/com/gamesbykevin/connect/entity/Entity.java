@@ -6,6 +6,7 @@ import android.graphics.RectF;
 import com.gamesbykevin.androidframeworkv2.base.Cell;
 
 import static com.gamesbykevin.connect.opengl.OpenGLSurfaceView.HEIGHT;
+import static com.gamesbykevin.connect.shape.CustomShape.ANGLE_MAX;
 
 
 /**
@@ -91,6 +92,10 @@ public class Entity extends Cell {
      */
     public void setAngle(final float angle) {
         this.angle = angle;
+
+        //keep angle within range
+        if (getAngle() > ANGLE_MAX)
+            setAngle(getAngle() - ANGLE_MAX);
     }
 
     /**
@@ -251,18 +256,18 @@ public class Entity extends Cell {
 
     public float[] getTransformedVertices()
     {
-        // Start with scaling
+        //start scaling the coordinates
         float x1 = getBase().left * scale;
         float x2 = getBase().right * scale;
-        float y1 = getBase().bottom * scale;
-        float y2 = getBase().top * scale;
+        float y2 = getBase().bottom * scale;
+        float y1 = getBase().top * scale;
 
         //we now detach from our Rect because when rotating,
         //we need the separate points, so we do so in open gl order
-        nw.x = x1; nw.y = y2;
-        sw.x = x1; sw.y = y1;
-        se.x = x2; se.y = y1;
-        ne.x = x2; ne.y = y2;
+        nw.x = x1; nw.y = y1;
+        sw.x = x1; sw.y = y2;
+        se.x = x2; se.y = y2;
+        ne.x = x2; ne.y = y1;
 
         double radians = Math.toRadians(getAngle());
 
@@ -289,6 +294,19 @@ public class Entity extends Cell {
         ne.x += x; ne.y += y;
 
         //update our vertices with the new coordinates
+
+        /*
+        this.vertices[0] = nw.x; this.vertices[1] = nw.y; this.vertices[2] = 0.0f;
+        this.vertices[3] = ne.x; this.vertices[4] = ne.y; this.vertices[5] = 0.0f;
+        this.vertices[6] = se.x; this.vertices[7] = se.y; this.vertices[8] = 0.0f;
+        this.vertices[9] = sw.x; this.vertices[10] = sw.y; this.vertices[11] = 0.0f;
+        */
+        /*
+        this.vertices[0] = ne.x; this.vertices[1] = ne.y; this.vertices[2] = 0.0f;
+        this.vertices[3] = se.x; this.vertices[4] = se.y; this.vertices[5] = 0.0f;
+        this.vertices[6] = sw.x; this.vertices[7] = sw.y; this.vertices[8] = 0.0f;
+        this.vertices[9] = nw.x; this.vertices[10] = nw.y; this.vertices[11] = 0.0f;
+        */
         this.vertices[0] = nw.x; this.vertices[1] = nw.y; this.vertices[2] = 0.0f;
         this.vertices[3] = sw.x; this.vertices[4] = sw.y; this.vertices[5] = 0.0f;
         this.vertices[6] = se.x; this.vertices[7] = se.y; this.vertices[8] = 0.0f;

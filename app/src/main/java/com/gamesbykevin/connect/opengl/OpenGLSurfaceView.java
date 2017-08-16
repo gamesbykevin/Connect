@@ -64,14 +64,14 @@ public class OpenGLSurfaceView extends GLSurfaceView implements Runnable {
     private long postDraw;
 
     /**
-     * The duration of each frame (milliseconds)
-     */
-    public static final long FRAME_DURATION = (long)(1000.0d / FPS);
-
-    /**
      * How many milliseconds per second
      */
     public static final long MILLISECONDS_PER_SECOND = 1000L;
+
+    /**
+     * The duration of each frame (milliseconds)
+     */
+    public static final long FRAME_DURATION = (long)(MILLISECONDS_PER_SECOND / FPS);
 
     //count the number of frames for debugging purposes
     private int frames = 0;

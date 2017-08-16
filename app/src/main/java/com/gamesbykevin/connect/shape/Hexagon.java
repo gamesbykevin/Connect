@@ -446,6 +446,7 @@ public class Hexagon extends CustomShape {
 
     @Override
     public void rotateFinish() {
+
         //stop rotating
         setRotate(false);
 
