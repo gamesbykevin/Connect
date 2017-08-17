@@ -15,7 +15,6 @@ import static com.gamesbykevin.connect.game.GameHelper.getEntity;
 /**
  * Created by Kevin on 8/13/2017.
  */
-
 public class Square {
 
     public static float vertices[];
@@ -25,6 +24,7 @@ public class Square {
     public ShortBuffer drawListBuffer;
     public FloatBuffer uvBuffer;
 
+    //current texture id
     private int textureId;
 
     public Square() {
@@ -32,10 +32,14 @@ public class Square {
         setupTriangle();
     }
 
+    private int getTextureId() {
+        return this.textureId;
+    }
+
     private void setupImage() {
 
         //create our UV coordinates meaning we are going to render the entire texture
-        uvs = new float[]{
+        uvs = new float[] {
             0.0f, 0.0f,
             0.0f, 1.0f,
             1.0f, 1.0f,
@@ -63,9 +67,29 @@ public class Square {
         drawListBuffer.position(0);
     }
 
+    private void update(CustomShape shape) {
+
+        //if rotating update vertices
+        if (shape.hasRotate())
+            shape.updateVertices();
+
+        //return cached array to improve performance
+        this.vertices = shape.getVertices();
+
+        // The vertex buffer.
+        ByteBuffer bb = ByteBuffer.allocateDirect(vertices.length * 4);
+        bb.order(ByteOrder.nativeOrder());
+        vertexBuffer = bb.asFloatBuffer();
+        vertexBuffer.put(vertices);
+        vertexBuffer.position(0);
+
+        //also update the texture id
+        this.textureId = shape.getTextureId();
+    }
+
     private void update(Entity entity) {
 
-        // Get information of sprite.
+        //calculate vertices
         this.vertices = entity.getTransformedVertices();
 
         // The vertex buffer.
@@ -79,23 +103,9 @@ public class Square {
         this.textureId = entity.getTextureId();
     }
 
-    private int getTextureId() {
-        return this.textureId;
-    }
-
     public void render(final CustomShape shape, final float[] m) {
-
-        //store the current angle rotation
-        final float angle = shape.getAngle();
-
-        //offset for the pipe animation
-        shape.setAngle(angle + shape.getAnglePipe());
-
         update(shape);
         render(m);
-
-        //restore the angle
-        shape.setAngle(angle);
     }
 
     public void render(final Entity entity, final float[] m) {

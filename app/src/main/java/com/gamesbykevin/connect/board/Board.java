@@ -16,7 +16,6 @@ import static com.gamesbykevin.connect.activity.GameActivity.getRandomObject;
 import static com.gamesbykevin.connect.board.BoardHelper.checkBoard;
 import static com.gamesbykevin.connect.game.Game.AUTO_ROTATE;
 import static com.gamesbykevin.connect.game.GameHelper.getSquare;
-import static com.gamesbykevin.connect.opengl.OpenGLSurfaceView.HEIGHT;
 
 /**
  * Created by Kevin on 8/1/2017.
@@ -37,8 +36,8 @@ public class Board implements ICommon {
 
     private Entity entity = new Entity();
 
-    public static final int BOARD_COLS = 3;
-    public static final int BOARD_ROWS = 3;
+    public static final int BOARD_COLS = 10;
+    public static final int BOARD_ROWS = 10;
 
     //base point that we will mark connected
     public static final int ANCHOR_COL = (BOARD_COLS / 2);
@@ -135,7 +134,7 @@ public class Board implements ICommon {
 
         //assign x, y coordinates
         tmp.setX(x);
-        tmp.setY(HEIGHT - y);
+        tmp.setY(y);
 
         //mark the anchor shape as connected
         if (col == ANCHOR_COL && row == ANCHOR_ROW)
@@ -166,6 +165,9 @@ public class Board implements ICommon {
             tmp.rotateFinish();
             rotations++;
         }
+
+        //calculate vertices, so it is cached at first
+        tmp.updateVertices();
 
         //assign shape in array
         getShapes()[row][col] = tmp;

@@ -5,10 +5,6 @@ import android.graphics.RectF;
 
 import com.gamesbykevin.androidframeworkv2.base.Cell;
 
-import static com.gamesbykevin.connect.opengl.OpenGLSurfaceView.HEIGHT;
-import static com.gamesbykevin.connect.shape.CustomShape.ANGLE_MAX;
-
-
 /**
  * Created by Kevin on 8/1/2017.
  */
@@ -39,7 +35,7 @@ public class Entity extends Cell {
     private PointF nw = new PointF(), ne = new PointF(), sw = new PointF(), se = new PointF();
 
     //the vertices of our entity
-    private float[] vertices = new float[12];;
+    private float[] vertices = new float[12];
 
     /**
      * Default constructor
@@ -60,6 +56,10 @@ public class Entity extends Cell {
 
         //start rotation
         setAngle(0f);
+    }
+
+    private PointF getTranslation() {
+        return this.translation;
     }
 
     private RectF getBase() {
@@ -92,10 +92,6 @@ public class Entity extends Cell {
      */
     public void setAngle(final float angle) {
         this.angle = angle;
-
-        //keep angle within range
-        if (getAngle() > ANGLE_MAX)
-            setAngle(getAngle() - ANGLE_MAX);
     }
 
     /**
@@ -162,7 +158,7 @@ public class Entity extends Cell {
      */
     public void setX(final float x)
     {
-        this.translation.x = x;
+        getTranslation().x = x;
     }
 
     /**
@@ -171,7 +167,7 @@ public class Entity extends Cell {
      */
     public void setY(final float y)
     {
-        this.translation.y = y;
+        getTranslation().y = y;
     }
 
     /**
@@ -180,7 +176,7 @@ public class Entity extends Cell {
      */
     public float getX()
     {
-        return this.translation.x;
+        return getTranslation().x;
     }
 
     /**
@@ -189,7 +185,7 @@ public class Entity extends Cell {
      */
     public float getY()
     {
-        return this.translation.y;
+        return getTranslation().y;
     }
 
     /**
@@ -207,7 +203,7 @@ public class Entity extends Cell {
      */
     public float getHeight()
     {
-        return (getBase().top - getBase().bottom);
+        return (getBase().bottom - getBase().top);
     }
 
     /**
@@ -250,69 +246,62 @@ public class Entity extends Cell {
         float half = (h / 2);
 
         //update the rectangle coordinates
-        getBase().top = half;
-        getBase().bottom = -half;
+        getBase().top = -half;
+        getBase().bottom = half;
     }
 
-    public float[] getTransformedVertices()
-    {
-        //start scaling the coordinates
-        float x1 = getBase().left * scale;
-        float x2 = getBase().right * scale;
-        float y2 = getBase().bottom * scale;
-        float y1 = getBase().top * scale;
+    public float[] getVertices() {
+        return this.vertices;
+    }
 
-        //we now detach from our Rect because when rotating,
-        //we need the separate points, so we do so in open gl order
-        nw.x = x1; nw.y = y1;
-        sw.x = x1; sw.y = y2;
-        se.x = x2; se.y = y2;
-        ne.x = x2; ne.y = y1;
+    public float[] getTransformedVertices() {
 
+        //start scaling
+        float x1 = getBase().left * getScale();
+        float x2 = getBase().right * getScale();
+        float y1 = getBase().bottom * getScale();
+        float y2 = getBase().top * getScale();
+
+        //now we need to detach from the points so we can start rotating
+        nw.x = x1; nw.y = y2;
+        sw.x = x1; sw.y = y1;
+        se.x = x2; se.y = y1;
+        ne.x = x2; ne.y = y2;
+
+        //convert to radians
         double radians = Math.toRadians(getAngle());
 
-        //we create the sin and cos function once, so we do not have calculate them each time.
+        //calculate this once, so we don't have to do it every time
         float s = (float) Math.sin(radians);
         float c = (float) Math.cos(radians);
-        //float s = (float) Math.sin(getAngle());
-        //float c = (float) Math.cos(getAngle());
 
         //rotate each point
-        nw.x = x1 * c - y2 * s; nw.y = x1 * s + y2 * c;
-        sw.x = x1 * c - y1 * s; sw.y = x1 * s + y1 * c;
-        se.x = x2 * c - y1 * s; se.y = x2 * s + y1 * c;
-        ne.x = x2 * c - y2 * s; ne.y = x2 * s + y2 * c;
+        nw.x = x1 * c - y2 * s;
+        nw.y = x1 * s + y2 * c;
+        sw.x = x1 * c - y1 * s;
+        sw.y = x1 * s + y1 * c;
+        se.x = x2 * c - y1 * s;
+        se.y = x2 * s + y1 * c;
+        ne.x = x2 * c - y2 * s;
+        ne.y = x2 * s + y2 * c;
 
-        //offset translation coordinates to make this easier
-        final float x = (getWidth() / 2) + translation.x;
-        final float y = (getHeight() / 2) + translation.y;
+        //offset so we are back at the designated location
+        float tmpX = (getWidth() / 2) + getTranslation().x;
+        float tmpY = (getHeight() / 2) + getTranslation().y;
 
-        //translate the entity to its correct position.
-        nw.x += x; nw.y += y;
-        sw.x += x; sw.y += y;
-        se.x += x; se.y += y;
-        ne.x += x; ne.y += y;
+        //now translate all 4 locations to the correct location
+        nw.x += tmpX; nw.y += tmpY;
+        sw.x += tmpX; sw.y += tmpY;
+        se.x += tmpX; se.y += tmpY;
+        ne.x += tmpX; ne.y += tmpY;
 
         //update our vertices with the new coordinates
-
-        /*
-        this.vertices[0] = nw.x; this.vertices[1] = nw.y; this.vertices[2] = 0.0f;
-        this.vertices[3] = ne.x; this.vertices[4] = ne.y; this.vertices[5] = 0.0f;
-        this.vertices[6] = se.x; this.vertices[7] = se.y; this.vertices[8] = 0.0f;
-        this.vertices[9] = sw.x; this.vertices[10] = sw.y; this.vertices[11] = 0.0f;
-        */
-        /*
-        this.vertices[0] = ne.x; this.vertices[1] = ne.y; this.vertices[2] = 0.0f;
-        this.vertices[3] = se.x; this.vertices[4] = se.y; this.vertices[5] = 0.0f;
-        this.vertices[6] = sw.x; this.vertices[7] = sw.y; this.vertices[8] = 0.0f;
-        this.vertices[9] = nw.x; this.vertices[10] = nw.y; this.vertices[11] = 0.0f;
-        */
-        this.vertices[0] = nw.x; this.vertices[1] = nw.y; this.vertices[2] = 0.0f;
-        this.vertices[3] = sw.x; this.vertices[4] = sw.y; this.vertices[5] = 0.0f;
-        this.vertices[6] = se.x; this.vertices[7] = se.y; this.vertices[8] = 0.0f;
-        this.vertices[9] = ne.x; this.vertices[10] = ne.y; this.vertices[11] = 0.0f;
+        getVertices()[0] = nw.x; getVertices()[1] = nw.y;  getVertices()[2] = 0.0f;
+        getVertices()[3] = sw.x; getVertices()[4] = sw.y;  getVertices()[5] = 0.0f;
+        getVertices()[6] = se.x; getVertices()[7] = se.y;  getVertices()[8] = 0.0f;
+        getVertices()[9] = ne.x; getVertices()[10] = ne.y; getVertices()[11] = 0.0f;
 
         //return our calculated vertices
-        return this.vertices;
+        return getVertices();
     }
 }

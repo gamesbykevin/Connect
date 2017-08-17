@@ -280,6 +280,24 @@ public abstract class CustomShape extends Entity implements ICustomShape {
         setDestinationAngle(getAngle() + ROTATION_ANGLE);
     }
 
+    /**
+     * Update the vertices based on the combined current angle and pipe angle
+     */
+    public void updateVertices() {
+
+        //get angle
+        float angle = getAngle();
+
+        //offset angle for pipe
+        setAngle(getAngle() + getAnglePipe());
+
+        //update vertices
+        super.getTransformedVertices();
+
+        //restore angle
+        setAngle(angle);
+    }
+
     @Override
     public void update(GameActivity activity) {
 
@@ -291,6 +309,9 @@ public abstract class CustomShape extends Entity implements ICustomShape {
 
                 //stop rotating
                 rotateFinish();
+
+                //make sure vertices are correct
+                updateVertices();
 
             } else {
 
