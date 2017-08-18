@@ -66,34 +66,39 @@ public class Square {
         drawListBuffer.position(0);
     }
 
+    private void setupVertices(float[] vertices) {
+
+        //assign array
+        this.vertices = vertices;
+
+        // The vertex buffer.
+        ByteBuffer bb = ByteBuffer.allocateDirect(this.vertices.length * 4);
+        bb.order(ByteOrder.nativeOrder());
+        vertexBuffer = bb.asFloatBuffer();
+        vertexBuffer.put(this.vertices);
+        vertexBuffer.position(0);
+    }
+
     private void update(CustomShape shape) {
 
         //if rotating update vertices
         if (shape.hasRotate())
             shape.updateVertices();
 
-        //return cached array to improve performance
-        this.vertices = shape.getVertices();
+        //assign the texture atlas coordinates
+        setupImage(shape.getTextureCoordinates());
 
-        // The vertex buffer.
-        ByteBuffer bb = ByteBuffer.allocateDirect(vertices.length * 4);
-        bb.order(ByteOrder.nativeOrder());
-        vertexBuffer = bb.asFloatBuffer();
-        vertexBuffer.put(vertices);
-        vertexBuffer.position(0);
+        //return cached array to improve performance
+        setupVertices(shape.getVertices());
     }
 
     private void update(Entity entity) {
 
-        //calculate vertices
-        this.vertices = entity.getTransformedVertices();
+        //assign default texture atlas coordinates
+        setupImage();
 
-        // The vertex buffer.
-        ByteBuffer bb = ByteBuffer.allocateDirect(vertices.length * 4);
-        bb.order(ByteOrder.nativeOrder());
-        vertexBuffer = bb.asFloatBuffer();
-        vertexBuffer.put(vertices);
-        vertexBuffer.position(0);
+        //calculate vertices
+        setupVertices(entity.getTransformedVertices());
     }
 
     public void render(final CustomShape shape, final float[] m) {

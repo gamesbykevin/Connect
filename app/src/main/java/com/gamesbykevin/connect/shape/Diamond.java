@@ -1,21 +1,9 @@
 package com.gamesbykevin.connect.shape;
 
 import com.gamesbykevin.androidframeworkv2.maze.Room;
-import com.gamesbykevin.connect.activity.GameActivity;
-import com.gamesbykevin.connect.opengl.Textures;
 
-import javax.microedition.khronos.opengles.GL10;
-
-import static com.gamesbykevin.connect.opengl.Textures.TEXTURE_ID_DIAMOND_GRAY_PIPE_END;
-import static com.gamesbykevin.connect.opengl.Textures.TEXTURE_ID_DIAMOND_GRAY_PIPE_NS;
-import static com.gamesbykevin.connect.opengl.Textures.TEXTURE_ID_DIAMOND_GRAY_PIPE_NSEW;
-import static com.gamesbykevin.connect.opengl.Textures.TEXTURE_ID_DIAMOND_GRAY_PIPE_SE;
-import static com.gamesbykevin.connect.opengl.Textures.TEXTURE_ID_DIAMOND_GRAY_PIPE_WES;
-import static com.gamesbykevin.connect.opengl.Textures.TEXTURE_ID_DIAMOND_GREEN_PIPE_END;
-import static com.gamesbykevin.connect.opengl.Textures.TEXTURE_ID_DIAMOND_GREEN_PIPE_NS;
-import static com.gamesbykevin.connect.opengl.Textures.TEXTURE_ID_DIAMOND_GREEN_PIPE_NSEW;
-import static com.gamesbykevin.connect.opengl.Textures.TEXTURE_ID_DIAMOND_GREEN_PIPE_SE;
-import static com.gamesbykevin.connect.opengl.Textures.TEXTURE_ID_DIAMOND_GREEN_PIPE_WES;
+import static com.gamesbykevin.connect.opengl.Textures.TEXTURE_DIAMOND_COLS;
+import static com.gamesbykevin.connect.opengl.Textures.TEXTURE_DIAMOND_ROWS;
 
 /**
  * Created by Kevin on 8/5/2017.
@@ -53,45 +41,65 @@ public class Diamond extends CustomShape {
     }
 
     @Override
-    public void assignTextureIdPipe() {
+    public void assignTextureCoordinates() {
+
+        //the location of each
+        int column;
+        int rowGray = 1, rowGreen = 0;
+
         if (hasNorth() && !hasSouth() && !hasEast() && !hasWest()) { //n
-            setTextureIdPipeGray(TEXTURE_ID_DIAMOND_GRAY_PIPE_END);
-            setTextureIdPipeGreen(TEXTURE_ID_DIAMOND_GREEN_PIPE_END);
+            column = 0;
         } else if (!hasNorth() && hasSouth() && !hasEast() && !hasWest()) { //s
-            setTextureIdPipeGray(TEXTURE_ID_DIAMOND_GRAY_PIPE_END);
-            setTextureIdPipeGreen(TEXTURE_ID_DIAMOND_GREEN_PIPE_END);
+            column = 0;
         } else if (!hasNorth() && !hasSouth() && hasEast() && !hasWest()) { //e
-            setTextureIdPipeGray(TEXTURE_ID_DIAMOND_GRAY_PIPE_END);
-            setTextureIdPipeGreen(TEXTURE_ID_DIAMOND_GREEN_PIPE_END);
+            column = 0;
         } else if (!hasNorth() && !hasSouth() && !hasEast() && hasWest()) { //w
-            setTextureIdPipeGray(TEXTURE_ID_DIAMOND_GRAY_PIPE_END);
-            setTextureIdPipeGreen(TEXTURE_ID_DIAMOND_GREEN_PIPE_END);
+            column = 0;
         } else if (hasNorth() && !hasSouth() && hasEast() && !hasWest()) { //ne
-            setTextureIdPipeGray(TEXTURE_ID_DIAMOND_GRAY_PIPE_SE);
-            setTextureIdPipeGreen(TEXTURE_ID_DIAMOND_GREEN_PIPE_SE);
+            column = 3;
         } else if (hasNorth() && !hasSouth() && !hasEast() && hasWest()) { //nw
-            setTextureIdPipeGray(TEXTURE_ID_DIAMOND_GRAY_PIPE_SE);
-            setTextureIdPipeGreen(TEXTURE_ID_DIAMOND_GREEN_PIPE_SE);
+            column = 3;
         } else if (!hasNorth() && hasSouth() && hasEast() && !hasWest()) { //se
-            setTextureIdPipeGray(TEXTURE_ID_DIAMOND_GRAY_PIPE_SE);
-            setTextureIdPipeGreen(TEXTURE_ID_DIAMOND_GREEN_PIPE_SE);
+            column = 3;
         } else if (!hasNorth() && hasSouth() && !hasEast() && hasWest()) { //sw
-            setTextureIdPipeGray(TEXTURE_ID_DIAMOND_GRAY_PIPE_SE);
-            setTextureIdPipeGreen(TEXTURE_ID_DIAMOND_GREEN_PIPE_SE);
+            column = 3;
         } else if (hasNorth() && hasSouth() && !hasEast() && !hasWest()) { //ns
-            setTextureIdPipeGray(TEXTURE_ID_DIAMOND_GRAY_PIPE_NS);
-            setTextureIdPipeGreen(TEXTURE_ID_DIAMOND_GREEN_PIPE_NS);
+            column = 1;
         } else if (!hasNorth() && !hasSouth() && hasEast() && hasWest()) { //we
-            setTextureIdPipeGray(TEXTURE_ID_DIAMOND_GRAY_PIPE_NS);
-            setTextureIdPipeGreen(TEXTURE_ID_DIAMOND_GREEN_PIPE_NS);
+            column = 1;
         } else if (hasNorth() && hasSouth() && hasEast() && hasWest()) { //nsew
-            setTextureIdPipeGray(TEXTURE_ID_DIAMOND_GRAY_PIPE_NSEW);
-            setTextureIdPipeGreen(TEXTURE_ID_DIAMOND_GREEN_PIPE_NSEW);
+            column = 2;
         } else {
             //NSW, NSE, WEN, WES
-            setTextureIdPipeGray(TEXTURE_ID_DIAMOND_GRAY_PIPE_WES);
-            setTextureIdPipeGreen(TEXTURE_ID_DIAMOND_GREEN_PIPE_WES);
+            column = 4;
         }
+
+        //now create the uvs coordinates;
+        float[] uvsGray = null;
+        float[] uvsGreen = null;
+
+        if (getTextureCoordinatesGray() == null)
+            uvsGray = new float[8];
+        if (getTextureCoordinatesGreen() == null)
+            uvsGreen = new float[8];
+
+        final float startCol = (float)column / TEXTURE_DIAMOND_COLS;
+        float startRow = (float)rowGray / TEXTURE_DIAMOND_ROWS;
+        final float width = 1.0f / TEXTURE_DIAMOND_COLS;
+        final float height = 1.0f / TEXTURE_DIAMOND_ROWS;
+
+        uvsGray[0] = startCol; uvsGray[1] = startRow;
+        uvsGray[2] = startCol; uvsGray[3] = startRow + height;
+        uvsGray[4] = startCol + width; uvsGray[5] = startRow + height;
+        uvsGray[6] = startCol + width; uvsGray[7] = startRow;
+        super.setTextureCoordinatesGray(uvsGray);
+
+        startRow = (float)rowGreen / TEXTURE_DIAMOND_ROWS;
+        uvsGreen[0] = startCol; uvsGreen[1] = startRow;
+        uvsGreen[2] = startCol; uvsGreen[3] = startRow + height;
+        uvsGreen[4] = startCol + width; uvsGreen[5] = startRow + height;
+        uvsGreen[6] = startCol + width; uvsGreen[7] = startRow;
+        super.setTextureCoordinatesGreen(uvsGreen);
     }
 
     @Override

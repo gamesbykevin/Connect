@@ -2,22 +2,7 @@ package com.gamesbykevin.connect.shape;
 
 import com.gamesbykevin.androidframeworkv2.maze.Room;
 import com.gamesbykevin.androidframeworkv2.maze.Room.Wall;
-import com.gamesbykevin.connect.activity.GameActivity;
-import com.gamesbykevin.connect.board.Board;
-import com.gamesbykevin.connect.opengl.Textures;
 
-import javax.microedition.khronos.opengles.GL10;
-
-import static com.gamesbykevin.connect.opengl.Textures.TEXTURE_ID_SQUARE_GRAY_PIPE_END;
-import static com.gamesbykevin.connect.opengl.Textures.TEXTURE_ID_SQUARE_GRAY_PIPE_NS;
-import static com.gamesbykevin.connect.opengl.Textures.TEXTURE_ID_SQUARE_GRAY_PIPE_NSEW;
-import static com.gamesbykevin.connect.opengl.Textures.TEXTURE_ID_SQUARE_GRAY_PIPE_SE;
-import static com.gamesbykevin.connect.opengl.Textures.TEXTURE_ID_SQUARE_GRAY_PIPE_WES;
-import static com.gamesbykevin.connect.opengl.Textures.TEXTURE_ID_SQUARE_GREEN_PIPE_END;
-import static com.gamesbykevin.connect.opengl.Textures.TEXTURE_ID_SQUARE_GREEN_PIPE_NS;
-import static com.gamesbykevin.connect.opengl.Textures.TEXTURE_ID_SQUARE_GREEN_PIPE_NSEW;
-import static com.gamesbykevin.connect.opengl.Textures.TEXTURE_ID_SQUARE_GREEN_PIPE_SE;
-import static com.gamesbykevin.connect.opengl.Textures.TEXTURE_ID_SQUARE_GREEN_PIPE_WES;
 import static com.gamesbykevin.connect.opengl.Textures.TEXTURE_SQUARE_COLS;
 import static com.gamesbykevin.connect.opengl.Textures.TEXTURE_SQUARE_ROWS;
 
@@ -99,20 +84,23 @@ public class Square extends CustomShape {
         if (getTextureCoordinatesGreen() == null)
             uvsGreen = new float[8];
 
-        //south west
-        uvsGray[0] = column; uvsGray[1] = rowGray;
+        final float startCol = (float)column / TEXTURE_SQUARE_COLS;
+        float startRow = (float)rowGray / TEXTURE_SQUARE_ROWS;
+        final float width = 1.0f / TEXTURE_SQUARE_COLS;
+        final float height = 1.0f / TEXTURE_SQUARE_ROWS;
 
-        //north west
-        uvsGray[1] = column; uvsGray[2] = (float)rowGray / (float)TEXTURE_SQUARE_ROWS;
+        uvsGray[0] = startCol; uvsGray[1] = startRow;
+        uvsGray[2] = startCol; uvsGray[3] = startRow + height;
+        uvsGray[4] = startCol + width; uvsGray[5] = startRow + height;
+        uvsGray[6] = startCol + width; uvsGray[7] = startRow;
+        super.setTextureCoordinatesGray(uvsGray);
 
-        //north east
-        uvsGray[3] = (float)column / (float)TEXTURE_SQUARE_COLS; uvsGray[4] = ;
-
-        0.0f, 0.0f,
-                0.0f, 1.0f,
-                1.0f, 1.0f,
-                1.0f, 0.0f
-
+        startRow = (float)rowGreen / TEXTURE_SQUARE_ROWS;
+        uvsGreen[0] = startCol; uvsGreen[1] = startRow;
+        uvsGreen[2] = startCol; uvsGreen[3] = startRow + height;
+        uvsGreen[4] = startCol + width; uvsGreen[5] = startRow + height;
+        uvsGreen[6] = startCol + width; uvsGreen[7] = startRow;
+        super.setTextureCoordinatesGreen(uvsGreen);
     }
 
     @Override

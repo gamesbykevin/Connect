@@ -2,34 +2,9 @@ package com.gamesbykevin.connect.shape;
 
 import com.gamesbykevin.androidframeworkv2.maze.Room;
 import com.gamesbykevin.androidframeworkv2.maze.Room.Wall;
-import com.gamesbykevin.connect.opengl.Textures;
 
-import static com.gamesbykevin.connect.opengl.Textures.TEXTURE_ID_HEXAGON_GRAY_PIPE_END;
-import static com.gamesbykevin.connect.opengl.Textures.TEXTURE_ID_HEXAGON_GRAY_PIPE_NE_E;
-import static com.gamesbykevin.connect.opengl.Textures.TEXTURE_ID_HEXAGON_GRAY_PIPE_NE_E_SE;
-import static com.gamesbykevin.connect.opengl.Textures.TEXTURE_ID_HEXAGON_GRAY_PIPE_NE_E_SE_SW;
-import static com.gamesbykevin.connect.opengl.Textures.TEXTURE_ID_HEXAGON_GRAY_PIPE_NE_E_SE_SW_W;
-import static com.gamesbykevin.connect.opengl.Textures.TEXTURE_ID_HEXAGON_GRAY_PIPE_NE_E_SW;
-import static com.gamesbykevin.connect.opengl.Textures.TEXTURE_ID_HEXAGON_GRAY_PIPE_NE_E_W;
-import static com.gamesbykevin.connect.opengl.Textures.TEXTURE_ID_HEXAGON_GRAY_PIPE_NE_SE;
-import static com.gamesbykevin.connect.opengl.Textures.TEXTURE_ID_HEXAGON_GRAY_PIPE_NE_SW;
-import static com.gamesbykevin.connect.opengl.Textures.TEXTURE_ID_HEXAGON_GRAY_PIPE_NE_W;
-import static com.gamesbykevin.connect.opengl.Textures.TEXTURE_ID_HEXAGON_GRAY_PIPE_NW_E_SW;
-import static com.gamesbykevin.connect.opengl.Textures.TEXTURE_ID_HEXAGON_GRAY_PIPE_NW_NE_E_SW;
-import static com.gamesbykevin.connect.opengl.Textures.TEXTURE_ID_HEXAGON_GRAY_PIPE_NW_NE_SE_SW;
-import static com.gamesbykevin.connect.opengl.Textures.TEXTURE_ID_HEXAGON_GREEN_PIPE_END;
-import static com.gamesbykevin.connect.opengl.Textures.TEXTURE_ID_HEXAGON_GREEN_PIPE_NE_E;
-import static com.gamesbykevin.connect.opengl.Textures.TEXTURE_ID_HEXAGON_GREEN_PIPE_NE_E_SE;
-import static com.gamesbykevin.connect.opengl.Textures.TEXTURE_ID_HEXAGON_GREEN_PIPE_NE_E_SE_SW;
-import static com.gamesbykevin.connect.opengl.Textures.TEXTURE_ID_HEXAGON_GREEN_PIPE_NE_E_SE_SW_W;
-import static com.gamesbykevin.connect.opengl.Textures.TEXTURE_ID_HEXAGON_GREEN_PIPE_NE_E_SW;
-import static com.gamesbykevin.connect.opengl.Textures.TEXTURE_ID_HEXAGON_GREEN_PIPE_NE_E_W;
-import static com.gamesbykevin.connect.opengl.Textures.TEXTURE_ID_HEXAGON_GREEN_PIPE_NE_SE;
-import static com.gamesbykevin.connect.opengl.Textures.TEXTURE_ID_HEXAGON_GREEN_PIPE_NE_SW;
-import static com.gamesbykevin.connect.opengl.Textures.TEXTURE_ID_HEXAGON_GREEN_PIPE_NE_W;
-import static com.gamesbykevin.connect.opengl.Textures.TEXTURE_ID_HEXAGON_GREEN_PIPE_NW_E_SW;
-import static com.gamesbykevin.connect.opengl.Textures.TEXTURE_ID_HEXAGON_GREEN_PIPE_NW_NE_E_SW;
-import static com.gamesbykevin.connect.opengl.Textures.TEXTURE_ID_HEXAGON_GREEN_PIPE_NW_NE_SE_SW;
+import static com.gamesbykevin.connect.opengl.Textures.TEXTURE_HEXAGON_COLS;
+import static com.gamesbykevin.connect.opengl.Textures.TEXTURE_HEXAGON_ROWS;
 
 /**
  * Created by Kevin on 8/5/2017.
@@ -67,217 +42,180 @@ public class Hexagon extends CustomShape {
     }
 
     @Override
-    public void assignTextureIdPipe() {
+    public void assignTextureCoordinates() {
+
+        //the location of each
+        int column;
+        int rowGray = 1, rowGreen = 0;
+
         if (hasNorthWest() && hasNorthEast() && hasEast() && hasSouthEast() && hasSouthWest() && hasWest()) {
-            setTextureIdPipeGray(Textures.TEXTURE_ID_HEXAGON_GRAY_PIPE_ALL);
-            setTextureIdPipeGreen(Textures.TEXTURE_ID_HEXAGON_GREEN_PIPE_ALL);
+            column = 0;
         } else if (!hasNorthWest() && hasNorthEast() && !hasEast() && !hasSouthEast() && !hasSouthWest() && !hasWest()) {
-            setTextureIdPipeGray(TEXTURE_ID_HEXAGON_GRAY_PIPE_END);
-            setTextureIdPipeGreen(TEXTURE_ID_HEXAGON_GREEN_PIPE_END);
+            column = 1;
         } else if (!hasNorthWest() && !hasNorthEast() && hasEast() && !hasSouthEast() && !hasSouthWest() && !hasWest()) {
-            setTextureIdPipeGray(TEXTURE_ID_HEXAGON_GRAY_PIPE_END);
-            setTextureIdPipeGreen(TEXTURE_ID_HEXAGON_GREEN_PIPE_END);
+            column = 1;
         } else if (!hasNorthWest() && !hasNorthEast() && !hasEast() && hasSouthEast() && !hasSouthWest() && !hasWest()) {
-            setTextureIdPipeGray(TEXTURE_ID_HEXAGON_GRAY_PIPE_END);
-            setTextureIdPipeGreen(TEXTURE_ID_HEXAGON_GREEN_PIPE_END);
+            column = 1;
         } else if (!hasNorthWest() && !hasNorthEast() && !hasEast() && !hasSouthEast() && hasSouthWest() && !hasWest()) {
-            setTextureIdPipeGray(TEXTURE_ID_HEXAGON_GRAY_PIPE_END);
-            setTextureIdPipeGreen(TEXTURE_ID_HEXAGON_GREEN_PIPE_END);
+            column = 1;
         } else if (!hasNorthWest() && !hasNorthEast() && !hasEast() && !hasSouthEast() && !hasSouthWest() && hasWest()) {
-            setTextureIdPipeGray(TEXTURE_ID_HEXAGON_GRAY_PIPE_END);
-            setTextureIdPipeGreen(TEXTURE_ID_HEXAGON_GREEN_PIPE_END);
+            column = 1;
         } else if (hasNorthWest() && !hasNorthEast() && !hasEast() && !hasSouthEast() && !hasSouthWest() && !hasWest()) {
-            setTextureIdPipeGray(TEXTURE_ID_HEXAGON_GRAY_PIPE_END);
-            setTextureIdPipeGreen(TEXTURE_ID_HEXAGON_GREEN_PIPE_END);
+            column = 1;
         } else if (!hasNorthWest() && hasNorthEast() && hasEast() && !hasSouthEast() && !hasSouthWest() && !hasWest()) {
-            setTextureIdPipeGray(TEXTURE_ID_HEXAGON_GRAY_PIPE_NE_E);
-            setTextureIdPipeGreen(TEXTURE_ID_HEXAGON_GREEN_PIPE_NE_E);
+            column = 2;
         } else if (!hasNorthWest() && !hasNorthEast() && hasEast() && hasSouthEast() && !hasSouthWest() && !hasWest()) {
-            setTextureIdPipeGray(TEXTURE_ID_HEXAGON_GRAY_PIPE_NE_E);
-            setTextureIdPipeGreen(TEXTURE_ID_HEXAGON_GREEN_PIPE_NE_E);
+            column = 2;
         } else if (!hasNorthWest() && !hasNorthEast() && !hasEast() && hasSouthEast() && hasSouthWest() && !hasWest()) {
-            setTextureIdPipeGray(TEXTURE_ID_HEXAGON_GRAY_PIPE_NE_E);
-            setTextureIdPipeGreen(TEXTURE_ID_HEXAGON_GREEN_PIPE_NE_E);
+            column = 2;
         } else if (!hasNorthWest() && !hasNorthEast() && !hasEast() && !hasSouthEast() && hasSouthWest() && hasWest()) {
-            setTextureIdPipeGray(TEXTURE_ID_HEXAGON_GRAY_PIPE_NE_E);
-            setTextureIdPipeGreen(TEXTURE_ID_HEXAGON_GREEN_PIPE_NE_E);
+            column = 2;
         } else if (hasNorthWest() && !hasNorthEast() && !hasEast() && !hasSouthEast() && !hasSouthWest() && hasWest()) {
-            setTextureIdPipeGray(TEXTURE_ID_HEXAGON_GRAY_PIPE_NE_E);
-            setTextureIdPipeGreen(TEXTURE_ID_HEXAGON_GREEN_PIPE_NE_E);
+            column = 2;
         } else if (hasNorthWest() && hasNorthEast() && !hasEast() && !hasSouthEast() && !hasSouthWest() && !hasWest()) {
-            setTextureIdPipeGray(TEXTURE_ID_HEXAGON_GRAY_PIPE_NE_E);
-            setTextureIdPipeGreen(TEXTURE_ID_HEXAGON_GREEN_PIPE_NE_E);
+            column = 2;
         } else if (!hasNorthWest() && hasNorthEast() && hasEast() && hasSouthEast() && !hasSouthWest() && !hasWest()) {
-            setTextureIdPipeGray(TEXTURE_ID_HEXAGON_GRAY_PIPE_NE_E_SE);
-            setTextureIdPipeGreen(TEXTURE_ID_HEXAGON_GREEN_PIPE_NE_E_SE);
+            column = 3;
         } else if (!hasNorthWest() && !hasNorthEast() && hasEast() && hasSouthEast() && hasSouthWest() && !hasWest()) {
-            setTextureIdPipeGray(TEXTURE_ID_HEXAGON_GRAY_PIPE_NE_E_SE);
-            setTextureIdPipeGreen(TEXTURE_ID_HEXAGON_GREEN_PIPE_NE_E_SE);
+            column = 3;
         } else if (!hasNorthWest() && !hasNorthEast() && !hasEast() && hasSouthEast() && hasSouthWest() && hasWest()) {
-            setTextureIdPipeGray(TEXTURE_ID_HEXAGON_GRAY_PIPE_NE_E_SE);
-            setTextureIdPipeGreen(TEXTURE_ID_HEXAGON_GREEN_PIPE_NE_E_SE);
+            column = 3;
         } else if (hasNorthWest() && !hasNorthEast() && !hasEast() && !hasSouthEast() && hasSouthWest() && hasWest()) {
-            setTextureIdPipeGray(TEXTURE_ID_HEXAGON_GRAY_PIPE_NE_E_SE);
-            setTextureIdPipeGreen(TEXTURE_ID_HEXAGON_GREEN_PIPE_NE_E_SE);
+            column = 3;
         } else if (hasNorthWest() && hasNorthEast() && !hasEast() && !hasSouthEast() && !hasSouthWest() && hasWest()) {
-            setTextureIdPipeGray(TEXTURE_ID_HEXAGON_GRAY_PIPE_NE_E_SE);
-            setTextureIdPipeGreen(TEXTURE_ID_HEXAGON_GREEN_PIPE_NE_E_SE);
+            column = 3;
         } else if (hasNorthWest() && hasNorthEast() && hasEast() && !hasSouthEast() && !hasSouthWest() && !hasWest()) {
-            setTextureIdPipeGray(TEXTURE_ID_HEXAGON_GRAY_PIPE_NE_E_SE);
-            setTextureIdPipeGreen(TEXTURE_ID_HEXAGON_GREEN_PIPE_NE_E_SE);
+            column = 3;
         } else if (!hasNorthWest() && hasNorthEast() && hasEast() && hasSouthEast() && hasSouthWest() && !hasWest()) {
-            setTextureIdPipeGray(TEXTURE_ID_HEXAGON_GRAY_PIPE_NE_E_SE_SW);
-            setTextureIdPipeGreen(TEXTURE_ID_HEXAGON_GREEN_PIPE_NE_E_SE_SW);
+            column = 4;
         } else if (!hasNorthWest() && !hasNorthEast() && hasEast() && hasSouthEast() && hasSouthWest() && hasWest()) {
-            setTextureIdPipeGray(TEXTURE_ID_HEXAGON_GRAY_PIPE_NE_E_SE_SW);
-            setTextureIdPipeGreen(TEXTURE_ID_HEXAGON_GREEN_PIPE_NE_E_SE_SW);
+            column = 4;
         } else if (hasNorthWest() && !hasNorthEast() && !hasEast() && hasSouthEast() && hasSouthWest() && hasWest()) {
-            setTextureIdPipeGray(TEXTURE_ID_HEXAGON_GRAY_PIPE_NE_E_SE_SW);
-            setTextureIdPipeGreen(TEXTURE_ID_HEXAGON_GREEN_PIPE_NE_E_SE_SW);
+            column = 4;
         } else if (hasNorthWest() && hasNorthEast() && !hasEast() && !hasSouthEast() && hasSouthWest() && hasWest()) {
-            setTextureIdPipeGray(TEXTURE_ID_HEXAGON_GRAY_PIPE_NE_E_SE_SW);
-            setTextureIdPipeGreen(TEXTURE_ID_HEXAGON_GREEN_PIPE_NE_E_SE_SW);
+            column = 4;
         } else if (hasNorthWest() && hasNorthEast() && hasEast() && !hasSouthEast() && !hasSouthWest() && hasWest()) {
-            setTextureIdPipeGray(TEXTURE_ID_HEXAGON_GRAY_PIPE_NE_E_SE_SW);
-            setTextureIdPipeGreen(TEXTURE_ID_HEXAGON_GREEN_PIPE_NE_E_SE_SW);
+            column = 4;
         } else if (hasNorthWest() && hasNorthEast() && hasEast() && hasSouthEast() && !hasSouthWest() && !hasWest()) {
-            setTextureIdPipeGray(TEXTURE_ID_HEXAGON_GRAY_PIPE_NE_E_SE_SW);
-            setTextureIdPipeGreen(TEXTURE_ID_HEXAGON_GREEN_PIPE_NE_E_SE_SW);
+            column = 4;
         } else if (!hasNorthWest() && hasNorthEast() && hasEast() && hasSouthEast() && hasSouthWest() && hasWest()) {
-            setTextureIdPipeGray(TEXTURE_ID_HEXAGON_GRAY_PIPE_NE_E_SE_SW_W);
-            setTextureIdPipeGreen(TEXTURE_ID_HEXAGON_GREEN_PIPE_NE_E_SE_SW_W);
+            column = 5;
         } else if (hasNorthWest() && !hasNorthEast() && hasEast() && hasSouthEast() && hasSouthWest() && hasWest()) {
-            setTextureIdPipeGray(TEXTURE_ID_HEXAGON_GRAY_PIPE_NE_E_SE_SW_W);
-            setTextureIdPipeGreen(TEXTURE_ID_HEXAGON_GREEN_PIPE_NE_E_SE_SW_W);
+            column = 5;
         } else if (hasNorthWest() && hasNorthEast() && !hasEast() && hasSouthEast() && hasSouthWest() && hasWest()) {
-            setTextureIdPipeGray(TEXTURE_ID_HEXAGON_GRAY_PIPE_NE_E_SE_SW_W);
-            setTextureIdPipeGreen(TEXTURE_ID_HEXAGON_GREEN_PIPE_NE_E_SE_SW_W);
+            column = 5;
         } else if (hasNorthWest() && hasNorthEast() && hasEast() && !hasSouthEast() && hasSouthWest() && hasWest()) {
-            setTextureIdPipeGray(TEXTURE_ID_HEXAGON_GRAY_PIPE_NE_E_SE_SW_W);
-            setTextureIdPipeGreen(TEXTURE_ID_HEXAGON_GREEN_PIPE_NE_E_SE_SW_W);
+            column = 5;
         } else if (hasNorthWest() && hasNorthEast() && hasEast() && hasSouthEast() && !hasSouthWest() && hasWest()) {
-            setTextureIdPipeGray(TEXTURE_ID_HEXAGON_GRAY_PIPE_NE_E_SE_SW_W);
-            setTextureIdPipeGreen(TEXTURE_ID_HEXAGON_GREEN_PIPE_NE_E_SE_SW_W);
+            column = 5;
         } else if (hasNorthWest() && hasNorthEast() && hasEast() && hasSouthEast() && hasSouthWest() && !hasWest()) {
-            setTextureIdPipeGray(TEXTURE_ID_HEXAGON_GRAY_PIPE_NE_E_SE_SW_W);
-            setTextureIdPipeGreen(TEXTURE_ID_HEXAGON_GREEN_PIPE_NE_E_SE_SW_W);
+            column = 5;
         } else if (!hasNorthWest() && hasNorthEast() && hasEast() && !hasSouthEast() && hasSouthWest() && !hasWest()) {
-            setTextureIdPipeGray(TEXTURE_ID_HEXAGON_GRAY_PIPE_NE_E_SW);
-            setTextureIdPipeGreen(TEXTURE_ID_HEXAGON_GREEN_PIPE_NE_E_SW);
+            column = 6;
         } else if (!hasNorthWest() && !hasNorthEast() && hasEast() && hasSouthEast() && !hasSouthWest() && hasWest()) {
-            setTextureIdPipeGray(TEXTURE_ID_HEXAGON_GRAY_PIPE_NE_E_SW);
-            setTextureIdPipeGreen(TEXTURE_ID_HEXAGON_GREEN_PIPE_NE_E_SW);
+            column = 6;
         } else if (hasNorthWest() && !hasNorthEast() && !hasEast() && hasSouthEast() && hasSouthWest() && !hasWest()) {
-            setTextureIdPipeGray(TEXTURE_ID_HEXAGON_GRAY_PIPE_NE_E_SW);
-            setTextureIdPipeGreen(TEXTURE_ID_HEXAGON_GREEN_PIPE_NE_E_SW);
+            column = 6;
         } else if (!hasNorthWest() && hasNorthEast() && !hasEast() && !hasSouthEast() && hasSouthWest() && hasWest()) {
-            setTextureIdPipeGray(TEXTURE_ID_HEXAGON_GRAY_PIPE_NE_E_SW);
-            setTextureIdPipeGreen(TEXTURE_ID_HEXAGON_GREEN_PIPE_NE_E_SW);
+            column = 6;
         } else if (hasNorthWest() && !hasNorthEast() && hasEast() && !hasSouthEast() && !hasSouthWest() && hasWest()) {
-            setTextureIdPipeGray(TEXTURE_ID_HEXAGON_GRAY_PIPE_NE_E_SW);
-            setTextureIdPipeGreen(TEXTURE_ID_HEXAGON_GREEN_PIPE_NE_E_SW);
+            column = 6;
         } else if (hasNorthWest() && hasNorthEast() && !hasEast() && hasSouthEast() && !hasSouthWest() && !hasWest()) {
-            setTextureIdPipeGray(TEXTURE_ID_HEXAGON_GRAY_PIPE_NE_E_SW);
-            setTextureIdPipeGreen(TEXTURE_ID_HEXAGON_GREEN_PIPE_NE_E_SW);
+            column = 6;
         } else if (!hasNorthWest() && hasNorthEast() && hasEast() && !hasSouthEast() && !hasSouthWest() && hasWest()) {
-            setTextureIdPipeGray(TEXTURE_ID_HEXAGON_GRAY_PIPE_NE_E_W);
-            setTextureIdPipeGreen(TEXTURE_ID_HEXAGON_GREEN_PIPE_NE_E_W);
+            column = 7;
         } else if (hasNorthWest() && !hasNorthEast() && hasEast() && hasSouthEast() && !hasSouthWest() && !hasWest()) {
-            setTextureIdPipeGray(TEXTURE_ID_HEXAGON_GRAY_PIPE_NE_E_W);
-            setTextureIdPipeGreen(TEXTURE_ID_HEXAGON_GREEN_PIPE_NE_E_W);
+            column = 7;
         } else if (!hasNorthWest() && hasNorthEast() && !hasEast() && hasSouthEast() && hasSouthWest() && !hasWest()) {
-            setTextureIdPipeGray(TEXTURE_ID_HEXAGON_GRAY_PIPE_NE_E_W);
-            setTextureIdPipeGreen(TEXTURE_ID_HEXAGON_GREEN_PIPE_NE_E_W);
+            column = 7;
         } else if (!hasNorthWest() && !hasNorthEast() && hasEast() && !hasSouthEast() && hasSouthWest() && hasWest()) {
-            setTextureIdPipeGray(TEXTURE_ID_HEXAGON_GRAY_PIPE_NE_E_W);
-            setTextureIdPipeGreen(TEXTURE_ID_HEXAGON_GREEN_PIPE_NE_E_W);
+            column = 7;
         } else if (hasNorthWest() && !hasNorthEast() && !hasEast() && hasSouthEast() && !hasSouthWest() && hasWest()) {
-            setTextureIdPipeGray(TEXTURE_ID_HEXAGON_GRAY_PIPE_NE_E_W);
-            setTextureIdPipeGreen(TEXTURE_ID_HEXAGON_GREEN_PIPE_NE_E_W);
+            column = 7;
         } else if (hasNorthWest() && hasNorthEast() && !hasEast() && !hasSouthEast() && hasSouthWest() && !hasWest()) {
-            setTextureIdPipeGray(TEXTURE_ID_HEXAGON_GRAY_PIPE_NE_E_W);
-            setTextureIdPipeGreen(TEXTURE_ID_HEXAGON_GREEN_PIPE_NE_E_W);
+            column = 7;
         } else if (!hasNorthWest() && hasNorthEast() && !hasEast() && hasSouthEast() && !hasSouthWest() && !hasWest()) {
-            setTextureIdPipeGray(TEXTURE_ID_HEXAGON_GRAY_PIPE_NE_SE);
-            setTextureIdPipeGreen(TEXTURE_ID_HEXAGON_GREEN_PIPE_NE_SE);
+            column = 8;
         } else if (!hasNorthWest() && !hasNorthEast() && hasEast() && !hasSouthEast() && hasSouthWest() && !hasWest()) {
-            setTextureIdPipeGray(TEXTURE_ID_HEXAGON_GRAY_PIPE_NE_SE);
-            setTextureIdPipeGreen(TEXTURE_ID_HEXAGON_GREEN_PIPE_NE_SE);
+            column = 8;
         } else if (!hasNorthWest() && !hasNorthEast() && !hasEast() && hasSouthEast() && !hasSouthWest() && hasWest()) {
-            setTextureIdPipeGray(TEXTURE_ID_HEXAGON_GRAY_PIPE_NE_SE);
-            setTextureIdPipeGreen(TEXTURE_ID_HEXAGON_GREEN_PIPE_NE_SE);
+            column = 8;
         } else if (hasNorthWest() && !hasNorthEast() && !hasEast() && !hasSouthEast() && hasSouthWest() && !hasWest()) {
-            setTextureIdPipeGray(TEXTURE_ID_HEXAGON_GRAY_PIPE_NE_SE);
-            setTextureIdPipeGreen(TEXTURE_ID_HEXAGON_GREEN_PIPE_NE_SE);
+            column = 8;
         } else if (!hasNorthWest() && hasNorthEast() && !hasEast() && !hasSouthEast() && !hasSouthWest() && hasWest()) {
-            setTextureIdPipeGray(TEXTURE_ID_HEXAGON_GRAY_PIPE_NE_SE);
-            setTextureIdPipeGreen(TEXTURE_ID_HEXAGON_GREEN_PIPE_NE_SE);
+            column = 8;
         } else if (hasNorthWest() && !hasNorthEast() && hasEast() && !hasSouthEast() && !hasSouthWest() && !hasWest()) {
-            setTextureIdPipeGray(TEXTURE_ID_HEXAGON_GRAY_PIPE_NE_SE);
-            setTextureIdPipeGreen(TEXTURE_ID_HEXAGON_GREEN_PIPE_NE_SE);
+            column = 8;
         } else if (!hasNorthWest() && hasNorthEast() && !hasEast() && !hasSouthEast() && hasSouthWest() && !hasWest()) {
-            setTextureIdPipeGray(TEXTURE_ID_HEXAGON_GRAY_PIPE_NE_SW);
-            setTextureIdPipeGreen(TEXTURE_ID_HEXAGON_GREEN_PIPE_NE_SW);
+            column = 9;
         } else if (!hasNorthWest() && !hasNorthEast() && hasEast() && !hasSouthEast() && !hasSouthWest() && hasWest()) {
-            setTextureIdPipeGray(TEXTURE_ID_HEXAGON_GRAY_PIPE_NE_SW);
-            setTextureIdPipeGreen(TEXTURE_ID_HEXAGON_GREEN_PIPE_NE_SW);
+            column = 9;
         } else if (hasNorthWest() && !hasNorthEast() && !hasEast() && hasSouthEast() && !hasSouthWest() && !hasWest()) {
-            setTextureIdPipeGray(TEXTURE_ID_HEXAGON_GRAY_PIPE_NE_SW);
-            setTextureIdPipeGreen(TEXTURE_ID_HEXAGON_GREEN_PIPE_NE_SW);
+            column = 9;
         } else if (!hasNorthWest() && !hasNorthEast() && !hasEast() && !hasSouthEast() && !hasSouthWest() && !hasWest()) {
-            setTextureIdPipeGray(TEXTURE_ID_HEXAGON_GRAY_PIPE_NE_W);
-            setTextureIdPipeGreen(TEXTURE_ID_HEXAGON_GREEN_PIPE_NE_W);
+            column = 10;
         } else if (hasNorthWest() && !hasNorthEast() && hasEast() && !hasSouthEast() && !hasSouthWest() && !hasWest()) {
-            setTextureIdPipeGray(TEXTURE_ID_HEXAGON_GRAY_PIPE_NE_W);
-            setTextureIdPipeGreen(TEXTURE_ID_HEXAGON_GREEN_PIPE_NE_W);
+            column = 10;
         } else if (!hasNorthWest() && hasNorthEast() && !hasEast() && hasSouthEast() && !hasSouthWest() && !hasWest()) {
-            setTextureIdPipeGray(TEXTURE_ID_HEXAGON_GRAY_PIPE_NE_W);
-            setTextureIdPipeGreen(TEXTURE_ID_HEXAGON_GREEN_PIPE_NE_W);
+            column = 10;
         } else if (!hasNorthWest() && !hasNorthEast() && hasEast() && !hasSouthEast() && hasSouthWest() && !hasWest()) {
-            setTextureIdPipeGray(TEXTURE_ID_HEXAGON_GRAY_PIPE_NE_W);
-            setTextureIdPipeGreen(TEXTURE_ID_HEXAGON_GREEN_PIPE_NE_W);
+            column = 10;
         } else if (!hasNorthWest() && !hasNorthEast() && !hasEast() && hasSouthEast() && !hasSouthWest() && hasWest()) {
-            setTextureIdPipeGray(TEXTURE_ID_HEXAGON_GRAY_PIPE_NE_W);
-            setTextureIdPipeGreen(TEXTURE_ID_HEXAGON_GREEN_PIPE_NE_W);
+            column = 10;
         } else if (hasNorthWest() && !hasNorthEast() && !hasEast() && !hasSouthEast() && hasSouthWest() && !hasWest()) {
-            setTextureIdPipeGray(TEXTURE_ID_HEXAGON_GRAY_PIPE_NE_W);
-            setTextureIdPipeGreen(TEXTURE_ID_HEXAGON_GREEN_PIPE_NE_W);
+            column = 10;
         } else if (hasNorthWest() && hasNorthEast() && !hasEast() && hasSouthEast() && hasSouthWest() && !hasWest()) {
-            setTextureIdPipeGray(TEXTURE_ID_HEXAGON_GRAY_PIPE_NW_NE_SE_SW);
-            setTextureIdPipeGreen(TEXTURE_ID_HEXAGON_GREEN_PIPE_NW_NE_SE_SW);
+            column = 13;
         } else if (!hasNorthWest() && hasNorthEast() && hasEast() && !hasSouthEast() && hasSouthWest() && hasWest()) {
-            setTextureIdPipeGray(TEXTURE_ID_HEXAGON_GRAY_PIPE_NW_NE_SE_SW);
-            setTextureIdPipeGreen(TEXTURE_ID_HEXAGON_GREEN_PIPE_NW_NE_SE_SW);
+            column = 13;
         } else if (hasNorthWest() && !hasNorthEast() && hasEast() && hasSouthEast() && !hasSouthWest() && hasWest()) {
-            setTextureIdPipeGray(TEXTURE_ID_HEXAGON_GRAY_PIPE_NW_NE_SE_SW);
-            setTextureIdPipeGreen(TEXTURE_ID_HEXAGON_GREEN_PIPE_NW_NE_SE_SW);
+            column = 13;
         } else if (hasNorthWest() && hasNorthEast() && hasEast() && !hasSouthEast() && hasSouthWest() && !hasWest()) {
-            setTextureIdPipeGray(TEXTURE_ID_HEXAGON_GRAY_PIPE_NW_NE_E_SW);
-            setTextureIdPipeGreen(TEXTURE_ID_HEXAGON_GREEN_PIPE_NW_NE_E_SW);
+            column = 12;
         } else if (!hasNorthWest() && hasNorthEast() && hasEast() && hasSouthEast() && !hasSouthWest() && hasWest()) {
-            setTextureIdPipeGray(TEXTURE_ID_HEXAGON_GRAY_PIPE_NW_NE_E_SW);
-            setTextureIdPipeGreen(TEXTURE_ID_HEXAGON_GREEN_PIPE_NW_NE_E_SW);
+            column = 12;
         } else if (hasNorthWest() && !hasNorthEast() && hasEast() && hasSouthEast() && hasSouthWest() && !hasWest()) {
-            setTextureIdPipeGray(TEXTURE_ID_HEXAGON_GRAY_PIPE_NW_NE_E_SW);
-            setTextureIdPipeGreen(TEXTURE_ID_HEXAGON_GREEN_PIPE_NW_NE_E_SW);
+            column = 12;
         } else if (!hasNorthWest() && hasNorthEast() && !hasEast() && hasSouthEast() && hasSouthWest() && hasWest()) {
-            setTextureIdPipeGray(TEXTURE_ID_HEXAGON_GRAY_PIPE_NW_NE_E_SW);
-            setTextureIdPipeGreen(TEXTURE_ID_HEXAGON_GREEN_PIPE_NW_NE_E_SW);
+            column = 12;
         } else if (hasNorthWest() && !hasNorthEast() && hasEast() && !hasSouthEast() && hasSouthWest() && hasWest()) {
-            setTextureIdPipeGray(TEXTURE_ID_HEXAGON_GRAY_PIPE_NW_NE_E_SW);
-            setTextureIdPipeGreen(TEXTURE_ID_HEXAGON_GREEN_PIPE_NW_NE_E_SW);
+            column = 12;
         } else if (hasNorthWest() && hasNorthEast() && !hasEast() && hasSouthEast() && !hasSouthWest() && hasWest()) {
-            setTextureIdPipeGray(TEXTURE_ID_HEXAGON_GRAY_PIPE_NW_NE_E_SW);
-            setTextureIdPipeGreen(TEXTURE_ID_HEXAGON_GREEN_PIPE_NW_NE_E_SW);
+            column = 12;
         } else if (hasNorthWest() && !hasNorthEast() && hasEast() && !hasSouthEast() && hasSouthWest() && !hasWest()) {
-            setTextureIdPipeGray(TEXTURE_ID_HEXAGON_GRAY_PIPE_NW_E_SW);
-            setTextureIdPipeGreen(TEXTURE_ID_HEXAGON_GREEN_PIPE_NW_E_SW);
+            column = 11;
         } else if (!hasNorthWest() && hasNorthEast() && !hasEast() && hasSouthEast() && !hasSouthWest() && hasWest()) {
-            setTextureIdPipeGray(TEXTURE_ID_HEXAGON_GRAY_PIPE_NW_E_SW);
-            setTextureIdPipeGreen(TEXTURE_ID_HEXAGON_GREEN_PIPE_NW_E_SW);
+            column = 11;
         } else {
             throw new RuntimeException("Texture id not found NW:" + hasNorthWest() + " NE:" + hasNorthEast() + " E:" + hasEast() + " SE:" + hasSouthEast() + " SW:" + hasSouthWest() + " W:" + hasWest());
         }
+
+        //now create the uvs coordinates;
+        float[] uvsGray = null;
+        float[] uvsGreen = null;
+
+        if (getTextureCoordinatesGray() == null)
+            uvsGray = new float[8];
+        if (getTextureCoordinatesGreen() == null)
+            uvsGreen = new float[8];
+
+        final float startCol = (float)column / TEXTURE_HEXAGON_COLS;
+        float startRow = (float)rowGray / TEXTURE_HEXAGON_ROWS;
+        final float width = 1.0f / TEXTURE_HEXAGON_COLS;
+        final float height = 1.0f / TEXTURE_HEXAGON_ROWS;
+
+        uvsGray[0] = startCol; uvsGray[1] = startRow;
+        uvsGray[2] = startCol; uvsGray[3] = startRow + height;
+        uvsGray[4] = startCol + width; uvsGray[5] = startRow + height;
+        uvsGray[6] = startCol + width; uvsGray[7] = startRow;
+        super.setTextureCoordinatesGray(uvsGray);
+
+        startRow = (float)rowGreen / TEXTURE_HEXAGON_ROWS;
+        uvsGreen[0] = startCol; uvsGreen[1] = startRow;
+        uvsGreen[2] = startCol; uvsGreen[3] = startRow + height;
+        uvsGreen[4] = startCol + width; uvsGreen[5] = startRow + height;
+        uvsGreen[6] = startCol + width; uvsGreen[7] = startRow;
+        super.setTextureCoordinatesGreen(uvsGreen);
     }
 
     @Override
