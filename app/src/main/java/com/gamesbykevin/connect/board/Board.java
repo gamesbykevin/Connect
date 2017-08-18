@@ -1,10 +1,13 @@
 package com.gamesbykevin.connect.board;
 
+import android.opengl.GLES20;
+
 import com.gamesbykevin.androidframeworkv2.maze.Maze;
 import com.gamesbykevin.androidframeworkv2.maze.Room;
 import com.gamesbykevin.androidframeworkv2.maze.algorithm.Prims;
 import com.gamesbykevin.androidframeworkv2.util.UtilityHelper;
 import com.gamesbykevin.connect.entity.Entity;
+import com.gamesbykevin.connect.opengl.Textures;
 import com.gamesbykevin.connect.shape.CustomShape;
 import com.gamesbykevin.connect.activity.GameActivity;
 import com.gamesbykevin.connect.common.ICommon;
@@ -150,8 +153,8 @@ public class Board implements ICommon {
         //make sure we render the pipe(s) correctly
         tmp.calculateAnglePipe();
 
-        //assign the texture id for the pipe on the shape
-        tmp.assignTextureIdPipe();
+        //assign the texture coordinates for the pipe on the shape
+        tmp.assignTextureCoordinates();
 
         //how many rotations have we had
         int rotations = 0;
@@ -365,6 +368,26 @@ public class Board implements ICommon {
             return;
         if (getMaze() == null)
             return;
+
+        //set the correct texture for rendering
+        GLES20.glActiveTexture(GLES20.GL_TEXTURE0);
+
+        //bind the texture that we need only once
+        switch (getType()) {
+
+            case Square:
+                GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, Textures.TEXTURE_ID_SQUARE);
+                break;
+
+            case Hexagon:
+                GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, Textures.TEXTURE_ID_HEXAGON);
+                break;
+
+            case Diamond:
+                GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, Textures.TEXTURE_ID_DIAMOND);
+                break;
+        }
+
 
         for (int col = 0; col < getMaze().getCols(); col++) {
             for (int row = 0; row < getMaze().getRows(); row++) {

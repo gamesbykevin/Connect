@@ -204,10 +204,10 @@ public class OpenGLRenderer implements Renderer {
         //setup our screen width and height for our intended screen size
         Matrix.orthoM(mtrxProjection, 0, 0f, WIDTH, HEIGHT, 0f, 0f, 50f);
 
-        // Set the camera position (View matrix)
+        //set the camera position (matrix)
         Matrix.setLookAtM(mtrxView, 0, 0f, 0f, 1f, 0f, 0f, 0f, 0f, 1.0f, 0.0f);
 
-        // Calculate the projection and view transformation
+        //calculate the projection and view transformation
         Matrix.multiplyMM(mtrxProjectionAndView, 0, mtrxProjection, 0, mtrxView, 0);
 
         //store the ratio for the render
@@ -235,9 +235,11 @@ public class OpenGLRenderer implements Renderer {
         //clear the screen and depth buffer, we have set the clear color as black.
         GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT | GLES20.GL_DEPTH_BUFFER_BIT);
 
+        //render our background
         setupBackground();
         getSquare().render(getEntity(), mtrxProjectionAndView);
 
+        //render game elements
         getGame().render(mtrxProjectionAndView);
 
         if (DEBUG && !false) {

@@ -49,8 +49,8 @@ public abstract class CustomShape extends Entity implements ICustomShape {
     //do we render the shape background
     private boolean visible = true;
 
-    //the texture id of both pipes (connected/not connected)
-    private int textureIdPipeGray = -1, textureIdPipeGreen = -1;
+    //texture altas coordinates
+    private float[] uvsGray, uvsGreen;
 
     //how fast can we rotate the shape
     private float rotateVelocity = 0.0f;
@@ -218,41 +218,37 @@ public abstract class CustomShape extends Entity implements ICustomShape {
         this.southEast = southEast;
     }
 
-    protected void setTextureIdPipeGray(final int textureIdPipeGray) {
-        this.textureIdPipeGray = textureIdPipeGray;
+    protected void setTextureCoordinatesGray(final float[] uvs) {
+        this.uvsGray = uvs;
     }
 
-    protected void setTextureIdPipeGreen(final int textureIdPipeGreen) {
-        this.textureIdPipeGreen = textureIdPipeGreen;
+    protected void setTextureCoordinatesGreen(final float[] uvs) {
+        this.uvsGreen = uvs;
     }
-
-    protected int getTextureIdPipeGray() {
-        return this.textureIdPipeGray;
-    }
-
-    protected int getTextureIdPipeGreen() {
-        return this.textureIdPipeGreen;
-    }
-
-    //need logic implemented to assign the texture
-    public abstract void assignTextureIdPipe();
 
     @Override
-    public int getTextureId() {
+    public float[] getTextureCoordinatesGray() {
+        return this.uvsGray;
+    }
 
-        //assign the values if they don't exist
-        if (getTextureIdPipeGray() < 0 || getTextureIdPipeGreen() < 0)
-            assignTextureIdPipe();
+    @Override
+    public float[] getTextureCoordinatesGreen() {
+        return this.uvsGreen;
+    }
 
-        //return the correct value
-        return isConnected() ? getTextureIdPipeGreen() : getTextureIdPipeGray();
+    //need logic implemented to assign the texture coordinates
+    public abstract void assignTextureCoordinates();
+
+    @Override
+    public float[] getTextureCoordinates() {
+        return (isConnected() ? getTextureCoordinatesGreen() : getTextureCoordinatesGray());
     }
 
     @Override
     public void reset() {
         setVisible(true);
-        setTextureIdPipeGreen(-1);
-        setTextureIdPipeGray(-1);
+        setTextureCoordinatesGreen(null);
+        setTextureCoordinatesGray(null);
     }
 
     public void setRotateVelocity(final float rotateVelocity) {

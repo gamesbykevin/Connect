@@ -123,8 +123,7 @@ public class Entity extends Cell {
      * @param entity The entity we want to compare
      * @return The distance between the current and specified entities
      */
-    public double getDistance(final Entity entity)
-    {
+    public double getDistance(final Entity entity) {
         return getDistance(entity.getX(), entity.getY());
     }
 
@@ -134,8 +133,7 @@ public class Entity extends Cell {
      * @param y y-coordinate
      * @return The distance between the entity and specified (x,y)
      */
-    public double getDistance(final double x, final double y)
-    {
+    public double getDistance(final double x, final double y) {
         return getDistance(x, y, getX(), getY());
     }
 
@@ -147,8 +145,7 @@ public class Entity extends Cell {
      * @param y2 y-coordinate
      * @return The distance between the 2 specified (x,y) coordinates
      */
-    public static double getDistance(final double x1, final double y1, final double x2, final double y2)
-    {
+    public static double getDistance(final double x1, final double y1, final double x2, final double y2) {
         return Math.sqrt(Math.pow(x1 - x2, 2) + Math.pow(y1 - y2, 2));
     }
 
@@ -156,8 +153,7 @@ public class Entity extends Cell {
      * Assign the x-coordinate
      * @param x the desired x-coordinate
      */
-    public void setX(final float x)
-    {
+    public void setX(final float x) {
         getTranslation().x = x;
     }
 
@@ -165,8 +161,7 @@ public class Entity extends Cell {
      * Assign the y-coordinate
      * @param y the desired y-coordinate
      */
-    public void setY(final float y)
-    {
+    public void setY(final float y) {
         getTranslation().y = y;
     }
 
@@ -174,8 +169,7 @@ public class Entity extends Cell {
      * Get the x-coordinate
      * @return the x-coordinate
      */
-    public float getX()
-    {
+    public float getX() {
         return getTranslation().x;
     }
 
@@ -183,8 +177,7 @@ public class Entity extends Cell {
      * Get the y-coordinate
      * @return the y-coordinate
      */
-    public float getY()
-    {
+    public float getY() {
         return getTranslation().y;
     }
 
@@ -192,8 +185,7 @@ public class Entity extends Cell {
      * Get the width
      * @return get the width
      */
-    public float getWidth()
-    {
+    public float getWidth() {
         return (getBase().right - getBase().left);
     }
 
@@ -201,8 +193,7 @@ public class Entity extends Cell {
      * Get the height
      * @return get the height
      */
-    public float getHeight()
-    {
+    public float getHeight() {
         return (getBase().bottom - getBase().top);
     }
 
@@ -210,8 +201,7 @@ public class Entity extends Cell {
      * Assign the width
      * @param entity The object containing the width
      */
-    public void setWidth(final Entity entity)
-    {
+    public void setWidth(final Entity entity) {
         setWidth(entity.getWidth());
     }
 
@@ -219,8 +209,7 @@ public class Entity extends Cell {
      * Assign the width
      * @param w The desired width
      */
-    public void setWidth(final float w)
-    {
+    public void setWidth(final float w) {
         float half = (w / 2);
 
         //update the rectangle coordinates
@@ -232,8 +221,7 @@ public class Entity extends Cell {
      * Assign the height
      * @param entity The object containing the height
      */
-    public void setHeight(final Entity entity)
-    {
+    public void setHeight(final Entity entity) {
         setHeight(entity.getHeight());
     }
 
@@ -241,8 +229,8 @@ public class Entity extends Cell {
      * Assign the height
      * @param h The desired height
      */
-    public void setHeight(final float h)
-    {
+    public void setHeight(final float h) {
+
         float half = (h / 2);
 
         //update the rectangle coordinates

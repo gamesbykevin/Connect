@@ -18,6 +18,8 @@ import static com.gamesbykevin.connect.opengl.Textures.TEXTURE_ID_SQUARE_GREEN_P
 import static com.gamesbykevin.connect.opengl.Textures.TEXTURE_ID_SQUARE_GREEN_PIPE_NSEW;
 import static com.gamesbykevin.connect.opengl.Textures.TEXTURE_ID_SQUARE_GREEN_PIPE_SE;
 import static com.gamesbykevin.connect.opengl.Textures.TEXTURE_ID_SQUARE_GREEN_PIPE_WES;
+import static com.gamesbykevin.connect.opengl.Textures.TEXTURE_SQUARE_COLS;
+import static com.gamesbykevin.connect.opengl.Textures.TEXTURE_SQUARE_ROWS;
 
 /**
  * Created by Kevin on 8/5/2017.
@@ -55,45 +57,62 @@ public class Square extends CustomShape {
     }
 
     @Override
-    public void assignTextureIdPipe() {
+    public void assignTextureCoordinates() {
+
+        //the location of each
+        int column;
+        int rowGray = 1, rowGreen = 0;
+
         if (hasNorth() && !hasSouth() && !hasEast() && !hasWest()) { //n
-            setTextureIdPipeGray(TEXTURE_ID_SQUARE_GRAY_PIPE_END);
-            setTextureIdPipeGreen(TEXTURE_ID_SQUARE_GREEN_PIPE_END);
+            column = 0;
         } else if (!hasNorth() && hasSouth() && !hasEast() && !hasWest()) { //s
-            setTextureIdPipeGray(TEXTURE_ID_SQUARE_GRAY_PIPE_END);
-            setTextureIdPipeGreen(TEXTURE_ID_SQUARE_GREEN_PIPE_END);
+            column = 0;
         } else if (!hasNorth() && !hasSouth() && hasEast() && !hasWest()) { //e
-            setTextureIdPipeGray(TEXTURE_ID_SQUARE_GRAY_PIPE_END);
-            setTextureIdPipeGreen(TEXTURE_ID_SQUARE_GREEN_PIPE_END);
+            column = 0;
         } else if (!hasNorth() && !hasSouth() && !hasEast() && hasWest()) { //w
-            setTextureIdPipeGray(TEXTURE_ID_SQUARE_GRAY_PIPE_END);
-            setTextureIdPipeGreen(TEXTURE_ID_SQUARE_GREEN_PIPE_END);
+            column = 0;
         } else if (hasNorth() && !hasSouth() && hasEast() && !hasWest()) { //ne
-            setTextureIdPipeGray(TEXTURE_ID_SQUARE_GRAY_PIPE_SE);
-            setTextureIdPipeGreen(TEXTURE_ID_SQUARE_GREEN_PIPE_SE);
+            column = 3;
         } else if (hasNorth() && !hasSouth() && !hasEast() && hasWest()) { //nw
-            setTextureIdPipeGray(TEXTURE_ID_SQUARE_GRAY_PIPE_SE);
-            setTextureIdPipeGreen(TEXTURE_ID_SQUARE_GREEN_PIPE_SE);
+            column = 3;
         } else if (!hasNorth() && hasSouth() && hasEast() && !hasWest()) { //se
-            setTextureIdPipeGray(TEXTURE_ID_SQUARE_GRAY_PIPE_SE);
-            setTextureIdPipeGreen(TEXTURE_ID_SQUARE_GREEN_PIPE_SE);
+            column = 3;
         } else if (!hasNorth() && hasSouth() && !hasEast() && hasWest()) { //sw
-            setTextureIdPipeGray(TEXTURE_ID_SQUARE_GRAY_PIPE_SE);
-            setTextureIdPipeGreen(TEXTURE_ID_SQUARE_GREEN_PIPE_SE);
+            column = 3;
         } else if (hasNorth() && hasSouth() && !hasEast() && !hasWest()) { //ns
-            setTextureIdPipeGray(TEXTURE_ID_SQUARE_GRAY_PIPE_NS);
-            setTextureIdPipeGreen(TEXTURE_ID_SQUARE_GREEN_PIPE_NS);
+            column = 1;
         } else if (!hasNorth() && !hasSouth() && hasEast() && hasWest()) { //we
-            setTextureIdPipeGray(TEXTURE_ID_SQUARE_GRAY_PIPE_NS);
-            setTextureIdPipeGreen(TEXTURE_ID_SQUARE_GREEN_PIPE_NS);
+            column = 1;
         } else if (hasNorth() && hasSouth() && hasEast() && hasWest()) { //nsew
-            setTextureIdPipeGray(TEXTURE_ID_SQUARE_GRAY_PIPE_NSEW);
-            setTextureIdPipeGreen(TEXTURE_ID_SQUARE_GREEN_PIPE_NSEW);
+            column = 2;
         } else {
             //NSW, NSE, WEN, WES
-            setTextureIdPipeGray(TEXTURE_ID_SQUARE_GRAY_PIPE_WES);
-            setTextureIdPipeGreen(TEXTURE_ID_SQUARE_GREEN_PIPE_WES);
+            column = 4;
         }
+
+        //now create the uvs coordinates;
+        float[] uvsGray = null;
+        float[] uvsGreen = null;
+
+        if (getTextureCoordinatesGray() == null)
+            uvsGray = new float[8];
+        if (getTextureCoordinatesGreen() == null)
+            uvsGreen = new float[8];
+
+        //south west
+        uvsGray[0] = column; uvsGray[1] = rowGray;
+
+        //north west
+        uvsGray[1] = column; uvsGray[2] = (float)rowGray / (float)TEXTURE_SQUARE_ROWS;
+
+        //north east
+        uvsGray[3] = (float)column / (float)TEXTURE_SQUARE_COLS; uvsGray[4] = ;
+
+        0.0f, 0.0f,
+                0.0f, 1.0f,
+                1.0f, 1.0f,
+                1.0f, 0.0f
+
     }
 
     @Override

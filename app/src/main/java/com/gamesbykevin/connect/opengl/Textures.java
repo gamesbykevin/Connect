@@ -21,63 +21,19 @@ public class Textures {
     //array containing all the texture ids
     public static int[] IDS;
 
+    //background image
     public static int TEXTURE_ID_BACKGROUND = 0;
 
     //texture id for each shape
-    public static int TEXTURE_ID_SQUARE_GRAY_PIPE_NS = 0;
-    public static int TEXTURE_ID_SQUARE_GRAY_PIPE_SE = 0;
-    public static int TEXTURE_ID_SQUARE_GRAY_PIPE_WES = 0;
-    public static int TEXTURE_ID_SQUARE_GRAY_PIPE_NSEW = 0;
-    public static int TEXTURE_ID_SQUARE_GRAY_PIPE_END = 0;
+    public static int TEXTURE_ID_SQUARE = 0;
+    public static int TEXTURE_ID_HEXAGON = 0;
+    public static int TEXTURE_ID_DIAMOND = 0;
 
-    public static int TEXTURE_ID_SQUARE_GREEN_PIPE_NS = 0;
-    public static int TEXTURE_ID_SQUARE_GREEN_PIPE_SE = 0;
-    public static int TEXTURE_ID_SQUARE_GREEN_PIPE_WES = 0;
-    public static int TEXTURE_ID_SQUARE_GREEN_PIPE_NSEW = 0;
-    public static int TEXTURE_ID_SQUARE_GREEN_PIPE_END = 0;
+    public static int TEXTURE_SQUARE_COLS = 5;
+    public static int TEXTURE_SQUARE_ROWS = 2;
 
-    public static int TEXTURE_ID_DIAMOND_GRAY_PIPE_NS = 0;
-    public static int TEXTURE_ID_DIAMOND_GRAY_PIPE_SE = 0;
-    public static int TEXTURE_ID_DIAMOND_GRAY_PIPE_WES = 0;
-    public static int TEXTURE_ID_DIAMOND_GRAY_PIPE_NSEW = 0;
-    public static int TEXTURE_ID_DIAMOND_GRAY_PIPE_END = 0;
-
-    public static int TEXTURE_ID_DIAMOND_GREEN_PIPE_NS = 0;
-    public static int TEXTURE_ID_DIAMOND_GREEN_PIPE_SE = 0;
-    public static int TEXTURE_ID_DIAMOND_GREEN_PIPE_WES = 0;
-    public static int TEXTURE_ID_DIAMOND_GREEN_PIPE_NSEW = 0;
-    public static int TEXTURE_ID_DIAMOND_GREEN_PIPE_END = 0;
-
-    public static int TEXTURE_ID_HEXAGON_GRAY_PIPE_ALL = 0;
-    public static int TEXTURE_ID_HEXAGON_GRAY_PIPE_END = 0;
-    public static int TEXTURE_ID_HEXAGON_GRAY_PIPE_NE_E = 0;
-    public static int TEXTURE_ID_HEXAGON_GRAY_PIPE_NE_E_SE = 0;
-    public static int TEXTURE_ID_HEXAGON_GRAY_PIPE_NE_E_SE_SW = 0;
-    public static int TEXTURE_ID_HEXAGON_GRAY_PIPE_NE_E_SE_SW_W = 0;
-    public static int TEXTURE_ID_HEXAGON_GRAY_PIPE_NE_E_SW = 0;
-    public static int TEXTURE_ID_HEXAGON_GRAY_PIPE_NE_E_W = 0;
-    public static int TEXTURE_ID_HEXAGON_GRAY_PIPE_NE_SE = 0;
-    public static int TEXTURE_ID_HEXAGON_GRAY_PIPE_NE_SW = 0;
-    public static int TEXTURE_ID_HEXAGON_GRAY_PIPE_NE_W = 0;
-    public static int TEXTURE_ID_HEXAGON_GRAY_PIPE_NW_NE_SE_SW = 0;
-    public static int TEXTURE_ID_HEXAGON_GRAY_PIPE_NW_NE_E_SW = 0;
-    public static int TEXTURE_ID_HEXAGON_GRAY_PIPE_NW_E_SW = 0;
-
-    public static int TEXTURE_ID_HEXAGON_GREEN_PIPE_ALL = 0;
-    public static int TEXTURE_ID_HEXAGON_GREEN_PIPE_END = 0;
-    public static int TEXTURE_ID_HEXAGON_GREEN_PIPE_NE_E = 0;
-    public static int TEXTURE_ID_HEXAGON_GREEN_PIPE_NE_E_SE = 0;
-    public static int TEXTURE_ID_HEXAGON_GREEN_PIPE_NE_E_SE_SW = 0;
-    public static int TEXTURE_ID_HEXAGON_GREEN_PIPE_NE_E_SE_SW_W = 0;
-    public static int TEXTURE_ID_HEXAGON_GREEN_PIPE_NE_E_SW = 0;
-    public static int TEXTURE_ID_HEXAGON_GREEN_PIPE_NE_E_W = 0;
-    public static int TEXTURE_ID_HEXAGON_GREEN_PIPE_NE_SE = 0;
-    public static int TEXTURE_ID_HEXAGON_GREEN_PIPE_NE_SW = 0;
-    public static int TEXTURE_ID_HEXAGON_GREEN_PIPE_NE_W = 0;
-    public static int TEXTURE_ID_HEXAGON_GREEN_PIPE_NW_NE_SE_SW = 0;
-    public static int TEXTURE_ID_HEXAGON_GREEN_PIPE_NW_NE_E_SW = 0;
-    public static int TEXTURE_ID_HEXAGON_GREEN_PIPE_NW_E_SW = 0;
-
+    public static int TEXTURE_DIAMOND_COLS = 5;
+    public static int TEXTURE_DIAMOND_ROWS = 2;
 
     //store reference to access resources
     private final Context activity;
@@ -105,62 +61,11 @@ public class Textures {
         //Bitmap square = BitmapFactory.decodeResource(activity.getResources(), R.drawable.square);
         //Bitmap ball = Bitmap.createBitmap(sheet, (Ball.DIMENSIONS * i), 0, Ball.DIMENSIONS, Ball.DIMENSIONS);
 
-        //load the texture
+        //load the textures
         TEXTURE_ID_BACKGROUND = loadTexture(R.drawable.background);
-
-        TEXTURE_ID_SQUARE_GRAY_PIPE_NS = loadTexture(R.drawable.square_pipe_ns_gray);
-        TEXTURE_ID_SQUARE_GRAY_PIPE_SE = loadTexture(R.drawable.square_pipe_se_gray);
-        TEXTURE_ID_SQUARE_GRAY_PIPE_WES = loadTexture(R.drawable.square_pipe_wes_gray);
-        TEXTURE_ID_SQUARE_GRAY_PIPE_NSEW = loadTexture(R.drawable.square_pipe_nsew_gray);
-        TEXTURE_ID_SQUARE_GRAY_PIPE_END = loadTexture(R.drawable.square_pipe_end_gray);
-
-        TEXTURE_ID_SQUARE_GREEN_PIPE_NS = loadTexture(R.drawable.square_pipe_ns_green);
-        TEXTURE_ID_SQUARE_GREEN_PIPE_SE = loadTexture(R.drawable.square_pipe_se_green);
-        TEXTURE_ID_SQUARE_GREEN_PIPE_WES = loadTexture(R.drawable.square_pipe_wes_green);
-        TEXTURE_ID_SQUARE_GREEN_PIPE_NSEW = loadTexture(R.drawable.square_pipe_nsew_green);
-        TEXTURE_ID_SQUARE_GREEN_PIPE_END = loadTexture(R.drawable.square_pipe_end_green);
-
-        TEXTURE_ID_DIAMOND_GRAY_PIPE_NS = loadTexture(R.drawable.diamond_pipe_ns_gray);
-        TEXTURE_ID_DIAMOND_GRAY_PIPE_SE = loadTexture(R.drawable.diamond_pipe_se_gray);
-        TEXTURE_ID_DIAMOND_GRAY_PIPE_WES = loadTexture(R.drawable.diamond_pipe_wes_gray);
-        TEXTURE_ID_DIAMOND_GRAY_PIPE_NSEW = loadTexture(R.drawable.diamond_pipe_nsew_gray);
-        TEXTURE_ID_DIAMOND_GRAY_PIPE_END = loadTexture(R.drawable.diamond_pipe_end_gray);
-
-        TEXTURE_ID_DIAMOND_GREEN_PIPE_NS = loadTexture(R.drawable.diamond_pipe_ns_green);
-        TEXTURE_ID_DIAMOND_GREEN_PIPE_SE = loadTexture(R.drawable.diamond_pipe_se_green);
-        TEXTURE_ID_DIAMOND_GREEN_PIPE_WES = loadTexture(R.drawable.diamond_pipe_wes_green);
-        TEXTURE_ID_DIAMOND_GREEN_PIPE_NSEW = loadTexture(R.drawable.diamond_pipe_nsew_green);
-        TEXTURE_ID_DIAMOND_GREEN_PIPE_END = loadTexture(R.drawable.diamond_pipe_end_green);
-
-        TEXTURE_ID_HEXAGON_GRAY_PIPE_ALL = loadTexture(R.drawable.hexagon_pipe_gray_all);
-        TEXTURE_ID_HEXAGON_GRAY_PIPE_END = loadTexture(R.drawable.hexagon_pipe_gray_end);
-        TEXTURE_ID_HEXAGON_GRAY_PIPE_NE_E = loadTexture(R.drawable.hexagon_pipe_gray_ne_e);
-        TEXTURE_ID_HEXAGON_GRAY_PIPE_NE_E_SE = loadTexture(R.drawable.hexagon_pipe_gray_ne_e_se);
-        TEXTURE_ID_HEXAGON_GRAY_PIPE_NE_E_SE_SW = loadTexture(R.drawable.hexagon_pipe_gray_ne_e_se_sw);
-        TEXTURE_ID_HEXAGON_GRAY_PIPE_NE_E_SE_SW_W = loadTexture(R.drawable.hexagon_pipe_gray_ne_e_se_sw_w);
-        TEXTURE_ID_HEXAGON_GRAY_PIPE_NE_E_SW = loadTexture(R.drawable.hexagon_pipe_gray_ne_e_sw);
-        TEXTURE_ID_HEXAGON_GRAY_PIPE_NE_E_W = loadTexture(R.drawable.hexagon_pipe_gray_ne_e_w);
-        TEXTURE_ID_HEXAGON_GRAY_PIPE_NE_SE = loadTexture(R.drawable.hexagon_pipe_gray_ne_se);
-        TEXTURE_ID_HEXAGON_GRAY_PIPE_NE_SW = loadTexture(R.drawable.hexagon_pipe_gray_ne_sw);
-        TEXTURE_ID_HEXAGON_GRAY_PIPE_NE_W = loadTexture(R.drawable.hexagon_pipe_gray_ne_w);
-        TEXTURE_ID_HEXAGON_GRAY_PIPE_NW_NE_SE_SW = loadTexture(R.drawable.hexagon_pipe_gray_nw_ne_se_sw);
-        TEXTURE_ID_HEXAGON_GRAY_PIPE_NW_NE_E_SW = loadTexture(R.drawable.hexagon_pipe_gray_nw_ne_e_sw);
-        TEXTURE_ID_HEXAGON_GRAY_PIPE_NW_E_SW = loadTexture(R.drawable.hexagon_pipe_gray_nw_e_sw);
-
-        TEXTURE_ID_HEXAGON_GREEN_PIPE_ALL = loadTexture(R.drawable.hexagon_pipe_green_all);
-        TEXTURE_ID_HEXAGON_GREEN_PIPE_END = loadTexture(R.drawable.hexagon_pipe_green_end);
-        TEXTURE_ID_HEXAGON_GREEN_PIPE_NE_E = loadTexture(R.drawable.hexagon_pipe_green_ne_e);
-        TEXTURE_ID_HEXAGON_GREEN_PIPE_NE_E_SE = loadTexture(R.drawable.hexagon_pipe_green_ne_e_se);
-        TEXTURE_ID_HEXAGON_GREEN_PIPE_NE_E_SE_SW = loadTexture(R.drawable.hexagon_pipe_green_ne_e_se_sw);
-        TEXTURE_ID_HEXAGON_GREEN_PIPE_NE_E_SE_SW_W = loadTexture(R.drawable.hexagon_pipe_green_ne_e_se_sw_w);
-        TEXTURE_ID_HEXAGON_GREEN_PIPE_NE_E_SW = loadTexture(R.drawable.hexagon_pipe_green_ne_e_sw);
-        TEXTURE_ID_HEXAGON_GREEN_PIPE_NE_E_W = loadTexture(R.drawable.hexagon_pipe_green_ne_e_w);
-        TEXTURE_ID_HEXAGON_GREEN_PIPE_NE_SE = loadTexture(R.drawable.hexagon_pipe_green_ne_se);
-        TEXTURE_ID_HEXAGON_GREEN_PIPE_NE_SW = loadTexture(R.drawable.hexagon_pipe_green_ne_sw);
-        TEXTURE_ID_HEXAGON_GREEN_PIPE_NE_W = loadTexture(R.drawable.hexagon_pipe_green_ne_w);
-        TEXTURE_ID_HEXAGON_GREEN_PIPE_NW_NE_SE_SW = loadTexture(R.drawable.hexagon_pipe_green_nw_ne_se_sw);
-        TEXTURE_ID_HEXAGON_GREEN_PIPE_NW_NE_E_SW = loadTexture(R.drawable.hexagon_pipe_green_nw_ne_e_sw);
-        TEXTURE_ID_HEXAGON_GREEN_PIPE_NW_E_SW = loadTexture(R.drawable.hexagon_pipe_green_nw_e_sw);
+        TEXTURE_ID_DIAMOND = loadTexture(R.drawable.diamonds);
+        TEXTURE_ID_HEXAGON = loadTexture(R.drawable.hexagons);
+        TEXTURE_ID_SQUARE = loadTexture(R.drawable.squares);
     }
 
     /**

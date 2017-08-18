@@ -24,33 +24,32 @@ public class Square {
     public ShortBuffer drawListBuffer;
     public FloatBuffer uvBuffer;
 
-    //current texture id
-    private int textureId;
-
     public Square() {
         setupImage();
         setupTriangle();
     }
 
-    private int getTextureId() {
-        return this.textureId;
+    private void setupImage() {
+        if (this.uvs == null) {
+            //create our UV coordinates meaning we are going to render the entire texture
+            uvs = new float[] {
+                0.0f, 0.0f,
+                0.0f, 1.0f,
+                1.0f, 1.0f,
+                1.0f, 0.0f
+            };
+        }
+
+        setupImage(uvs);
     }
 
-    private void setupImage() {
-
-        //create our UV coordinates meaning we are going to render the entire texture
-        uvs = new float[] {
-            0.0f, 0.0f,
-            0.0f, 1.0f,
-            1.0f, 1.0f,
-            1.0f, 0.0f
-        };
+    private void setupImage(float[] uvsTmp) {
 
         // The texture buffer
-        ByteBuffer bb = ByteBuffer.allocateDirect(uvs.length * 4);
+        ByteBuffer bb = ByteBuffer.allocateDirect(uvsTmp.length * 4);
         bb.order(ByteOrder.nativeOrder());
         uvBuffer = bb.asFloatBuffer();
-        uvBuffer.put(uvs);
+        uvBuffer.put(uvsTmp);
         uvBuffer.position(0);
     }
 
@@ -82,9 +81,6 @@ public class Square {
         vertexBuffer = bb.asFloatBuffer();
         vertexBuffer.put(vertices);
         vertexBuffer.position(0);
-
-        //also update the texture id
-        this.textureId = shape.getTextureId();
     }
 
     private void update(Entity entity) {
@@ -98,9 +94,6 @@ public class Square {
         vertexBuffer = bb.asFloatBuffer();
         vertexBuffer.put(vertices);
         vertexBuffer.position(0);
-
-        //also update the texture id
-        this.textureId = entity.getTextureId();
     }
 
     public void render(final CustomShape shape, final float[] m) {
@@ -144,10 +137,6 @@ public class Square {
 
         // Set the sampler texture unit to 0, where we have saved the texture.
         GLES20.glUniform1i(mSamplerLoc, 0);
-
-        //set the correct texture for rendering
-        GLES20.glActiveTexture(GLES20.GL_TEXTURE0);
-        GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, getTextureId());
 
         // Draw the triangle
         GLES20.glDrawElements(GLES20.GL_TRIANGLES, indices.length, GLES20.GL_UNSIGNED_SHORT, drawListBuffer);
