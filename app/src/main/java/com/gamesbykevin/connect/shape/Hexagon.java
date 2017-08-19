@@ -30,8 +30,7 @@ public class Hexagon extends CustomShape {
      * How many degrees do we rotate the shape each time when auto rotating
      */
     public static final float ROTATE_VELOCITY_FAST = (ROTATION_ANGLE_DEFAULT / 10);
-
-
+    
     public Hexagon() {
         super(DIMENSION, DIMENSION);
     }

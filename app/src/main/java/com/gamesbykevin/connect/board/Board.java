@@ -17,6 +17,7 @@ import com.gamesbykevin.connect.shape.Square;
 
 import static com.gamesbykevin.connect.activity.GameActivity.getRandomObject;
 import static com.gamesbykevin.connect.board.BoardHelper.checkBoard;
+import static com.gamesbykevin.connect.board.BoardHelper.setupCoordinates;
 import static com.gamesbykevin.connect.game.Game.AUTO_ROTATE;
 import static com.gamesbykevin.connect.game.GameHelper.getSquare;
 
@@ -25,6 +26,12 @@ import static com.gamesbykevin.connect.game.GameHelper.getSquare;
  */
 public class Board implements ICommon {
 
+    //store these coordinates for rendering
+    protected static float[] VERTICES;
+    protected static short[] INDICES;
+    protected static float[] UVS;
+
+    //array of shapes on the board
     private CustomShape[][] shapes;
 
     public enum Shape {
@@ -39,8 +46,8 @@ public class Board implements ICommon {
 
     private Entity entity = new Entity();
 
-    public static final int BOARD_COLS = 10;
-    public static final int BOARD_ROWS = 10;
+    public static final int BOARD_COLS = 15;
+    public static final int BOARD_ROWS = 15;
 
     //base point that we will mark connected
     public static final int ANCHOR_COL = (BOARD_COLS / 2);
@@ -111,6 +118,11 @@ public class Board implements ICommon {
                 addShape(getType(), getMaze().getRoom(col, row), x, y, col, row);
             }
         }
+
+        //setup coordinates for open gl rendering
+        getUvs();
+        getVertices();
+        getIndices();
     }
 
     public final void addShape(Shape shape, Room room, float x, float y, int col, int row) {
@@ -332,6 +344,18 @@ public class Board implements ICommon {
         return this.type;
     }
 
+    public float[] getVertices() {
+        return VERTICES;
+    }
+
+    public short[] getIndices() {
+        return INDICES;
+    }
+
+    public float[] getUvs() {
+        return UVS;
+    }
+
     @Override
     public void reset() {
 
@@ -388,24 +412,9 @@ public class Board implements ICommon {
                 break;
         }
 
+        setupCoordinates(getShapes());
 
-        for (int col = 0; col < getMaze().getCols(); col++) {
-            for (int row = 0; row < getMaze().getRows(); row++) {
-
-                try {
-
-                    CustomShape shape = getShapes()[row][col];
-
-                    if (shape == null || entity == null)
-                        return;
-
-                    //render the shape
-                    getSquare().render(shape, m);
-
-                } catch (Exception e) {
-                    UtilityHelper.handleException(e);
-                }
-            }
-        }
+        //render the shape
+        getSquare().render(this, m);
     }
 }

@@ -49,7 +49,7 @@ public abstract class CustomShape extends Entity implements ICustomShape {
     //do we render the shape background
     private boolean visible = true;
 
-    //texture altas coordinates
+    //texture atlas coordinates
     private float[] uvsGray, uvsGreen;
 
     //how fast can we rotate the shape

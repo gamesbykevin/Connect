@@ -2,112 +2,113 @@ package com.gamesbykevin.connect.opengl;
 
 import android.opengl.GLES20;
 
+import com.gamesbykevin.connect.board.Board;
 import com.gamesbykevin.connect.entity.Entity;
-import com.gamesbykevin.connect.shape.CustomShape;
 
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.FloatBuffer;
 import java.nio.ShortBuffer;
 
-import static com.gamesbykevin.connect.game.GameHelper.getEntity;
-
 /**
  * Created by Kevin on 8/13/2017.
  */
 public class Square {
 
-    public static float vertices[];
-    public static short indices[];
-    public static float uvs[];
-    public FloatBuffer vertexBuffer;
-    public ShortBuffer drawListBuffer;
-    public FloatBuffer uvBuffer;
+    private float[] vertices;
+    private short[] indices;
+    private float[] uvs;
+    private FloatBuffer vertexBuffer;
+    private ShortBuffer drawListBuffer;
+    private FloatBuffer uvBuffer;
 
     public Square() {
-        setupImage();
-        setupTriangle();
+        //default constructor
+        //setupImage();
+        //setupTriangle();
     }
 
     private void setupImage() {
-        if (this.uvs == null) {
-            //create our UV coordinates meaning we are going to render the entire texture
-            uvs = new float[] {
-                0.0f, 0.0f,
-                0.0f, 1.0f,
-                1.0f, 1.0f,
-                1.0f, 0.0f
-            };
-        }
 
-        setupImage(uvs);
+        //create our UV coordinates meaning we are going to render the entire texture
+        if (this.uvs == null)
+            this.uvs = new float[] { 0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f, 0.0f };
+
+        setupImage(this.uvs);
     }
 
-    private void setupImage(float[] uvsTmp) {
+    private void setupImage(float[] tmp) {
 
-        // The texture buffer
-        ByteBuffer bb = ByteBuffer.allocateDirect(uvsTmp.length * 4);
+        this.uvs = tmp;
+
+        //the texture buffer
+        ByteBuffer bb = ByteBuffer.allocateDirect(tmp.length * 4);
         bb.order(ByteOrder.nativeOrder());
         uvBuffer = bb.asFloatBuffer();
-        uvBuffer.put(uvsTmp);
+        uvBuffer.put(tmp);
         uvBuffer.position(0);
     }
 
     private void setupTriangle() {
 
-        // The order of vertex rendering for a quad
-        indices = new short[] {0, 1, 2, 0, 2, 3};
+        //create indices meaning we are only rendering one quad texture (2 triangles)
+        if (this.indices == null)
+            this.indices = new short[] {0, 1, 2, 0, 2, 3};
 
-        // initialize byte buffer for the draw list
-        ByteBuffer dlb = ByteBuffer.allocateDirect(indices.length * 2);
+        setupTriangle(this.indices);
+    }
+
+    private void setupTriangle(short[] tmp) {
+
+        this.indices = tmp;
+
+        //initialize byte buffer for the draw list
+        ByteBuffer dlb = ByteBuffer.allocateDirect(tmp.length * 2);
         dlb.order(ByteOrder.nativeOrder());
         drawListBuffer = dlb.asShortBuffer();
-        drawListBuffer.put(indices);
+        drawListBuffer.put(tmp);
         drawListBuffer.position(0);
     }
 
-    private void setupVertices(float[] vertices) {
+    private void setupVertices(float[] tmp) {
 
-        //assign array
-        this.vertices = vertices;
+        this.vertices = tmp;
 
-        // The vertex buffer.
-        ByteBuffer bb = ByteBuffer.allocateDirect(this.vertices.length * 4);
+        //the vertex buffer.
+        ByteBuffer bb = ByteBuffer.allocateDirect(tmp.length * 4);
         bb.order(ByteOrder.nativeOrder());
         vertexBuffer = bb.asFloatBuffer();
-        vertexBuffer.put(this.vertices);
+        vertexBuffer.put(tmp);
         vertexBuffer.position(0);
     }
 
-    private void update(CustomShape shape) {
-
-        //if rotating update vertices
-        if (shape.hasRotate())
-            shape.updateVertices();
+    public void render(final Board board, final float[] m) {
 
         //assign the texture atlas coordinates
-        setupImage(shape.getTextureCoordinates());
+        setupImage(board.getUvs());
+
+        //setup the indices to render all the shapes
+        setupTriangle(board.getIndices());
 
         //return cached array to improve performance
-        setupVertices(shape.getVertices());
-    }
+        setupVertices(board.getVertices());
 
-    private void update(Entity entity) {
-
-        //assign default texture atlas coordinates
-        setupImage();
-
-        //calculate vertices
-        setupVertices(entity.getTransformedVertices());
-    }
-
-    public void render(final CustomShape shape, final float[] m) {
-        update(shape);
+        //render
         render(m);
     }
 
     public void render(final Entity entity, final float[] m) {
-        update(entity);
+
+        //assign default texture atlas coordinates
+        setupImage();
+
+        //setup the indices to render this single entity
+        setupTriangle();
+
+        //calculate vertices
+        setupVertices(entity.getTransformedVertices());
+
+        //render
         render(m);
     }
 
@@ -125,10 +126,10 @@ public class Square {
         // Get handle to texture coordinates location
         int mTexCoordLoc = GLES20.glGetAttribLocation(riGraphicTools.sp_Image, "a_texCoord" );
 
-        // Enable generic vertex attribute array
+        //enable generic vertex attribute array
         GLES20.glEnableVertexAttribArray(mTexCoordLoc);
 
-        // Prepare the texture coordinates
+        //prepare the texture coordinates
         GLES20.glVertexAttribPointer(mTexCoordLoc, 2, GLES20.GL_FLOAT, false, 0, uvBuffer);
 
         // Get handle to shape's transformation matrix
@@ -143,10 +144,10 @@ public class Square {
         // Set the sampler texture unit to 0, where we have saved the texture.
         GLES20.glUniform1i(mSamplerLoc, 0);
 
-        // Draw the triangle
+        //draw the triangle
         GLES20.glDrawElements(GLES20.GL_TRIANGLES, indices.length, GLES20.GL_UNSIGNED_SHORT, drawListBuffer);
 
-        // Disable vertex array
+        //disable vertex array
         GLES20.glDisableVertexAttribArray(mPositionHandle);
         GLES20.glDisableVertexAttribArray(mTexCoordLoc);
     }
