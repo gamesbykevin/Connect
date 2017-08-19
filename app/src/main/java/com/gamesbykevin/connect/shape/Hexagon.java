@@ -46,7 +46,7 @@ public class Hexagon extends CustomShape {
 
         //the location of each
         int column;
-        int rowGray = 1, rowGreen = 0;
+        int rowGray = 0, rowGreen = 1;
 
         if (hasNorthWest() && hasNorthEast() && hasEast() && hasSouthEast() && hasSouthWest() && hasWest()) {
             column = 0;
@@ -190,6 +190,11 @@ public class Hexagon extends CustomShape {
             throw new RuntimeException("Texture id not found NW:" + hasNorthWest() + " NE:" + hasNorthEast() + " E:" + hasEast() + " SE:" + hasSouthEast() + " SW:" + hasSouthWest() + " W:" + hasWest());
         }
 
+        if (rowGray >= TEXTURE_HEXAGON_ROWS || rowGray < 0)
+            throw new RuntimeException("Unexpected rowGray " + rowGray);
+        if (rowGreen >= TEXTURE_HEXAGON_ROWS || rowGreen < 0)
+            throw new RuntimeException("Unexpected rowGreen " + rowGreen);
+
         //now create the uvs coordinates;
         float[] uvsGray = null;
         float[] uvsGreen = null;
@@ -200,21 +205,15 @@ public class Hexagon extends CustomShape {
             uvsGreen = new float[8];
 
         final float startCol = (float)column / TEXTURE_HEXAGON_COLS;
-        float startRow = (float)rowGray / TEXTURE_HEXAGON_ROWS;
         final float width = 1.0f / TEXTURE_HEXAGON_COLS;
         final float height = 1.0f / TEXTURE_HEXAGON_ROWS;
 
-        uvsGray[0] = startCol; uvsGray[1] = startRow;
-        uvsGray[2] = startCol; uvsGray[3] = startRow + height;
-        uvsGray[4] = startCol + width; uvsGray[5] = startRow + height;
-        uvsGray[6] = startCol + width; uvsGray[7] = startRow;
+        float startRow = (float)rowGray / TEXTURE_HEXAGON_ROWS;
+        setupUVS(uvsGray, startCol, startRow, width, height);
         super.setTextureCoordinatesGray(uvsGray);
 
         startRow = (float)rowGreen / TEXTURE_HEXAGON_ROWS;
-        uvsGreen[0] = startCol; uvsGreen[1] = startRow;
-        uvsGreen[2] = startCol; uvsGreen[3] = startRow + height;
-        uvsGreen[4] = startCol + width; uvsGreen[5] = startRow + height;
-        uvsGreen[6] = startCol + width; uvsGreen[7] = startRow;
+        setupUVS(uvsGreen, startCol, startRow, width, height);
         super.setTextureCoordinatesGreen(uvsGreen);
     }
 

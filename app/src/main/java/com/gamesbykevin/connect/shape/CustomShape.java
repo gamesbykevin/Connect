@@ -236,6 +236,14 @@ public abstract class CustomShape extends Entity implements ICustomShape {
         return this.uvsGreen;
     }
 
+    protected void setupUVS(float[] uvs, float col, float row, float width, float height) {
+
+        uvs[0] = col; uvs[1] = row;
+        uvs[2] = col; uvs[3] = row + height;
+        uvs[4] = col + width; uvs[5] = row + height;
+        uvs[6] = col + width; uvs[7] = row;
+    }
+
     //need logic implemented to assign the texture coordinates
     public abstract void assignTextureCoordinates();
 

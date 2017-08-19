@@ -29,14 +29,14 @@ public class Textures {
     public static int TEXTURE_ID_HEXAGON = 0;
     public static int TEXTURE_ID_DIAMOND = 0;
 
-    public static float TEXTURE_SQUARE_COLS = 5;
-    public static float TEXTURE_SQUARE_ROWS = 2;
+    public static float TEXTURE_SQUARE_COLS = 5.0f;
+    public static float TEXTURE_SQUARE_ROWS = 2.0f;
 
-    public static float TEXTURE_DIAMOND_COLS = 5;
-    public static float TEXTURE_DIAMOND_ROWS = 2;
+    public static float TEXTURE_DIAMOND_COLS = 5.0f;
+    public static float TEXTURE_DIAMOND_ROWS = 2.0f;
 
-    public static float TEXTURE_HEXAGON_COLS = 14;
-    public static float TEXTURE_HEXAGON_ROWS = 2;
+    public static float TEXTURE_HEXAGON_COLS = 14.0f;
+    public static float TEXTURE_HEXAGON_ROWS = 2.0f;
 
     //store reference to access resources
     private final Context activity;

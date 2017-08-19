@@ -233,7 +233,11 @@ public class OpenGLRenderer implements Renderer {
         long time = System.currentTimeMillis();
 
         //clear the screen and depth buffer, we have set the clear color as black.
-        GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT | GLES20.GL_DEPTH_BUFFER_BIT);
+        //GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT | GLES20.GL_DEPTH_BUFFER_BIT);
+
+        //support transparency
+        GLES20.glEnable(GLES20.GL_BLEND);
+        GLES20.glBlendFunc(GLES20.GL_ONE_MINUS_SRC_ALPHA, GLES20.GL_BLEND_SRC_ALPHA);
 
         //render our background
         setupBackground();
@@ -257,7 +261,9 @@ public class OpenGLRenderer implements Renderer {
      * Setup the background to be rendered
      */
     private void setupBackground() {
-        getEntity().setTextureId(Textures.TEXTURE_ID_BACKGROUND);
+        //set the correct texture for rendering
+        GLES20.glActiveTexture(GLES20.GL_TEXTURE0);
+        GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, Textures.TEXTURE_ID_BACKGROUND);
         getEntity().setAngle(0f);
         getEntity().setX(0);
         getEntity().setY(0);
