@@ -42,15 +42,12 @@ public class OpenGLRenderer implements Renderer {
     /**
      * The maximum amount we can zoom out
      */
-    private static float ZOOM_RATIO_MAX = 4.0f;
+    private static float ZOOM_RATIO_MAX = 5.0f;
 
     /**
      * The minimum amount we can zoom in
      */
     private static float ZOOM_RATIO_MIN = 0.2f;
-
-    //keep track of our pan coordinates
-    private float panX, panY;
 
     //get the ratio of the users screen compared to the default dimensions for the motion event
     private static float originalScaleMotionX = 0, originalScaleMotionY = 0;
@@ -121,6 +118,10 @@ public class OpenGLRenderer implements Renderer {
         ZOOM_SCALE_MOTION_X = (WIDTH * zoomRatio) / screenWidth;
         ZOOM_SCALE_MOTION_Y = (HEIGHT * zoomRatio) / screenHeight;
 
+        //every time we zoom, reset the offset (x, y)
+        OFFSET_X = 0f;
+        OFFSET_Y = 0f;
+
         //adjust the zoom on the matrix
         Matrix.orthoM(mtrxProjection, 0, 0f, WIDTH * zoomRatio, HEIGHT * zoomRatio, 0f, 0f, 50f);
 
@@ -129,10 +130,6 @@ public class OpenGLRenderer implements Renderer {
     }
 
     public void adjustPan(float x, float y) {
-
-        //keep track of current pan coordinates
-        panX += x;
-        panY += y;
 
         //offset the screen
         Matrix.translateM(mtrxProjection, 0, x, y, 0.0f);
