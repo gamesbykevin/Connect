@@ -1,7 +1,6 @@
 package com.gamesbykevin.connect.opengl;
 
 import android.content.Context;
-import android.graphics.PixelFormat;
 import android.opengl.GLSurfaceView;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
@@ -107,13 +106,7 @@ public class OpenGLSurfaceView extends GLSurfaceView implements Runnable {
     private float motionMoveX = 0.0f, motionMoveY = 0.0f;
 
     //do we offset the render for our game
-    public static float OFFSET_X, OFFSET_Y;
-
-    //boundaries to stay within
-    public static int OFFSET_X_MIN = -WIDTH * 2;
-    public static int OFFSET_X_MAX = WIDTH * 2;
-    public static int OFFSET_Y_MIN = -HEIGHT * 2;
-    public static int OFFSET_Y_MAX = HEIGHT * 2;
+    public static float OFFSET_X = 0.0f, OFFSET_Y = 0.0f;
 
     //are we zooming?
     private boolean zooming = false;
@@ -300,6 +293,9 @@ public class OpenGLSurfaceView extends GLSurfaceView implements Runnable {
             if (!LOADED)
                 return true;
 
+            final float x = event.getX();
+            final float y = event.getY();
+
             //if zoom functionality is enabled, check for it
             if (ZOOM_ENABLED) {
 
@@ -316,8 +312,8 @@ public class OpenGLSurfaceView extends GLSurfaceView implements Runnable {
                         pinchDistance = 0;
 
                         //store the coordinates
-                        motionMoveX = event.getX();
-                        motionMoveY = event.getY();
+                        motionMoveX = x;
+                        motionMoveY = y;
                         break;
 
                     //keep track of how many fingers are on the screen
@@ -402,8 +398,8 @@ public class OpenGLSurfaceView extends GLSurfaceView implements Runnable {
                                 return true;
 
                             //adjust the coordinates where touch event occurred
-                            final float x1 = event.getRawX();
-                            final float y1 = event.getRawY();
+                            final float x1 = x;
+                            final float y1 = y;
                             final float x2 = motionMoveX;
                             final float y2 = motionMoveY;
 
@@ -419,25 +415,15 @@ public class OpenGLSurfaceView extends GLSurfaceView implements Runnable {
                             dragging = true;
 
                             //if one finger is moved, offset the x,y coordinates
-                            if (OFFSET_X + xDiff < OFFSET_X_MIN) {
-                                OFFSET_X = OFFSET_X_MIN;
-                            } else if (OFFSET_X + xDiff > OFFSET_X_MAX) {
-                                OFFSET_X = OFFSET_X_MAX;
-                            } else {
-                                OFFSET_X += xDiff;
-                            }
+                            OFFSET_X += xDiff;
+                            OFFSET_Y += yDiff;
 
-                            if (OFFSET_Y + yDiff < OFFSET_Y_MIN) {
-                                OFFSET_Y = OFFSET_Y_MIN;
-                            } else if (OFFSET_Y + yDiff > OFFSET_Y_MAX) {
-                                OFFSET_Y = OFFSET_Y_MAX;
-                            } else {
-                                OFFSET_Y += yDiff;
-                            }
+                            //move the screen accordingly
+                            getOpenGlRenderer().adjustPan(xDiff * ZOOM_SCALE_MOTION_X, yDiff * ZOOM_SCALE_MOTION_Y);
 
                             //update the coordinates
-                            motionMoveX = event.getX();
-                            motionMoveY = event.getY();
+                            motionMoveX = x1;
+                            motionMoveY = y1;
 
                             //don't interact with the game since that is not the intention
                             return true;
@@ -446,14 +432,15 @@ public class OpenGLSurfaceView extends GLSurfaceView implements Runnable {
                 }
             }
 
-            //adjust the coordinates where touch event occurred
-            final float x = (event.getRawX() * ZOOM_SCALE_MOTION_X) - (OFFSET_X * ZOOM_SCALE_MOTION_X);
-            final float y = (event.getRawY() * ZOOM_SCALE_MOTION_Y) - (OFFSET_Y * ZOOM_SCALE_MOTION_Y);
-
             //make sure we aren't using too many fingers
             if (fingers < 2) {
+
+                //adjust the coordinates where touch event occurred
+                final float adjustX = (x * ZOOM_SCALE_MOTION_X) - (OFFSET_X * ZOOM_SCALE_MOTION_X);
+                final float adjustY = (y * ZOOM_SCALE_MOTION_Y) - (OFFSET_Y * ZOOM_SCALE_MOTION_Y);
+
                 //update game accordingly
-                getGame().onTouchEvent(event.getAction(), x, y);
+                getGame().onTouchEvent(event.getAction(), adjustX, adjustY);
             }
         }
         catch (Exception e)

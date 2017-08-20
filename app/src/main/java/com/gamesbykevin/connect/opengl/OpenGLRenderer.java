@@ -6,12 +6,6 @@ import android.opengl.GLSurfaceView.Renderer;
 import android.opengl.Matrix;
 
 import com.gamesbykevin.androidframeworkv2.util.UtilityHelper;
-import com.gamesbykevin.connect.entity.Entity;
-
-import java.nio.ByteBuffer;
-import java.nio.ByteOrder;
-import java.nio.FloatBuffer;
-import java.nio.ShortBuffer;
 
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
@@ -19,11 +13,9 @@ import javax.microedition.khronos.opengles.GL10;
 import static com.gamesbykevin.androidframeworkv2.util.UtilityHelper.DEBUG;
 import static com.gamesbykevin.connect.activity.GameActivity.getGame;
 import static com.gamesbykevin.connect.game.Game.RESET_ZOOM;
-import static com.gamesbykevin.connect.game.Game.ZOOM_SCALE_RENDER_X;
-import static com.gamesbykevin.connect.game.Game.ZOOM_SCALE_RENDER_Y;
+
 import static com.gamesbykevin.connect.game.Game.ZOOM_SCALE_MOTION_X;
 import static com.gamesbykevin.connect.game.Game.ZOOM_SCALE_MOTION_Y;
-
 import static com.gamesbykevin.connect.game.GameHelper.getEntity;
 import static com.gamesbykevin.connect.game.GameHelper.getSquare;
 import static com.gamesbykevin.connect.opengl.OpenGLSurfaceView.FRAME_DURATION;
@@ -50,15 +42,15 @@ public class OpenGLRenderer implements Renderer {
     /**
      * The maximum amount we can zoom out
      */
-    private static float ZOOM_RATIO_MAX = 2.0f;
+    private static float ZOOM_RATIO_MAX = 4.0f;
 
     /**
      * The minimum amount we can zoom in
      */
-    private static float ZOOM_RATIO_MIN = 0.4f;
+    private static float ZOOM_RATIO_MIN = 0.2f;
 
-    //get the ratio of the users screen compared to the default dimensions for the render
-    private static float originalScaleRenderX, originalScaleRenderY;
+    //keep track of our pan coordinates
+    private float panX, panY;
 
     //get the ratio of the users screen compared to the default dimensions for the motion event
     private static float originalScaleMotionX = 0, originalScaleMotionY = 0;
@@ -104,8 +96,6 @@ public class OpenGLRenderer implements Renderer {
         //store the zoom variables as the same
         ZOOM_SCALE_MOTION_X = originalScaleMotionX;
         ZOOM_SCALE_MOTION_Y = originalScaleMotionY;
-        ZOOM_SCALE_RENDER_X = originalScaleRenderX;
-        ZOOM_SCALE_RENDER_Y = originalScaleRenderY;
         OFFSET_X = 0;
         OFFSET_Y = 0;
 
@@ -127,13 +117,28 @@ public class OpenGLRenderer implements Renderer {
         if (zoomRatio < ZOOM_RATIO_MIN)
             this.zoomRatio = ZOOM_RATIO_MIN;
 
-        //store the ratio for the render
-        ZOOM_SCALE_RENDER_X = screenWidth / (float) (WIDTH * zoomRatio);
-        ZOOM_SCALE_RENDER_Y = screenHeight / (float) (HEIGHT * zoomRatio);
-
         //store the ratio when touching the screen
-        ZOOM_SCALE_MOTION_X = (float) (WIDTH * zoomRatio) / screenWidth;
-        ZOOM_SCALE_MOTION_Y = (float) (HEIGHT * zoomRatio) / screenHeight;
+        ZOOM_SCALE_MOTION_X = (WIDTH * zoomRatio) / screenWidth;
+        ZOOM_SCALE_MOTION_Y = (HEIGHT * zoomRatio) / screenHeight;
+
+        //adjust the zoom on the matrix
+        Matrix.orthoM(mtrxProjection, 0, 0f, WIDTH * zoomRatio, HEIGHT * zoomRatio, 0f, 0f, 50f);
+
+        //calculate the projection and view transformation
+        Matrix.multiplyMM(mtrxProjectionAndView, 0, mtrxProjection, 0, mtrxView, 0);
+    }
+
+    public void adjustPan(float x, float y) {
+
+        //keep track of current pan coordinates
+        panX += x;
+        panY += y;
+
+        //offset the screen
+        Matrix.translateM(mtrxProjection, 0, x, y, 0.0f);
+
+        //calculate the projection and view transformation
+        Matrix.multiplyMM(mtrxProjectionAndView, 0, mtrxProjection, 0, mtrxView, 0);
     }
 
     /**
@@ -172,9 +177,6 @@ public class OpenGLRenderer implements Renderer {
 
         //load our textures
         this.textures.loadTextures();
-
-        //flag that we have loaded the textures
-        LOADED = true;
     }
 
     /**
@@ -204,23 +206,25 @@ public class OpenGLRenderer implements Renderer {
         //setup our screen width and height for our intended screen size
         Matrix.orthoM(mtrxProjection, 0, 0f, WIDTH, HEIGHT, 0f, 0f, 50f);
 
+        //offset the screen
+        Matrix.translateM(mtrxProjection, 0, 0.0f, 0.0f, 0.0f);
+
         //set the camera position (matrix)
         Matrix.setLookAtM(mtrxView, 0, 0f, 0f, 1f, 0f, 0f, 0f, 0f, 1.0f, 0.0f);
 
         //calculate the projection and view transformation
         Matrix.multiplyMM(mtrxProjectionAndView, 0, mtrxProjection, 0, mtrxView, 0);
 
-        //store the ratio for the render
-        this.originalScaleRenderX = screenWidth / (float) WIDTH;
-        this.originalScaleRenderY = screenHeight / (float) HEIGHT;
-
         //store the ratio when touching the screen
-        this.originalScaleMotionX = (float) WIDTH / screenWidth;
-        this.originalScaleMotionY = (float) HEIGHT / screenHeight;
+        this.originalScaleMotionX = (float)WIDTH  / (float)screenWidth;
+        this.originalScaleMotionY = (float)HEIGHT / (float)screenHeight;
 
         //set the zoom values same as original
         if (RESET_ZOOM)
             resetZoom();
+
+        //flag that we have loaded the textures & screens
+        LOADED = true;
     }
 
     /**
@@ -240,8 +244,16 @@ public class OpenGLRenderer implements Renderer {
         GLES20.glBlendFunc(GLES20.GL_ONE, GLES20.GL_BLEND_SRC_ALPHA);
 
         //render our background
-        //setupBackground();
-        //getSquare().render(getEntity(), mtrxProjectionAndView);
+        setupBackground();
+        getSquare().render(getEntity(), mtrxProjectionAndView);
+
+
+        //adjust the zoom on the matrix
+        //Matrix.orthoM(mtrxProjection, 0, 0f, WIDTH * ZOOM_SCALE_MOTION_X, HEIGHT * ZOOM_SCALE_MOTION_Y, 0f, 0f, 50f);
+
+        //calculate the projection and view transformation
+        //Matrix.multiplyMM(mtrxProjectionAndView, 0, mtrxProjection, 0, mtrxView, 0);
+
 
         //render game elements
         getGame().render(mtrxProjectionAndView);
@@ -261,13 +273,27 @@ public class OpenGLRenderer implements Renderer {
      * Setup the background to be rendered
      */
     private void setupBackground() {
+
         //set the correct texture for rendering
         GLES20.glActiveTexture(GLES20.GL_TEXTURE0);
         GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, Textures.TEXTURE_ID_BACKGROUND);
         getEntity().setAngle(0f);
+
+        //always render the background full screen
         getEntity().setX(0);
         getEntity().setY(0);
         getEntity().setWidth(WIDTH);
         getEntity().setHeight(HEIGHT);
+
+        /*
+        //set the boundary as the full screen size
+        Matrix.orthoM(mtrxProjection, 0, 0f, WIDTH, HEIGHT, 0f, 0f, 50f);
+
+        //offset the screen
+        Matrix.translateM(mtrxProjection, 0, 0.0f, 0.0f, 0.0f);
+
+        //calculate the projection and view transformation
+        Matrix.multiplyMM(mtrxProjectionAndView, 0, mtrxProjection, 0, mtrxView, 0);
+        */
     }
 }

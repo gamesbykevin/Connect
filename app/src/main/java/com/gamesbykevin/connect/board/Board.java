@@ -17,7 +17,8 @@ import com.gamesbykevin.connect.shape.Square;
 
 import static com.gamesbykevin.connect.activity.GameActivity.getRandomObject;
 import static com.gamesbykevin.connect.board.BoardHelper.checkBoard;
-import static com.gamesbykevin.connect.board.BoardHelper.setupCoordinates;
+import static com.gamesbykevin.connect.board.BoardHelper.updateCoordinates;
+import static com.gamesbykevin.connect.board.BoardHelper.updateShape;
 import static com.gamesbykevin.connect.game.Game.AUTO_ROTATE;
 import static com.gamesbykevin.connect.game.GameHelper.getSquare;
 
@@ -46,8 +47,8 @@ public class Board implements ICommon {
 
     private Entity entity = new Entity();
 
-    public static final int BOARD_COLS = 15;
-    public static final int BOARD_ROWS = 15;
+    public static final int BOARD_COLS = 10;
+    public static final int BOARD_ROWS = 10;
 
     //base point that we will mark connected
     public static final int ANCHOR_COL = (BOARD_COLS / 2);
@@ -106,6 +107,8 @@ public class Board implements ICommon {
         final int sx = BoardHelper.getStartX(getType(), maze.getCols(), maze.getRows(), w, h);
         final int sy = BoardHelper.getStartY(getType(), maze.getCols(), maze.getRows(), w, h);
 
+        int index = 0;
+
         for (int col = 0; col < getMaze().getCols(); col++) {
 
             for (int row = 0; row < getMaze().getRows(); row++) {
@@ -115,17 +118,15 @@ public class Board implements ICommon {
                 y = sy + BoardHelper.getY(getType(), col, row, w, h);
 
                 //add shape
-                addShape(getType(), getMaze().getRoom(col, row), x, y, col, row);
+                addShape(getType(), getMaze().getRoom(col, row), x, y, col, row, index);
+
+                //keep track of index
+                index++;
             }
         }
-
-        //setup coordinates for open gl rendering
-        getUvs();
-        getVertices();
-        getIndices();
     }
 
-    public final void addShape(Shape shape, Room room, float x, float y, int col, int row) {
+    public final void addShape(Shape shape, Room room, float x, float y, int col, int row, int index) {
 
         CustomShape tmp = null;
 
@@ -150,6 +151,9 @@ public class Board implements ICommon {
         //assign x, y coordinates
         tmp.setX(x);
         tmp.setY(y);
+
+        //assign the index
+        tmp.setIndex(index);
 
         //mark the anchor shape as connected
         if (col == ANCHOR_COL && row == ANCHOR_ROW)
@@ -181,7 +185,7 @@ public class Board implements ICommon {
             rotations++;
         }
 
-        //calculate vertices, so it is cached at first
+        //update the vertices
         tmp.updateVertices();
 
         //assign shape in array
@@ -301,6 +305,9 @@ public class Board implements ICommon {
                     if (getRotationShape().hasRotate())
                         return;
 
+                    //make sure the vertices are updates
+                    getRotationShape().updateVertices();
+
                     //if magnet is enabled, check if we still need to rotate
                     if (AUTO_ROTATE) {
 
@@ -412,9 +419,13 @@ public class Board implements ICommon {
                 break;
         }
 
-        setupCoordinates(getShapes());
+        if (getUvs() == null || getIndices() == null || getVertices() == null) {
+            updateCoordinates(getShapes());
+        } else if (getRotationShape() != null) {
+            updateShape(getRotationShape());
+        }
 
-        //render the shape
+        //make a single call to render all shapes
         getSquare().render(this, m);
     }
 }

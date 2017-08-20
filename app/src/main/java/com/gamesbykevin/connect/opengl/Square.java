@@ -3,6 +3,7 @@ package com.gamesbykevin.connect.opengl;
 import android.opengl.GLES20;
 
 import com.gamesbykevin.connect.board.Board;
+import com.gamesbykevin.connect.board.BoardHelper;
 import com.gamesbykevin.connect.entity.Entity;
 
 import java.nio.ByteBuffer;
@@ -22,19 +23,22 @@ public class Square {
     private ShortBuffer drawListBuffer;
     private FloatBuffer uvBuffer;
 
+    //indices and uvs coordinates for a single entity
+    private short[] tmpIndices;
+    private float[] tmpUvs;
+
+
     public Square() {
         //default constructor
-        //setupImage();
-        //setupTriangle();
     }
 
     private void setupImage() {
 
         //create our UV coordinates meaning we are going to render the entire texture
-        if (this.uvs == null)
-            this.uvs = new float[] { 0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f, 0.0f };
+        if (this.tmpUvs == null)
+            this.tmpUvs = new float[] { 0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f, 0.0f };
 
-        setupImage(this.uvs);
+        setupImage(this.tmpUvs);
     }
 
     private void setupImage(float[] tmp) {
@@ -52,10 +56,10 @@ public class Square {
     private void setupTriangle() {
 
         //create indices meaning we are only rendering one quad texture (2 triangles)
-        if (this.indices == null)
-            this.indices = new short[] {0, 1, 2, 0, 2, 3};
+        if (this.tmpIndices == null)
+            this.tmpIndices = new short[] { 0, 1, 2, 0, 2, 3 };
 
-        setupTriangle(this.indices);
+        setupTriangle(this.tmpIndices);
     }
 
     private void setupTriangle(short[] tmp) {

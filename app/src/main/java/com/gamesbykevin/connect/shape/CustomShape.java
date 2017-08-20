@@ -58,6 +58,9 @@ public abstract class CustomShape extends Entity implements ICustomShape {
     //# of degrees for a single rotation
     public static float ROTATION_ANGLE;
 
+    //index in array for open gl rendering
+    private int index;
+
     /**
      * Default constructor
      */
@@ -67,6 +70,14 @@ public abstract class CustomShape extends Entity implements ICustomShape {
 
         super.setWidth(w);
         super.setHeight(h);
+    }
+
+    public void setIndex(final int index) {
+        this.index = index;
+    }
+
+    public int getIndex() {
+        return this.index;
     }
 
     public void setVisible(final boolean visible) {
@@ -313,9 +324,6 @@ public abstract class CustomShape extends Entity implements ICustomShape {
 
                 //stop rotating
                 rotateFinish();
-
-                //make sure vertices are correct
-                updateVertices();
 
             } else {
 

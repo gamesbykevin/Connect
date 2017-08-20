@@ -35,7 +35,7 @@ public class Entity extends Cell {
     private PointF nw = new PointF(), ne = new PointF(), sw = new PointF(), se = new PointF();
 
     //the vertices of our entity
-    private float[] vertices = new float[12];
+    private float[] vertices;
 
     /**
      * Default constructor
@@ -239,6 +239,12 @@ public class Entity extends Cell {
     }
 
     public float[] getVertices() {
+
+        //calculate at least once
+        if (this.vertices == null)
+            return getTransformedVertices();
+
+        //return our array
         return this.vertices;
     }
 
@@ -282,6 +288,9 @@ public class Entity extends Cell {
         sw.x += tmpX; sw.y += tmpY;
         se.x += tmpX; se.y += tmpY;
         ne.x += tmpX; ne.y += tmpY;
+
+        if (this.vertices == null)
+            this.vertices = new float[12];
 
         //update our vertices with the new coordinates
         getVertices()[0] = nw.x; getVertices()[1] = nw.y;  getVertices()[2] = 0.0f;

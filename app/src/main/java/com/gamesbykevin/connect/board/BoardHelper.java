@@ -154,6 +154,9 @@ public class BoardHelper {
             }
         }
 
+        //update the coordinates for everything
+        updateCoordinates(board.getShapes());
+
         //if solved the game is over
         GAME_OVER = solved;
     }
@@ -433,93 +436,76 @@ public class BoardHelper {
     /**
      * Setup the coordinates for open gl rendering
      */
-    protected static void setupCoordinates(CustomShape[][] shapes) {
+    protected static void updateCoordinates(CustomShape[][] shapes) {
 
         if (VERTICES == null)
             VERTICES = new float[(shapes[0].length * shapes.length) * 4 * 3];
         if (UVS == null)
             UVS = new float[(shapes[0].length * shapes.length) * 4 * 2];
 
-        int index = 0;
-
         for (int col = 0; col < shapes[0].length; col++) {
             for (int row = 0; row < shapes.length; row++) {
 
                 try {
+
                     //get the current shape
                     CustomShape shape = shapes[row][col];
 
                     if (shape == null)
                         continue;
 
-                    //if rotating update vertices
-                    if (shape.hasRotate())
-                        shape.updateVertices();
-
-                    //assign vertices
-                    VERTICES[(index * 12) + 0] = shape.getVertices()[0];
-                    VERTICES[(index * 12) + 1] = shape.getVertices()[1];
-                    VERTICES[(index * 12) + 2] = shape.getVertices()[2];
-                    VERTICES[(index * 12) + 3] = shape.getVertices()[3];
-                    VERTICES[(index * 12) + 4] = shape.getVertices()[4];
-                    VERTICES[(index * 12) + 5] = shape.getVertices()[5];
-                    VERTICES[(index * 12) + 6] = shape.getVertices()[6];
-                    VERTICES[(index * 12) + 7] = shape.getVertices()[7];
-                    VERTICES[(index * 12) + 8] = shape.getVertices()[8];
-                    VERTICES[(index * 12) + 9] = shape.getVertices()[9];
-                    VERTICES[(index * 12) + 10] = shape.getVertices()[10];
-                    VERTICES[(index * 12) + 11] = shape.getVertices()[11];
-
-                    //which portion of the texture are we rendering
-                    UVS[(index * 8) + 0] = shape.getTextureCoordinates()[0];
-                    UVS[(index * 8) + 1] = shape.getTextureCoordinates()[1];
-                    UVS[(index * 8) + 2] = shape.getTextureCoordinates()[2];
-                    UVS[(index * 8) + 3] = shape.getTextureCoordinates()[3];
-                    UVS[(index * 8) + 4] = shape.getTextureCoordinates()[4];
-                    UVS[(index * 8) + 5] = shape.getTextureCoordinates()[5];
-                    UVS[(index * 8) + 6] = shape.getTextureCoordinates()[6];
-                    UVS[(index * 8) + 7] = shape.getTextureCoordinates()[7];
+                    //update shape coordinates
+                    updateShape(shape);
 
                 } catch (Exception e) {
                     UtilityHelper.handleException(e);
                 }
-
-                //increase index
-                index++;
             }
         }
 
         //setup one time
         if (INDICES == null) {
+
             INDICES = new short[(shapes[0].length * shapes.length) * 6];
 
             int last = 0;
-            index = 0;
 
-            for (int col = 0; col < shapes[0].length; col++) {
-                for (int row = 0; row < shapes.length; row++) {
+            for (int index = 0; index < shapes[0].length * shapes.length; index++) {
 
-                    try {
+                try {
 
-                        //we need to set the new indices for the new quad
-                        INDICES[(index * 6) + 0] = (short) (last + 0);
-                        INDICES[(index * 6) + 1] = (short) (last + 1);
-                        INDICES[(index * 6) + 2] = (short) (last + 2);
-                        INDICES[(index * 6) + 3] = (short) (last + 0);
-                        INDICES[(index * 6) + 4] = (short) (last + 2);
-                        INDICES[(index * 6) + 5] = (short) (last + 3);
+                    //we need to set the new indices for the new quad
+                    INDICES[(index * 6) + 0] = (short) (last + 0);
+                    INDICES[(index * 6) + 1] = (short) (last + 1);
+                    INDICES[(index * 6) + 2] = (short) (last + 2);
+                    INDICES[(index * 6) + 3] = (short) (last + 0);
+                    INDICES[(index * 6) + 4] = (short) (last + 2);
+                    INDICES[(index * 6) + 5] = (short) (last + 3);
 
-                        //normal quad = 0,1,2,0,2,3 so the next one will be 4,5,6,4,6,7
-                        last = last + 4;
+                    //normal quad = 0,1,2,0,2,3 so the next one will be 4,5,6,4,6,7
+                    last = last + 4;
 
-                    } catch (Exception e) {
-                        UtilityHelper.handleException(e);
-                    }
-
-                    //increase index
-                    index++;
+                } catch (Exception e) {
+                    UtilityHelper.handleException(e);
                 }
             }
+        }
+    }
+
+    protected static void updateShape(CustomShape shape) {
+
+        //if rotating update vertices
+        if (shape.hasRotate())
+            shape.updateVertices();
+
+        //assign vertices
+        for (int i = 0; i < shape.getVertices().length; i++) {
+            VERTICES[(shape.getIndex() * 12) + i] = shape.getVertices()[i];
+        }
+
+        //which portion of the texture are we rendering
+        for (int i = 0; i < shape.getTextureCoordinates().length; i++) {
+            UVS[(shape.getIndex() * 8) + i] = shape.getTextureCoordinates()[i];
         }
     }
 }
