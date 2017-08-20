@@ -49,6 +49,9 @@ public class OpenGLRenderer implements Renderer {
      */
     private static float ZOOM_RATIO_MIN = 0.2f;
 
+    //keep track of the offset
+    private static float PAN_X = 0f, PAN_Y = 0f;
+
     //get the ratio of the users screen compared to the default dimensions for the motion event
     private static float originalScaleMotionX = 0, originalScaleMotionY = 0;
 
@@ -95,6 +98,8 @@ public class OpenGLRenderer implements Renderer {
         ZOOM_SCALE_MOTION_Y = originalScaleMotionY;
         OFFSET_X = 0;
         OFFSET_Y = 0;
+        PAN_X = 0f;
+        PAN_Y = 0f;
 
         //flag false
         RESET_ZOOM = false;
@@ -121,6 +126,8 @@ public class OpenGLRenderer implements Renderer {
         //every time we zoom, reset the offset (x, y)
         OFFSET_X = 0f;
         OFFSET_Y = 0f;
+        PAN_X = 0f;
+        PAN_Y = 0f;
 
         //adjust the zoom on the matrix
         Matrix.orthoM(mtrxProjection, 0, 0f, WIDTH * zoomRatio, HEIGHT * zoomRatio, 0f, 0f, 50f);
@@ -130,6 +137,10 @@ public class OpenGLRenderer implements Renderer {
     }
 
     public void adjustPan(float x, float y) {
+
+        //keep track of the panning
+        PAN_X += x;
+        PAN_Y += y;
 
         //offset the screen
         Matrix.translateM(mtrxProjection, 0, x, y, 0.0f);
@@ -244,13 +255,10 @@ public class OpenGLRenderer implements Renderer {
         setupBackground();
         getSquare().render(getEntity(), mtrxProjectionAndView);
 
-
-        //adjust the zoom on the matrix
-        //Matrix.orthoM(mtrxProjection, 0, 0f, WIDTH * ZOOM_SCALE_MOTION_X, HEIGHT * ZOOM_SCALE_MOTION_Y, 0f, 0f, 50f);
-
-        //calculate the projection and view transformation
-        //Matrix.multiplyMM(mtrxProjectionAndView, 0, mtrxProjection, 0, mtrxView, 0);
-
+        //restore the zoom and pan coordinates
+        Matrix.orthoM(mtrxProjection, 0, 0f, WIDTH * zoomRatio, HEIGHT * zoomRatio, 0f, 0f, 50f);
+        Matrix.translateM(mtrxProjection, 0, PAN_X, PAN_Y, 0.0f);
+        Matrix.multiplyMM(mtrxProjectionAndView, 0, mtrxProjection, 0, mtrxView, 0);
 
         //render game elements
         getGame().render(mtrxProjectionAndView);
@@ -282,15 +290,9 @@ public class OpenGLRenderer implements Renderer {
         getEntity().setWidth(WIDTH);
         getEntity().setHeight(HEIGHT);
 
-        /*
-        //set the boundary as the full screen size
+        //reset to normal so background is displayed as is without transformation
         Matrix.orthoM(mtrxProjection, 0, 0f, WIDTH, HEIGHT, 0f, 0f, 50f);
-
-        //offset the screen
         Matrix.translateM(mtrxProjection, 0, 0.0f, 0.0f, 0.0f);
-
-        //calculate the projection and view transformation
         Matrix.multiplyMM(mtrxProjectionAndView, 0, mtrxProjection, 0, mtrxView, 0);
-        */
     }
 }
