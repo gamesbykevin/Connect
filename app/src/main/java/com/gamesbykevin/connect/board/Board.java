@@ -47,8 +47,8 @@ public class Board implements ICommon {
 
     private Entity entity = new Entity();
 
-    public static final int BOARD_COLS = 10;
-    public static final int BOARD_ROWS = 10;
+    public static final int BOARD_COLS = 5;
+    public static final int BOARD_ROWS = 5;
 
     //base point that we will mark connected
     public static final int ANCHOR_COL = (BOARD_COLS / 2);
@@ -219,6 +219,7 @@ public class Board implements ICommon {
 
                     //determine how fast the shape rotates
                     switch(getType()) {
+
                         case Square:
                             shape.setRotateVelocity(AUTO_ROTATE ? Square.ROTATE_VELOCITY_FAST : Square.ROTATE_VELOCITY);
                             break;

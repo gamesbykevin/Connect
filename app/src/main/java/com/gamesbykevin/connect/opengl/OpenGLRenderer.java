@@ -37,7 +37,7 @@ public class OpenGLRenderer implements Renderer {
     /**
      * How much can we adjust the zoom at one time
      */
-    public static float ZOOM_RATIO_ADJUST = 0.05f;
+    public static float ZOOM_RATIO_ADJUST = 0.1f;
 
     /**
      * The maximum amount we can zoom out
@@ -66,10 +66,12 @@ public class OpenGLRenderer implements Renderer {
     //object containing all the texture ids
     private Textures textures;
 
-    //our matrices
+    //our matrices window/camera/view etc...
     private final float[] mtrxProjection = new float[16];
     private final float[] mtrxView = new float[16];
     private final float[] mtrxProjectionAndView = new float[16];
+
+    private float angle = 0f;
 
     public OpenGLRenderer(Context activity) {
 
@@ -111,6 +113,10 @@ public class OpenGLRenderer implements Renderer {
      */
     public void adjustZoom(final float adjust) {
 
+        //don't continue if not loaded
+        if (!LOADED)
+            return;
+
         this.zoomRatio += adjust;
 
         //keep the zoom within the boundary
@@ -132,11 +138,30 @@ public class OpenGLRenderer implements Renderer {
         //adjust the zoom on the matrix
         Matrix.orthoM(mtrxProjection, 0, 0f, WIDTH * zoomRatio, HEIGHT * zoomRatio, 0f, 0f, 50f);
 
+        if (zoomRatio < 1) {
+
+        } else if (zoomRatio > 1) {
+
+        }
+
+        float newRatioWidth = WIDTH / (WIDTH * zoomRatio);
+        float newRatioHeight = HEIGHT / (HEIGHT * zoomRatio);
+
+        //now translate so it appears centered
+        Matrix.translateM(mtrxProjection, 0, (WIDTH * zoomRatio) / 2, (HEIGHT * zoomRatio) / 2, 0.0f);
+
+
+        //Matrix.setLookAtM(mtrxView, 0, 0f, 0f, 1f, 0.5f, 0.5f, 0f, 0f, 1.0f, 0.0f);
+
         //calculate the projection and view transformation
         Matrix.multiplyMM(mtrxProjectionAndView, 0, mtrxProjection, 0, mtrxView, 0);
     }
 
     public void adjustPan(float x, float y) {
+
+        //don't continue if not loaded
+        if (!LOADED)
+            return;
 
         //keep track of the panning
         PAN_X += x;
@@ -161,7 +186,7 @@ public class OpenGLRenderer implements Renderer {
         //set the clear color to black
         GLES20.glClearColor(0.0f, 0.0f, 0.0f, 1);
 
-        //create the shaders, solid color
+        //create the shader's, solid color
         int vertexShader = riGraphicTools.loadShader(GLES20.GL_VERTEX_SHADER, riGraphicTools.vs_SolidColor);
         int fragmentShader = riGraphicTools.loadShader(GLES20.GL_FRAGMENT_SHADER, riGraphicTools.fs_SolidColor);
         riGraphicTools.sp_SolidColor = GLES20.glCreateProgram();    // create empty OpenGL ES Program
@@ -169,7 +194,7 @@ public class OpenGLRenderer implements Renderer {
         GLES20.glAttachShader(riGraphicTools.sp_SolidColor, fragmentShader); // add the fragment shader to program
         GLES20.glLinkProgram(riGraphicTools.sp_SolidColor);                  // creates OpenGL ES program executables
 
-        //create the shaders, images
+        //create the shader's, images
         vertexShader = riGraphicTools.loadShader(GLES20.GL_VERTEX_SHADER, riGraphicTools.vs_Image);
         fragmentShader = riGraphicTools.loadShader(GLES20.GL_FRAGMENT_SHADER, riGraphicTools.fs_Image);
         riGraphicTools.sp_Image = GLES20.glCreateProgram();             // create empty OpenGL ES Program
@@ -251,17 +276,35 @@ public class OpenGLRenderer implements Renderer {
         GLES20.glEnable(GLES20.GL_BLEND);
         GLES20.glBlendFunc(GLES20.GL_ONE, GLES20.GL_BLEND_SRC_ALPHA);
 
+        /*
         //render our background
         setupBackground();
         getSquare().render(getEntity(), mtrxProjectionAndView);
 
+        final float newWidth = WIDTH * zoomRatio;
+        final float newHeight = HEIGHT * zoomRatio;
+
         //restore the zoom and pan coordinates
-        Matrix.orthoM(mtrxProjection, 0, 0f, WIDTH * zoomRatio, HEIGHT * zoomRatio, 0f, 0f, 50f);
+        Matrix.orthoM(mtrxProjection, 0, 0f, newWidth, newHeight, 0f, 0f, 50f);
         Matrix.translateM(mtrxProjection, 0, PAN_X, PAN_Y, 0.0f);
         Matrix.multiplyMM(mtrxProjectionAndView, 0, mtrxProjection, 0, mtrxView, 0);
+        */
 
         //render game elements
         getGame().render(mtrxProjectionAndView);
+
+        /*
+        Matrix.orthoM(mtrxProjection, 0, 0f, newWidth, newHeight, 0f, 0f, 50f);
+        //Matrix.translateM(mtrxProjection, 0, -(newWidth / 2), -(newHeight / 2), 0.0f);
+        //Matrix.rotateM(mtrxProjection, 0, angle, 0.0f, 0.0f, 1.0f);
+        //Matrix.translateM(mtrxProjection, 0, ((WIDTH * zoomRatio) / 2) + PAN_X, ((HEIGHT * zoomRatio) / 2) + PAN_Y, 0.0f);
+
+        angle += 1;
+
+        if (angle >= 360)
+            angle = 0;
+        */
+
 
         if (DEBUG && !false) {
 
