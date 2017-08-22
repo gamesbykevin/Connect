@@ -64,6 +64,38 @@ public class Board implements ICommon {
         //do we need to do anything here?
     }
 
+    /**
+     * Get the width of the entire board
+     * @return The pixel width of the entire board
+     */
+    public float getWidth() {
+
+        //west
+        CustomShape shape1 = getShapes()[0][0];
+
+        //east
+        CustomShape shape2 = getShapes()[0][getMaze().getCols() - 1];
+
+        //get the difference
+        return (shape2.getX() + shape2.getWidth()) - shape1.getX();
+    }
+
+    /**
+     * Get the height of the entire board
+     * @return The pixel height of the entire board
+     */
+    public float getHeight() {
+
+        //north
+        CustomShape shape1 = getShapes()[0][0];
+
+        //south
+        CustomShape shape2 = getShapes()[getMaze().getRows() - 1][0];
+
+        //get the difference
+        return (shape2.getY() + shape2.getHeight()) - shape1.getY();
+    }
+
     public Maze getMaze() {
         return this.maze;
     }

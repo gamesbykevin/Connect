@@ -7,6 +7,8 @@ import android.view.View;
 
 import com.gamesbykevin.androidframeworkv2.util.UtilityHelper;
 import com.gamesbykevin.connect.R;
+import com.gamesbykevin.connect.game.Game;
+import com.gamesbykevin.connect.opengl.OpenGLRenderer;
 
 public class MainActivity extends BaseActivity {
 
@@ -56,6 +58,9 @@ public class MainActivity extends BaseActivity {
     }
 
     public void onClickStart(View view) {
+
+        //reset the zoom, for every new game started
+        Game.RESET_ZOOM = true;
 
         //start game
         Intent intent = new Intent(this, GameActivity.class);

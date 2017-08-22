@@ -12,6 +12,7 @@ import com.gamesbykevin.androidframeworkv2.base.Disposable;
 import com.gamesbykevin.androidframeworkv2.util.UtilityHelper;
 import com.gamesbykevin.connect.R;
 import com.gamesbykevin.connect.game.Game;
+import com.gamesbykevin.connect.opengl.OpenGLRenderer;
 import com.gamesbykevin.connect.opengl.OpenGLSurfaceView;
 
 import java.util.ArrayList;

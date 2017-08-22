@@ -57,6 +57,9 @@ public class Game implements IGame {
 
         //default to loading
         STEP = Step.Loading;
+
+        //reset zoom
+        RESET_ZOOM = true;
     }
 
     public Board getBoard() {
