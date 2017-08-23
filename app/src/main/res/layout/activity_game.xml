@@ -18,6 +18,9 @@
     <!-- Game over layout(s) -->
     <include layout="@layout/layout_game_over_default" android:id="@+id/gameOverLayoutDefault" />
 
+    <!-- Level select layout -->
+    <include layout="@layout/layout_level_select" android:id="@+id/levelSelectLayout" />
+
     <!-- Splash page layout -->
     <include layout="@layout/activity_splash" android:id="@+id/loadingScreenLayout" />
 </FrameLayout>

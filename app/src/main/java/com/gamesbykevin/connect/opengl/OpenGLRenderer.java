@@ -75,7 +75,7 @@ public class OpenGLRenderer implements Renderer {
     private final float mx = (WIDTH / 2), my = (HEIGHT / 2);
 
     //the zoom window screen
-    private float left = 0f, right = WIDTH, bottom = HEIGHT, top = 0f;
+    public static float LEFT = 0f, RIGHT = WIDTH, BOTTOM = HEIGHT, TOP = 0f;
 
     public OpenGLRenderer(Context activity) {
 
@@ -110,6 +110,12 @@ public class OpenGLRenderer implements Renderer {
         ZOOM_RATIO = 1.0f;
         OFFSET_X = 0;
         OFFSET_Y = 0;
+
+        //reset the display window
+        LEFT = 0f;
+        RIGHT = WIDTH;
+        TOP = 0f;
+        BOTTOM = HEIGHT;
 
         //flag false
         RESET_ZOOM = false;
@@ -147,28 +153,11 @@ public class OpenGLRenderer implements Renderer {
         OFFSET_Y = 0f;
 
         //calculate the zoom screen
-        left = mx - (NEW_WIDTH / 2);
-        right = mx + (NEW_WIDTH / 2);
-        bottom = my + (NEW_HEIGHT / 2);
-        top = my - (NEW_HEIGHT / 2);
+        LEFT = mx - (NEW_WIDTH / 2);
+        RIGHT = mx + (NEW_WIDTH / 2);
+        BOTTOM = my + (NEW_HEIGHT / 2);
+        TOP = my - (NEW_HEIGHT / 2);
     }
-
-    public float getLeft() {
-        return  this.left;
-    }
-
-    public float getRight() {
-        return  this.right;
-    }
-
-    public float getBottom() {
-        return  this.bottom;
-    }
-
-    public float getTop() {
-        return  this.top;
-    }
-
 
     /**
      * Called once to set up the view's OpenGL ES environment
@@ -296,7 +285,7 @@ public class OpenGLRenderer implements Renderer {
     private void restoreZoomPan() {
 
         //setup the window that the user will see
-        Matrix.orthoM(mtrxProjection, 0, getLeft(), getRight(), getBottom(), getTop(), 0f, 50f);
+        Matrix.orthoM(mtrxProjection, 0, LEFT, RIGHT, BOTTOM, TOP, 0f, 50f);
 
         //offset the screen
         Matrix.translateM(mtrxProjection, 0, OFFSET_X, OFFSET_Y, 0.0f);

@@ -77,11 +77,19 @@ public class Game implements IGame {
 
     public void reset() throws Exception {
 
-        if (getBoard() != null)
-            getBoard().dispose();
+        if (getBoard() != null) {
+            board.dispose();
+            board = null;
+        }
+
+        //flag game over false
+        GAME_OVER = false;
+
+        //reset the zoom for a new level
+        OpenGLRenderer.resetZoom();
 
         //create a new board
-        this.board = new Board();
+        this.board = new Board(Board.BOARD_COLS, Board.BOARD_ROWS);
 
         //set the type of shape we will be playing with
         getBoard().setType((Board.Shape)activity.getObjectValue(R.string.game_shape_file_key, Board.Shape.class));
@@ -101,38 +109,33 @@ public class Game implements IGame {
                 if (LOADED) {
 
                     //if loaded display level select screen
-                    //activity.setScreen(Screen.LevelSelect);
+                    activity.setScreen(Screen.LevelSelect);
 
                     //go to start step
-                    STEP = Step.Reset;
+                    STEP = Step.Start;
                 }
                 break;
 
-            //once the ui is updated correctly we can continue
             case Start:
-
+                //don't do anything here
+                /*
                 //if loading is still displayed, don't render anything
                 if (activity.getScreen() == Screen.Loading)
                     return;
 
                 //all is good, we can start updating
                 STEP = Step.Updating;
+                */
                 break;
 
             //we are resetting the board
             case Reset:
 
-                //flag game over false
-                GAME_OVER = false;
-
-                //reset the zoom for a new level
-                OpenGLRenderer.resetZoom();
-
                 //reset level
                 reset();
 
                 //after resetting, next step is updating
-                STEP = Step.Start;
+                STEP = Step.Updating;
 
                 //we can go to ready now
                 activity.setScreen(Screen.Ready);
@@ -156,7 +159,9 @@ public class Game implements IGame {
                     activity.vibrate();
 
                 } else {
+
                     getBoard().update(activity);
+
                 }
                 break;
 
@@ -211,7 +216,7 @@ public class Game implements IGame {
 
     public void render(float[] m) {
 
-        //don't display if we are still loading
+        //don't display if we aren't ready
         if (STEP != Step.Updating && STEP != Step.GameOver)
             return;
 

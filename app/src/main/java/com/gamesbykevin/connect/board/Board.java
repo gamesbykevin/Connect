@@ -54,12 +54,12 @@ public class Board implements ICommon {
 
     private Entity entity = new Entity();
 
-    public static final int BOARD_COLS = 10;
-    public static final int BOARD_ROWS = 10;
+    public static int BOARD_COLS;
+    public static int BOARD_ROWS;
 
     //base point that we will mark connected
-    public static final int ANCHOR_COL = (BOARD_COLS / 2);
-    public static final int ANCHOR_ROW = (BOARD_ROWS / 2);
+    public static int ANCHOR_COL;
+    public static int ANCHOR_ROW;
 
     //the current rotating shape
     private CustomShape rotationShape = null;
@@ -67,8 +67,10 @@ public class Board implements ICommon {
     /**
      * Default constructor
      */
-    public Board() throws Exception {
-        //do we need to do anything here?
+    public Board(int cols, int rows) {
+        //which shape is in the center
+        ANCHOR_COL = (cols / 2);
+        ANCHOR_ROW = (rows / 2);
     }
 
     /**
@@ -341,6 +343,10 @@ public class Board implements ICommon {
 
         //flag null
         setRotationShape(null);
+
+        VERTICES = null;
+        UVS = null;
+        INDICES = null;
     }
 
     @Override
@@ -460,10 +466,12 @@ public class Board implements ICommon {
      */
     public void render(float[] m) {
 
-        //if these are null we can't continue
+        //if these are null or not ready, we can't continue
         if (getShapes() == null)
             return;
         if (getMaze() == null)
+            return;
+        if (!getMaze().isGenerated())
             return;
 
         //set the correct texture for rendering

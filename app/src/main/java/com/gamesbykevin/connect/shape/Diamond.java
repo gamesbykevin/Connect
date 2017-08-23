@@ -24,7 +24,7 @@ public class Diamond extends CustomShape {
     /**
      * How many degrees do we rotate the shape each time when auto rotating
      */
-    public static final float ROTATE_VELOCITY_FAST = (ROTATION_ANGLE_DEFAULT / 10);
+    public static final float ROTATE_VELOCITY_FAST = (ROTATION_ANGLE_DEFAULT / NUM_ROTATIONS_FAST);
 
     public Diamond() {
         super();

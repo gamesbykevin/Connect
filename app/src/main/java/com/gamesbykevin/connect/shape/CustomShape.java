@@ -60,6 +60,9 @@ public abstract class CustomShape extends Entity implements ICustomShape {
     //# of degrees for a single rotation
     public static float ROTATION_ANGLE;
 
+    //how many times do we want to rotate in a single rotation
+    protected static float NUM_ROTATIONS_FAST = 6;
+
     //index in array for open gl rendering
     private int index;
 

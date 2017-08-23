@@ -14,8 +14,6 @@ import static com.gamesbykevin.connect.activity.GameActivity.getGame;
 import static com.gamesbykevin.connect.game.Game.ZOOM_SCALE_MOTION_X;
 import static com.gamesbykevin.connect.game.Game.ZOOM_SCALE_MOTION_Y;
 import static com.gamesbykevin.connect.opengl.OpenGLRenderer.LOADED;
-import static com.gamesbykevin.connect.opengl.OpenGLRenderer.NEW_HEIGHT;
-import static com.gamesbykevin.connect.opengl.OpenGLRenderer.NEW_WIDTH;
 import static com.gamesbykevin.connect.opengl.OpenGLRenderer.ZOOM_RATIO_ADJUST;
 
 /**
@@ -440,8 +438,8 @@ public class OpenGLSurfaceView extends GLSurfaceView implements Runnable {
 
                 //adjust the coordinates based on the window displayed
                 if (getOpenGlRenderer() != null) {
-                    adjustX += getOpenGlRenderer().getLeft();
-                    adjustY += getOpenGlRenderer().getTop();
+                    adjustX += getOpenGlRenderer().LEFT;
+                    adjustY += getOpenGlRenderer().TOP;
                 }
 
                 //update game accordingly
