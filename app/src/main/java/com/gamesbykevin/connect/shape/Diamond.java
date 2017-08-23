@@ -12,11 +12,6 @@ import static com.gamesbykevin.connect.opengl.Textures.TEXTURE_DIAMOND_ROWS;
 public class Diamond extends CustomShape {
 
     /**
-     * The size of the diamond
-     */
-    public static int DIMENSION = 64;
-
-    /**
      * How many degrees do we rotate the shape each time
      */
     public static final float ROTATE_VELOCITY = 6.0f;
@@ -32,7 +27,7 @@ public class Diamond extends CustomShape {
     public static final float ROTATE_VELOCITY_FAST = (ROTATION_ANGLE_DEFAULT / 10);
 
     public Diamond() {
-        super(DIMENSION, DIMENSION);
+        super();
     }
 
     @Override

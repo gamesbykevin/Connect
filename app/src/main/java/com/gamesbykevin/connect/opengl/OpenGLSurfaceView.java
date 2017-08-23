@@ -14,6 +14,8 @@ import static com.gamesbykevin.connect.activity.GameActivity.getGame;
 import static com.gamesbykevin.connect.game.Game.ZOOM_SCALE_MOTION_X;
 import static com.gamesbykevin.connect.game.Game.ZOOM_SCALE_MOTION_Y;
 import static com.gamesbykevin.connect.opengl.OpenGLRenderer.LOADED;
+import static com.gamesbykevin.connect.opengl.OpenGLRenderer.NEW_HEIGHT;
+import static com.gamesbykevin.connect.opengl.OpenGLRenderer.NEW_WIDTH;
 import static com.gamesbykevin.connect.opengl.OpenGLRenderer.ZOOM_RATIO_ADJUST;
 
 /**
@@ -415,11 +417,8 @@ public class OpenGLSurfaceView extends GLSurfaceView implements Runnable {
                             dragging = true;
 
                             //if one finger is moved, offset the x,y coordinates
-                            OFFSET_X += xDiff;
-                            OFFSET_Y += yDiff;
-
-                            //move the screen accordingly
-                            getOpenGlRenderer().adjustPan(xDiff * ZOOM_SCALE_MOTION_X, yDiff * ZOOM_SCALE_MOTION_Y);
+                            OFFSET_X += (xDiff * ZOOM_SCALE_MOTION_X);
+                            OFFSET_Y += (yDiff * ZOOM_SCALE_MOTION_Y);
 
                             //update the coordinates
                             motionMoveX = x1;
@@ -436,8 +435,14 @@ public class OpenGLSurfaceView extends GLSurfaceView implements Runnable {
             if (fingers < 2) {
 
                 //adjust the coordinates where touch event occurred
-                final float adjustX = (x * ZOOM_SCALE_MOTION_X) - (OFFSET_X * ZOOM_SCALE_MOTION_X);
-                final float adjustY = (y * ZOOM_SCALE_MOTION_Y) - (OFFSET_Y * ZOOM_SCALE_MOTION_Y);
+                float adjustX = (x * ZOOM_SCALE_MOTION_X) - OFFSET_X;
+                float adjustY = (y * ZOOM_SCALE_MOTION_Y) - OFFSET_Y;
+
+                //adjust the coordinates based on the window displayed
+                if (getOpenGlRenderer() != null) {
+                    adjustX += getOpenGlRenderer().getLeft();
+                    adjustY += getOpenGlRenderer().getTop();
+                }
 
                 //update game accordingly
                 getGame().onTouchEvent(event.getAction(), adjustX, adjustY);

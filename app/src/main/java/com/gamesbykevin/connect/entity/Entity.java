@@ -5,6 +5,8 @@ import android.graphics.RectF;
 
 import com.gamesbykevin.androidframeworkv2.base.Cell;
 
+import static com.gamesbykevin.connect.shape.CustomShape.ANGLE_MAX;
+
 /**
  * Created by Kevin on 8/1/2017.
  */
@@ -92,6 +94,9 @@ public class Entity extends Cell {
      */
     public void setAngle(final float angle) {
         this.angle = angle;
+
+        if (getAngle() >= ANGLE_MAX)
+            setAngle(getAngle() - ANGLE_MAX);
     }
 
     /**

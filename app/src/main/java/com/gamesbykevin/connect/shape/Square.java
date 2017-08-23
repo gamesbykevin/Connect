@@ -13,11 +13,6 @@ import static com.gamesbykevin.connect.opengl.Textures.TEXTURE_SQUARE_ROWS;
 public class Square extends CustomShape {
 
     /**
-     * The size of the square
-     */
-    public static int DIMENSION = 64;
-
-    /**
      * How many degrees do we rotate the shape each time
      */
     public static final float ROTATE_VELOCITY = 6.0f;
@@ -33,7 +28,7 @@ public class Square extends CustomShape {
     public static final float ROTATE_VELOCITY_FAST = (ROTATION_ANGLE_DEFAULT / 10);
 
     public Square() {
-        super(DIMENSION, DIMENSION);
+        super();
     }
 
     @Override

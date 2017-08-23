@@ -21,6 +21,8 @@ import static com.gamesbykevin.connect.board.BoardHelper.updateCoordinates;
 import static com.gamesbykevin.connect.board.BoardHelper.updateShape;
 import static com.gamesbykevin.connect.game.Game.AUTO_ROTATE;
 import static com.gamesbykevin.connect.game.GameHelper.getSquare;
+import static com.gamesbykevin.connect.opengl.OpenGLSurfaceView.HEIGHT;
+import static com.gamesbykevin.connect.opengl.OpenGLSurfaceView.WIDTH;
 
 /**
  * Created by Kevin on 8/1/2017.
@@ -42,13 +44,18 @@ public class Board implements ICommon {
     //what type of shape are we using
     private Shape type = null;
 
+    /**
+     * The size of the shape
+     */
+    public static int DIMENSION = 64;
+
     //our maze generation object
     private Maze maze;
 
     private Entity entity = new Entity();
 
-    public static final int BOARD_COLS = 5;
-    public static final int BOARD_ROWS = 5;
+    public static final int BOARD_COLS = 10;
+    public static final int BOARD_ROWS = 10;
 
     //base point that we will mark connected
     public static final int ANCHOR_COL = (BOARD_COLS / 2);
@@ -70,11 +77,30 @@ public class Board implements ICommon {
      */
     public float getWidth() {
 
-        //west
-        CustomShape shape1 = getShapes()[0][0];
+        //2 shapes to calculate the difference
+        CustomShape shape1, shape2;
 
-        //east
-        CustomShape shape2 = getShapes()[0][getMaze().getCols() - 1];
+        //get the appropriate shapes based on the type
+        switch(getType()) {
+
+            case Square:
+                shape1 = getShapes()[0][0];
+                shape2 = getShapes()[0][getMaze().getCols() - 1];
+                break;
+
+            case Diamond:
+                shape1 = getShapes()[getMaze().getRows() - 1][0];
+                shape2 = getShapes()[0][getMaze().getCols() - 1];
+                break;
+
+            case Hexagon:
+                shape1 = getShapes()[0][0];
+                shape2 = getShapes()[1][getMaze().getCols() - 1];
+                break;
+
+            default:
+                throw new RuntimeException("Type not defined: " + getType().toString());
+        }
 
         //get the difference
         return (shape2.getX() + shape2.getWidth()) - shape1.getX();
@@ -86,11 +112,30 @@ public class Board implements ICommon {
      */
     public float getHeight() {
 
-        //north
-        CustomShape shape1 = getShapes()[0][0];
+        //2 shapes to calculate the difference
+        CustomShape shape1, shape2;
 
-        //south
-        CustomShape shape2 = getShapes()[getMaze().getRows() - 1][0];
+        //get the appropriate shapes based on the type
+        switch(getType()) {
+
+            case Square:
+                shape1 = getShapes()[0][0];
+                shape2 = getShapes()[getMaze().getRows() - 1][0];
+                break;
+
+            case Diamond:
+                shape1 = getShapes()[0][0];
+                shape2 = getShapes()[getMaze().getRows() - 1][getMaze().getCols() - 1];
+                break;
+
+            case Hexagon:
+                shape1 = getShapes()[0][0];
+                shape2 = getShapes()[getMaze().getRows() - 1][0];
+                break;
+
+            default:
+                throw new RuntimeException("Type not defined: " + getType().toString());
+        }
 
         //get the difference
         return (shape2.getY() + shape2.getHeight()) - shape1.getY();
@@ -103,31 +148,19 @@ public class Board implements ICommon {
     private void addShapes() {
 
         int x = 0, y = 0;
-        final int w, h;
+        final int w = DIMENSION, h = DIMENSION;
 
         switch (getType()) {
 
             case Square:
-
-                //assign dimensions
-                w = Square.DIMENSION;
-                h = Square.DIMENSION;
                 CustomShape.ROTATION_ANGLE = Square.ROTATION_ANGLE_DEFAULT;
                 break;
 
             case Hexagon:
-
-                //assign dimensions
-                w = Hexagon.DIMENSION;
-                h = Hexagon.DIMENSION;
                 CustomShape.ROTATION_ANGLE = Hexagon.ROTATION_ANGLE_DEFAULT;
                 break;
 
             case Diamond:
-
-                //assign dimensions
-                w = Diamond.DIMENSION;
-                h = Diamond.DIMENSION;
                 CustomShape.ROTATION_ANGLE = Diamond.ROTATION_ANGLE_DEFAULT;
                 break;
 
@@ -136,8 +169,8 @@ public class Board implements ICommon {
         }
 
         //start coordinates
-        final int sx = BoardHelper.getStartX(getType(), maze.getCols(), maze.getRows(), w, h);
-        final int sy = BoardHelper.getStartY(getType(), maze.getCols(), maze.getRows(), w, h);
+        final int sx = BoardHelper.getStartX(getType(), WIDTH, maze.getCols(), maze.getRows(), w, h);
+        final int sy = BoardHelper.getStartY(getType(), HEIGHT, maze.getCols(), maze.getRows(), w, h);
 
         int index = 0;
 

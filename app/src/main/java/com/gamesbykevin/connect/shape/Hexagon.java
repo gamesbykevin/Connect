@@ -11,10 +11,6 @@ import static com.gamesbykevin.connect.opengl.Textures.TEXTURE_HEXAGON_ROWS;
  */
 
 public class Hexagon extends CustomShape {
-    /**
-     * The size of the square
-     */
-    public static int DIMENSION = 64;
 
     /**
      * How many degrees do we rotate the shape each time
@@ -32,7 +28,7 @@ public class Hexagon extends CustomShape {
     public static final float ROTATE_VELOCITY_FAST = (ROTATION_ANGLE_DEFAULT / 10);
     
     public Hexagon() {
-        super(DIMENSION, DIMENSION);
+        super();
     }
 
     @Override

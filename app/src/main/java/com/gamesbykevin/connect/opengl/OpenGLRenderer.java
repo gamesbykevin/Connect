@@ -49,9 +49,6 @@ public class OpenGLRenderer implements Renderer {
      */
     private static float ZOOM_RATIO_MIN = 0.2f;
 
-    //keep track of the offset
-    private static float PAN_X = 0f, PAN_Y = 0f;
-
     //get the ratio of the users screen compared to the default dimensions for the motion event
     private static float originalScaleMotionX = 0, originalScaleMotionY = 0;
 
@@ -67,9 +64,18 @@ public class OpenGLRenderer implements Renderer {
     private Textures textures;
 
     //our matrices window/camera/view etc...
-    private final float[] mtrxProjection = new float[16];
-    private final float[] mtrxView = new float[16];
-    private final float[] mtrxProjectionAndView = new float[16];
+    private final float[] mtrxProjection;
+    private final float[] mtrxView;
+    private final float[] mtrxProjectionAndView;
+
+    //store the new screen dimensions in case of zoom
+    public static int NEW_WIDTH = WIDTH, NEW_HEIGHT = HEIGHT;
+
+    //calculate the center of the screen
+    private final float mx = (WIDTH / 2), my = (HEIGHT / 2);
+
+    //the zoom window screen
+    private float left = 0f, right = WIDTH, bottom = HEIGHT, top = 0f;
 
     public OpenGLRenderer(Context activity) {
 
@@ -78,6 +84,11 @@ public class OpenGLRenderer implements Renderer {
 
         //flag the textures loaded as false
         LOADED = false;
+
+        //create new array
+        mtrxProjection = new float[16];
+        mtrxView = new float[16];
+        mtrxProjectionAndView = new float[16];
     }
 
     public void onPause() {
@@ -99,8 +110,6 @@ public class OpenGLRenderer implements Renderer {
         ZOOM_RATIO = 1.0f;
         OFFSET_X = 0;
         OFFSET_Y = 0;
-        PAN_X = 0f;
-        PAN_Y = 0f;
 
         //flag false
         RESET_ZOOM = false;
@@ -126,50 +135,40 @@ public class OpenGLRenderer implements Renderer {
             ZOOM_RATIO = ZOOM_RATIO_MIN;
 
         //calculate the  new dimensions
-        final float newWidth = (WIDTH * ZOOM_RATIO);
-        final float newHeight = (HEIGHT * ZOOM_RATIO);
+        NEW_WIDTH = (int)(WIDTH * ZOOM_RATIO);
+        NEW_HEIGHT = (int)(HEIGHT * ZOOM_RATIO);
 
         //store the ratio when touching the screen
-        ZOOM_SCALE_MOTION_X = newWidth / screenWidth;
-        ZOOM_SCALE_MOTION_Y = newHeight / screenHeight;
-
-        //also calculate the opposite ratio
-        final float tmpX = screenWidth / newWidth;
-        final float tmpY = screenHeight / newHeight;
+        ZOOM_SCALE_MOTION_X = ((float)NEW_WIDTH  / (float)screenWidth);
+        ZOOM_SCALE_MOTION_Y = ((float)NEW_HEIGHT / (float)screenHeight);
 
         //every time we zoom, reset the offset (x, y)
         OFFSET_X = 0f;
         OFFSET_Y = 0f;
-        PAN_X = 0f;
-        PAN_Y = 0f;
 
-        //get the  board game size
-        final float w = getGame().getBoard().getWidth();
-        final float h = getGame().getBoard().getHeight();
-
-        //calculate the offset, so we can position the board in the center of the screen
-        final float adjustX = (float)(-(w / 1.25) + (newWidth  / 2));
-        final float adjustY = (float)(-(h / 0.75) + (newHeight / 2));
-
-        //now offset the board by these coordinates
-        PAN_X = adjustX;
-        PAN_Y = adjustY;
-
-        //calculate our offset coordinates for collision detections when we touch the screen
-        OFFSET_X = adjustX * tmpX;
-        OFFSET_Y = adjustY * tmpY;
+        //calculate the zoom screen
+        left = mx - (NEW_WIDTH / 2);
+        right = mx + (NEW_WIDTH / 2);
+        bottom = my + (NEW_HEIGHT / 2);
+        top = my - (NEW_HEIGHT / 2);
     }
 
-    public void adjustPan(float x, float y) {
-
-        //don't continue if not loaded
-        if (!LOADED)
-            return;
-
-        //keep track of the panning
-        PAN_X += x;
-        PAN_Y += y;
+    public float getLeft() {
+        return  this.left;
     }
+
+    public float getRight() {
+        return  this.right;
+    }
+
+    public float getBottom() {
+        return  this.bottom;
+    }
+
+    public float getTop() {
+        return  this.top;
+    }
+
 
     /**
      * Called once to set up the view's OpenGL ES environment
@@ -296,15 +295,11 @@ public class OpenGLRenderer implements Renderer {
 
     private void restoreZoomPan() {
 
-        //calculate the screen size
-        final float newWidth = (WIDTH * ZOOM_RATIO);
-        final float newHeight = (HEIGHT * ZOOM_RATIO);
-
-        //adjust the zoom on the matrix to fit the new dimensions
-        Matrix.orthoM(mtrxProjection, 0, 0f, newWidth, newHeight, 0f, 0f, 50f);
+        //setup the window that the user will see
+        Matrix.orthoM(mtrxProjection, 0, getLeft(), getRight(), getBottom(), getTop(), 0f, 50f);
 
         //offset the screen
-        Matrix.translateM(mtrxProjection, 0, PAN_X, PAN_Y, 0.0f);
+        Matrix.translateM(mtrxProjection, 0, OFFSET_X, OFFSET_Y, 0.0f);
 
         //calculate the projection and view transformation
         Matrix.multiplyMM(mtrxProjectionAndView, 0, mtrxProjection, 0, mtrxView, 0);

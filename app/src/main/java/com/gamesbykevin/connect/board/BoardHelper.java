@@ -12,6 +12,7 @@ import static com.gamesbykevin.connect.board.Board.ANCHOR_COL;
 import static com.gamesbykevin.connect.board.Board.ANCHOR_ROW;
 import static com.gamesbykevin.connect.board.Board.BOARD_COLS;
 import static com.gamesbykevin.connect.board.Board.BOARD_ROWS;
+import static com.gamesbykevin.connect.board.Board.DIMENSION;
 import static com.gamesbykevin.connect.board.Board.INDICES;
 import static com.gamesbykevin.connect.board.Board.UVS;
 import static com.gamesbykevin.connect.board.Board.VERTICES;
@@ -378,10 +379,14 @@ public class BoardHelper {
         }
     }
 
-    protected static int getStartX(Board.Shape type, final int cols, final int rows, final int w, final int h) {
+    public static int getStartX(Board board, int screenWidth) {
+        return getStartX(board.getType(), screenWidth, board.getMaze().getCols(), board.getMaze().getRows(), DIMENSION, DIMENSION);
+    }
+
+    protected static int getStartX(Board.Shape type, int screenWidth, int cols, int rows, int w, int h) {
 
         //middle coordinate
-        final int mx = (WIDTH / 2);
+        final int mx = (screenWidth / 2);
 
         switch(type) {
 
@@ -399,10 +404,14 @@ public class BoardHelper {
         }
     }
 
-    protected static int getStartY(Board.Shape type, final int cols, final int rows, final int w, final int h) {
+    public static int getStartY(Board board, int screenHeight) {
+        return getStartY(board.getType(), screenHeight, board.getMaze().getCols(), board.getMaze().getRows(), DIMENSION, DIMENSION);
+    }
+
+    protected static int getStartY(Board.Shape type, int screenHeight, int cols, int rows, int w, int h) {
 
         //middle coordinate
-        final int my = (HEIGHT / 2);
+        final int my = (screenHeight / 2);
 
         switch(type) {
 

@@ -5,6 +5,8 @@ import com.gamesbykevin.connect.entity.Entity;
 
 import javax.microedition.khronos.opengles.GL10;
 
+import static com.gamesbykevin.connect.board.Board.DIMENSION;
+
 /**
  * Created by Kevin on 8/1/2017.
  */
@@ -64,12 +66,12 @@ public abstract class CustomShape extends Entity implements ICustomShape {
     /**
      * Default constructor
      */
-    protected CustomShape(int w, int h) {
+    protected CustomShape() {
 
         super();
 
-        super.setWidth(w);
-        super.setHeight(h);
+        super.setWidth(DIMENSION);
+        super.setHeight(DIMENSION);
     }
 
     public void setIndex(final int index) {
