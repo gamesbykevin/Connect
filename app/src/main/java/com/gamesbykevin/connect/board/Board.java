@@ -67,7 +67,12 @@ public class Board implements ICommon {
     /**
      * Default constructor
      */
-    public Board(int cols, int rows) {
+    public Board(int cols, int rows) throws Exception {
+
+        //make sure board is large enough
+        if (cols < 3 || rows < 3)
+            throw new Exception("Board size too small " + cols + ", " + rows);
+
         //which shape is in the center
         ANCHOR_COL = (cols / 2);
         ANCHOR_ROW = (rows / 2);
@@ -260,10 +265,6 @@ public class Board implements ICommon {
     }
 
     protected CustomShape[][] getShapes() {
-
-        if (this.shapes == null)
-            this.shapes = new CustomShape[BOARD_ROWS][BOARD_COLS];
-
         return this.shapes;
     }
 
@@ -343,6 +344,18 @@ public class Board implements ICommon {
 
         //flag null
         setRotationShape(null);
+
+        for (int i = 0; i < VERTICES.length; i++) {
+            VERTICES[i] = 0;
+        }
+
+        for (int i = 0; i < UVS.length; i++) {
+            UVS[i] = 0;
+        }
+
+        for (int i = 0; i < INDICES.length; i++) {
+            INDICES[i] = 0;
+        }
 
         VERTICES = null;
         UVS = null;
@@ -442,6 +455,10 @@ public class Board implements ICommon {
 
             //create new instance of maze
             this.maze = new Prims((getType() == Shape.Hexagon), BOARD_COLS, BOARD_ROWS);
+
+            //create the shapes if null or a different size
+            if (this.shapes == null || this.shapes.length != BOARD_ROWS || this.shapes[0].length != BOARD_COLS)
+                this.shapes = new CustomShape[BOARD_ROWS][BOARD_COLS];
 
             //flag the rotation shape null
             setRotationShape(null);

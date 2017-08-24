@@ -94,6 +94,7 @@ public abstract class BaseActivity extends com.gamesbykevin.androidframeworkv2.a
 
             //resume playing
             SOUND.get(resId).start();
+
         } catch (Exception e) {
             UtilityHelper.handleException(e);
         }

@@ -108,24 +108,12 @@ public class Game implements IGame {
                 //if the textures have finished loading
                 if (LOADED) {
 
-                    //if loaded display level select screen
-                    activity.setScreen(Screen.LevelSelect);
-
                     //go to start step
-                    STEP = Step.Start;
+                    STEP = Step.Reset;
                 }
                 break;
 
             case Start:
-                //don't do anything here
-                /*
-                //if loading is still displayed, don't render anything
-                if (activity.getScreen() == Screen.Loading)
-                    return;
-
-                //all is good, we can start updating
-                STEP = Step.Updating;
-                */
                 break;
 
             //we are resetting the board
@@ -159,9 +147,7 @@ public class Game implements IGame {
                     activity.vibrate();
 
                 } else {
-
                     getBoard().update(activity);
-
                 }
                 break;
 
@@ -187,7 +173,7 @@ public class Game implements IGame {
     public boolean onTouchEvent(final int action, float x, float y) {
 
         //don't continue if we aren't ready yet
-        if (STEP != Step.Updating && STEP != Step.Start)
+        if (STEP != Step.Updating)
             return true;
 
         if (action == MotionEvent.ACTION_UP)
@@ -215,6 +201,14 @@ public class Game implements IGame {
     }
 
     public void render(float[] m) {
+
+        if (STEP == Step.Reset) {
+
+            //if resetting, clear matrix
+            for (int i = 0; i < m.length; i++) {
+                m[i] = 0;
+            }
+        }
 
         //don't display if we aren't ready
         if (STEP != Step.Updating && STEP != Step.GameOver)

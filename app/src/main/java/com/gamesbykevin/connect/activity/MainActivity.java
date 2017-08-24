@@ -63,7 +63,7 @@ public class MainActivity extends BaseActivity {
         Game.RESET_ZOOM = true;
 
         //start game
-        Intent intent = new Intent(this, GameActivity.class);
+        Intent intent = new Intent(this, LevelSelectActivity.class);;//new Intent(this, GameActivity.class);
         startActivity(intent);
     }
 

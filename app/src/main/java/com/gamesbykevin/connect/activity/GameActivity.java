@@ -5,8 +5,6 @@ import android.opengl.GLSurfaceView;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.GridView;
 import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.ToggleButton;
@@ -18,7 +16,6 @@ import com.gamesbykevin.connect.board.Board;
 import com.gamesbykevin.connect.game.Game;
 import com.gamesbykevin.connect.game.Game.Step;
 import com.gamesbykevin.connect.opengl.OpenGLSurfaceView;
-import com.gamesbykevin.connect.ui.CustomAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +27,7 @@ import static com.gamesbykevin.connect.game.Game.STEP;
 import static com.gamesbykevin.androidframeworkv2.util.UtilityHelper.DEBUG;
 
 
-public class GameActivity extends BaseActivity implements Disposable, AdapterView.OnItemClickListener {
+public class GameActivity extends BaseActivity implements Disposable {
 
     //our open GL surface view
     private GLSurfaceView glSurfaceView;
@@ -58,8 +55,7 @@ public class GameActivity extends BaseActivity implements Disposable, AdapterVie
     public enum Screen {
         Loading,
         Ready,
-        GameOver,
-        LevelSelect
+        GameOver
     }
 
     //current screen we are on
@@ -67,9 +63,6 @@ public class GameActivity extends BaseActivity implements Disposable, AdapterVie
 
     //our auto rotate button reference
     private ToggleButton buttonAutoRotate;
-
-    //our custom adapter that we bind to GridView
-    private CustomAdapter customAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,57 +87,11 @@ public class GameActivity extends BaseActivity implements Disposable, AdapterVie
         this.layouts.add((LinearLayout)findViewById(R.id.gameOverLayoutDefault));
         this.layouts.add((LinearLayout)findViewById(R.id.loadingScreenLayout));
         this.layouts.add((LinearLayout)findViewById(R.id.layoutGameControls));
-        this.layouts.add((TableLayout)findViewById(R.id.levelSelectLayout));
-
-        //update level select screen
-        refreshLevelSelect();
     }
 
     public static Game getGame() {
         return GAME;
     }
-
-    /**
-     * Update the level select screen with the current data
-     */
-    public void refreshLevelSelect() {
-
-        //get the grid view reference and assign on click
-        GridView levelSelectGrid = (GridView)findViewById(R.id.levelSelectGrid);
-        levelSelectGrid.setOnItemClickListener(this);
-
-        ArrayList<Boolean> list = new ArrayList<>();
-
-        for (int i = 0; i < 20; i++) {
-            list.add(getRandomObject().nextBoolean());
-        }
-
-        //create the custom adapter using the level selection layout and data to populate it
-        this.customAdapter = new CustomAdapter(this, R.layout.level_selection, list);
-
-        //set our adapter to the grid view
-        levelSelectGrid.setAdapter(this.customAdapter);
-
-        //show current position, without having to scroll
-        //levelSelectGrid.setSelection(STATISTICS.getIndex());
-    }
-
-    @Override
-    public void onItemClick(final AdapterView<?> arg0, final View view, final int position, final long id)
-    {
-        Board.BOARD_COLS = 3 + position;
-        Board.BOARD_ROWS = 3 + position;
-
-        //assign the level selected
-        //STATISTICS.setIndex(position);
-
-        //show loading screen while we reset
-        setScreen(Screen.Ready);
-
-        //reset the game board
-        STEP = Step.Reset;
-    }
-
 
     /**
      * Get our random object.<br>
@@ -285,11 +232,6 @@ public class GameActivity extends BaseActivity implements Disposable, AdapterVie
                 setLayoutVisibility((ViewGroup)findViewById(R.id.gameOverLayoutDefault), true);
                 break;
 
-            //show level select screen
-            case LevelSelect:
-                setLayoutVisibility((ViewGroup)findViewById(R.id.levelSelectLayout), true);
-                break;
-
             //don't re-enable anything
             case Ready:
                 setLayoutVisibility((ViewGroup)findViewById(R.id.layoutGameControls), true);
@@ -327,22 +269,6 @@ public class GameActivity extends BaseActivity implements Disposable, AdapterVie
     @Override
     public void onBackPressed() {
 
-        //if not on level select screen, go to it
-        if (getScreen() != Screen.LevelSelect) {
-
-            //go to level select screen
-            setScreen(Screen.LevelSelect);
-
-            //go back to start step
-            STEP = Step.Start;
-
-            //update list so it displays correct information
-            refreshLevelSelect();
-
-            //no need to continue here
-            return;
-        }
-
         //call parent
         super.onBackPressed();
     }
@@ -379,14 +305,12 @@ public class GameActivity extends BaseActivity implements Disposable, AdapterVie
 
     public void onClickLevelSelect(View view) {
 
-        //update level select screen
-        refreshLevelSelect();
-
-        //go to level select screen
-        setScreen(Screen.LevelSelect);
-
         //go back to start step
         STEP = Step.Start;
+
+        //go to level select screen
+        startActivity(new Intent(this, LevelSelectActivity.class));
+
     }
 
     public void onClickNext(View view) {
