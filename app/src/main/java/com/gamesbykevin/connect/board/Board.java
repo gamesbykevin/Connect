@@ -1,6 +1,7 @@
 package com.gamesbykevin.connect.board;
 
 import android.opengl.GLES20;
+import android.view.VelocityTracker;
 
 import com.gamesbykevin.androidframeworkv2.maze.Maze;
 import com.gamesbykevin.androidframeworkv2.maze.Room;
@@ -30,15 +31,25 @@ import static com.gamesbykevin.connect.opengl.OpenGLSurfaceView.WIDTH;
 public class Board implements ICommon {
 
     //store these coordinates for rendering
-    protected static float[] VERTICES;
-    protected static short[] INDICES;
-    protected static float[] UVS;
+    private static float[] VERTICES;
+    private static short[] INDICES;
+    private static float[] UVS;
 
     //array of shapes on the board
     private CustomShape[][] shapes;
 
     public enum Shape {
-        Square, Hexagon, Diamond
+        Square(0), Hexagon(1), Diamond(2);
+
+        private int value;
+
+        private Shape(int value) {
+            this.value = value;
+        }
+
+        public int getValue() {
+            return this.value;
+        }
     }
 
     //what type of shape are we using
@@ -437,14 +448,68 @@ public class Board implements ICommon {
     }
 
     public float[] getVertices() {
+
+        final int length = (getShapes()[0].length * getShapes().length) * 4 * 3;
+
+        //if null or the size doesn't add up
+        if (VERTICES == null || VERTICES.length != length) {
+            VERTICES = new float[length];
+
+            for (int i = 0; i < VERTICES.length; i++) {
+                VERTICES[i] = 0;
+            }
+        }
+
         return VERTICES;
     }
 
     public short[] getIndices() {
+
+        //expected length of array
+        final int length = (shapes[0].length * shapes.length) * 6;
+
+        //if null or the size doesn't add up
+        if (INDICES == null || INDICES.length != length) {
+            INDICES = new short[length];
+
+            int last = 0;
+
+            for (int index = 0; index < getShapes()[0].length * getShapes().length; index++) {
+
+                try {
+                    //we need to set the new indices for the new quad
+                    INDICES[(index * 6) + 0] = (short) (last + 0);
+                    INDICES[(index * 6) + 1] = (short) (last + 1);
+                    INDICES[(index * 6) + 2] = (short) (last + 2);
+                    INDICES[(index * 6) + 3] = (short) (last + 0);
+                    INDICES[(index * 6) + 4] = (short) (last + 2);
+                    INDICES[(index * 6) + 5] = (short) (last + 3);
+
+                    //normal quad = 0,1,2,0,2,3 so the next one will be 4,5,6,4,6,7
+                    last = last + 4;
+
+                } catch (Exception e) {
+                    UtilityHelper.handleException(e);
+                }
+            }
+        }
+
         return INDICES;
     }
 
     public float[] getUvs() {
+
+        final int length = (getShapes()[0].length * getShapes().length) * 4 * 2;
+
+        //if null or the size doesn't add up
+        if (UVS == null || UVS.length != length) {
+            UVS = new float[length];
+
+            for (int i = 0; i < UVS.length; i++) {
+                UVS[i] = 0;
+            }
+        }
+
         return UVS;
     }
 
@@ -511,9 +576,9 @@ public class Board implements ICommon {
         }
 
         if (getUvs() == null || getIndices() == null || getVertices() == null) {
-            updateCoordinates(getShapes());
+            updateCoordinates(this);
         } else if (getRotationShape() != null) {
-            updateShape(getRotationShape());
+            updateShape(this, getRotationShape());
         }
 
         //make a single call to render all shapes

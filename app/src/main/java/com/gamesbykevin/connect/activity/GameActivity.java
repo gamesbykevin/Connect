@@ -269,6 +269,9 @@ public class GameActivity extends BaseActivity implements Disposable {
     @Override
     public void onBackPressed() {
 
+        //move step to do nothing
+        STEP = Step.Start;
+
         //call parent
         super.onBackPressed();
     }

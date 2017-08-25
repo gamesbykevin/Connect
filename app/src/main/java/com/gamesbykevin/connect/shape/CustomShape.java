@@ -325,7 +325,7 @@ public abstract class CustomShape extends Entity implements ICustomShape {
         if (hasRotate()) {
 
             //if we hit the destination
-            if (getAngle() == getDestinationAngle()) {
+            if ((int)getAngle() == (int)getDestinationAngle()) {
 
                 //stop rotating
                 rotateFinish();
@@ -333,10 +333,6 @@ public abstract class CustomShape extends Entity implements ICustomShape {
             } else {
 
                 setAngle(getAngle() + getRotateVelocity());
-
-                //make sure we stay within range
-                if (getAngle() >= ANGLE_MAX)
-                    setAngle(ANGLE_MIN);
             }
         }
     }

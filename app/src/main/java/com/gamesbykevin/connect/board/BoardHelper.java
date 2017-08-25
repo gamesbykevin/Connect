@@ -3,7 +3,6 @@ package com.gamesbykevin.connect.board;
 import com.gamesbykevin.androidframeworkv2.maze.Room;
 import com.gamesbykevin.androidframeworkv2.util.UtilityHelper;
 import com.gamesbykevin.connect.shape.CustomShape;
-import com.gamesbykevin.connect.shape.Square;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,17 +12,11 @@ import static com.gamesbykevin.connect.board.Board.ANCHOR_ROW;
 import static com.gamesbykevin.connect.board.Board.BOARD_COLS;
 import static com.gamesbykevin.connect.board.Board.BOARD_ROWS;
 import static com.gamesbykevin.connect.board.Board.DIMENSION;
-import static com.gamesbykevin.connect.board.Board.INDICES;
-import static com.gamesbykevin.connect.board.Board.UVS;
-import static com.gamesbykevin.connect.board.Board.VERTICES;
 import static com.gamesbykevin.connect.game.GameHelper.GAME_OVER;
-import static com.gamesbykevin.connect.opengl.OpenGLSurfaceView.HEIGHT;
-import static com.gamesbykevin.connect.opengl.OpenGLSurfaceView.WIDTH;
 
 /**
  * Created by Kevin on 8/5/2017.
  */
-
 public class BoardHelper {
 
     //list of locations to check
@@ -40,6 +33,8 @@ public class BoardHelper {
 
         //create array if not instantiated
         if (tmpConnected == null)
+            tmpConnected = new boolean[board.getMaze().getRows()][board.getMaze().getCols()];
+        if (tmpConnected.length != board.getMaze().getRows() || tmpConnected[0].length != board.getMaze().getCols())
             tmpConnected = new boolean[board.getMaze().getRows()][board.getMaze().getCols()];
 
         //mark all shapes not connected at first
@@ -156,7 +151,7 @@ public class BoardHelper {
         }
 
         //update the coordinates for everything
-        updateCoordinates(board.getShapes());
+        updateCoordinates(board);
 
         //if solved the game is over
         GAME_OVER = solved;
@@ -434,7 +429,7 @@ public class BoardHelper {
      * @param board The board containing our shapes
      * @param visible Do we want the shape background to be visible
      */
-    public static void setVisible(final Board board, final boolean visible) {
+    public static void setVisible(Board board, final boolean visible) {
         for (int col = 0; col < board.getShapes()[0].length; col++) {
             for (int row = 0; row < board.getShapes().length; row++) {
                 board.getShapes()[row][col].setVisible(visible);
@@ -445,26 +440,21 @@ public class BoardHelper {
     /**
      * Setup the coordinates for open gl rendering
      */
-    protected static void updateCoordinates(CustomShape[][] shapes) {
+    protected static void updateCoordinates(Board board) {
 
-        if (VERTICES == null)
-            VERTICES = new float[(shapes[0].length * shapes.length) * 4 * 3];
-        if (UVS == null)
-            UVS = new float[(shapes[0].length * shapes.length) * 4 * 2];
-
-        for (int col = 0; col < shapes[0].length; col++) {
-            for (int row = 0; row < shapes.length; row++) {
+        for (int col = 0; col < board.getShapes()[0].length; col++) {
+            for (int row = 0; row < board.getShapes().length; row++) {
 
                 try {
 
                     //get the current shape
-                    CustomShape shape = shapes[row][col];
+                    CustomShape shape = board.getShapes()[row][col];
 
                     if (shape == null)
                         continue;
 
                     //update shape coordinates
-                    updateShape(shape);
+                    updateShape(board, shape);
 
                 } catch (Exception e) {
                     UtilityHelper.handleException(e);
@@ -472,36 +462,11 @@ public class BoardHelper {
             }
         }
 
-        //setup one time
-        if (INDICES == null) {
-
-            INDICES = new short[(shapes[0].length * shapes.length) * 6];
-
-            int last = 0;
-
-            for (int index = 0; index < shapes[0].length * shapes.length; index++) {
-
-                try {
-
-                    //we need to set the new indices for the new quad
-                    INDICES[(index * 6) + 0] = (short) (last + 0);
-                    INDICES[(index * 6) + 1] = (short) (last + 1);
-                    INDICES[(index * 6) + 2] = (short) (last + 2);
-                    INDICES[(index * 6) + 3] = (short) (last + 0);
-                    INDICES[(index * 6) + 4] = (short) (last + 2);
-                    INDICES[(index * 6) + 5] = (short) (last + 3);
-
-                    //normal quad = 0,1,2,0,2,3 so the next one will be 4,5,6,4,6,7
-                    last = last + 4;
-
-                } catch (Exception e) {
-                    UtilityHelper.handleException(e);
-                }
-            }
-        }
+        //make sure our indices are created
+        board.getIndices();
     }
 
-    protected static void updateShape(CustomShape shape) {
+    protected static void updateShape(Board board, CustomShape shape) {
 
         //if rotating update vertices
         if (shape.hasRotate())
@@ -509,12 +474,24 @@ public class BoardHelper {
 
         //assign vertices
         for (int i = 0; i < shape.getVertices().length; i++) {
-            VERTICES[(shape.getIndex() * 12) + i] = shape.getVertices()[i];
+
+            int index = (shape.getIndex() * 12) + i;
+
+            if (index >= board.getVertices().length)
+                return;
+
+            board.getVertices()[index] = shape.getVertices()[i];
         }
 
         //which portion of the texture are we rendering
         for (int i = 0; i < shape.getTextureCoordinates().length; i++) {
-            UVS[(shape.getIndex() * 8) + i] = shape.getTextureCoordinates()[i];
+
+            int index = (shape.getIndex() * 8) + i;
+
+            if (index >= board.getUvs().length)
+                return;
+
+            board.getUvs()[index] = shape.getTextureCoordinates()[i];
         }
     }
 }

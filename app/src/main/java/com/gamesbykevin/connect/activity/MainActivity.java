@@ -7,6 +7,7 @@ import android.view.View;
 
 import com.gamesbykevin.androidframeworkv2.util.UtilityHelper;
 import com.gamesbykevin.connect.R;
+import com.gamesbykevin.connect.board.Board;
 import com.gamesbykevin.connect.game.Game;
 import com.gamesbykevin.connect.opengl.OpenGLRenderer;
 
@@ -62,8 +63,11 @@ public class MainActivity extends BaseActivity {
         //reset the zoom, for every new game started
         Game.RESET_ZOOM = true;
 
+        //store our shape selection
+        OptionsActivity.OPTION_BOARD_SHAPE = (Board.Shape)super.getObjectValue(R.string.game_shape_file_key, Board.Shape.class);
+
         //start game
-        Intent intent = new Intent(this, LevelSelectActivity.class);;//new Intent(this, GameActivity.class);
+        Intent intent = new Intent(this, LevelSelectActivity.class);
         startActivity(intent);
     }
 

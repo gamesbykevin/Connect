@@ -16,6 +16,8 @@ public final class GameHelper
 {
 	private static Entity entity = null;
 
+    private static Square square = null;
+
     public static Entity getEntity() {
         if (entity == null)
             entity = new Entity();
@@ -23,7 +25,6 @@ public final class GameHelper
         return entity;
     }
 
-    private static Square square = null;
 
     public static Square getSquare() {
         if (square == null)

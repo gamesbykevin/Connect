@@ -30,6 +30,9 @@ public class Game implements IGame {
     //are we pressing on the screen
     private boolean press = false;
 
+    //did we perform the first render
+    private boolean initialRender = false;
+
     /**
      * The list of steps in the game
      */
@@ -113,6 +116,7 @@ public class Game implements IGame {
                 }
                 break;
 
+            //do nothing
             case Start:
                 break;
 
@@ -126,7 +130,7 @@ public class Game implements IGame {
                 STEP = Step.Updating;
 
                 //we can go to ready now
-                activity.setScreen(Screen.Ready);
+                //activity.setScreen(Screen.Ready);
                 break;
 
             case Updating:
@@ -148,6 +152,10 @@ public class Game implements IGame {
 
                 } else {
                     getBoard().update(activity);
+
+                    //if we already rendered the board then lets display it
+                    if (initialRender && activity.getScreen() == Screen.Loading)
+                        activity.setScreen(Screen.Ready);
                 }
                 break;
 
@@ -202,19 +210,14 @@ public class Game implements IGame {
 
     public void render(float[] m) {
 
-        if (STEP == Step.Reset) {
-
-            //if resetting, clear matrix
-            for (int i = 0; i < m.length; i++) {
-                m[i] = 0;
-            }
-        }
-
         //don't display if we aren't ready
         if (STEP != Step.Updating && STEP != Step.GameOver)
             return;
 
         //render everything on screen
         GameHelper.render(m);
+
+        //we have performed the initial render
+        initialRender = true;
     }
 }

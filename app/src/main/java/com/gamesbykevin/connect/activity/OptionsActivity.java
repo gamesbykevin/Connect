@@ -15,7 +15,10 @@ public class OptionsActivity extends BaseActivity {
     //has the activity been paused
     private boolean paused = false;
 
+    //multi select option for the toggle button
     private MultiStateToggleButton buttonShape;
+
+    public static Board.Shape OPTION_BOARD_SHAPE;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

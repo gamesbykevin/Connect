@@ -93,8 +93,8 @@ public class OpenGLRenderer implements Renderer {
 
     public void onPause() {
 
+        //clear our matrices
         if (mtrxProjectionAndView != null) {
-            //clear our matrices
             for (int i = 0; i < mtrxProjectionAndView.length; i++) {
                 mtrxProjection[i] = 0.0f;
                 mtrxView[i] = 0.0f;
