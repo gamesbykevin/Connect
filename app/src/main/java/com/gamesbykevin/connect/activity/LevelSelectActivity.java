@@ -96,6 +96,10 @@ public class LevelSelectActivity extends FragmentActivity {
         customPagerAdapter = new LevelSelectPagerAdapter(getFragmentManager());
         getCustomPager().setAdapter(customPagerAdapter);
 
+        getCustomPager().setClipToPadding(false);
+        getCustomPager().setPadding(0,0,0,0);
+        getCustomPager().setOffscreenPageLimit(3);
+
         //setup the page dots on the bottom
         setupPagerIndicatorDots();
 
