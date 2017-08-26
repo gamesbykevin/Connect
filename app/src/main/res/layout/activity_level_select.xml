@@ -6,17 +6,29 @@
     android:clipChildren="false"
     style="@style/ActivityPage">
 
+    <!-- Level Select Text -->
+    <ImageView
+        android:src="@drawable/select_level"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp" />
+
+    <!-- Level Select Screens -->
     <android.support.v4.view.ViewPager
         android:id="@+id/customPager"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="50dp"
-        android:layout_marginRight="50dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginRight="0dp"
+        android:layout_marginTop="15dp"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:clipChildren="false"
         />
 
+    <!-- Pager dots -->
     <LinearLayout
         android:id="@+id/listPageContainer"
         android:layout_width="match_parent"

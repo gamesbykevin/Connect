@@ -141,9 +141,9 @@ public class LevelSelectActivity extends FragmentActivity {
 
                             //scroll to the other side
                             if (CURRENT_PAGE == 0) {
-                                getCustomPager().setCurrentItem(PAGES - 1, false);
+                                getCustomPager().setCurrentItem(PAGES - 1, true);
                             } else if (CURRENT_PAGE == PAGES - 1){
-                                getCustomPager().setCurrentItem(0, false);
+                                getCustomPager().setCurrentItem(0, true);
                             }
                         }
                         break;
@@ -184,40 +184,10 @@ public class LevelSelectActivity extends FragmentActivity {
         //call parent
         super.onDestroy();
 
-        if (getCustomPager() != null) {
-
-            //remove all views
-            getCustomPager().removeAllViews();
-
-            //remove adapter
-            getCustomPager().setAdapter(null);
-
-            //set object null
-            this.customPager = null;
-        }
-
-        if (fragments != null) {
-
-            for (int i = 0; i < fragments.size(); i++) {
-                fragments.set(i, null);
-            }
-
-            fragments.clear();
-            fragments = null;
-        }
-
-        if (listPageContainer != null) {
-            listPageContainer.removeAllViews();
-            listPageContainer = null;
-        }
-
-        if (listPageImages != null) {
-            for (int i = 0; i < listPageImages.length; i++) {
-                listPageImages[i].setImageDrawable(null);
-            }
-
-            listPageImages = null;
-        }
+        customPager = null;
+        fragments = null;
+        listPageContainer = null;
+        listPageImages = null;
     }
 
     private ViewPager getCustomPager() {

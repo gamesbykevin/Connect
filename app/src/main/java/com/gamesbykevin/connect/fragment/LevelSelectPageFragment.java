@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.gamesbykevin.connect.R;
+import com.gamesbykevin.connect.activity.LevelSelectActivity;
 import com.gamesbykevin.connect.activity.OptionsActivity;
 import com.gamesbykevin.connect.board.Board;
 
@@ -58,14 +59,142 @@ public class LevelSelectPageFragment extends Fragment {
         //inflate the layout to access the ui elements
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_level_select_page, container, false);
 
-        TextView textHeader = (TextView)rootView.findViewById(R.id.textHeader);
-        textHeader.setText(getString(R.string.text_level) + " " + (getPageNumber() + 1));
+        //display the level # image
+        setupImageViewLevelNumber((ImageView)rootView.findViewById(R.id.levelNumber));
 
-        //make sure the correct image is shown
-        ImageView imageView = (ImageView)rootView.findViewById(R.id.levelSelectShape);
+        //make sure the correct level size is shown
+        setupImageViewLevelSize((ImageView)rootView.findViewById(R.id.levelSize), LevelSelectActivity.Level.values()[getPageNumber()]);
 
+        //make sure the correct image shape is shown
+        setupImageViewShape((ImageView)rootView.findViewById(R.id.levelSelectShape));
+
+        //return our altered view
+        return rootView;
+    }
+
+    /**
+     * Returns the page number represented by this fragment object.
+     */
+    public int getPageNumber() {
+        return pageNumber;
+    }
+
+    private void setupImageViewLevelSize(ImageView imageView, LevelSelectActivity.Level level) {
+
+        //image resource id
+        int resId;
+
+        switch(level) {
+
+            case Level01:
+                resId = R.drawable.size_3;
+                break;
+
+            case Level02:
+                resId = R.drawable.size_5;
+                break;
+
+            case Level03:
+                resId = R.drawable.size_7;
+                break;
+
+            case Level04:
+                resId = R.drawable.size_9;
+                break;
+
+            case Level05:
+                resId = R.drawable.size_11;
+                break;
+
+            case Level06:
+                resId = R.drawable.size_13;
+                break;
+
+            case Level07:
+                resId = R.drawable.size_15;
+                break;
+
+            case Level08:
+                resId = R.drawable.size_17;
+                break;
+
+            case Level09:
+                resId = R.drawable.size_19;
+                break;
+
+            case Level10:
+                resId = R.drawable.size_21;
+                break;
+
+            default:
+                throw new RuntimeException("Level not defined: " + level.toString());
+        }
+
+        //set our bitmap accordingly
+        imageView.setImageBitmap(BitmapFactory.decodeResource(getResources(), resId));
+    }
+
+    private void setupImageViewLevelNumber(ImageView imageView) {
+
+        //image resource id
+        int resId;
+
+        switch (getPageNumber()) {
+
+            case 0:
+                resId = R.drawable.one;
+                break;
+
+            case 1:
+                resId = R.drawable.two;
+                break;
+
+            case 2:
+                resId = R.drawable.three;
+                break;
+
+            case 3:
+                resId = R.drawable.four;
+                break;
+
+            case 4:
+                resId = R.drawable.five;
+                break;
+
+            case 5:
+                resId = R.drawable.six;
+                break;
+
+            case 6:
+                resId = R.drawable.seven;
+                break;
+
+            case 7:
+                resId = R.drawable.eight;
+                break;
+
+            case 8:
+                resId = R.drawable.nine;
+                break;
+
+            case 9:
+                resId = R.drawable.ten;
+                break;
+
+            default:
+                throw new RuntimeException("Page number not defined: " + getPageNumber());
+        }
+
+        //set our bitmap accordingly
+        imageView.setImageBitmap(BitmapFactory.decodeResource(getResources(), resId));
+    }
+
+    private void setupImageViewShape(ImageView imageView) {
+
+        //get the current selected shape
         int typeValue = OptionsActivity.OPTION_BOARD_SHAPE.getValue();
 
+        //the image resource id
         int resId;
 
         //set the correct image
@@ -147,15 +276,5 @@ public class LevelSelectPageFragment extends Fragment {
 
         //set our bitmap accordingly
         imageView.setImageBitmap(BitmapFactory.decodeResource(getResources(), resId));
-
-        //return our altered view
-        return rootView;
-    }
-
-    /**
-     * Returns the page number represented by this fragment object.
-     */
-    public int getPageNumber() {
-        return pageNumber;
     }
 }
