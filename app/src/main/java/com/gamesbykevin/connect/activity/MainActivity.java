@@ -66,6 +66,9 @@ public class MainActivity extends BaseActivity {
         //store our shape selection
         OptionsActivity.OPTION_BOARD_SHAPE = (Board.Shape)super.getObjectValue(R.string.game_shape_file_key, Board.Shape.class);
 
+        //reset to first page
+        LevelSelectActivity.CURRENT_PAGE = 0;
+
         //start game
         Intent intent = new Intent(this, LevelSelectActivity.class);
         startActivity(intent);

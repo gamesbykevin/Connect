@@ -15,7 +15,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/text_header_level_select"
-            android:textSize="24pt"
+            android:textSize="12pt"
             android:layout_marginBottom="16dp" />
 
         <TextView
@@ -26,7 +26,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="24pt"
+            android:textSize="12pt"
             android:layout_marginBottom="16dp" />
 
         <TextView
@@ -38,7 +38,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Best Time 00:00"
-            android:textSize="24pt"
+            android:textSize="12pt"
             android:layout_marginBottom="16dp" />
 
 

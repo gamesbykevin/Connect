@@ -6,11 +6,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-import android.widget.TableLayout;
 import android.widget.ToggleButton;
 
 import com.gamesbykevin.androidframeworkv2.base.Disposable;
 import com.gamesbykevin.androidframeworkv2.util.UtilityHelper;
+import com.gamesbykevin.connect.activity.LevelSelectActivity.Level;
 import com.gamesbykevin.connect.R;
 import com.gamesbykevin.connect.board.Board;
 import com.gamesbykevin.connect.game.Game;
@@ -23,9 +23,10 @@ import java.util.Random;
 
 import static android.view.View.INVISIBLE;
 import static android.view.View.VISIBLE;
+import static com.gamesbykevin.connect.activity.LevelSelectActivity.PAGES;
 import static com.gamesbykevin.connect.game.Game.STEP;
 import static com.gamesbykevin.androidframeworkv2.util.UtilityHelper.DEBUG;
-
+import static com.gamesbykevin.connect.activity.LevelSelectActivity.CURRENT_PAGE;
 
 public class GameActivity extends BaseActivity implements Disposable {
 
@@ -318,11 +319,21 @@ public class GameActivity extends BaseActivity implements Disposable {
 
     public void onClickNext(View view) {
 
-        Board.BOARD_COLS++;
-        Board.BOARD_ROWS++;
+        //increase the current page
+        CURRENT_PAGE++;
+
+        //if the page is at the end, start over
+        if (CURRENT_PAGE >= PAGES)
+            CURRENT_PAGE = 0;
+
+        Level level = Level.values()[CURRENT_PAGE];
+
+        //update the board size
+        Board.BOARD_COLS = level.getCols();
+        Board.BOARD_ROWS = level.getRows();
 
         //show loading screen while we reset
-        setScreen(Screen.Ready);
+        setScreen(Screen.Loading);
 
         //reset the game board
         STEP = Step.Reset;

@@ -66,16 +66,87 @@ public class LevelSelectPageFragment extends Fragment {
 
         int typeValue = OptionsActivity.OPTION_BOARD_SHAPE.getValue();
 
+        int resId;
+
         //set the correct image
         if (typeValue == Board.Shape.Square.getValue()) {
-            imageView.setImageBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.level_select_square));
+            if (getPageNumber() == 0) {
+                resId = R.drawable.level_select_square_1;
+            } else if (getPageNumber() == 1) {
+                resId = R.drawable.level_select_square_2;
+            } else if (getPageNumber() == 2) {
+                resId = R.drawable.level_select_square_3;
+            } else if (getPageNumber() == 3) {
+                resId = R.drawable.level_select_square_4;
+            } else if (getPageNumber() == 4) {
+                resId = R.drawable.level_select_square_5;
+            } else if (getPageNumber() == 5) {
+                resId = R.drawable.level_select_square_6;
+            } else if (getPageNumber() == 6) {
+                resId = R.drawable.level_select_square_7;
+            } else if (getPageNumber() == 7) {
+                resId = R.drawable.level_select_square_8;
+            } else if (getPageNumber() == 8) {
+                resId = R.drawable.level_select_square_9;
+            } else if (getPageNumber() == 9) {
+                resId = R.drawable.level_select_square_10;
+            } else {
+                resId = R.drawable.level_select_square_10;
+            }
         } else if (typeValue == Board.Shape.Hexagon.getValue()) {
-            imageView.setImageBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.level_select_hexagon));
+            if (getPageNumber() == 0) {
+                resId = R.drawable.level_select_hexagon_1;
+            } else if (getPageNumber() == 1) {
+                resId = R.drawable.level_select_hexagon_2;
+            } else if (getPageNumber() == 2) {
+                resId = R.drawable.level_select_hexagon_3;
+            } else if (getPageNumber() == 3) {
+                resId = R.drawable.level_select_hexagon_4;
+            } else if (getPageNumber() == 4) {
+                resId = R.drawable.level_select_hexagon_5;
+            } else if (getPageNumber() == 5) {
+                resId = R.drawable.level_select_hexagon_6;
+            } else if (getPageNumber() == 6) {
+                resId = R.drawable.level_select_hexagon_7;
+            } else if (getPageNumber() == 7) {
+                resId = R.drawable.level_select_hexagon_8;
+            } else if (getPageNumber() == 8) {
+                resId = R.drawable.level_select_hexagon_9;
+            } else if (getPageNumber() == 9) {
+                resId = R.drawable.level_select_hexagon_10;
+            } else {
+                resId = R.drawable.level_select_hexagon_10;
+            }
         } else if (typeValue == Board.Shape.Diamond.getValue()) {
-            imageView.setImageBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.level_select_diamond));
+            if (getPageNumber() == 0) {
+                resId = R.drawable.level_select_diamond_1;
+            } else if (getPageNumber() == 1) {
+                resId = R.drawable.level_select_diamond_2;
+            } else if (getPageNumber() == 2) {
+                resId = R.drawable.level_select_diamond_3;
+            } else if (getPageNumber() == 3) {
+                resId = R.drawable.level_select_diamond_4;
+            } else if (getPageNumber() == 4) {
+                resId = R.drawable.level_select_diamond_5;
+            } else if (getPageNumber() == 5) {
+                resId = R.drawable.level_select_diamond_6;
+            } else if (getPageNumber() == 6) {
+                resId = R.drawable.level_select_diamond_7;
+            } else if (getPageNumber() == 7) {
+                resId = R.drawable.level_select_diamond_8;
+            } else if (getPageNumber() == 8) {
+                resId = R.drawable.level_select_diamond_9;
+            } else if (getPageNumber() == 9) {
+                resId = R.drawable.level_select_diamond_10;
+            } else {
+                resId = R.drawable.level_select_diamond_10;
+            }
         } else {
             throw new RuntimeException("Type value not defined: " + typeValue);
         }
+
+        //set our bitmap accordingly
+        imageView.setImageBitmap(BitmapFactory.decodeResource(getResources(), resId));
 
         //return our altered view
         return rootView;

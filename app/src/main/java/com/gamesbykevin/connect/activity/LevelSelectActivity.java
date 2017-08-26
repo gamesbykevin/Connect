@@ -1,14 +1,12 @@
 package com.gamesbykevin.connect.activity;
 
 import android.content.Intent;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.support.v13.app.FragmentStatePagerAdapter;
 import android.support.v4.app.FragmentActivity;
-import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,7 +17,6 @@ import com.gamesbykevin.connect.R;
 import com.gamesbykevin.connect.board.Board;
 import com.gamesbykevin.connect.fragment.LevelSelectPageFragment;
 import com.gamesbykevin.connect.game.Game;
-import com.gamesbykevin.connect.opengl.OpenGLRenderer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,9 +28,6 @@ public class LevelSelectActivity extends FragmentActivity {
 
     //our pager object that allows horizontal swiping
     private ViewPager customPager;
-
-    //the pager adapter, which provides the pages to the view pager widget.
-    private PagerAdapter customPagerAdapter;
 
     //container for the page dots
     private LinearLayout listPageContainer;
@@ -70,8 +64,13 @@ public class LevelSelectActivity extends FragmentActivity {
         }
     }
 
+    /**
+     * The total number of pages/levels
+     */
+    public static final int PAGES = Level.values().length;
+
     //the current page index
-    private static int CURRENT_PAGE = 0;
+    public static int CURRENT_PAGE = 0;
 
     //temp value to check if we tried to scroll out of bounds
     private static int TMP_CURRENT_PAGE = 0;
@@ -93,18 +92,17 @@ public class LevelSelectActivity extends FragmentActivity {
 
         //get our view pager
         customPager = (ViewPager) findViewById(R.id.customPager);
-        customPagerAdapter = new LevelSelectPagerAdapter(getFragmentManager());
-        getCustomPager().setAdapter(customPagerAdapter);
-
+        getCustomPager().setAdapter(new LevelSelectPagerAdapter(getFragmentManager()));
         getCustomPager().setClipToPadding(false);
-        getCustomPager().setPadding(0,0,0,0);
-        getCustomPager().setOffscreenPageLimit(3);
+
+        //cache all pages to prevent memory leak
+        getCustomPager().setOffscreenPageLimit(PAGES);
 
         //setup the page dots on the bottom
         setupPagerIndicatorDots();
 
         //add listener so we update our list page images
-        customPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+        getCustomPager().addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
 
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -143,12 +141,11 @@ public class LevelSelectActivity extends FragmentActivity {
 
                             //scroll to the other side
                             if (CURRENT_PAGE == 0) {
-                                customPager.setCurrentItem(Level.values().length - 1);
-                            } else if (CURRENT_PAGE == Level.values().length - 1){
-                                customPager.setCurrentItem(0);
+                                getCustomPager().setCurrentItem(PAGES - 1, false);
+                            } else if (CURRENT_PAGE == PAGES - 1){
+                                getCustomPager().setCurrentItem(0, false);
                             }
                         }
-
                         break;
 
                     case ViewPager.SCROLL_STATE_SETTLING:
@@ -166,8 +163,60 @@ public class LevelSelectActivity extends FragmentActivity {
         fragments = new ArrayList<>();
 
         //add all fragments
-        for (int i = 0; i < Level.values().length; i++) {
+        for (int i = 0; i < PAGES; i++) {
             fragments.add(LevelSelectPageFragment.create(i));
+        }
+    }
+
+    @Override
+    public void onResume() {
+
+        //call parent
+        super.onResume();
+
+        //make sure the current page is displayed
+        getCustomPager().setCurrentItem(CURRENT_PAGE);
+    }
+
+    @Override
+    protected void onDestroy(){
+
+        //call parent
+        super.onDestroy();
+
+        if (getCustomPager() != null) {
+
+            //remove all views
+            getCustomPager().removeAllViews();
+
+            //remove adapter
+            getCustomPager().setAdapter(null);
+
+            //set object null
+            this.customPager = null;
+        }
+
+        if (fragments != null) {
+
+            for (int i = 0; i < fragments.size(); i++) {
+                fragments.set(i, null);
+            }
+
+            fragments.clear();
+            fragments = null;
+        }
+
+        if (listPageContainer != null) {
+            listPageContainer.removeAllViews();
+            listPageContainer = null;
+        }
+
+        if (listPageImages != null) {
+            for (int i = 0; i < listPageImages.length; i++) {
+                listPageImages[i].setImageDrawable(null);
+            }
+
+            listPageImages = null;
         }
     }
 
@@ -175,10 +224,13 @@ public class LevelSelectActivity extends FragmentActivity {
         return this.customPager;
     }
 
+    /**
+     * Setup the UI for the pager dots
+     */
     private void setupPagerIndicatorDots() {
 
         //the array size will match the number of pages we have
-        listPageImages = new ImageView[Level.values().length];
+        listPageImages = new ImageView[PAGES];
 
         //create our page dots
         for (int i = 0; i < listPageImages.length; i++) {
@@ -204,6 +256,7 @@ public class LevelSelectActivity extends FragmentActivity {
 
             //what do we do if the user clicks on the page icon
             listPageImages[i].setOnClickListener(new View.OnClickListener() {
+
                 @Override
                 public void onClick(View view) {
 
@@ -232,13 +285,14 @@ public class LevelSelectActivity extends FragmentActivity {
 
         @Override
         public Fragment getItem(int position) {
+
+            //return  fragment from our list
             return fragments.get(position);
-            //return LevelSelectPageFragment.create(position);
         }
 
         @Override
         public int getCount() {
-            return Level.values().length;
+            return PAGES;
         }
     }
 
@@ -248,6 +302,7 @@ public class LevelSelectActivity extends FragmentActivity {
      */
     public void onClickPlay(View view) {
 
+        //the level is determined  by the current page
         Level level = Level.values()[getCustomPager().getCurrentItem()];
 
         //set board size
@@ -257,12 +312,9 @@ public class LevelSelectActivity extends FragmentActivity {
         //set to loading phase
         Game.STEP = Game.Step.Loading;
 
-        //reset the camera perspective as well
-        OpenGLRenderer.resetZoom();
-
+        //start our game
         startActivity(new Intent(this, GameActivity.class));
     }
-
 
     @Override
     public void onBackPressed() {
@@ -273,5 +325,4 @@ public class LevelSelectActivity extends FragmentActivity {
         startMain.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(new Intent(this, MainActivity.class));
     }
-
 }
