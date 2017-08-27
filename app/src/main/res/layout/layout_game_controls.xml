@@ -21,4 +21,19 @@
         android:id="@+id/ButtonAutoRotate"
         />
 
+    <LinearLayout
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="20dp"
+        android:gravity="right"
+        android:layout_gravity="top"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+            <ImageView style="@style/LevelSelectCustomText" android:id="@+id/time1" android:src="@drawable/zero" />
+            <ImageView style="@style/LevelSelectCustomText" android:id="@+id/time2" android:src="@drawable/zero" />
+            <ImageView style="@style/LevelSelectCustomText" android:src="@drawable/colon" />
+            <ImageView style="@style/LevelSelectCustomText" android:id="@+id/time3" android:src="@drawable/zero" />
+            <ImageView style="@style/LevelSelectCustomText" android:id="@+id/time4" android:src="@drawable/zero" />
+    </LinearLayout>
+
+
 </LinearLayout>

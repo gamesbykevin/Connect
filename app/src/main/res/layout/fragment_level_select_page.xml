@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:gravity="center"
     android:padding="16dp">
 
         <TableLayout style="@style/TableLevelSelect" android:background="@drawable/level_select_window">
@@ -11,70 +13,47 @@
 
                         <LinearLayout android:orientation="horizontal" android:gravity="center" android:paddingTop="10dp">
 
-                                <!--Level -->
-                                <ImageView style="@style/LevelSelectCustomText" android:src="@drawable/level" />
+                                <!--Level # -->
+                                <ImageView style="@style/LevelSelectCustomText" android:id="@+id/levelNumber" />
 
-                                <!-- # -->
-                                <ImageView style="@style/LevelSelectCustomText" android:id="@+id/levelNumber" android:src="@drawable/level" />
+                                <!-- sample shape -->
+                                <ImageView style="@style/LevelSelectImage" android:id="@+id/levelSelectShape" />
 
                         </LinearLayout>
 
                 </TableRow>
 
-                <!--
+                <!-- Level size -->
                 <TableRow style="@style/RowLevelSelect">
+                        <ImageView style="@style/LevelSelectCustomText" android:id="@+id/levelSize" />
+                </TableRow>
 
-                        <LinearLayout android:orientation="horizontal">
+                <!-- Best Header -->
+                <TableRow style="@style/RowLevelSelect">
+                        <ImageView style="@style/LevelSelectCustomText" android:src="@drawable/best" />
+                </TableRow>
 
-                                <ImageView style="@style/LevelSelectCustomText" android:src="@drawable/best" />
-
+                <!-- Personal Best -->
+                <TableRow style="@style/RowLevelSelect">
+                        <LinearLayout android:gravity="center_horizontal" android:layout_gravity="center_horizontal">
                                 <ImageView style="@style/LevelSelectCustomText" android:id="@+id/bestTime1" android:src="@drawable/zero" />
                                 <ImageView style="@style/LevelSelectCustomText" android:id="@+id/bestTime2" android:src="@drawable/zero" />
                                 <ImageView style="@style/LevelSelectCustomText" android:src="@drawable/colon" />
                                 <ImageView style="@style/LevelSelectCustomText" android:id="@+id/bestTime3" android:src="@drawable/zero" />
                                 <ImageView style="@style/LevelSelectCustomText" android:id="@+id/bestTime4" android:src="@drawable/zero" />
-
                         </LinearLayout>
                 </TableRow>
-                -->
 
+                <!-- leader board -->
                 <TableRow style="@style/RowLevelSelect">
-
-                        <!-- Level Size 3 x 3 -->
-                        <ImageView
-                            style="@style/LevelSelectCustomText"
-                            android:id="@+id/levelSize" />
-
-                </TableRow>
-                
-                <TableRow style="@style/RowLevelSelect">
-
-                        <!--Sample display shape -->
-                        <ImageView
-                            android:id="@+id/levelSelectShape"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
+                        <Button style="@style/ButtonLevelSelect" android:id="@+id/buttonLeaderboard" android:text="@string/button_text_leaderboard" android:onClick="onClickLeaderboard" />
                 </TableRow>
 
+                <!-- play level -->
                 <TableRow style="@style/RowLevelSelect">
-
-                        <!-- leader board -->
-                        <Button
-                            style="@style/ButtonLevelSelect"
-                            android:id="@+id/buttonLeaderboard"
-                            android:text="@string/button_text_leaderboard"
-                            android:onClick="onClickLeaderboard" />
-                </TableRow>
-
-                <TableRow style="@style/RowLevelSelect">
-
-                        <!-- play level -->
-                        <Button
-                            style="@style/ButtonLevelSelect"
-                            android:id="@+id/buttonPlay"
-                            android:text="@string/button_text_play"
-                            android:onClick="onClickPlay" />
+                        <Button style="@style/ButtonLevelSelect" android:id="@+id/buttonPlay" android:text="@string/button_text_play" android:onClick="onClickPlay" />
                 </TableRow>
 
         </TableLayout>
+
 </RelativeLayout>

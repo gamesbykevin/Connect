@@ -4,12 +4,16 @@ import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 
 import com.gamesbykevin.androidframeworkv2.util.UtilityHelper;
 import com.gamesbykevin.connect.R;
 import com.gamesbykevin.connect.board.Board;
 
 import java.util.HashMap;
+
+import static android.view.View.INVISIBLE;
+import static android.view.View.VISIBLE;
 
 /**
  * Created by Kevin on 5/22/2017.
@@ -213,5 +217,25 @@ public abstract class BaseActivity extends com.gamesbykevin.androidframeworkv2.a
 
         //call parent
         super.onResume();
+    }
+
+    protected void setLayoutVisibility(final ViewGroup layoutView, final boolean visible) {
+        setLayoutVisibility(layoutView, (visible) ? VISIBLE : INVISIBLE);
+    }
+
+    protected void setLayoutVisibility(final ViewGroup layoutView, final int visibility) {
+        this.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                //assign visibility accordingly
+                layoutView.setVisibility(visibility);
+
+                //if the layout is visible, make sure it is displayed
+                if (visibility == VISIBLE) {
+                    layoutView.invalidate();
+                    layoutView.bringToFront();
+                }
+            }
+        });
     }
 }

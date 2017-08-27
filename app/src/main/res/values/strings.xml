@@ -1,6 +1,6 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="app_name">Connect</string>
-	
+
     <!-- button text -->
     <string name="button_text_next">Next</string>
     <string name="button_text_restart">Restart</string>
@@ -20,9 +20,8 @@
     <string name="text_header_level_select">Levels</string>
     <string name="text_header_shape">Shape:&#160;</string>
 
-	<string translatable="false" name="game_stats_file_key">com.gamesbykevin.connect.GAME_STATS_FILE_KEY</string>
-    <string translatable="false" name="game_shape_file_key">com.gamesbykevin.connect.SHAPE_FILE_KEY</string>
-
+    <string name="game_stats_file_key" translatable="false">com.gamesbykevin.connect.GAME_STATS_FILE_KEY</string>
+    <string name="game_shape_file_key" translatable="false">com.gamesbykevin.connect.SHAPE_FILE_KEY</string>
 
 
     <!-- Titles -->

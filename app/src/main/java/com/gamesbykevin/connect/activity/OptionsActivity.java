@@ -18,7 +18,7 @@ public class OptionsActivity extends BaseActivity {
     //multi select option for the toggle button
     private MultiStateToggleButton buttonShape;
 
-    public static Board.Shape OPTION_BOARD_SHAPE;
+    public static Board.Shape OPTION_BOARD_SHAPE = Board.Shape.Square;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -1,5 +1,6 @@
 package com.gamesbykevin.connect.game;
 
+import android.opengl.GLSurfaceView;
 import android.view.MotionEvent;
 import com.gamesbykevin.connect.R;
 import com.gamesbykevin.connect.activity.GameActivity;
@@ -7,6 +8,7 @@ import com.gamesbykevin.connect.activity.GameActivity.Screen;
 import com.gamesbykevin.connect.board.Board;
 import com.gamesbykevin.connect.board.BoardHelper;
 import com.gamesbykevin.connect.opengl.OpenGLRenderer;
+import com.gamesbykevin.connect.opengl.OpenGLSurfaceView;
 
 import static com.gamesbykevin.connect.game.GameHelper.FRAMES;
 import static com.gamesbykevin.connect.game.GameHelper.GAME_OVER;
@@ -52,6 +54,9 @@ public class Game implements IGame {
 
     //do we rotate until we connect to something?
     public static boolean AUTO_ROTATE = false;
+
+    //amount of time elapsed (milli seconds)
+    private long elapsed = 0;
 
     public Game(GameActivity activity) {
 
@@ -126,6 +131,9 @@ public class Game implements IGame {
                 //reset level
                 reset();
 
+                //reset the game timer
+                activity.resetTimer();
+
                 //after resetting, next step is updating
                 STEP = Step.Updating;
 
@@ -151,7 +159,22 @@ public class Game implements IGame {
                     activity.vibrate();
 
                 } else {
+
+                    //update the board
                     getBoard().update(activity);
+
+                    //keep track of the time
+                    elapsed += OpenGLSurfaceView.FRAME_DURATION;
+
+                    //if 1 second passed, update timer
+                    if (elapsed >= OpenGLSurfaceView.MILLISECONDS_PER_SECOND) {
+
+                        //reset elapsed
+                        elapsed = 0;
+
+                        //update the game timer
+                        activity.updateTimer();
+                    }
 
                     //if we already rendered the board then lets display it
                     if (initialRender && activity.getScreen() == Screen.Loading)

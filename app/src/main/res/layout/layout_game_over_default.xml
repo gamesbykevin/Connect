@@ -14,9 +14,6 @@
             <Button style="@style/ButtonMenu" android:text="@string/button_text_next" android:onClick="onClickNext" android:id="@+id/ButtonNext" />
         </TableRow>
         <TableRow style="@style/RowMenu">
-            <Button style="@style/ButtonMenu" android:text="@string/text_header_level_select" android:onClick="onClickLevelSelect" />
-        </TableRow>
-        <TableRow style="@style/RowMenu">
             <Button style="@style/ButtonMenu" android:text="@string/button_text_rate" android:onClick="onClickRate" />
         </TableRow>
         <TableRow style="@style/RowMenu">

@@ -13,25 +13,49 @@ public class SplashActivity extends BaseActivity {
      */
     public static final long SPLASH_DELAY = 2500L;
 
+    /**
+     * After we initialize how long should we delay
+     */
+    public static final long DEFAULT_DELAY = 333L;
+
+    /**
+     * Is this the first time we came here
+     */
+    public static boolean INITIALIZE = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        //call parent
         super.onCreate(savedInstanceState);
+
+        //assign our layout
         setContentView(R.layout.activity_splash);
     }
 
     @Override
     public void onResume() {
+
+        //call parent
         super.onResume();
+
+        //how long do we display the screen
+        final long delay = (INITIALIZE) ? DEFAULT_DELAY : SPLASH_DELAY;
 
         //delay a couple seconds before going to main page
         new Handler().postDelayed(new Runnable() {
+
             @Override
             public void run() {
-                startActivity(new Intent(SplashActivity.this, MainActivity.class));
+
+                //start the new activity
+                startActivity(new Intent(SplashActivity.this, (INITIALIZE) ? LevelSelectActivity.class : MainActivity.class));
+
+                //close the activity
                 finish();
             }
 
-        }, SPLASH_DELAY);
+        }, delay);
     }
 
     @Override

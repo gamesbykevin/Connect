@@ -26,4 +26,5 @@
     </TableLayout>
 
     <include layout="@layout/layout_social_icons" />
+
 </LinearLayout>

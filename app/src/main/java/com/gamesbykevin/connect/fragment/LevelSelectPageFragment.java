@@ -142,43 +142,43 @@ public class LevelSelectPageFragment extends Fragment {
         switch (getPageNumber()) {
 
             case 0:
-                resId = R.drawable.one;
+                resId = R.drawable.level_1;
                 break;
 
             case 1:
-                resId = R.drawable.two;
+                resId = R.drawable.level_2;
                 break;
 
             case 2:
-                resId = R.drawable.three;
+                resId = R.drawable.level_3;
                 break;
 
             case 3:
-                resId = R.drawable.four;
+                resId = R.drawable.level_4;
                 break;
 
             case 4:
-                resId = R.drawable.five;
+                resId = R.drawable.level_5;
                 break;
 
             case 5:
-                resId = R.drawable.six;
+                resId = R.drawable.level_6;
                 break;
 
             case 6:
-                resId = R.drawable.seven;
+                resId = R.drawable.level_7;
                 break;
 
             case 7:
-                resId = R.drawable.eight;
+                resId = R.drawable.level_8;
                 break;
 
             case 8:
-                resId = R.drawable.nine;
+                resId = R.drawable.level_9;
                 break;
 
             case 9:
-                resId = R.drawable.ten;
+                resId = R.drawable.level_10;
                 break;
 
             default:

@@ -1,10 +1,12 @@
 package com.gamesbykevin.connect.activity;
 
 import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.opengl.GLSurfaceView;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ToggleButton;
 
@@ -65,6 +67,12 @@ public class GameActivity extends BaseActivity implements Disposable {
     //our auto rotate button reference
     private ToggleButton buttonAutoRotate;
 
+    //the images that make up our time
+    private ImageView time1, time2, time3, time4;
+
+    //keep track of the time
+    private int value1 = 0, value2 = 0, value3 = 0, value4 = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -88,6 +96,12 @@ public class GameActivity extends BaseActivity implements Disposable {
         this.layouts.add((LinearLayout)findViewById(R.id.gameOverLayoutDefault));
         this.layouts.add((LinearLayout)findViewById(R.id.loadingScreenLayout));
         this.layouts.add((LinearLayout)findViewById(R.id.layoutGameControls));
+
+        //out time image references
+        this.time1 = (ImageView)findViewById(R.id.time1);
+        this.time2 = (ImageView)findViewById(R.id.time2);
+        this.time3 = (ImageView)findViewById(R.id.time3);
+        this.time4 = (ImageView)findViewById(R.id.time4);
     }
 
     public static Game getGame() {
@@ -138,6 +152,30 @@ public class GameActivity extends BaseActivity implements Disposable {
                 UtilityHelper.handleException(e);
             }
         }
+
+        if (layouts != null) {
+
+            for (ViewGroup view : layouts) {
+                if (view != null) {
+                    try {
+                        view.removeAllViews();
+                        view = null;
+                    } catch (Exception e) {
+                        UtilityHelper.handleException(e);
+                    }
+                }
+            }
+
+            layouts.clear();
+            layouts = null;
+        }
+
+        glSurfaceView = null;
+        layoutParams = null;
+        time1 = null;
+        time2 = null;
+        time3 = null;
+        time4 = null;
     }
 
     @Override
@@ -251,24 +289,11 @@ public class GameActivity extends BaseActivity implements Disposable {
         return this.layoutParams;
     }
 
-    public void setLayoutVisibility(final ViewGroup layoutView, final boolean visible) {
-        this.runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                //assign visibility accordingly
-                layoutView.setVisibility(visible ? VISIBLE : INVISIBLE);
-
-                //if the layout is visible, make sure it is displayed
-                if (visible) {
-                    layoutView.invalidate();
-                    layoutView.bringToFront();
-                }
-            }
-        });
-    }
-
     @Override
     public void onBackPressed() {
+
+        //show loading screen while we reset
+        setScreen(Screen.Loading);
 
         //move step to do nothing
         STEP = Step.Start;
@@ -307,16 +332,6 @@ public class GameActivity extends BaseActivity implements Disposable {
         startActivity(new Intent(this, MainActivity.class));
     }
 
-    public void onClickLevelSelect(View view) {
-
-        //go back to start step
-        STEP = Step.Start;
-
-        //go to level select screen
-        startActivity(new Intent(this, LevelSelectActivity.class));
-
-    }
-
     public void onClickNext(View view) {
 
         //increase the current page
@@ -337,5 +352,146 @@ public class GameActivity extends BaseActivity implements Disposable {
 
         //reset the game board
         STEP = Step.Reset;
+    }
+
+    public void resetTimer() {
+        value1 = 0;
+        value2 = 0;
+        value3 = 0;
+        value4 = 0;
+    }
+
+    /**
+     * Update the game timer
+     */
+    public void updateTimer() {
+
+        boolean flag1 = false;
+        boolean flag2 = false;
+        boolean flag3 = false;
+        boolean flag4 = true;
+
+        //increase the seconds
+        value4++;
+
+        //10 seconds
+        if (value4 > 9) {
+
+            //reset
+            value4 = 0;
+
+            //increase the tens (seconds)
+            value3++;
+
+            //flag change
+            flag3 = true;
+        }
+
+        //60 seconds
+        if (value3 > 5) {
+
+            //reset
+            value3 = 0;
+
+            //increase the minutes
+            value2++;
+
+            //flag change
+            flag2 = true;
+        }
+
+        //10 minutes
+        if (value2 > 9) {
+
+            //reset
+            value2 = 0;
+
+            //increase the tens (minutes)
+            value1++;
+
+            //flag change
+            flag1 = true;
+        }
+
+        //only update when necessary
+        if (flag1)
+            updateImageViewTimer(value1, time1);
+        if (flag2)
+            updateImageViewTimer(value2, time2);
+        if (flag3)
+            updateImageViewTimer(value3, time3);
+        if (flag4)
+            updateImageViewTimer(value4, time4);
+    }
+
+    private void updateImageViewTimer(final int value, final ImageView imageView) {
+
+        //resource id
+        final int resId;
+
+        //if we are at the max displayed value, everything will be 9
+        if (value1 > 9) {
+
+            resId = R.drawable.nine;
+
+        } else {
+
+            //find the appropriate drawable
+            switch (value) {
+
+                case 0:
+                    resId = R.drawable.zero;
+                    break;
+
+                case 1:
+                    resId = R.drawable.one;
+                    break;
+
+                case 2:
+                    resId = R.drawable.two;
+                    break;
+
+                case 3:
+                    resId = R.drawable.three;
+                    break;
+
+                case 4:
+                    resId = R.drawable.four;
+                    break;
+
+                case 5:
+                    resId = R.drawable.five;
+                    break;
+
+                case 6:
+                    resId = R.drawable.six;
+                    break;
+
+                case 7:
+                    resId = R.drawable.seven;
+                    break;
+
+                case 8:
+                    resId = R.drawable.eight;
+                    break;
+
+                case 9:
+                    resId = R.drawable.nine;
+                    break;
+
+                default:
+                    throw new RuntimeException("value not defined: " + value);
+            }
+        }
+
+        //run on ui thread
+        this.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+
+                //update bitmap accordingly
+                imageView.setImageBitmap(BitmapFactory.decodeResource(getResources(), resId));
+            }
+        });
     }
 }

@@ -69,6 +69,11 @@ public class LevelSelectActivity extends FragmentActivity {
      */
     public static final int PAGES = Level.values().length;
 
+    /**
+     * Spacing between each pager dot
+     */
+    public static final int PAGE_DOT_PADDING = 5;
+
     //the current page index
     public static int CURRENT_PAGE = 0;
 
@@ -92,14 +97,64 @@ public class LevelSelectActivity extends FragmentActivity {
 
         //get our view pager
         customPager = (ViewPager) findViewById(R.id.customPager);
+
+        //create new array list
+        fragments = new ArrayList<>();
+
+        //create and assign our adapter
         getCustomPager().setAdapter(new LevelSelectPagerAdapter(getFragmentManager()));
-        getCustomPager().setClipToPadding(false);
 
         //cache all pages to prevent memory leak
         getCustomPager().setOffscreenPageLimit(PAGES);
 
         //setup the page dots on the bottom
         setupPagerIndicatorDots();
+
+        //add view pager listener
+        addPagerListener();
+
+        //default the first page as selected
+        listPageImages[0].setImageResource(R.drawable.tab_indicator_selected);
+    }
+
+    @Override
+    public void onStart() {
+
+        //call parent
+        super.onStart();
+    }
+
+    @Override
+    public void onResume() {
+
+        //call parent
+        super.onResume();
+
+        //make sure the current page is displayed
+        getCustomPager().setCurrentItem(CURRENT_PAGE);
+    }
+
+    @Override
+    protected void onDestroy() {
+
+        //call parent
+        super.onDestroy();
+
+        customPager = null;
+        fragments = null;
+        listPageContainer = null;
+        listPageImages = null;
+    }
+
+    private ViewPager getCustomPager() {
+        return this.customPager;
+    }
+
+    private List<LevelSelectPageFragment> getFragments() {
+        return this.fragments;
+    }
+
+    private void addPagerListener() {
 
         //add listener so we update our list page images
         getCustomPager().addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -142,7 +197,7 @@ public class LevelSelectActivity extends FragmentActivity {
                             //scroll to the other side
                             if (CURRENT_PAGE == 0) {
                                 getCustomPager().setCurrentItem(PAGES - 1, true);
-                            } else if (CURRENT_PAGE == PAGES - 1){
+                            } else if (CURRENT_PAGE == PAGES - 1) {
                                 getCustomPager().setCurrentItem(0, true);
                             }
                         }
@@ -155,43 +210,6 @@ public class LevelSelectActivity extends FragmentActivity {
                 }
             }
         });
-
-        //default the first page as selected
-        listPageImages[0].setImageResource(R.drawable.tab_indicator_selected);
-
-        //create new array list
-        fragments = new ArrayList<>();
-
-        //add all fragments
-        for (int i = 0; i < PAGES; i++) {
-            fragments.add(LevelSelectPageFragment.create(i));
-        }
-    }
-
-    @Override
-    public void onResume() {
-
-        //call parent
-        super.onResume();
-
-        //make sure the current page is displayed
-        getCustomPager().setCurrentItem(CURRENT_PAGE);
-    }
-
-    @Override
-    protected void onDestroy(){
-
-        //call parent
-        super.onDestroy();
-
-        customPager = null;
-        fragments = null;
-        listPageContainer = null;
-        listPageImages = null;
-    }
-
-    private ViewPager getCustomPager() {
-        return this.customPager;
     }
 
     /**
@@ -212,14 +230,14 @@ public class LevelSelectActivity extends FragmentActivity {
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 
             //provide space between each page icon
-            params.setMargins(5, 0, 5, 0);
+            params.setMargins(PAGE_DOT_PADDING, 0, PAGE_DOT_PADDING, 0);
 
             //update with the specified layout
             listPageImages[i].setLayoutParams(params);
 
             //default the icon
             listPageImages[i].setImageResource(R.drawable.tab_indicator_default);
-            //ivArrayDotsPager[i].setAlpha(0.4f);
+            //listPageImages[i].setAlpha(0.4f);
 
             //pass index through to navigate page(s) directly
             final int index = i;
@@ -257,7 +275,22 @@ public class LevelSelectActivity extends FragmentActivity {
         public Fragment getItem(int position) {
 
             //return  fragment from our list
-            return fragments.get(position);
+            //return fragments.get(position);
+
+            //check to see if we already have the fragment
+            for (int i = 0; i < getFragments().size(); i++) {
+                if (getFragments().get(i).getPageNumber() == position)
+                    return getFragments().get(position);
+            }
+
+            //create it since the fragment does not exist
+            LevelSelectPageFragment fragment = LevelSelectPageFragment.create(position);
+
+            //add to array list
+            getFragments().add(fragment);
+
+            //return result
+            return fragment;
         }
 
         @Override
