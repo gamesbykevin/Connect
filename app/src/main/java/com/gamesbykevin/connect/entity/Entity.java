@@ -247,19 +247,21 @@ public class Entity extends Cell {
 
         //calculate at least once
         if (this.vertices == null)
-            return getTransformedVertices();
+            return getTransformedVertices(getAngle());
 
         //return our array
         return this.vertices;
     }
 
-    public float[] getTransformedVertices() {
+    public float[] getTransformedVertices(final float tmpAngle) {
+
+        float x1, x2, y1, y2;
 
         //start scaling
-        float x1 = getBase().left * getScale();
-        float x2 = getBase().right * getScale();
-        float y1 = getBase().bottom * getScale();
-        float y2 = getBase().top * getScale();
+        x1 = getBase().left * getScale();
+        x2 = getBase().right * getScale();
+        y1 = getBase().bottom * getScale();
+        y2 = getBase().top * getScale();
 
         //now we need to detach from the points so we can start rotating
         nw.x = x1; nw.y = y2;
@@ -268,7 +270,7 @@ public class Entity extends Cell {
         ne.x = x2; ne.y = y2;
 
         //convert to radians
-        double radians = Math.toRadians(getAngle());
+        double radians = Math.toRadians(tmpAngle);
 
         //calculate this once, so we don't have to do it every time
         float s = (float) Math.sin(radians);

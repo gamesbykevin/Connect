@@ -3,9 +3,7 @@ package com.gamesbykevin.connect.shape;
 import com.gamesbykevin.connect.activity.GameActivity;
 import com.gamesbykevin.connect.entity.Entity;
 
-import javax.microedition.khronos.opengles.GL10;
-
-import static com.gamesbykevin.connect.board.Board.DIMENSION;
+import static com.gamesbykevin.connect.board.BoardHelper.DIMENSION;
 
 /**
  * Created by Kevin on 8/1/2017.
@@ -48,9 +46,6 @@ public abstract class CustomShape extends Entity implements ICustomShape {
     //how to render the pipe
     private float anglePipe = 0.0f;
 
-    //do we render the shape background
-    private boolean visible = true;
-
     //texture atlas coordinates
     private float[] uvsGray, uvsGreen;
 
@@ -83,14 +78,6 @@ public abstract class CustomShape extends Entity implements ICustomShape {
 
     public int getIndex() {
         return this.index;
-    }
-
-    public void setVisible(final boolean visible) {
-        this.visible = visible;
-    }
-
-    public boolean isVisible() {
-        return this.visible;
     }
 
     @Override
@@ -270,7 +257,6 @@ public abstract class CustomShape extends Entity implements ICustomShape {
 
     @Override
     public void reset() {
-        setVisible(true);
         setTextureCoordinatesGreen(null);
         setTextureCoordinatesGray(null);
     }
@@ -305,17 +291,8 @@ public abstract class CustomShape extends Entity implements ICustomShape {
      */
     public void updateVertices() {
 
-        //get angle
-        float angle = getAngle();
-
-        //offset angle for pipe
-        setAngle(getAngle() + getAnglePipe());
-
-        //update vertices
-        super.getTransformedVertices();
-
-        //restore angle
-        setAngle(angle);
+        //add the angle to the current pipe to update the vertices
+        super.getTransformedVertices(getAngle() + getAnglePipe());
     }
 
     @Override

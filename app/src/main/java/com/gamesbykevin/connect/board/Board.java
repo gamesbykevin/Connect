@@ -1,10 +1,8 @@
 package com.gamesbykevin.connect.board;
 
 import android.opengl.GLES20;
-import android.view.VelocityTracker;
 
 import com.gamesbykevin.androidframeworkv2.maze.Maze;
-import com.gamesbykevin.androidframeworkv2.maze.Room;
 import com.gamesbykevin.androidframeworkv2.maze.algorithm.Prims;
 import com.gamesbykevin.androidframeworkv2.util.UtilityHelper;
 import com.gamesbykevin.connect.entity.Entity;
@@ -17,13 +15,15 @@ import com.gamesbykevin.connect.shape.Hexagon;
 import com.gamesbykevin.connect.shape.Square;
 
 import static com.gamesbykevin.connect.activity.GameActivity.getRandomObject;
+import static com.gamesbykevin.connect.board.BoardHelper.CALCULATE_INDICES;
+import static com.gamesbykevin.connect.board.BoardHelper.CALCULATE_UVS;
+import static com.gamesbykevin.connect.board.BoardHelper.CALCULATE_VERTICES;
+import static com.gamesbykevin.connect.board.BoardHelper.addShapes;
 import static com.gamesbykevin.connect.board.BoardHelper.checkBoard;
 import static com.gamesbykevin.connect.board.BoardHelper.updateCoordinates;
 import static com.gamesbykevin.connect.board.BoardHelper.updateShape;
 import static com.gamesbykevin.connect.game.Game.AUTO_ROTATE;
 import static com.gamesbykevin.connect.game.GameHelper.getSquare;
-import static com.gamesbykevin.connect.opengl.OpenGLSurfaceView.HEIGHT;
-import static com.gamesbykevin.connect.opengl.OpenGLSurfaceView.WIDTH;
 
 /**
  * Created by Kevin on 8/1/2017.
@@ -39,26 +39,11 @@ public class Board implements ICommon {
     private CustomShape[][] shapes;
 
     public enum Shape {
-        Square(0), Hexagon(1), Diamond(2);
-
-        private int value;
-
-        private Shape(int value) {
-            this.value = value;
-        }
-
-        public int getValue() {
-            return this.value;
-        }
+        Square, Hexagon, Diamond;
     }
 
     //what type of shape are we using
     private Shape type = null;
-
-    /**
-     * The size of the shape
-     */
-    public static int DIMENSION = 64;
 
     //our maze generation object
     private Maze maze;
@@ -94,34 +79,7 @@ public class Board implements ICommon {
      * @return The pixel width of the entire board
      */
     public float getWidth() {
-
-        //2 shapes to calculate the difference
-        CustomShape shape1, shape2;
-
-        //get the appropriate shapes based on the type
-        switch(getType()) {
-
-            case Square:
-                shape1 = getShapes()[0][0];
-                shape2 = getShapes()[0][getMaze().getCols() - 1];
-                break;
-
-            case Diamond:
-                shape1 = getShapes()[getMaze().getRows() - 1][0];
-                shape2 = getShapes()[0][getMaze().getCols() - 1];
-                break;
-
-            case Hexagon:
-                shape1 = getShapes()[0][0];
-                shape2 = getShapes()[1][getMaze().getCols() - 1];
-                break;
-
-            default:
-                throw new RuntimeException("Type not defined: " + getType().toString());
-        }
-
-        //get the difference
-        return (shape2.getX() + shape2.getWidth()) - shape1.getX();
+        return BoardHelper.getWidth(this);
     }
 
     /**
@@ -129,150 +87,11 @@ public class Board implements ICommon {
      * @return The pixel height of the entire board
      */
     public float getHeight() {
-
-        //2 shapes to calculate the difference
-        CustomShape shape1, shape2;
-
-        //get the appropriate shapes based on the type
-        switch(getType()) {
-
-            case Square:
-                shape1 = getShapes()[0][0];
-                shape2 = getShapes()[getMaze().getRows() - 1][0];
-                break;
-
-            case Diamond:
-                shape1 = getShapes()[0][0];
-                shape2 = getShapes()[getMaze().getRows() - 1][getMaze().getCols() - 1];
-                break;
-
-            case Hexagon:
-                shape1 = getShapes()[0][0];
-                shape2 = getShapes()[getMaze().getRows() - 1][0];
-                break;
-
-            default:
-                throw new RuntimeException("Type not defined: " + getType().toString());
-        }
-
-        //get the difference
-        return (shape2.getY() + shape2.getHeight()) - shape1.getY();
+        return BoardHelper.getHeight(this);
     }
 
     public Maze getMaze() {
         return this.maze;
-    }
-
-    private void addShapes() {
-
-        int x = 0, y = 0;
-        final int w = DIMENSION, h = DIMENSION;
-
-        switch (getType()) {
-
-            case Square:
-                CustomShape.ROTATION_ANGLE = Square.ROTATION_ANGLE_DEFAULT;
-                break;
-
-            case Hexagon:
-                CustomShape.ROTATION_ANGLE = Hexagon.ROTATION_ANGLE_DEFAULT;
-                break;
-
-            case Diamond:
-                CustomShape.ROTATION_ANGLE = Diamond.ROTATION_ANGLE_DEFAULT;
-                break;
-
-            default:
-                throw new RuntimeException("Shape not defined: " + getType().toString());
-        }
-
-        //start coordinates
-        final int sx = BoardHelper.getStartX(getType(), WIDTH, maze.getCols(), maze.getRows(), w, h);
-        final int sy = BoardHelper.getStartY(getType(), HEIGHT, maze.getCols(), maze.getRows(), w, h);
-
-        int index = 0;
-
-        for (int col = 0; col < getMaze().getCols(); col++) {
-
-            for (int row = 0; row < getMaze().getRows(); row++) {
-
-                //calculate coordinates
-                x = sx + BoardHelper.getX(getType(), col, row, w, h);
-                y = sy + BoardHelper.getY(getType(), col, row, w, h);
-
-                //add shape
-                addShape(getType(), getMaze().getRoom(col, row), x, y, col, row, index);
-
-                //keep track of index
-                index++;
-            }
-        }
-    }
-
-    public final void addShape(Shape shape, Room room, float x, float y, int col, int row, int index) {
-
-        CustomShape tmp = null;
-
-        switch (shape) {
-
-            case Square:
-                tmp = new Square();
-                break;
-
-            case Hexagon:
-                tmp = new Hexagon();
-                break;
-
-            case Diamond:
-                tmp = new Diamond();
-                break;
-
-            default:
-                throw new RuntimeException("Shape not defined: " + shape.toString());
-        }
-
-        //assign x, y coordinates
-        tmp.setX(x);
-        tmp.setY(y);
-
-        //assign the index
-        tmp.setIndex(index);
-
-        //mark the anchor shape as connected
-        if (col == ANCHOR_COL && row == ANCHOR_ROW)
-            tmp.setConnected(true);
-
-        //open up the appropriate sides
-        tmp.setBorders(room);
-
-        //assign the location
-        tmp.setCol(col);
-        tmp.setRow(row);
-
-        //make sure we render the pipe(s) correctly
-        tmp.calculateAnglePipe();
-
-        //assign the texture coordinates for the pipe on the shape
-        tmp.assignTextureCoordinates();
-
-        //how many rotations have we had
-        int rotations = 0;
-
-        //pick a random number of rotations to perform
-        int rotationsMax = getRandomObject().nextInt(tmp.getRotationCountMax());
-
-        //rotate the shape a random number of times
-        while (rotations < rotationsMax) {
-            tmp.rotate();
-            tmp.rotateFinish();
-            rotations++;
-        }
-
-        //update the vertices
-        tmp.updateVertices();
-
-        //assign shape in array
-        getShapes()[row][col] = tmp;
     }
 
     protected CustomShape[][] getShapes() {
@@ -336,11 +155,15 @@ public class Board implements ICommon {
             for (int col = 0; col < getMaze().getCols(); col++) {
                 for (int row = 0; row < getMaze().getRows(); row++) {
 
-                    CustomShape shape = getShapes()[row][col];
+                    try {
+                        CustomShape shape = getShapes()[row][col];
 
-                    if (shape != null) {
-                        shape.dispose();
-                        shape = null;
+                        if (shape != null) {
+                            shape.dispose();
+                            shape = null;
+                        }
+                    } catch (Exception e) {
+                        UtilityHelper.handleException(e);
                     }
                 }
             }
@@ -356,18 +179,6 @@ public class Board implements ICommon {
         //flag null
         setRotationShape(null);
 
-        for (int i = 0; i < VERTICES.length; i++) {
-            VERTICES[i] = 0;
-        }
-
-        for (int i = 0; i < UVS.length; i++) {
-            UVS[i] = 0;
-        }
-
-        for (int i = 0; i < INDICES.length; i++) {
-            INDICES[i] = 0;
-        }
-
         VERTICES = null;
         UVS = null;
         INDICES = null;
@@ -375,6 +186,7 @@ public class Board implements ICommon {
 
     @Override
     public void update(GameActivity activity) {
+
         try {
 
             if (!getMaze().isGenerated()) {
@@ -385,10 +197,10 @@ public class Board implements ICommon {
                 }
 
                 //add the shapes to the board
-                addShapes();
+                addShapes(this);
 
                 //highlight the connected pipes
-                checkBoard(this);
+                checkBoard(this, false);
 
             } else {
 
@@ -401,8 +213,10 @@ public class Board implements ICommon {
                     if (getRotationShape().hasRotate())
                         return;
 
-                    //make sure the vertices are updates
+                    //make sure the vertices are updated
                     getRotationShape().updateVertices();
+
+                    boolean check = false;
 
                     //if magnet is enabled, check if we still need to rotate
                     if (AUTO_ROTATE) {
@@ -410,17 +224,23 @@ public class Board implements ICommon {
                         //if we can't connect and the magnet is enabled, what do we do?
                         if (!BoardHelper.canConnect(this, getRotationShape())) {
                             if (getRotationShape().getRotationCount() >= getRotationShape().getRotationCountMax()) {
-                                checkBoard(this);
-                                setRotationShape(null);
+                                //flag true to check the board
+                                check = true;
                             } else {
                                 getRotationShape().rotate();
                             }
                         } else {
-                            checkBoard(this);
-                            setRotationShape(null);
+                            //flag true to check the board
+                            check = true;
                         }
                     } else {
-                        checkBoard(this);
+                        //flag true to check the board
+                        check = true;
+                    }
+
+                    //do we need to check the board
+                    if (check) {
+                        checkBoard(this, true);
                         setRotationShape(null);
                     }
                 }
@@ -518,6 +338,11 @@ public class Board implements ICommon {
 
         try {
 
+            //we need to recalculate
+            CALCULATE_UVS = true;
+            CALCULATE_INDICES = true;
+            CALCULATE_VERTICES = true;
+
             //create new instance of maze
             this.maze = new Prims((getType() == Shape.Hexagon), BOARD_COLS, BOARD_ROWS);
 
@@ -576,12 +401,32 @@ public class Board implements ICommon {
         }
 
         if (getUvs() == null || getIndices() == null || getVertices() == null) {
+
+            //if null we need to setup the coordinates
             updateCoordinates(this);
         } else if (getRotationShape() != null) {
+
+            //if a shape is rotating we need to update the coordinates
             updateShape(this, getRotationShape());
         }
 
-        //make a single call to render all shapes
-        getSquare().render(this, m);
+        //only do these calculations when necessary
+        if (CALCULATE_UVS) {
+            getSquare().setupImage(getUvs());
+            CALCULATE_UVS = false;
+        }
+
+        if (CALCULATE_INDICES) {
+            getSquare().setupTriangle(getIndices());
+            CALCULATE_INDICES = false;
+        }
+
+        if (CALCULATE_VERTICES) {
+            getSquare().setupVertices(getVertices());
+            CALCULATE_VERTICES = false;
+        }
+
+        //make a single render call to render everything
+        getSquare().render(m);
     }
 }

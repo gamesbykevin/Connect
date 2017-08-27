@@ -32,7 +32,7 @@ public class Square {
         //default constructor
     }
 
-    private void setupImage() {
+    public void setupImage() {
 
         //create our UV coordinates meaning we are going to render the entire texture
         if (this.tmpUvs == null)
@@ -41,7 +41,7 @@ public class Square {
         setupImage(this.tmpUvs);
     }
 
-    private void setupImage(float[] tmp) {
+    public void setupImage(float[] tmp) {
 
         this.uvs = tmp;
 
@@ -53,7 +53,7 @@ public class Square {
         uvBuffer.position(0);
     }
 
-    private void setupTriangle() {
+    public void setupTriangle() {
 
         //create indices meaning we are only rendering one quad texture (2 triangles)
         if (this.tmpIndices == null)
@@ -62,7 +62,7 @@ public class Square {
         setupTriangle(this.tmpIndices);
     }
 
-    private void setupTriangle(short[] tmp) {
+    public void setupTriangle(short[] tmp) {
 
         this.indices = tmp;
 
@@ -74,7 +74,7 @@ public class Square {
         drawListBuffer.position(0);
     }
 
-    private void setupVertices(float[] tmp) {
+    public void setupVertices(float[] tmp) {
 
         this.vertices = tmp;
 
@@ -101,22 +101,7 @@ public class Square {
         render(m);
     }
 
-    public void render(final Entity entity, final float[] m) {
-
-        //assign default texture atlas coordinates
-        setupImage();
-
-        //setup the indices to render this single entity
-        setupTriangle();
-
-        //calculate vertices
-        setupVertices(entity.getTransformedVertices());
-
-        //render
-        render(m);
-    }
-
-    private void render(final float[] m) {
+    public void render(final float[] m) {
 
         // get handle to vertex shader's vPosition member
         int mPositionHandle = GLES20.glGetAttribLocation(riGraphicTools.sp_Image, "vPosition");

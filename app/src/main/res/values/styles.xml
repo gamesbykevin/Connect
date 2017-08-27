@@ -29,6 +29,8 @@
         <item name="android:layout_gravity">center</item>
         <item name="android:gravity">center</item>
         <item name="android:stretchColumns">*</item>
+        <item name="android:layout_marginLeft">10dp</item>
+        <item name="android:layout_marginRight">10dp</item>
     </style>
 
     <style name="LevelSelectHeaderText">

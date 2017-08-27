@@ -152,9 +152,6 @@ public class Game implements IGame {
                     //move to game over step
                     STEP = Step.GameOver;
 
-                    //hide board background
-                    BoardHelper.setVisible(getBoard(), false);
-
                     //vibrate the phone
                     activity.vibrate();
 
@@ -199,6 +196,12 @@ public class Game implements IGame {
      */
     public void dispose() {
 
+        if (board != null)
+            board.dispose();
+
+        board = null;
+
+        GameHelper.dispose();
     }
 
     public boolean onTouchEvent(final int action, float x, float y) {

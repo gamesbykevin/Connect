@@ -192,86 +192,94 @@ public class LevelSelectPageFragment extends Fragment {
     private void setupImageViewShape(ImageView imageView) {
 
         //get the current selected shape
-        int typeValue = OptionsActivity.OPTION_BOARD_SHAPE.getValue();
+        Board.Shape type = OptionsActivity.OPTION_BOARD_SHAPE;
 
         //the image resource id
         int resId;
 
         //set the correct image
-        if (typeValue == Board.Shape.Square.getValue()) {
-            if (getPageNumber() == 0) {
-                resId = R.drawable.level_select_square_1;
-            } else if (getPageNumber() == 1) {
-                resId = R.drawable.level_select_square_2;
-            } else if (getPageNumber() == 2) {
-                resId = R.drawable.level_select_square_3;
-            } else if (getPageNumber() == 3) {
-                resId = R.drawable.level_select_square_4;
-            } else if (getPageNumber() == 4) {
-                resId = R.drawable.level_select_square_5;
-            } else if (getPageNumber() == 5) {
-                resId = R.drawable.level_select_square_6;
-            } else if (getPageNumber() == 6) {
-                resId = R.drawable.level_select_square_7;
-            } else if (getPageNumber() == 7) {
-                resId = R.drawable.level_select_square_8;
-            } else if (getPageNumber() == 8) {
-                resId = R.drawable.level_select_square_9;
-            } else if (getPageNumber() == 9) {
-                resId = R.drawable.level_select_square_10;
-            } else {
-                resId = R.drawable.level_select_square_10;
-            }
-        } else if (typeValue == Board.Shape.Hexagon.getValue()) {
-            if (getPageNumber() == 0) {
-                resId = R.drawable.level_select_hexagon_1;
-            } else if (getPageNumber() == 1) {
-                resId = R.drawable.level_select_hexagon_2;
-            } else if (getPageNumber() == 2) {
-                resId = R.drawable.level_select_hexagon_3;
-            } else if (getPageNumber() == 3) {
-                resId = R.drawable.level_select_hexagon_4;
-            } else if (getPageNumber() == 4) {
-                resId = R.drawable.level_select_hexagon_5;
-            } else if (getPageNumber() == 5) {
-                resId = R.drawable.level_select_hexagon_6;
-            } else if (getPageNumber() == 6) {
-                resId = R.drawable.level_select_hexagon_7;
-            } else if (getPageNumber() == 7) {
-                resId = R.drawable.level_select_hexagon_8;
-            } else if (getPageNumber() == 8) {
-                resId = R.drawable.level_select_hexagon_9;
-            } else if (getPageNumber() == 9) {
-                resId = R.drawable.level_select_hexagon_10;
-            } else {
-                resId = R.drawable.level_select_hexagon_10;
-            }
-        } else if (typeValue == Board.Shape.Diamond.getValue()) {
-            if (getPageNumber() == 0) {
-                resId = R.drawable.level_select_diamond_1;
-            } else if (getPageNumber() == 1) {
-                resId = R.drawable.level_select_diamond_2;
-            } else if (getPageNumber() == 2) {
-                resId = R.drawable.level_select_diamond_3;
-            } else if (getPageNumber() == 3) {
-                resId = R.drawable.level_select_diamond_4;
-            } else if (getPageNumber() == 4) {
-                resId = R.drawable.level_select_diamond_5;
-            } else if (getPageNumber() == 5) {
-                resId = R.drawable.level_select_diamond_6;
-            } else if (getPageNumber() == 6) {
-                resId = R.drawable.level_select_diamond_7;
-            } else if (getPageNumber() == 7) {
-                resId = R.drawable.level_select_diamond_8;
-            } else if (getPageNumber() == 8) {
-                resId = R.drawable.level_select_diamond_9;
-            } else if (getPageNumber() == 9) {
-                resId = R.drawable.level_select_diamond_10;
-            } else {
-                resId = R.drawable.level_select_diamond_10;
-            }
-        } else {
-            throw new RuntimeException("Type value not defined: " + typeValue);
+        switch (type) {
+
+            case Square:
+                if (getPageNumber() == 0) {
+                    resId = R.drawable.level_select_square_1;
+                } else if (getPageNumber() == 1) {
+                    resId = R.drawable.level_select_square_2;
+                } else if (getPageNumber() == 2) {
+                    resId = R.drawable.level_select_square_3;
+                } else if (getPageNumber() == 3) {
+                    resId = R.drawable.level_select_square_4;
+                } else if (getPageNumber() == 4) {
+                    resId = R.drawable.level_select_square_5;
+                } else if (getPageNumber() == 5) {
+                    resId = R.drawable.level_select_square_6;
+                } else if (getPageNumber() == 6) {
+                    resId = R.drawable.level_select_square_7;
+                } else if (getPageNumber() == 7) {
+                    resId = R.drawable.level_select_square_8;
+                } else if (getPageNumber() == 8) {
+                    resId = R.drawable.level_select_square_9;
+                } else if (getPageNumber() == 9) {
+                    resId = R.drawable.level_select_square_10;
+                } else {
+                    resId = R.drawable.level_select_square_10;
+                }
+                break;
+
+            case Hexagon:
+                if (getPageNumber() == 0) {
+                    resId = R.drawable.level_select_hexagon_1;
+                } else if (getPageNumber() == 1) {
+                    resId = R.drawable.level_select_hexagon_2;
+                } else if (getPageNumber() == 2) {
+                    resId = R.drawable.level_select_hexagon_3;
+                } else if (getPageNumber() == 3) {
+                    resId = R.drawable.level_select_hexagon_4;
+                } else if (getPageNumber() == 4) {
+                    resId = R.drawable.level_select_hexagon_5;
+                } else if (getPageNumber() == 5) {
+                    resId = R.drawable.level_select_hexagon_6;
+                } else if (getPageNumber() == 6) {
+                    resId = R.drawable.level_select_hexagon_7;
+                } else if (getPageNumber() == 7) {
+                    resId = R.drawable.level_select_hexagon_8;
+                } else if (getPageNumber() == 8) {
+                    resId = R.drawable.level_select_hexagon_9;
+                } else if (getPageNumber() == 9) {
+                    resId = R.drawable.level_select_hexagon_10;
+                } else {
+                    resId = R.drawable.level_select_hexagon_10;
+                }
+                break;
+
+            case Diamond:
+                if (getPageNumber() == 0) {
+                    resId = R.drawable.level_select_diamond_1;
+                } else if (getPageNumber() == 1) {
+                    resId = R.drawable.level_select_diamond_2;
+                } else if (getPageNumber() == 2) {
+                    resId = R.drawable.level_select_diamond_3;
+                } else if (getPageNumber() == 3) {
+                    resId = R.drawable.level_select_diamond_4;
+                } else if (getPageNumber() == 4) {
+                    resId = R.drawable.level_select_diamond_5;
+                } else if (getPageNumber() == 5) {
+                    resId = R.drawable.level_select_diamond_6;
+                } else if (getPageNumber() == 6) {
+                    resId = R.drawable.level_select_diamond_7;
+                } else if (getPageNumber() == 7) {
+                    resId = R.drawable.level_select_diamond_8;
+                } else if (getPageNumber() == 8) {
+                    resId = R.drawable.level_select_diamond_9;
+                } else if (getPageNumber() == 9) {
+                    resId = R.drawable.level_select_diamond_10;
+                } else {
+                    resId = R.drawable.level_select_diamond_10;
+                }
+                break;
+
+            default:
+                throw new RuntimeException("Type value not defined: " + type.toString());
         }
 
         //set our bitmap accordingly

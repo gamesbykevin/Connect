@@ -11,19 +11,11 @@
 
     <TableLayout style="@style/TableLayoutSplash">
         <TableRow>
-            <ImageView
-                android:id="@+id/LoadingImage"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/loading" />
+            <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/loading" />
         </TableRow>
 
         <TableRow>
-            <ImageView
-                android:id="@+id/SiteLogo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/sitelogo" />
+            <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/sitelogo" />
         </TableRow>
     </TableLayout>
 </LinearLayout>

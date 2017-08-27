@@ -16,8 +16,9 @@ import static com.gamesbykevin.connect.game.Game.RESET_ZOOM;
 
 import static com.gamesbykevin.connect.game.Game.ZOOM_SCALE_MOTION_X;
 import static com.gamesbykevin.connect.game.Game.ZOOM_SCALE_MOTION_Y;
-import static com.gamesbykevin.connect.game.GameHelper.getEntity;
+import static com.gamesbykevin.connect.game.GameHelper.getEntityBackground;
 import static com.gamesbykevin.connect.game.GameHelper.getSquare;
+import static com.gamesbykevin.connect.game.GameHelper.getSquareBackground;
 import static com.gamesbykevin.connect.opengl.OpenGLSurfaceView.FRAME_DURATION;
 import static com.gamesbykevin.connect.opengl.OpenGLSurfaceView.HEIGHT;
 import static com.gamesbykevin.connect.opengl.OpenGLSurfaceView.WIDTH;
@@ -76,6 +77,9 @@ public class OpenGLRenderer implements Renderer {
 
     //the zoom window screen
     public static float LEFT = 0f, RIGHT = WIDTH, BOTTOM = HEIGHT, TOP = 0f;
+
+    //the angle of the board
+    private float angle = 0f;
 
     public OpenGLRenderer(Context activity) {
 
@@ -271,9 +275,9 @@ public class OpenGLRenderer implements Renderer {
 
         //render our background
         setupBackground();
-        getSquare().render(getEntity(), mtrxProjectionAndView);
+        getSquareBackground().render(mtrxProjectionAndView);
 
-        //restore the zoom and pan coordinates
+        //restore the zoom and pan coordinates for the game
         restoreZoomPan();
 
         //render game elements
@@ -310,13 +314,9 @@ public class OpenGLRenderer implements Renderer {
         //set the correct texture for rendering
         GLES20.glActiveTexture(GLES20.GL_TEXTURE0);
         GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, Textures.TEXTURE_ID_BACKGROUND);
-        getEntity().setAngle(0f);
 
-        //always render the background full screen
-        getEntity().setX(0);
-        getEntity().setY(0);
-        getEntity().setWidth(WIDTH);
-        getEntity().setHeight(HEIGHT);
+        //setup entity (if not already setup)
+        getEntityBackground();
 
         //reset to normal screen size so background is displayed without transformation
         Matrix.orthoM(mtrxProjection, 0, 0f, WIDTH, HEIGHT, 0f, 0f, 50f);

@@ -7,6 +7,8 @@ import com.gamesbykevin.connect.opengl.Square;
 
 import static com.gamesbykevin.connect.activity.GameActivity.getGame;
 import static com.gamesbykevin.connect.opengl.OpenGLSurfaceView.FPS;
+import static com.gamesbykevin.connect.opengl.OpenGLSurfaceView.HEIGHT;
+import static com.gamesbykevin.connect.opengl.OpenGLSurfaceView.WIDTH;
 
 /**
  * Game helper methods
@@ -14,15 +16,29 @@ import static com.gamesbykevin.connect.opengl.OpenGLSurfaceView.FPS;
  */
 public final class GameHelper 
 {
-	private static Entity entity = null;
+	private static Entity entityBackground = null;
 
     private static Square square = null;
 
-    public static Entity getEntity() {
-        if (entity == null)
-            entity = new Entity();
+    private static Square squareBackground = null;
 
-        return entity;
+    public static Entity getEntityBackground() {
+
+        if (entityBackground == null) {
+            entityBackground = new Entity();
+            entityBackground.setX(0);
+            entityBackground.setY(0);
+            entityBackground.setAngle(0f);
+            entityBackground.setWidth(WIDTH);
+            entityBackground.setHeight(HEIGHT);
+
+            //only needed to do one time
+            getSquareBackground().setupImage();
+            getSquareBackground().setupTriangle();
+            getSquareBackground().setupVertices(entityBackground.getVertices());
+        }
+
+        return entityBackground;
     }
 
 
@@ -33,6 +49,13 @@ public final class GameHelper
         return square;
     }
 
+    public static Square getSquareBackground() {
+        if (squareBackground == null)
+            squareBackground = new Square();
+
+        return squareBackground;
+    }
+
     //did we flag the game over?
     public static boolean GAME_OVER = false;
 
@@ -41,6 +64,12 @@ public final class GameHelper
 
     //keep track of elapsed frames
     public static int FRAMES = 0;
+
+    public static void dispose() {
+        squareBackground = null;
+        square = null;
+        entityBackground = null;
+    }
 
     /**
      * Render the game accordingly

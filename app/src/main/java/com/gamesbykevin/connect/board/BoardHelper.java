@@ -3,21 +3,31 @@ package com.gamesbykevin.connect.board;
 import com.gamesbykevin.androidframeworkv2.maze.Room;
 import com.gamesbykevin.androidframeworkv2.util.UtilityHelper;
 import com.gamesbykevin.connect.shape.CustomShape;
+import com.gamesbykevin.connect.shape.Diamond;
+import com.gamesbykevin.connect.shape.Hexagon;
+import com.gamesbykevin.connect.shape.Square;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.gamesbykevin.connect.activity.GameActivity.getRandomObject;
 import static com.gamesbykevin.connect.board.Board.ANCHOR_COL;
 import static com.gamesbykevin.connect.board.Board.ANCHOR_ROW;
 import static com.gamesbykevin.connect.board.Board.BOARD_COLS;
 import static com.gamesbykevin.connect.board.Board.BOARD_ROWS;
-import static com.gamesbykevin.connect.board.Board.DIMENSION;
 import static com.gamesbykevin.connect.game.GameHelper.GAME_OVER;
+import static com.gamesbykevin.connect.opengl.OpenGLSurfaceView.HEIGHT;
+import static com.gamesbykevin.connect.opengl.OpenGLSurfaceView.WIDTH;
 
 /**
  * Created by Kevin on 8/5/2017.
  */
 public class BoardHelper {
+
+    /**
+     * The size of a single shape
+     */
+    public static int DIMENSION = 64;
 
     //list of locations to check
     private static List<CustomShape> check;
@@ -25,17 +35,91 @@ public class BoardHelper {
     //our array storing what shapes are connected
     private static boolean[][] tmpConnected;
 
+    //only calculate when we need to
+    protected static boolean CALCULATE_UVS = true, CALCULATE_INDICES = true, CALCULATE_VERTICES = true;
+
+    protected static float getWidth(Board board) {
+
+        //2 shapes to calculate the difference
+        CustomShape shape1, shape2;
+
+        //get the appropriate shapes based on the type
+        switch(board.getType()) {
+
+            case Square:
+                shape1 = board.getShapes()[0][0];
+                shape2 = board.getShapes()[0][board.getMaze().getCols() - 1];
+                break;
+
+            case Diamond:
+                shape1 = board.getShapes()[board.getMaze().getRows() - 1][0];
+                shape2 = board.getShapes()[0][board.getMaze().getCols() - 1];
+                break;
+
+            case Hexagon:
+                shape1 = board.getShapes()[0][0];
+                shape2 = board.getShapes()[1][board.getMaze().getCols() - 1];
+                break;
+
+            default:
+                throw new RuntimeException("Type not defined: " + board.getType().toString());
+        }
+
+        //get the difference
+        return (shape2.getX() + shape2.getWidth()) - shape1.getX();
+    }
+
+    protected static float getHeight(Board board) {
+
+        //2 shapes to calculate the difference
+        CustomShape shape1, shape2;
+
+        //get the appropriate shapes based on the type
+        switch(board.getType()) {
+
+            case Square:
+                shape1 = board.getShapes()[0][0];
+                shape2 = board.getShapes()[board.getMaze().getRows() - 1][0];
+                break;
+
+            case Diamond:
+                shape1 = board.getShapes()[0][0];
+                shape2 = board.getShapes()[board.getMaze().getRows() - 1][board.getMaze().getCols() - 1];
+                break;
+
+            case Hexagon:
+                shape1 = board.getShapes()[0][0];
+                shape2 = board.getShapes()[board.getMaze().getRows() - 1][0];
+                break;
+
+            default:
+                throw new RuntimeException("Type not defined: " + board.getType().toString());
+        }
+
+        //get the difference
+        return (shape2.getY() + shape2.getHeight()) - shape1.getY();
+    }
+
     /**
      * Make sure all connected pieces are highlighted.<br>
      * If all are connected, the game is over
      */
-    public static void checkBoard(Board board) {
+    /**
+     * Check the board to see if all shapes are connected
+     * @param board The board containing all our shapes
+     * @param checkGameOver Do we want to check if the board is solved?
+     */
+    protected static void checkBoard(Board board, boolean checkGameOver) {
 
-        //create array if not instantiated
-        if (tmpConnected == null)
+        //create array if not instantiated or if the size doesn't match
+        if (tmpConnected == null || tmpConnected.length != board.getMaze().getRows() || tmpConnected[0].length != board.getMaze().getCols()) {
             tmpConnected = new boolean[board.getMaze().getRows()][board.getMaze().getCols()];
-        if (tmpConnected.length != board.getMaze().getRows() || tmpConnected[0].length != board.getMaze().getCols())
-            tmpConnected = new boolean[board.getMaze().getRows()][board.getMaze().getCols()];
+
+            //flag to recalculate
+            CALCULATE_VERTICES = true;
+            CALCULATE_INDICES = true;
+            CALCULATE_UVS = true;
+        }
 
         //mark all shapes not connected at first
         for (int col = 0; col < board.getMaze().getCols(); col++) {
@@ -153,8 +237,9 @@ public class BoardHelper {
         //update the coordinates for everything
         updateCoordinates(board);
 
-        //if solved the game is over
-        GAME_OVER = solved;
+        //only update if we want to check if game over
+        if (checkGameOver)
+            GAME_OVER = solved;
     }
 
     /**
@@ -425,19 +510,6 @@ public class BoardHelper {
     }
 
     /**
-     * Mark the shapes on the board visible...
-     * @param board The board containing our shapes
-     * @param visible Do we want the shape background to be visible
-     */
-    public static void setVisible(Board board, final boolean visible) {
-        for (int col = 0; col < board.getShapes()[0].length; col++) {
-            for (int row = 0; row < board.getShapes().length; row++) {
-                board.getShapes()[row][col].setVisible(visible);
-            }
-        }
-    }
-
-    /**
      * Setup the coordinates for open gl rendering
      */
     protected static void updateCoordinates(Board board) {
@@ -466,11 +538,14 @@ public class BoardHelper {
         board.getIndices();
     }
 
-    protected static void updateShape(Board board, CustomShape shape) {
+    protected static void updateShapeVertices(Board board, CustomShape shape) {
 
         //if rotating update vertices
         if (shape.hasRotate())
             shape.updateVertices();
+
+        //flag to recalculate
+        CALCULATE_VERTICES = true;
 
         //assign vertices
         for (int i = 0; i < shape.getVertices().length; i++) {
@@ -482,6 +557,12 @@ public class BoardHelper {
 
             board.getVertices()[index] = shape.getVertices()[i];
         }
+    }
+
+    protected static void updateShapeUvs(Board board, CustomShape shape) {
+
+        //flag to recalculate
+        CALCULATE_UVS = true;
 
         //which portion of the texture are we rendering
         for (int i = 0; i < shape.getTextureCoordinates().length; i++) {
@@ -493,5 +574,162 @@ public class BoardHelper {
 
             board.getUvs()[index] = shape.getTextureCoordinates()[i];
         }
+    }
+
+    /**
+     * Update the UVS and  Vertices coordinates
+     * @param board The board containing the render coordinates
+     * @param shape Current desired shape we want to update
+     */
+    protected static void updateShape(Board board, CustomShape shape) {
+
+        updateShapeVertices(board, shape);
+        updateShapeUvs(board, shape);
+    }
+
+    protected static void addShapes(final Board board) {
+
+        int x = 0, y = 0;
+        final int w = DIMENSION, h = DIMENSION;
+
+        switch (board.getType()) {
+
+            case Square:
+                CustomShape.ROTATION_ANGLE = Square.ROTATION_ANGLE_DEFAULT;
+                break;
+
+            case Hexagon:
+                CustomShape.ROTATION_ANGLE = Hexagon.ROTATION_ANGLE_DEFAULT;
+                break;
+
+            case Diamond:
+                CustomShape.ROTATION_ANGLE = Diamond.ROTATION_ANGLE_DEFAULT;
+                break;
+
+            default:
+                throw new RuntimeException("Shape not defined: " + board.getType().toString());
+        }
+
+        //start coordinates
+        final int sx = BoardHelper.getStartX(board.getType(), WIDTH, board.getMaze().getCols(), board.getMaze().getRows(), w, h);
+        final int sy = BoardHelper.getStartY(board.getType(), HEIGHT, board.getMaze().getCols(), board.getMaze().getRows(), w, h);
+
+        int index = 0;
+
+        for (int col = 0; col < board.getMaze().getCols(); col++) {
+
+            for (int row = 0; row < board.getMaze().getRows(); row++) {
+
+                //calculate coordinates
+                x = sx + BoardHelper.getX(board.getType(), col, row, w, h);
+                y = sy + BoardHelper.getY(board.getType(), col, row, w, h);
+
+                //add shape
+                addShape(board, board.getMaze().getRoom(col, row), x, y, col, row, index);
+
+                //keep track of index
+                index++;
+            }
+        }
+    }
+
+    private static final void addShape(Board board, Room room, float x, float y, int col, int row, int index) {
+
+        CustomShape tmp = null;
+
+        switch (board.getType()) {
+
+            case Square:
+                tmp = new Square();
+                break;
+
+            case Hexagon:
+                tmp = new Hexagon();
+                break;
+
+            case Diamond:
+                tmp = new Diamond();
+                break;
+
+            default:
+                throw new RuntimeException("Shape not defined: " + board.getType().toString());
+        }
+
+        //assign x, y coordinates
+        tmp.setX(x);
+        tmp.setY(y);
+
+        //assign the index
+        tmp.setIndex(index);
+
+        //mark the anchor shape as connected
+        if (col == ANCHOR_COL && row == ANCHOR_ROW)
+            tmp.setConnected(true);
+
+        //open up the appropriate sides
+        tmp.setBorders(room);
+
+        //assign the location
+        tmp.setCol(col);
+        tmp.setRow(row);
+
+        //make sure we render the pipe(s) correctly
+        tmp.calculateAnglePipe();
+
+        //assign the texture coordinates for the pipe on the shape
+        tmp.assignTextureCoordinates();
+
+        //how many rotations have we had
+        int rotations = 0;
+
+        //pick a random number of rotations to perform so no matter how we rotate it never start at the correct rotation
+        int rotationsMax = getRandomObject().nextInt(tmp.getRotationCountMax() - 1) + 1;
+
+        //rotate the shape a random number of times
+        while (rotations < rotationsMax) {
+            tmp.rotate();
+            tmp.rotateFinish();
+            rotations++;
+        }
+
+        //update the vertices
+        tmp.updateVertices();
+
+        //assign shape in array
+        board.getShapes()[row][col] = tmp;
+    }
+
+    /**
+     * Rotate all shapes on the board at their current position
+     * @param board The board containing all the shapes
+     */
+    protected static void rotate(final Board board) {
+
+        for (int col = 0; col < board.getShapes()[0].length; col++) {
+
+            for (int row = 0; row < board.getShapes().length; row++) {
+
+                //get the current shape
+                CustomShape tmp = board.getShapes()[row][col];
+
+                //how many rotations have we had
+                int rotations = 0;
+
+                //pick a random number of rotations to perform so no matter how we rotate it never start at the correct rotation
+                int rotationsMax = getRandomObject().nextInt(tmp.getRotationCountMax() - 1) + 1;
+
+                //rotate the shape a random number of times
+                while (rotations < rotationsMax) {
+                    tmp.rotate();
+                    tmp.rotateFinish();
+                    rotations++;
+                }
+
+                //update the vertices
+                tmp.updateVertices();
+            }
+        }
+
+        checkBoard(board, false);
     }
 }

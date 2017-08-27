@@ -98,6 +98,9 @@ public class MainActivity extends BaseActivity {
 
     public void onClickExit(View view) {
 
+        //flag false
+        SplashActivity.INITIALIZE = false;
+
         //finish activity
         super.finish();
 
