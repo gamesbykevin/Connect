@@ -1,15 +1,15 @@
 package com.gamesbykevin.connect.game;
 
-import android.opengl.GLSurfaceView;
 import android.view.MotionEvent;
 import com.gamesbykevin.connect.R;
 import com.gamesbykevin.connect.activity.GameActivity;
 import com.gamesbykevin.connect.activity.GameActivity.Screen;
 import com.gamesbykevin.connect.board.Board;
-import com.gamesbykevin.connect.board.BoardHelper;
 import com.gamesbykevin.connect.opengl.OpenGLRenderer;
 import com.gamesbykevin.connect.opengl.OpenGLSurfaceView;
 
+import static com.gamesbykevin.connect.activity.LevelSelectActivity.CURRENT_PAGE;
+import static com.gamesbykevin.connect.activity.MainActivity.getBoards;
 import static com.gamesbykevin.connect.game.GameHelper.FRAMES;
 import static com.gamesbykevin.connect.game.GameHelper.GAME_OVER;
 import static com.gamesbykevin.connect.game.GameHelper.GAME_OVER_DELAY_FRAMES;
@@ -90,6 +90,9 @@ public class Game implements IGame {
             board = null;
         }
 
+        //reset timer
+        elapsed = 0;
+
         //flag game over false
         GAME_OVER = false;
 
@@ -146,6 +149,9 @@ public class Game implements IGame {
                 //if the game is over, move to the next step
                 if (GAME_OVER) {
 
+                    //save the best time for the current level
+                    getBoards().update(getBoard().getType(), CURRENT_PAGE, activity.getSeconds());
+
                     //reset frames count
                     FRAMES = 0;
 
@@ -196,10 +202,10 @@ public class Game implements IGame {
      */
     public void dispose() {
 
-        if (board != null)
+        if (board != null) {
             board.dispose();
-
-        board = null;
+            board = null;
+        }
 
         GameHelper.dispose();
     }

@@ -7,7 +7,7 @@
     android:gravity="center"
     android:padding="16dp">
 
-        <TableLayout style="@style/TableLevelSelect" android:background="@drawable/level_select_window">
+        <TableLayout android:id="@+id/tableLevelSelect" style="@style/LevelSelectEnabled">
 
                 <TableRow style="@style/RowLevelSelect">
 
@@ -36,11 +36,11 @@
                 <!-- Personal Best -->
                 <TableRow style="@style/RowLevelSelect">
                         <LinearLayout android:gravity="center_horizontal" android:layout_gravity="center_horizontal">
-                                <ImageView style="@style/LevelSelectCustomText" android:id="@+id/bestTime1" android:src="@drawable/zero" />
-                                <ImageView style="@style/LevelSelectCustomText" android:id="@+id/bestTime2" android:src="@drawable/zero" />
+                                <ImageView style="@style/LevelSelectCustomText" android:id="@+id/bestTime1" android:src="@drawable/na" />
+                                <ImageView style="@style/LevelSelectCustomText" android:id="@+id/bestTime2" android:src="@drawable/na" />
                                 <ImageView style="@style/LevelSelectCustomText" android:src="@drawable/colon" />
-                                <ImageView style="@style/LevelSelectCustomText" android:id="@+id/bestTime3" android:src="@drawable/zero" />
-                                <ImageView style="@style/LevelSelectCustomText" android:id="@+id/bestTime4" android:src="@drawable/zero" />
+                                <ImageView style="@style/LevelSelectCustomText" android:id="@+id/bestTime3" android:src="@drawable/na" />
+                                <ImageView style="@style/LevelSelectCustomText" android:id="@+id/bestTime4" android:src="@drawable/na" />
                         </LinearLayout>
                 </TableRow>
 
@@ -55,5 +55,7 @@
                 </TableRow>
 
         </TableLayout>
+
+        <ImageView android:id="@+id/overlayDisabled" style="@style/LevelSelectDisabled" />
 
 </RelativeLayout>

@@ -6,13 +6,15 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.gamesbykevin.connect.R;
 import com.gamesbykevin.connect.activity.LevelSelectActivity;
 import com.gamesbykevin.connect.activity.OptionsActivity;
-import com.gamesbykevin.connect.board.Board;
+
+import static android.view.View.GONE;
+import static com.gamesbykevin.connect.activity.MainActivity.getBoards;
 
 /**
  * Created by Kevin on 8/23/2017.
@@ -26,6 +28,9 @@ public class LevelSelectPageFragment extends Fragment {
 
     //the fragment's page number
     private int pageNumber;
+
+    //store our view reference
+    private ViewGroup view;
 
     /**
      * Factory method for this fragment class.
@@ -57,19 +62,70 @@ public class LevelSelectPageFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         //inflate the layout to access the ui elements
-        ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_level_select_page, container, false);
+        this.view = (ViewGroup) inflater.inflate(R.layout.fragment_level_select_page, container, false);
 
         //display the level # image
-        setupImageViewLevelNumber((ImageView)rootView.findViewById(R.id.levelNumber));
+        setupImageViewLevelNumber((ImageView)view.findViewById(R.id.levelNumber));
 
         //make sure the correct level size is shown
-        setupImageViewLevelSize((ImageView)rootView.findViewById(R.id.levelSize), LevelSelectActivity.Level.values()[getPageNumber()]);
+        setupImageViewLevelSize((ImageView)view.findViewById(R.id.levelSize), LevelSelectActivity.Level.values()[getPageNumber()]);
 
         //make sure the correct image shape is shown
-        setupImageViewShape((ImageView)rootView.findViewById(R.id.levelSelectShape));
+        setupImageViewShape((ImageView)view.findViewById(R.id.levelSelectShape));
 
         //return our altered view
-        return rootView;
+        return view;
+    }
+
+    @Override
+    public void onResume() {
+
+        //call parent
+        super.onResume();
+
+        //update best time
+        int seconds = getBoards().getTime(OptionsActivity.OPTION_BOARD_SHAPE, getPageNumber());
+
+        //how much time is remaining
+        int remaining = seconds;
+
+        //each digit for our time
+        int value1 = -1, value2 = -1, value3 = -1, value4 = -1;
+
+        //get our ui buttons so we can manipulate
+        Button buttonLeader = (Button)view.findViewById(R.id.buttonLeaderboard);
+        Button buttonPlay = (Button)view.findViewById(R.id.buttonPlay);
+        ImageView imageOverlay = (ImageView)view.findViewById(R.id.overlayDisabled);
+
+        //calculate each number for minutes and seconds
+        if (seconds > 0) {
+            value1 = (int) (remaining / 600); //minutes 10's
+            remaining = remaining - (value1 * 600); //take away the remaining
+            value2 = (int) (remaining / 60); //minutes 1's
+            remaining = remaining - (value2 * 60);
+            value3 = (int) (remaining / 10); //seconds 10's
+            remaining = remaining - (value3 * 10);
+            value4 = remaining;
+        }
+
+        //is this level enabled
+        if (getBoards().getSize(OptionsActivity.OPTION_BOARD_SHAPE) >= getPageNumber()) {
+            //make sure buttons are enabled
+            buttonLeader.setEnabled(true);
+            buttonPlay.setEnabled(true);
+            imageOverlay.setVisibility(View.GONE);
+        } else {
+            //disable everything
+            buttonLeader.setEnabled(false);
+            buttonPlay.setEnabled(false);
+            imageOverlay.setVisibility(View.VISIBLE);
+        }
+
+        //update the timer ui
+        updateImageViewTimer(value1, (ImageView)view.findViewById(R.id.bestTime1));
+        updateImageViewTimer(value2, (ImageView)view.findViewById(R.id.bestTime2));
+        updateImageViewTimer(value3, (ImageView)view.findViewById(R.id.bestTime3));
+        updateImageViewTimer(value4, (ImageView)view.findViewById(R.id.bestTime4));
     }
 
     /**
@@ -191,14 +247,11 @@ public class LevelSelectPageFragment extends Fragment {
 
     private void setupImageViewShape(ImageView imageView) {
 
-        //get the current selected shape
-        Board.Shape type = OptionsActivity.OPTION_BOARD_SHAPE;
-
         //the image resource id
         int resId;
 
         //set the correct image
-        switch (type) {
+        switch (OptionsActivity.OPTION_BOARD_SHAPE) {
 
             case Square:
                 if (getPageNumber() == 0) {
@@ -279,10 +332,78 @@ public class LevelSelectPageFragment extends Fragment {
                 break;
 
             default:
-                throw new RuntimeException("Type value not defined: " + type.toString());
+                throw new RuntimeException("Type value not defined: " + OptionsActivity.OPTION_BOARD_SHAPE.toString());
         }
 
         //set our bitmap accordingly
+        imageView.setImageBitmap(BitmapFactory.decodeResource(getResources(), resId));
+    }
+
+    private void updateImageViewTimer(final int value, final ImageView imageView) {
+
+        //resource id
+        final int resId;
+
+        //if we are at the max displayed value, everything will be 9
+        if (value > 9) {
+
+            resId = R.drawable.nine;
+
+        } else {
+
+            //find the appropriate drawable
+            switch (value) {
+
+                case -1:
+                    resId = R.drawable.na;
+                    break;
+
+                case 0:
+                    resId = R.drawable.zero;
+                    break;
+
+                case 1:
+                    resId = R.drawable.one;
+                    break;
+
+                case 2:
+                    resId = R.drawable.two;
+                    break;
+
+                case 3:
+                    resId = R.drawable.three;
+                    break;
+
+                case 4:
+                    resId = R.drawable.four;
+                    break;
+
+                case 5:
+                    resId = R.drawable.five;
+                    break;
+
+                case 6:
+                    resId = R.drawable.six;
+                    break;
+
+                case 7:
+                    resId = R.drawable.seven;
+                    break;
+
+                case 8:
+                    resId = R.drawable.eight;
+                    break;
+
+                case 9:
+                    resId = R.drawable.nine;
+                    break;
+
+                default:
+                    throw new RuntimeException("value not defined: " + value);
+            }
+        }
+
+        //update bitmap accordingly
         imageView.setImageBitmap(BitmapFactory.decodeResource(getResources(), resId));
     }
 }

@@ -23,8 +23,4 @@
     <string name="game_stats_file_key" translatable="false">com.gamesbykevin.connect.GAME_STATS_FILE_KEY</string>
     <string name="game_shape_file_key" translatable="false">com.gamesbykevin.connect.SHAPE_FILE_KEY</string>
 
-
-    <!-- Titles -->
-    <string name="title_template_step">Step <xliff:g id="step_number">%1$d</xliff:g>: Lorem Ipsum</string>
-
 </resources>

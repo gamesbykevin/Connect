@@ -7,9 +7,13 @@ import android.view.View;
 
 import com.gamesbykevin.connect.R;
 import com.gamesbykevin.connect.board.Board;
+import com.gamesbykevin.connect.board.Boards;
 import com.gamesbykevin.connect.game.Game;
 
 public class MainActivity extends BaseActivity {
+
+    //keep track of our stats and the levels we have completed
+    private static Boards BOARDS;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +26,9 @@ public class MainActivity extends BaseActivity {
 
         //flag true so we know we loaded already
         SplashActivity.INITIALIZE = true;
+
+        if (BOARDS == null)
+            BOARDS = new Boards(this);
     }
 
     @Override
@@ -46,6 +53,11 @@ public class MainActivity extends BaseActivity {
 
         //recycle resources
         super.dispose();
+
+        if (BOARDS != null) {
+            BOARDS.dispose();
+            BOARDS = null;
+        }
     }
 
     @Override
@@ -106,5 +118,13 @@ public class MainActivity extends BaseActivity {
 
         //close all activities
         ActivityCompat.finishAffinity(this);
+    }
+
+    /**
+     * Our object to track our best level duration(s)
+     * @return object to track our best level duration(s)
+     */
+    public static Boards getBoards() {
+        return BOARDS;
     }
 }

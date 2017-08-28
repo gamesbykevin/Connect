@@ -424,6 +424,14 @@ public class GameActivity extends BaseActivity implements Disposable {
             updateImageViewTimer(value4, time4);
     }
 
+    /**
+     * Get the seconds
+     * @return total number of seconds elapsed
+     */
+    public int getSeconds() {
+        return (value4 + (value3 * 10) + (value2 * 60) + (value1 * 60 * 10));
+    }
+
     private void updateImageViewTimer(final int value, final ImageView imageView) {
 
         //resource id

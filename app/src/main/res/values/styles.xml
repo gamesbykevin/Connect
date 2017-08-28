@@ -92,13 +92,24 @@
         <item name="android:layout_gravity">center</item>
     </style>
 
-    <style name="TableLevelSelect">
+    <style name="LevelSelectEnabled">
         <item name="android:gravity">center</item>
         <item name="android:layout_gravity">center</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginTop">15dp</item>
         <item name="android:layout_marginBottom">15dp</item>
+        <item name="android:background">@drawable/level_select_window</item>
+    </style>
+
+    <style name="LevelSelectDisabled">
+        <item name="android:gravity">center</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">15dp</item>
+        <item name="android:layout_marginBottom">15dp</item>
+        <item name="android:background">@drawable/overlay</item>
     </style>
 
     <style name="ButtonLevelSelect">
