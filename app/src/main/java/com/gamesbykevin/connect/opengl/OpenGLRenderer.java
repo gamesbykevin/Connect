@@ -30,6 +30,9 @@ import static com.gamesbykevin.connect.opengl.OpenGLSurfaceView.OFFSET_Y;
  */
 public class OpenGLRenderer implements Renderer {
 
+    //the default starting zoom
+    public static final float ZOOM_DEFAULT = 1.0f;
+
     /**
      * How far do we zoom in/out
      */
@@ -54,7 +57,7 @@ public class OpenGLRenderer implements Renderer {
     private static float originalScaleMotionX = 0, originalScaleMotionY = 0;
 
     //the actual dimensions of the users phone
-    private int screenWidth, screenHeight;
+    private static int screenWidth, screenHeight;
 
     /**
      * Have all textures been loaded?
@@ -73,7 +76,7 @@ public class OpenGLRenderer implements Renderer {
     public static int NEW_WIDTH = WIDTH, NEW_HEIGHT = HEIGHT;
 
     //calculate the center of the screen
-    private final float mx = (WIDTH / 2), my = (HEIGHT / 2);
+    public static final float mx = (WIDTH / 2), my = (HEIGHT / 2);
 
     //the zoom window screen
     public static float LEFT = 0f, RIGHT = WIDTH, BOTTOM = HEIGHT, TOP = 0f;
@@ -119,7 +122,7 @@ public class OpenGLRenderer implements Renderer {
         //store the zoom variables as the same
         ZOOM_SCALE_MOTION_X = originalScaleMotionX;
         ZOOM_SCALE_MOTION_Y = originalScaleMotionY;
-        ZOOM_RATIO = 1.0f;
+        ZOOM_RATIO = ZOOM_DEFAULT;
         OFFSET_X = 0;
         OFFSET_Y = 0;
 
@@ -137,7 +140,7 @@ public class OpenGLRenderer implements Renderer {
      * Adjust the zoom
      * @param adjust The ratio amount to adjust our screen dimensions
      */
-    public void adjustZoom(final float adjust) {
+    public static void adjustZoom(final float adjust) {
 
         //don't continue if not loaded
         if (!LOADED)

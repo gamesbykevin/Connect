@@ -354,11 +354,22 @@ public class GameActivity extends BaseActivity implements Disposable {
         STEP = Step.Reset;
     }
 
+    /**
+     * Reset the game timer to "00:00"
+     */
     public void resetTimer() {
+
+        //reset time values
         value1 = 0;
         value2 = 0;
         value3 = 0;
         value4 = 0;
+
+        //also reset the ui timer as well
+        updateImageViewTimer(value1, time1);
+        updateImageViewTimer(value2, time2);
+        updateImageViewTimer(value3, time3);
+        updateImageViewTimer(value4, time4);
     }
 
     /**

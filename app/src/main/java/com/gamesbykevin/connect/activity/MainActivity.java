@@ -102,6 +102,12 @@ public class MainActivity extends BaseActivity {
         startActivity(new Intent(this, SplashActivity.class));
     }
 
+    public void onClickTutorial(View view) {
+
+        //start the tutorial
+        startActivity(new Intent(this, TutorialActivity.class));
+    }
+
     public void onClickOptions(View view) {
 
         //start options activity

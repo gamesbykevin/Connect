@@ -2,10 +2,14 @@ package com.gamesbykevin.connect.game;
 
 import android.opengl.GLES20;
 
+import com.gamesbykevin.connect.board.Board;
 import com.gamesbykevin.connect.entity.Entity;
 import com.gamesbykevin.connect.opengl.Square;
 
 import static com.gamesbykevin.connect.activity.GameActivity.getGame;
+import static com.gamesbykevin.connect.opengl.OpenGLRenderer.ZOOM_DEFAULT;
+import static com.gamesbykevin.connect.opengl.OpenGLRenderer.adjustZoom;
+import static com.gamesbykevin.connect.opengl.OpenGLRenderer.resetZoom;
 import static com.gamesbykevin.connect.opengl.OpenGLSurfaceView.FPS;
 import static com.gamesbykevin.connect.opengl.OpenGLSurfaceView.HEIGHT;
 import static com.gamesbykevin.connect.opengl.OpenGLSurfaceView.WIDTH;
@@ -69,6 +73,36 @@ public final class GameHelper
         squareBackground = null;
         square = null;
         entityBackground = null;
+    }
+
+    public static void zoomOut(final Board board) {
+
+        //reset the zoom for a new level
+        resetZoom();
+
+        //get the board size
+        final float w = (float)(board.getWidth() * 1.1);
+        final float h = (float)(board.getHeight() * 1.1);
+
+        //calculate the width and height ratio
+        final float wRatio = (w / WIDTH);
+        final float hRatio = (h / HEIGHT);
+
+        //make sure we zoom out properly
+        if (wRatio > 1.0f && hRatio > 1.0f) {
+
+            //we want to offset the bigger ratio difference
+            if (wRatio > hRatio) {
+                adjustZoom(wRatio - ZOOM_DEFAULT);
+            } else {
+                adjustZoom(hRatio - ZOOM_DEFAULT);
+            }
+
+        } else if (wRatio > 1.0f) {
+            adjustZoom(wRatio - ZOOM_DEFAULT);
+        } else if (hRatio > 1.0f) {
+            adjustZoom(hRatio - ZOOM_DEFAULT);
+        }
     }
 
     /**

@@ -18,6 +18,9 @@
             <Button android:id="@+id/ButtonRate" style="@style/ButtonMenu" android:text="@string/button_text_rate" android:onClick="onClickRate" />
         </TableRow>
         <TableRow style="@style/RowMenu">
+            <Button android:id="@+id/ButtonTutorial" style="@style/ButtonMenu" android:text="@string/button_text_tutorial" android:onClick="onClickTutorial" />
+        </TableRow>
+        <TableRow style="@style/RowMenu">
             <Button android:id="@+id/ButtonMore" style="@style/ButtonMenu" android:text="@string/button_text_more" android:onClick="onClickMore" />
         </TableRow>
         <TableRow style="@style/RowMenu">

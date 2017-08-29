@@ -13,7 +13,22 @@ import static com.gamesbykevin.connect.activity.MainActivity.getBoards;
 import static com.gamesbykevin.connect.game.GameHelper.FRAMES;
 import static com.gamesbykevin.connect.game.GameHelper.GAME_OVER;
 import static com.gamesbykevin.connect.game.GameHelper.GAME_OVER_DELAY_FRAMES;
+import static com.gamesbykevin.connect.game.GameHelper.zoomOut;
 import static com.gamesbykevin.connect.opengl.OpenGLRenderer.LOADED;
+import static com.gamesbykevin.connect.opengl.OpenGLRenderer.ZOOM_DEFAULT;
+import static com.gamesbykevin.connect.opengl.OpenGLRenderer.adjustZoom;
+import static com.gamesbykevin.connect.opengl.OpenGLRenderer.mx;
+import static com.gamesbykevin.connect.opengl.OpenGLRenderer.my;
+import static com.gamesbykevin.connect.opengl.OpenGLRenderer.resetZoom;
+import static com.gamesbykevin.connect.opengl.OpenGLSurfaceView.HEIGHT;
+import static com.gamesbykevin.connect.opengl.OpenGLSurfaceView.OFFSET_X;
+import static com.gamesbykevin.connect.opengl.OpenGLSurfaceView.OFFSET_Y;
+import static com.gamesbykevin.connect.opengl.OpenGLRenderer.LEFT;
+import static com.gamesbykevin.connect.opengl.OpenGLRenderer.RIGHT;
+import static com.gamesbykevin.connect.opengl.OpenGLRenderer.TOP;
+import static com.gamesbykevin.connect.opengl.OpenGLRenderer.BOTTOM;
+import static com.gamesbykevin.connect.opengl.OpenGLSurfaceView.WIDTH;
+
 
 /**
  * Created by Kevin on 7/19/2017.
@@ -96,9 +111,6 @@ public class Game implements IGame {
         //flag game over false
         GAME_OVER = false;
 
-        //reset the zoom for a new level
-        OpenGLRenderer.resetZoom();
-
         //create a new board
         this.board = new Board(Board.BOARD_COLS, Board.BOARD_ROWS);
 
@@ -152,6 +164,9 @@ public class Game implements IGame {
                     //save the best time for the current level
                     getBoards().update(getBoard().getType(), CURRENT_PAGE, activity.getSeconds());
 
+                    //zoom out so we can see the whole level
+                    zoomOut(getBoard());
+
                     //reset frames count
                     FRAMES = 0;
 
@@ -163,8 +178,14 @@ public class Game implements IGame {
 
                 } else {
 
+                    boolean generated = getBoard().getMaze().isGenerated();
+
                     //update the board
                     getBoard().update(activity);
+
+                    //if the board wasn't generated previously and is now, set the zoom
+                    if (!generated && getBoard().getMaze().isGenerated())
+                        zoomOut(getBoard());
 
                     //keep track of the time
                     elapsed += OpenGLSurfaceView.FRAME_DURATION;

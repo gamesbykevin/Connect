@@ -1,8 +1,7 @@
 package com.gamesbykevin.connect.activity;
 
-import android.content.Intent;
+import android.app.Activity;
 import android.os.Bundle;
-
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.support.v13.app.FragmentStatePagerAdapter;
@@ -14,17 +13,12 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.gamesbykevin.connect.R;
-import com.gamesbykevin.connect.board.Board;
-import com.gamesbykevin.connect.fragment.LevelSelectPageFragment;
-import com.gamesbykevin.connect.game.Game;
+import com.gamesbykevin.connect.fragment.TutorialPageFragment;
 
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Kevin on 8/23/2017.
- */
-public class LevelSelectActivity extends FragmentActivity {
+public class TutorialActivity extends FragmentActivity {
 
     //our pager object that allows horizontal swiping
     private ViewPager customPager;
@@ -35,39 +29,10 @@ public class LevelSelectActivity extends FragmentActivity {
     //array of our images representing the page dots
     private ImageView[] listPageImages;
 
-    public enum Level {
-
-        Level01(3,3),
-        Level02(5,5),
-        Level03(7,7),
-        Level04(9,9),
-        Level05(11,11),
-        Level06(13,13),
-        Level07(15,15),
-        Level08(17,17),
-        Level09(19,19),
-        Level10(21,21);
-
-        private int cols, rows;
-
-        private Level(int cols, int rows) {
-            this.cols = cols;
-            this.rows = rows;
-        }
-
-        public int getCols() {
-            return this.cols;
-        }
-
-        public int getRows() {
-            return this.rows;
-        }
-    }
-
     /**
-     * The total number of pages/levels
+     * The total number of pages
      */
-    public static final int PAGES = Level.values().length;
+    public static final int PAGES = 6;
 
     /**
      * Spacing between each pager dot
@@ -81,16 +46,12 @@ public class LevelSelectActivity extends FragmentActivity {
     private static int TMP_CURRENT_PAGE = 0;
 
     //our list of pages for the pager
-    private List<LevelSelectPageFragment> fragments;
+    private List<TutorialPageFragment> fragments;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
-        //call parent
         super.onCreate(savedInstanceState);
-
-        //set the appropriate content view
-        setContentView(R.layout.activity_level_select);
+        setContentView(R.layout.activity_tutorial);
 
         //get our pages container
         listPageContainer = (LinearLayout)findViewById(R.id.listPageContainer);
@@ -102,7 +63,7 @@ public class LevelSelectActivity extends FragmentActivity {
         fragments = new ArrayList<>();
 
         //create and assign our adapter
-        getCustomPager().setAdapter(new LevelSelectPagerAdapter(getFragmentManager()));
+        getCustomPager().setAdapter(new TutorialPagerAdapter(getFragmentManager()));
 
         //cache all pages to prevent memory leak
         getCustomPager().setOffscreenPageLimit(PAGES);
@@ -150,7 +111,7 @@ public class LevelSelectActivity extends FragmentActivity {
         return this.customPager;
     }
 
-    private List<LevelSelectPageFragment> getFragments() {
+    private List<TutorialPageFragment> getFragments() {
         return this.fragments;
     }
 
@@ -265,9 +226,9 @@ public class LevelSelectActivity extends FragmentActivity {
     /**
      * A simple pager adapter for all our pages
      */
-    private class LevelSelectPagerAdapter extends FragmentStatePagerAdapter {
+    private class TutorialPagerAdapter extends FragmentStatePagerAdapter {
 
-        public LevelSelectPagerAdapter(FragmentManager fragmentManager) {
+        public TutorialPagerAdapter(FragmentManager fragmentManager) {
             super(fragmentManager);
         }
 
@@ -281,7 +242,7 @@ public class LevelSelectActivity extends FragmentActivity {
             }
 
             //create it since the fragment does not exist
-            LevelSelectPageFragment fragment = LevelSelectPageFragment.create(position);
+            TutorialPageFragment fragment = TutorialPageFragment.create(position);
 
             //add to array list
             getFragments().add(fragment);
@@ -296,33 +257,11 @@ public class LevelSelectActivity extends FragmentActivity {
         }
     }
 
-    /**
-     * We want to play this level
-     * @param view
-     */
-    public void onClickPlay(View view) {
-
-        //the level is determined  by the current page
-        Level level = Level.values()[getCustomPager().getCurrentItem()];
-
-        //set board size
-        Board.BOARD_COLS = level.getCols();
-        Board.BOARD_ROWS = level.getRows();
-
-        //set to loading phase
-        Game.STEP = Game.Step.Loading;
-
-        //start our game
-        startActivity(new Intent(this, GameActivity.class));
-    }
-
     @Override
     public void onBackPressed() {
 
-        //always go back to main activity
-        Intent startMain = new Intent(Intent.ACTION_MAIN);
-        startMain.addCategory(Intent.CATEGORY_HOME);
-        startMain.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(new Intent(this, MainActivity.class));
+        //call parent
+        super.onBackPressed();
     }
+
 }
