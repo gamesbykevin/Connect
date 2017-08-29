@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ToggleButton;
 
+import com.gamesbykevin.androidframeworkv2.activity.*;
 import com.gamesbykevin.androidframeworkv2.ui.MultiStateToggleButton;
 import com.gamesbykevin.androidframeworkv2.util.UtilityHelper;
 import com.gamesbykevin.connect.R;

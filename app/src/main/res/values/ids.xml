@@ -2,4 +2,8 @@
 <resources>
     <item type="id" name="action_next" />
     <item type="id" name="action_previous" />
+
+
+    <string translatable="false" name="app_id">292633559655</string>
+
 </resources>

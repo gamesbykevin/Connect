@@ -1,6 +1,5 @@
 package com.gamesbykevin.connect.activity;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.app.FragmentManager;

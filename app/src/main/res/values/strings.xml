@@ -13,6 +13,7 @@
     <string name="button_text_tutorial">Tutorial</string>
     <string name="button_text_play">Play</string>
     <string name="button_text_leaderboard">Leaderboard</string>
+    <string name="button_text_achievements">Achievements</string>
 
     <string name="vibrate_on">Vibrate: On</string>
     <string name="vibrate_off">Vibrate: Off</string>
@@ -30,5 +31,18 @@
 
     <string name="game_stats_file_key" translatable="false">com.gamesbykevin.connect.GAME_STATS_FILE_KEY</string>
     <string name="game_shape_file_key" translatable="false">com.gamesbykevin.connect.SHAPE_FILE_KEY</string>
+
+
+    <!-- ui messages for google play services -->
+    <string name="sign_in_other_error">There was an issue with sign-in, please try again later.</string>
+    <string name="sign_in_failed">Failed to sign in. Please check your network connection and try again.</string>
+    <string name="app_misconfigured">The application is incorrectly configured. Check that the package name and signing certificate match the client ID created in Developer Console. Also, if the application is not yet published, check that the account you are trying to sign in with is listed as a tester account. See logs for more information.</string>
+    <string name="license_failed">License check failed.</string>
+    <string name="unknown_error">Unknown error.</string>
+    <string name="UNKNOWN_ERROR">Unknown error.</string>
+    <string name="gamehelper_sign_in_failed">Failed to sign in. Please check your network connection and try again.</string>
+    <string name="gamehelper_app_misconfigured">The application is incorrectly configured. Check that the package name and signing certificate match the client ID created in Developer Console. Also, if the application is not yet published, check that the account you are trying to sign in with is listed as a tester account. See logs for more information.</string>
+    <string name="gamehelper_license_failed">License check failed.</string>
+    <string name="gamehelper_unknown_error">Unknown error.</string>
 
 </resources>

@@ -37,6 +37,9 @@ public abstract class BaseActivity extends com.gamesbykevin.androidframeworkv2.a
         //flag debug true
         UtilityHelper.DEBUG = true;
 
+        //this is not an amazon app
+        UtilityHelper.AMAZON = false;
+
         //call parent
         super.onCreate(savedInstanceState);
 

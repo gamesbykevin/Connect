@@ -1,9 +1,11 @@
 package com.gamesbykevin.connect.activity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 
+import com.gamesbykevin.androidframeworkv2.activity.*;
 import com.gamesbykevin.connect.R;
 
 public class SplashActivity extends BaseActivity {

@@ -5,12 +5,14 @@ import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.view.View;
 
+import com.gamesbykevin.androidframeworkv2.util.UtilityHelper;
 import com.gamesbykevin.connect.R;
 import com.gamesbykevin.connect.board.Board;
 import com.gamesbykevin.connect.board.Boards;
 import com.gamesbykevin.connect.game.Game;
+import com.gamesbykevin.connect.services.BaseGameActivity;
 
-public class MainActivity extends BaseActivity {
+public class MainActivity extends BaseGameActivity {
 
     //keep track of our stats and the levels we have completed
     private static Boards BOARDS;
@@ -116,6 +118,9 @@ public class MainActivity extends BaseActivity {
 
     public void onClickExit(View view) {
 
+        //no need to bypass login in the future
+        BYPASS_LOGIN = false;
+
         //flag false
         SplashActivity.INITIALIZE = false;
 
@@ -124,6 +129,9 @@ public class MainActivity extends BaseActivity {
 
         //close all activities
         ActivityCompat.finishAffinity(this);
+
+        //sign out of google play services
+        super.signOut();
     }
 
     /**
@@ -132,5 +140,30 @@ public class MainActivity extends BaseActivity {
      */
     public static Boards getBoards() {
         return BOARDS;
+    }
+
+    @Override
+    public void onSignInSucceeded() {
+        UtilityHelper.displayMessage(this, "Google Play login worked!");
+
+        if (ACCESS_ACHIEVEMENT) {
+
+            //if we just came from achievements button and are now signed in, display ui
+            displayAchievementUI();
+
+            //flag back false
+            ACCESS_ACHIEVEMENT = false;
+        }
+
+        //don't bypass auto login
+        BYPASS_LOGIN = false;
+    }
+
+    @Override
+    public void onSignInFailed() {
+        UtilityHelper.displayMessage(this, "Google play login failed!");
+
+        //bypass auto login
+        BYPASS_LOGIN = true;
     }
 }

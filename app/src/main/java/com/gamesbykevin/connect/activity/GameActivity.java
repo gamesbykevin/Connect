@@ -18,19 +18,18 @@ import com.gamesbykevin.connect.board.Board;
 import com.gamesbykevin.connect.game.Game;
 import com.gamesbykevin.connect.game.Game.Step;
 import com.gamesbykevin.connect.opengl.OpenGLSurfaceView;
+import com.gamesbykevin.connect.services.BaseGameActivity;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import static android.view.View.INVISIBLE;
-import static android.view.View.VISIBLE;
 import static com.gamesbykevin.connect.activity.LevelSelectActivity.PAGES;
 import static com.gamesbykevin.connect.game.Game.STEP;
 import static com.gamesbykevin.androidframeworkv2.util.UtilityHelper.DEBUG;
 import static com.gamesbykevin.connect.activity.LevelSelectActivity.CURRENT_PAGE;
 
-public class GameActivity extends BaseActivity implements Disposable {
+public class GameActivity extends BaseGameActivity implements Disposable {
 
     //our open GL surface view
     private GLSurfaceView glSurfaceView;
@@ -332,6 +331,22 @@ public class GameActivity extends BaseActivity implements Disposable {
         startActivity(new Intent(this, MainActivity.class));
     }
 
+    public void onClickAchievements(View view) {
+
+        //if we are connected, display default achievements ui
+        if (getApiClient().isConnected()) {
+            displayAchievementUI();
+        } else {
+            //UtilityHelper.logEvent("beginUserInitiatedSignIn() before");
+            //if not connected, re-attempt google play login
+            beginUserInitiatedSignIn();
+            //UtilityHelper.logEvent("beginUserInitiatedSignIn() after");
+
+            //flag that we want to open the achievements
+            ACCESS_ACHIEVEMENT = true;
+        }
+    }
+
     public void onClickNext(View view) {
 
         //increase the current page
@@ -512,5 +527,27 @@ public class GameActivity extends BaseActivity implements Disposable {
                 imageView.setImageBitmap(BitmapFactory.decodeResource(getResources(), resId));
             }
         });
+    }
+
+    @Override
+    public void onSignInSucceeded() {
+        UtilityHelper.displayMessage(this, "Google Play login worked!");
+
+        //if we signed in to access the achievements
+        if (ACCESS_ACHIEVEMENT) {
+            displayAchievementUI();
+            ACCESS_ACHIEVEMENT = false;
+        }
+
+        //if we signed in to access the leaderboard
+        if (ACCESS_LEADERBOARD) {
+            //displayLeaderboardUI();
+            ACCESS_LEADERBOARD = false;
+        }
+    }
+
+    @Override
+    public void onSignInFailed() {
+        UtilityHelper.displayMessage(this, "Google play login failed!");
     }
 }
