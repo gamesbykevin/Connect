@@ -528,26 +528,4 @@ public class GameActivity extends BaseGameActivity implements Disposable {
             }
         });
     }
-
-    @Override
-    public void onSignInSucceeded() {
-        UtilityHelper.displayMessage(this, "Google Play login worked!");
-
-        //if we signed in to access the achievements
-        if (ACCESS_ACHIEVEMENT) {
-            displayAchievementUI();
-            ACCESS_ACHIEVEMENT = false;
-        }
-
-        //if we signed in to access the leaderboard
-        if (ACCESS_LEADERBOARD) {
-            //displayLeaderboardUI();
-            ACCESS_LEADERBOARD = false;
-        }
-    }
-
-    @Override
-    public void onSignInFailed() {
-        UtilityHelper.displayMessage(this, "Google play login failed!");
-    }
 }

@@ -3,7 +3,203 @@
     <item type="id" name="action_next" />
     <item type="id" name="action_previous" />
 
-
     <string translatable="false" name="app_id">292633559655</string>
 
+    <!-- package_name -->
+    <string name="package_name" translatable="false">com.gamesbykevin.connect</string>
+
+    <!-- achievement Level 1 Square -->
+    <string name="achievement_level_1_square" translatable="false">CgkI54THksIIEAIQAg</string>
+
+    <!-- achievement Level 2 Square -->
+    <string name="achievement_level_2_square" translatable="false">CgkI54THksIIEAIQAw</string>
+
+    <!-- achievement Level 3 Square -->
+    <string name="achievement_level_3_square" translatable="false">CgkI54THksIIEAIQBA</string>
+
+    <!-- achievement Level 4 Square -->
+    <string name="achievement_level_4_square" translatable="false">CgkI54THksIIEAIQBQ</string>
+
+    <!-- achievement Level 5 Square -->
+    <string name="achievement_level_5_square" translatable="false">CgkI54THksIIEAIQBg</string>
+
+    <!-- achievement Level 6 Square -->
+    <string name="achievement_level_6_square" translatable="false">CgkI54THksIIEAIQBw</string>
+
+    <!-- achievement Level 7 Square -->
+    <string name="achievement_level_7_square" translatable="false">CgkI54THksIIEAIQCA</string>
+
+    <!-- achievement Level 8 Square -->
+    <string name="achievement_level_8_square" translatable="false">CgkI54THksIIEAIQCQ</string>
+
+    <!-- achievement Level 9 Square -->
+    <string name="achievement_level_9_square" translatable="false">CgkI54THksIIEAIQCg</string>
+
+    <!-- achievement Level 10 Square -->
+    <string name="achievement_level_10_square" translatable="false">CgkI54THksIIEAIQCw</string>
+
+    <!-- achievement Level 1 Hexagon -->
+    <string name="achievement_level_1_hexagon" translatable="false">CgkI54THksIIEAIQDA</string>
+
+    <!-- achievement Level 2 Hexagon -->
+    <string name="achievement_level_2_hexagon" translatable="false">CgkI54THksIIEAIQDQ</string>
+
+    <!-- achievement Level 3 Hexagon -->
+    <string name="achievement_level_3_hexagon" translatable="false">CgkI54THksIIEAIQDg</string>
+
+    <!-- achievement Level 4 Hexagon -->
+    <string name="achievement_level_4_hexagon" translatable="false">CgkI54THksIIEAIQDw</string>
+
+    <!-- achievement Level 5 Hexagon -->
+    <string name="achievement_level_5_hexagon" translatable="false">CgkI54THksIIEAIQEA</string>
+
+    <!-- achievement Level 6 Hexagon -->
+    <string name="achievement_level_6_hexagon" translatable="false">CgkI54THksIIEAIQEQ</string>
+
+    <!-- achievement Level 7 Hexagon -->
+    <string name="achievement_level_7_hexagon" translatable="false">CgkI54THksIIEAIQEg</string>
+
+    <!-- achievement Level 8 Hexagon -->
+    <string name="achievement_level_8_hexagon" translatable="false">CgkI54THksIIEAIQEw</string>
+
+    <!-- achievement Level 9 Hexagon -->
+    <string name="achievement_level_9_hexagon" translatable="false">CgkI54THksIIEAIQFA</string>
+
+    <!-- achievement Level 10 Hexagon -->
+    <string name="achievement_level_10_hexagon" translatable="false">CgkI54THksIIEAIQFQ</string>
+
+    <!-- achievement Level 1 Diamond -->
+    <string name="achievement_level_1_diamond" translatable="false">CgkI54THksIIEAIQFg</string>
+
+    <!-- achievement Level 2 Diamond -->
+    <string name="achievement_level_2_diamond" translatable="false">CgkI54THksIIEAIQFw</string>
+
+    <!-- achievement Level 3 Diamond -->
+    <string name="achievement_level_3_diamond" translatable="false">CgkI54THksIIEAIQGA</string>
+
+    <!-- achievement Level 4 Diamond -->
+    <string name="achievement_level_4_diamond" translatable="false">CgkI54THksIIEAIQGQ</string>
+
+    <!-- achievement Level 5 Diamond -->
+    <string name="achievement_level_5_diamond" translatable="false">CgkI54THksIIEAIQGg</string>
+
+    <!-- achievement Level 6 Diamond -->
+    <string name="achievement_level_6_diamond" translatable="false">CgkI54THksIIEAIQGw</string>
+
+    <!-- achievement Level 7 Diamond -->
+    <string name="achievement_level_7_diamond" translatable="false">CgkI54THksIIEAIQHA</string>
+
+    <!-- achievement Level 8 Diamond -->
+    <string name="achievement_level_8_diamond" translatable="false">CgkI54THksIIEAIQHQ</string>
+
+    <!-- achievement Level 9 Diamond -->
+    <string name="achievement_level_9_diamond" translatable="false">CgkI54THksIIEAIQHg</string>
+
+    <!-- achievement Level 10 Diamond -->
+    <string name="achievement_level_10_diamond" translatable="false">CgkI54THksIIEAIQHw</string>
+
+    <!-- achievement Complete first puzzle -->
+    <string name="achievement_complete_first_puzzle" translatable="false">CgkI54THksIIEAIQAQ</string>
+
+    <!-- achievement Complete 10 Puzzles -->
+    <string name="achievement_complete_10_puzzles" translatable="false">CgkI54THksIIEAIQIA</string>
+
+    <!-- achievement Complete 50 Puzzles -->
+    <string name="achievement_complete_50_puzzles" translatable="false">CgkI54THksIIEAIQIQ</string>
+
+    <!-- leaderboard Level 1 Square -->
+    <string name="leaderboard_level_1_square" translatable="false">CgkI54THksIIEAIQIg</string>
+
+    <!-- leaderboard Level 2 Square -->
+    <string name="leaderboard_level_2_square" translatable="false">CgkI54THksIIEAIQIw</string>
+
+    <!-- leaderboard Level 3 Square -->
+    <string name="leaderboard_level_3_square" translatable="false">CgkI54THksIIEAIQJA</string>
+
+    <!-- leaderboard Level 4 Square -->
+    <string name="leaderboard_level_4_square" translatable="false">CgkI54THksIIEAIQJQ</string>
+
+    <!-- leaderboard Level 5 Square -->
+    <string name="leaderboard_level_5_square" translatable="false">CgkI54THksIIEAIQJg</string>
+
+    <!-- leaderboard Level 6 Square -->
+    <string name="leaderboard_level_6_square" translatable="false">CgkI54THksIIEAIQJw</string>
+
+    <!-- leaderboard Level 7 Square -->
+    <string name="leaderboard_level_7_square" translatable="false">CgkI54THksIIEAIQKA</string>
+
+    <!-- leaderboard Level 8 Square -->
+    <string name="leaderboard_level_8_square" translatable="false">CgkI54THksIIEAIQKQ</string>
+
+    <!-- leaderboard Level 9 Square -->
+    <string name="leaderboard_level_9_square" translatable="false">CgkI54THksIIEAIQKg</string>
+
+    <!-- leaderboard Level 10 Square -->
+    <string name="leaderboard_level_10_square" translatable="false">CgkI54THksIIEAIQKw</string>
+
+    <!-- leaderboard Level 1 Hexagon -->
+    <string name="leaderboard_level_1_hexagon" translatable="false">CgkI54THksIIEAIQLA</string>
+
+    <!-- leaderboard Level 2 Hexagon -->
+    <string name="leaderboard_level_2_hexagon" translatable="false">CgkI54THksIIEAIQLQ</string>
+
+    <!-- leaderboard Level 3 Hexagon -->
+    <string name="leaderboard_level_3_hexagon" translatable="false">CgkI54THksIIEAIQLg</string>
+
+    <!-- leaderboard Level 4 Hexagon -->
+    <string name="leaderboard_level_4_hexagon" translatable="false">CgkI54THksIIEAIQLw</string>
+
+    <!-- leaderboard Level 5 Hexagon -->
+    <string name="leaderboard_level_5_hexagon" translatable="false">CgkI54THksIIEAIQMA</string>
+
+    <!-- leaderboard Level 6 Hexagon -->
+    <string name="leaderboard_level_6_hexagon" translatable="false">CgkI54THksIIEAIQMQ</string>
+
+    <!-- leaderboard Level 7 Hexagon -->
+    <string name="leaderboard_level_7_hexagon" translatable="false">CgkI54THksIIEAIQMg</string>
+
+    <!-- leaderboard Level 8 Hexagon -->
+    <string name="leaderboard_level_8_hexagon" translatable="false">CgkI54THksIIEAIQMw</string>
+
+    <!-- leaderboard Level 9 Hexagon -->
+    <string name="leaderboard_level_9_hexagon" translatable="false">CgkI54THksIIEAIQNA</string>
+
+    <!-- leaderboard Level 10 Hexagon -->
+    <string name="leaderboard_level_10_hexagon" translatable="false">CgkI54THksIIEAIQNQ</string>
+
+    <!-- leaderboard Level 1 Diamond -->
+    <string name="leaderboard_level_1_diamond" translatable="false">CgkI54THksIIEAIQNg</string>
+
+    <!-- leaderboard Level 2 Diamond -->
+    <string name="leaderboard_level_2_diamond" translatable="false">CgkI54THksIIEAIQNw</string>
+
+    <!-- leaderboard Level 3 Diamond -->
+    <string name="leaderboard_level_3_diamond" translatable="false">CgkI54THksIIEAIQOA</string>
+
+    <!-- leaderboard Level 4 Diamond -->
+    <string name="leaderboard_level_4_diamond" translatable="false">CgkI54THksIIEAIQOQ</string>
+
+    <!-- leaderboard Level 5 Diamond -->
+    <string name="leaderboard_level_5_diamond" translatable="false">CgkI54THksIIEAIQOg</string>
+
+    <!-- leaderboard Level 6 Diamond -->
+    <string name="leaderboard_level_6_diamond" translatable="false">CgkI54THksIIEAIQOw</string>
+
+    <!-- leaderboard Level 7 Diamond -->
+    <string name="leaderboard_level_7_diamond" translatable="false">CgkI54THksIIEAIQPA</string>
+
+    <!-- leaderboard Level 8 Diamond -->
+    <string name="leaderboard_level_8_diamond" translatable="false">CgkI54THksIIEAIQPQ</string>
+
+    <!-- leaderboard Level 9 Diamond -->
+    <string name="leaderboard_level_9_diamond" translatable="false">CgkI54THksIIEAIQPg</string>
+
+    <!-- leaderboard Level 10 Diamond -->
+    <string name="leaderboard_level_10_diamond" translatable="false">CgkI54THksIIEAIQPw</string>
+
+    <!-- event Games Played -->
+    <string name="event_games_played" translatable="false">CgkI54THksIIEAIQQA</string>
+
+    <!-- event Games Completed -->
+    <string name="event_games_completed" translatable="false">CgkI54THksIIEAIQQQ</string>
 </resources>

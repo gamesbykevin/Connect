@@ -7,6 +7,8 @@ import com.gamesbykevin.connect.activity.GameActivity.Screen;
 import com.gamesbykevin.connect.board.Board;
 import com.gamesbykevin.connect.opengl.OpenGLRenderer;
 import com.gamesbykevin.connect.opengl.OpenGLSurfaceView;
+import com.gamesbykevin.connect.services.AchievementHelper;
+import com.gamesbykevin.connect.services.LeaderboardHelper;
 
 import static com.gamesbykevin.connect.activity.LevelSelectActivity.CURRENT_PAGE;
 import static com.gamesbykevin.connect.activity.MainActivity.getBoards;
@@ -114,6 +116,9 @@ public class Game implements IGame {
         //create a new board
         this.board = new Board(Board.BOARD_COLS, Board.BOARD_ROWS);
 
+        //keep track of how many games are played
+        activity.trackEvent(R.string.event_games_played);
+
         //set the type of shape we will be playing with
         getBoard().setType((Board.Shape)activity.getObjectValue(R.string.game_shape_file_key, Board.Shape.class));
 
@@ -160,6 +165,15 @@ public class Game implements IGame {
 
                 //if the game is over, move to the next step
                 if (GAME_OVER) {
+
+                    //unlock any achievements we achieved
+                    AchievementHelper.completedGame(activity, getBoard());
+
+                    //update the leader board as well
+                    LeaderboardHelper.updateLeaderboard(activity, getBoard(), activity.getSeconds());
+
+                    //keep track of how many games are completed
+                    activity.trackEvent(R.string.event_games_completed);
 
                     //save the best time for the current level
                     getBoards().update(getBoard().getType(), CURRENT_PAGE, activity.getSeconds());

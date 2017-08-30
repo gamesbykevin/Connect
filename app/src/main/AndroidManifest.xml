@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.gamesbykevin.connect">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.gamesbykevin.connect">
 
+    <!-- need vibrate permission to vibrate -->
     <uses-permission android:name="android.permission.VIBRATE"/>
 
+    <!-- We need internet permission for google play services -->
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <!-- we intend to use open gl 2.0 -->
-    <uses-feature
-        android:glEsVersion="0x00020000"
-        android:required="true"/>
+    <uses-feature android:glEsVersion="0x00020000" android:required="true"/>
 
     <application
         android:allowBackup="true"
@@ -26,7 +27,6 @@
             android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
-
                 <category android:name="android.intent.category.HOME"/>
             </intent-filter>
         </activity>
@@ -37,7 +37,6 @@
             android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
-
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
@@ -60,8 +59,7 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"/>
 
-        <activity android:name=".activity.TutorialActivity">
-        </activity>
+        <activity android:name=".activity.TutorialActivity" />
     </application>
 
 </manifest>

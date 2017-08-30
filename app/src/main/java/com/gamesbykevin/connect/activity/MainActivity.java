@@ -141,29 +141,4 @@ public class MainActivity extends BaseGameActivity {
     public static Boards getBoards() {
         return BOARDS;
     }
-
-    @Override
-    public void onSignInSucceeded() {
-        UtilityHelper.displayMessage(this, "Google Play login worked!");
-
-        if (ACCESS_ACHIEVEMENT) {
-
-            //if we just came from achievements button and are now signed in, display ui
-            displayAchievementUI();
-
-            //flag back false
-            ACCESS_ACHIEVEMENT = false;
-        }
-
-        //don't bypass auto login
-        BYPASS_LOGIN = false;
-    }
-
-    @Override
-    public void onSignInFailed() {
-        UtilityHelper.displayMessage(this, "Google play login failed!");
-
-        //bypass auto login
-        BYPASS_LOGIN = true;
-    }
 }

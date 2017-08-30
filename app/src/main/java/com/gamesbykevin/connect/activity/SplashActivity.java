@@ -1,11 +1,9 @@
 package com.gamesbykevin.connect.activity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 
-import com.gamesbykevin.androidframeworkv2.activity.*;
 import com.gamesbykevin.connect.R;
 
 public class SplashActivity extends BaseActivity {
@@ -23,7 +21,7 @@ public class SplashActivity extends BaseActivity {
     /**
      * Is this the first time we came here
      */
-    public static boolean INITIALIZE = false;
+    public static volatile boolean INITIALIZE = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

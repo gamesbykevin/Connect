@@ -3,6 +3,7 @@ package com.gamesbykevin.connect.services;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 
 import com.gamesbykevin.androidframeworkv2.util.UtilityHelper;
 import com.gamesbykevin.connect.activity.BaseActivity;
@@ -39,6 +40,11 @@ public abstract class BaseGameActivity extends BaseActivity implements GameHelpe
      * Did we want to access the leader boards
      */
     public boolean ACCESS_LEADERBOARD = false;
+
+    /**
+     * The leader board id we want to display
+     */
+    public static String LEADERBOARD_ID = "";
 
     /**
      * Do we skip future login? (this is in case the player does not want to sign in)
@@ -209,6 +215,22 @@ public abstract class BaseGameActivity extends BaseActivity implements GameHelpe
         return mHelper.getSignInError();
     }
 
+    public void onClickAchievements(View view) {
+
+        //if we are connected, display default achievements ui
+        if (getApiClient().isConnected()) {
+            displayAchievementUI();
+        } else {
+            //UtilityHelper.logEvent("beginUserInitiatedSignIn() before");
+            //if not connected, re-attempt google play login
+            beginUserInitiatedSignIn();
+            //UtilityHelper.logEvent("beginUserInitiatedSignIn() after");
+
+            //flag that we want to open the achievements
+            ACCESS_ACHIEVEMENT = true;
+        }
+    }
+
     public void displayAchievementUI() {
 
         if (getApiClient().isConnected()) {
@@ -239,5 +261,37 @@ public abstract class BaseGameActivity extends BaseActivity implements GameHelpe
             //flag that we want to open the achievements
             ACCESS_LEADERBOARD = true;
         }
+    }
+
+    @Override
+    public void onSignInSucceeded() {
+        UtilityHelper.displayMessage(this, "Google Play login worked!");
+
+        if (ACCESS_ACHIEVEMENT) {
+
+            //if we just came from achievements button and are now signed in, display ui
+            displayAchievementUI();
+
+            //flag back false
+            ACCESS_ACHIEVEMENT = false;
+
+        } else if (ACCESS_LEADERBOARD) {
+
+            //if we just logged in trying to access leaderboard display it
+            displayLeaderboardUI(LEADERBOARD_ID);
+
+            ACCESS_LEADERBOARD = false;
+        }
+
+        //don't bypass auto login
+        BYPASS_LOGIN = false;
+    }
+
+    @Override
+    public void onSignInFailed() {
+        UtilityHelper.displayMessage(this, "Google play login failed!");
+
+        //bypass auto login
+        BYPASS_LOGIN = true;
     }
 }
