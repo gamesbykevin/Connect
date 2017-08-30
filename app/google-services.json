@@ -15,19 +15,19 @@
       },
       "oauth_client": [
         {
+          "client_id": "292633559655-ommguatvaqq9ogomc0ta717f9ubj3mu9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.gamesbykevin.connect",
+            "certificate_hash": "aeadb1dc8a07f7ea4ca42d7fac013fed42a13d34"
+          }
+        },
+        {
           "client_id": "292633559655-tomnmkpro3hq84o7cpr116o27e2tl26u.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.gamesbykevin.connect",
             "certificate_hash": "7e883276024513846baa030ef413a72059597dde"
-          }
-        },
-        {
-          "client_id": "292633559655-afifk7bnpopssddgossmbn07iismlbsn.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.gamesbykevin.connect",
-            "certificate_hash": "aeadb1dc8a07f7ea4ca42d7fac013fed42a13d34"
           }
         },
         {

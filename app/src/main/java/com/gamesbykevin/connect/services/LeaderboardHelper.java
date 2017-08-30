@@ -8,7 +8,6 @@ import static com.gamesbykevin.connect.activity.LevelSelectActivity.CURRENT_PAGE
 /**
  * Created by Kevin on 8/29/2017.
  */
-
 public class LeaderboardHelper {
 
     public static void updateLeaderboard(final BaseGameActivity activity, final Board board, final int seconds) {
