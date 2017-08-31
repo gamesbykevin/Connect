@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<string name="app_name">ต่อ</string>
+<string name="button_text_next">ต่อไป</string>
+<string name="button_text_restart">เริ่มต้นใหม่</string>
+<string name="button_text_rate">อัตรา</string>
+<string name="button_text_more">มากกว่า</string>
+<string name="button_text_menu">เมนู</string>
+<string name="button_text_start">เริ่มต้น</string>
+<string name="button_text_options">ตัวเลือก</string>
+<string name="button_text_exit">ทางออก</string>
+<string name="button_text_tutorial">เกี่ยวกับการสอน</string>
+<string name="button_text_play">เล่น</string>
+<string name="button_text_leaderboard">ลีดเดอร์บอร์ด</string>
+<string name="button_text_achievements">ผู้ชนะ</string>
+<string name="vibrate_on">สั่น: เปิด</string>
+<string name="vibrate_off">สั่น: ปิด</string>
+<string name="sound_on">เสียง: เปิด</string>
+<string name="sound_off">ปิดเสียง</string>
+<string name="text_header_level_select">ระดับ</string>
+<string name="text_header_shape">รูปร่าง:</string>
+<string name="tutorial_instructions_1">บทที่ 1 บทที่ 1 \n หากต้องการแก้ปัญหาให้เชื่อมต่อท่อทั้งหมดเข้าด้วยกัน</string>
+<string name="tutorial_instructions_2">บทที่ 2 การสอน \n แตะท่อเพื่อหมุน </string>
+<string name="tutorial_instructions_3">บทที่ 3 \n เมื่อท่อทั้งหมดเชื่อมต่อคุณจะชนะ</string>
+<string name="tutorial_instructions_4">บทที่ 4 การสอน \n ลากนิ้วของคุณหากต้องการย้ายบอร์ด</string>
+<string name="tutorial_instructions_5">บทที่ 5 \n คุณยังสามารถย่อและขยายได้เมื่อคุณหยิกนิ้ว 2 นิ้ว</string>
+<string name="tutorial_instructions_6">บทที่ 6 \n เลือกแม่เหล็กเพื่อเปิดใช้การหมุนอัตโนมัติ</string>
+<string name="sign_in_other_error">มีปัญหาเกี่ยวกับการลงชื่อเข้าใช้โปรดลองอีกครั้งในภายหลัง</string>
+<string name="sign_in_failed">ไม่สามารถลงชื่อเข้าใช้โปรดตรวจสอบการเชื่อมต่อเครือข่ายและลองอีกครั้ง</string>
+<string name="app_misconfigured">แอ็พพลิเคชันถูกกำหนดค่าอย่างไม่ถูกต้อง </string>
+<string name="license_failed">การตรวจสอบใบอนุญาตล้มเหลว</string>
+<string name="unknown_error">ข้อผิดพลาดที่ไม่รู้จัก.</string>
+<string name="UNKNOWN_ERROR">ข้อผิดพลาดที่ไม่รู้จัก.</string>
+<string name="gamehelper_sign_in_failed">ไม่สามารถลงชื่อเข้าใช้โปรดตรวจสอบการเชื่อมต่อเครือข่ายและลองอีกครั้ง</string>
+<string name="gamehelper_app_misconfigured">แอ็พพลิเคชันถูกกำหนดค่าอย่างไม่ถูกต้อง </string>
+<string name="gamehelper_license_failed">การตรวจสอบใบอนุญาตล้มเหลว</string>
+<string name="gamehelper_unknown_error">ข้อผิดพลาดที่ไม่รู้จัก.</string>
+</resources>

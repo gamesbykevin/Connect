@@ -103,11 +103,17 @@ public class Board implements ICommon {
      * @param x x-coordinate
      * @param y y-coordinate
      */
-    public void touch(float x, float y) {
+    /**
+     * Touch the board and rotate the selected shape
+     * @param x x-coordinate
+     * @param y y-coordinate
+     * @return true if a shape was marked for rotation, false otherwise
+     */
+    public boolean touch(float x, float y) {
 
         //if we are already rotating don't check again
         if (getRotationShape() != null)
-            return;
+            return false;
 
         for (int col = 0; col < getMaze().getCols(); col++) {
             for (int row = 0; row < getMaze().getRows(); row++) {
@@ -137,14 +143,12 @@ public class Board implements ICommon {
                     shape.setRotationCount(0);
                     shape.rotate();
                     setRotationShape(shape);
-
-                    //no need to continue checking
-                    row = getMaze().getRows();
-                    col = getMaze().getCols();
-                    break;
+                    return true;
                 }
             }
         }
+
+        return false;
     }
 
     @Override
@@ -251,7 +255,7 @@ public class Board implements ICommon {
         }
     }
 
-    private CustomShape getRotationShape() {
+    protected CustomShape getRotationShape() {
         return this.rotationShape;
     }
 

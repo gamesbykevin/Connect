@@ -135,6 +135,9 @@ public class LevelSelectActivity extends BaseGameActivity {
 
         //make sure the current page is displayed
         getCustomPager().setCurrentItem(CURRENT_PAGE);
+
+        //play the main theme
+        playTheme();
     }
 
     @Override

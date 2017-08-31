@@ -12,6 +12,8 @@ import com.gamesbykevin.connect.services.LeaderboardHelper;
 
 import static com.gamesbykevin.connect.activity.LevelSelectActivity.CURRENT_PAGE;
 import static com.gamesbykevin.connect.activity.MainActivity.getBoards;
+import static com.gamesbykevin.connect.board.BoardHelper.SOUND_ROTATE;
+import static com.gamesbykevin.connect.board.BoardHelper.SOUND_ROTATE_CONNECT;
 import static com.gamesbykevin.connect.game.GameHelper.FRAMES;
 import static com.gamesbykevin.connect.game.GameHelper.GAME_OVER;
 import static com.gamesbykevin.connect.game.GameHelper.GAME_OVER_DELAY_FRAMES;
@@ -169,8 +171,8 @@ public class Game implements IGame {
                     //unlock any achievements we achieved
                     AchievementHelper.completedGame(activity, getBoard());
 
-                    //update the leader board as well
-                    LeaderboardHelper.updateLeaderboard(activity, getBoard(), activity.getSeconds());
+                    //update the leader board as well (in milliseconds)
+                    LeaderboardHelper.updateLeaderboard(activity, getBoard(), activity.getSeconds() * 1000);
 
                     //keep track of how many games are completed
                     activity.trackEvent(R.string.event_games_completed);
@@ -200,6 +202,15 @@ public class Game implements IGame {
                     //if the board wasn't generated previously and is now, set the zoom
                     if (!generated && getBoard().getMaze().isGenerated())
                         zoomOut(getBoard());
+
+                    //play sound effect if flagged
+                    if (SOUND_ROTATE) {
+                        activity.playSoundEffect(R.raw.rotate);
+                        SOUND_ROTATE = false;
+                    } else if (SOUND_ROTATE_CONNECT) {
+                        activity.playSoundEffect(R.raw.rotate_connect);
+                        SOUND_ROTATE_CONNECT = false;
+                    }
 
                     //keep track of the time
                     elapsed += OpenGLSurfaceView.FRAME_DURATION;

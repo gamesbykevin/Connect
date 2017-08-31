@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<string name="app_name">pripojiť</string>
+<string name="button_text_next">Ďalšie</string>
+<string name="button_text_restart">Reštart</string>
+<string name="button_text_rate">rýchlosť</string>
+<string name="button_text_more">viac</string>
+<string name="button_text_menu">Ponuka</string>
+<string name="button_text_start">štart</string>
+<string name="button_text_options">možnosti</string>
+<string name="button_text_exit">Východ</string>
+<string name="button_text_tutorial">cvičenie</string>
+<string name="button_text_play">hrať</string>
+<string name="button_text_leaderboard">leaderboard</string>
+<string name="button_text_achievements">úspechy</string>
+<string name="vibrate_on">Vibrovanie: Zapnuté</string>
+<string name="vibrate_off">Vibrovanie: Vypnuté</string>
+<string name="sound_on">Zvuk: Zapnutý</string>
+<string name="sound_off">Vypnúť zvuk</string>
+<string name="text_header_level_select">úrovne</string>
+<string name="text_header_shape">tvar:</string>
+<string name="tutorial_instructions_1">Výučba Časť 1 \nPre riešenie musíte spojiť všetky potrubia dohromady</string>
+<string name="tutorial_instructions_2">Výučba Časť 2 \nPosuňte potrubie na otáčanie. </string>
+<string name="tutorial_instructions_3">Výučba časť 3 \nAk sú pripojené všetky rúry, vyhráte</string>
+<string name="tutorial_instructions_4">Výučba Časť 4 \nOdstráňte prst, ak chcete presunúť dosku</string>
+<string name="tutorial_instructions_5">Výučba časť 5 \nMôžete tiež priblížiť a oddialiť pri prichytení dvoch prstov</string>
+<string name="tutorial_instructions_6">Výučba Časť 6 \nVyberte magnet, ktorý umožní automatické otáčanie</string>
+<string name="sign_in_other_error">Vyskytol sa problém s prihlásením. Skúste to znova neskôr.</string>
+<string name="sign_in_failed">Nepodarilo sa prihlásiť. Skontrolujte pripojenie k sieti a skúste to znova.</string>
+<string name="app_misconfigured">Aplikácia je nesprávne nakonfigurovaná. </string>
+<string name="license_failed">Kontrola licencie zlyhala.</string>
+<string name="unknown_error">Neznáma chyba.</string>
+<string name="UNKNOWN_ERROR">Neznáma chyba.</string>
+<string name="gamehelper_sign_in_failed">Nepodarilo sa prihlásiť. Skontrolujte pripojenie k sieti a skúste to znova.</string>
+<string name="gamehelper_app_misconfigured">Aplikácia je nesprávne nakonfigurovaná. </string>
+<string name="gamehelper_license_failed">Kontrola licencie zlyhala.</string>
+<string name="gamehelper_unknown_error">Neznáma chyba.</string>
+</resources>

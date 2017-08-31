@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<string name="app_name">Повежите се</string>
+<string name="button_text_next">Следећи</string>
+<string name="button_text_restart">Поново покренути</string>
+<string name="button_text_rate">Оцените</string>
+<string name="button_text_more">Више</string>
+<string name="button_text_menu">Мени</string>
+<string name="button_text_start">Почетак</string>
+<string name="button_text_options">Опције</string>
+<string name="button_text_exit">Изађи</string>
+<string name="button_text_tutorial">Приручник</string>
+<string name="button_text_play">Игра</string>
+<string name="button_text_leaderboard">Леадербоард</string>
+<string name="button_text_achievements">Достигнућа</string>
+<string name="vibrate_on">Вибрирање: укључено</string>
+<string name="vibrate_off">Вибрирање: Искључено</string>
+<string name="sound_on">Звук: укључен</string>
+<string name="sound_off">Звук: Искључено</string>
+<string name="text_header_level_select">Нивои</string>
+<string name="text_header_shape">Облик:</string>
+<string name="tutorial_instructions_1">Туториал Парт 1 \\ нТо ријешити морате повезати све цијеви заједно</string>
+<string name="tutorial_instructions_2">Туториал Парт 2 \\ нУпустите цеви да се ротирају. </string>
+<string name="tutorial_instructions_3">Туториал Парт 3 \\ нАко су сви цеви повезани којег сте победили</string>
+<string name="tutorial_instructions_4">Туториал Парт 4 \\ нДражите прст ако желите да померите плочу</string>
+<string name="tutorial_instructions_5">Туториал Парт 5 \\ нМожете такође увећати и умањити када притиснете два прста</string>
+<string name="tutorial_instructions_6">Туториал Парт 6 \\ нИзаберите магнет који омогућава аутоматско окретање</string>
+<string name="sign_in_other_error">Било је проблема са пријављивањем, покушајте поново касније.</string>
+<string name="sign_in_failed">Неуспешно се пријавите. Проверите мрежну везу и покушајте поново.</string>
+<string name="app_misconfigured">Апликација је погрешно конфигурисана. </string>
+<string name="license_failed">Провера лиценце није успела.</string>
+<string name="unknown_error">Непозната грешка.</string>
+<string name="UNKNOWN_ERROR">Непозната грешка.</string>
+<string name="gamehelper_sign_in_failed">Неуспешно се пријавите. Проверите мрежну везу и покушајте поново.</string>
+<string name="gamehelper_app_misconfigured">Апликација је погрешно конфигурисана. </string>
+<string name="gamehelper_license_failed">Провера лиценце није успела.</string>
+<string name="gamehelper_unknown_error">Непозната грешка.</string>
+</resources>

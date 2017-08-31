@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<string name="app_name">Συνδέω</string>
+<string name="button_text_next">επόμενος</string>
+<string name="button_text_restart">Επανεκκίνηση</string>
+<string name="button_text_rate">Τιμή</string>
+<string name="button_text_more">Περισσότερο</string>
+<string name="button_text_menu">Μενού</string>
+<string name="button_text_start">Αρχή</string>
+<string name="button_text_options">Επιλογές</string>
+<string name="button_text_exit">Εξοδος</string>
+<string name="button_text_tutorial">Φροντιστήριο</string>
+<string name="button_text_play">Παίζω</string>
+<string name="button_text_leaderboard">Leaderboard</string>
+<string name="button_text_achievements">Επιτεύγματα</string>
+<string name="vibrate_on">Δόνηση: Ενεργοποίηση</string>
+<string name="vibrate_off">Δόνηση: Απενεργοποίηση</string>
+<string name="sound_on">Ήχος: Ενεργοποίηση</string>
+<string name="sound_off">Χωρίς ήχο</string>
+<string name="text_header_level_select">Επίπεδα</string>
+<string name="text_header_shape">Σχήμα:</string>
+<string name="tutorial_instructions_1">Tutorial Part 1 \nΓια να λύσετε πρέπει να συνδέσετε όλες τις σωληνώσεις μεταξύ τους</string>
+<string name="tutorial_instructions_2">Tutorial Part 2 \nΑκουμπήστε τους σωλήνες για περιστροφή. </string>
+<string name="tutorial_instructions_3">Tutorial Part 3 \nΌταν όλες οι σωλήνες είναι συνδεδεμένες κερδίζετε</string>
+<string name="tutorial_instructions_4">Tutorial Part 4 \nΑντιστρέψτε το δάχτυλό σας εάν θέλετε να μετακινήσετε τον πίνακα</string>
+<string name="tutorial_instructions_5">Tutorial Part 5 \nΜπορείτε επίσης να κάνετε μεγέθυνση και σμίκρυνση όταν πιέζετε 2 δάχτυλα</string>
+<string name="tutorial_instructions_6">Tutorial Part 6 \nΕπιλέξτε το μαγνήτη για να ενεργοποιήσετε την αυτόματη περιστροφή</string>
+<string name="sign_in_other_error">Παρουσιάστηκε πρόβλημα με τη σύνδεση, δοκιμάστε ξανά αργότερα.</string>
+<string name="sign_in_failed">Δεν ήταν δυνατή η σύνδεση. Ελέγξτε τη σύνδεση δικτύου και δοκιμάστε ξανά.</string>
+<string name="app_misconfigured">Η εφαρμογή δεν έχει ρυθμιστεί σωστά. </string>
+<string name="license_failed">Ο έλεγχος αδειών απέτυχε.</string>
+<string name="unknown_error">Αγνωστο σφάλμα.</string>
+<string name="UNKNOWN_ERROR">Αγνωστο σφάλμα.</string>
+<string name="gamehelper_sign_in_failed">Δεν ήταν δυνατή η σύνδεση. Ελέγξτε τη σύνδεση δικτύου και δοκιμάστε ξανά.</string>
+<string name="gamehelper_app_misconfigured">Η εφαρμογή δεν έχει ρυθμιστεί σωστά. </string>
+<string name="gamehelper_license_failed">Ο έλεγχος αδειών απέτυχε.</string>
+<string name="gamehelper_unknown_error">Αγνωστο σφάλμα.</string>
+</resources>

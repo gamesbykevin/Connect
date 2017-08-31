@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<string name="app_name">Menghubungkan</string>
+<string name="button_text_next">Berikutnya</string>
+<string name="button_text_restart">Mengulang kembali</string>
+<string name="button_text_rate">Menilai</string>
+<string name="button_text_more">Lebih</string>
+<string name="button_text_menu">Menu</string>
+<string name="button_text_start">Mulai</string>
+<string name="button_text_options">Pilihan</string>
+<string name="button_text_exit">Keluar</string>
+<string name="button_text_tutorial">Tutorial</string>
+<string name="button_text_play">Bermain</string>
+<string name="button_text_leaderboard">Papan peringkat</string>
+<string name="button_text_achievements">Prestasi</string>
+<string name="vibrate_on">Getar: Aktif</string>
+<string name="vibrate_off">Getar: Mati</string>
+<string name="sound_on">Suara: Aktif</string>
+<string name="sound_off">Memperdengarkan</string>
+<string name="text_header_level_select">Tingkat</string>
+<string name="text_header_shape">Bentuk:</string>
+<string name="tutorial_instructions_1">Tutorial Bagian 1 \nUntuk mengatasinya Anda harus menghubungkan semua pipa bersama-sama</string>
+<string name="tutorial_instructions_2">Tutorial Bagian 2 \nTentuh pipa untuk memutar. </string>
+<string name="tutorial_instructions_3">Tutorial Bagian 3 \nSetelah semua pipa terhubung, Anda menang</string>
+<string name="tutorial_instructions_4">Tutorial Bagian 4 \nMengatur jari Anda jika Anda ingin memindahkan papan</string>
+<string name="tutorial_instructions_5">Tutorial Bagian 5 \nAnda juga dapat memperbesar dan memperkecil tampilan saat Anda menjepit 2 jari</string>
+<string name="tutorial_instructions_6">Tutorial Bagian 6 \nPilih magnet untuk mengaktifkan auto rotate</string>
+<string name="sign_in_other_error">Terjadi masalah saat masuk, coba lagi nanti.</string>
+<string name="sign_in_failed">Gagal masuk. Periksa koneksi jaringan Anda dan coba lagi.</string>
+<string name="app_misconfigured">Aplikasi salah dikonfigurasi. </string>
+<string name="license_failed">Cek lisensi gagal</string>
+<string name="unknown_error">Kesalahan yang tidak diketahui.</string>
+<string name="UNKNOWN_ERROR">Kesalahan yang tidak diketahui.</string>
+<string name="gamehelper_sign_in_failed">Gagal masuk. Periksa koneksi jaringan Anda dan coba lagi.</string>
+<string name="gamehelper_app_misconfigured">Aplikasi salah dikonfigurasi. </string>
+<string name="gamehelper_license_failed">Cek lisensi gagal</string>
+<string name="gamehelper_unknown_error">Kesalahan yang tidak diketahui.</string>
+</resources>

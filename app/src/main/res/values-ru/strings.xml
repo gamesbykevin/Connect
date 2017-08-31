@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<string name="app_name">соединять</string>
+<string name="button_text_next">следующий</string>
+<string name="button_text_restart">Перезапуск</string>
+<string name="button_text_rate">Ставка</string>
+<string name="button_text_more">Больше</string>
+<string name="button_text_menu">Меню</string>
+<string name="button_text_start">Начало</string>
+<string name="button_text_options">Опции</string>
+<string name="button_text_exit">Выход</string>
+<string name="button_text_tutorial">Руководство</string>
+<string name="button_text_play">Играть</string>
+<string name="button_text_leaderboard">Leaderboard</string>
+<string name="button_text_achievements">достижения</string>
+<string name="vibrate_on">Вибрация: включена</string>
+<string name="vibrate_off">Вибрация: выкл.</string>
+<string name="sound_on">Звучать на</string>
+<string name="sound_off">Без звука</string>
+<string name="text_header_level_select">Уровни</string>
+<string name="text_header_shape">Форма:</string>
+<string name="tutorial_instructions_1">Учебное пособие Часть 1 \nЧтобы решить, что вам нужно соединить все трубы вместе</string>
+<string name="tutorial_instructions_2">Учебное пособие Часть 2 \nВыберите трубы для вращения. </string>
+<string name="tutorial_instructions_3">Учебник Часть 3 \nПосле того, как все каналы подключены, вы выигрываете</string>
+<string name="tutorial_instructions_4">Учебник Часть 4 \nНажмите пальцем, если вы хотите переместить панель</string>
+<string name="tutorial_instructions_5">Учебное пособие Часть 5 \nВы можете также увеличивать и уменьшать масштаб, когда вы зажимаете 2 пальца</string>
+<string name="tutorial_instructions_6">Учебное пособие Часть 6 \nВыберите магнит, чтобы включить автоматический поворот</string>
+<string name="sign_in_other_error">Возникла проблема со входом в систему, повторите попытку позже.</string>
+<string name="sign_in_failed">Не удалось войти в систему. Проверьте подключение к сети и повторите попытку.</string>
+<string name="app_misconfigured">Приложение неправильно настроено. </string>
+<string name="license_failed">Ошибка лицензии.</string>
+<string name="unknown_error">Неизвестная ошибка.</string>
+<string name="UNKNOWN_ERROR">Неизвестная ошибка.</string>
+<string name="gamehelper_sign_in_failed">Не удалось войти в систему. Проверьте подключение к сети и повторите попытку.</string>
+<string name="gamehelper_app_misconfigured">Приложение неправильно настроено. </string>
+<string name="gamehelper_license_failed">Ошибка лицензии.</string>
+<string name="gamehelper_unknown_error">Неизвестная ошибка.</string>
+</resources>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<string name="app_name">Conectar</string>
+<string name="button_text_next">Próximo</string>
+<string name="button_text_restart">Reiniciar</string>
+<string name="button_text_rate">Taxa</string>
+<string name="button_text_more">Mais</string>
+<string name="button_text_menu">Cardápio</string>
+<string name="button_text_start">Começar</string>
+<string name="button_text_options">Opções</string>
+<string name="button_text_exit">Saída</string>
+<string name="button_text_tutorial">Tutorial</string>
+<string name="button_text_play">Toque</string>
+<string name="button_text_leaderboard">Entre os melhores</string>
+<string name="button_text_achievements">Realizações</string>
+<string name="vibrate_on">Vibrar: Ligado</string>
+<string name="vibrate_off">Vibrar: Desligado</string>
+<string name="sound_on">Som ligado</string>
+<string name="sound_off">Som: Desligado</string>
+<string name="text_header_level_select">Níveis</string>
+<string name="text_header_shape">Forma:</string>
+<string name="tutorial_instructions_1">Tutorial Parte 1 \nPara resolver, você deve conectar todos os tubos juntos</string>
+<string name="tutorial_instructions_2">Tutorial Parte 2 \nToque os tubos para girar. </string>
+<string name="tutorial_instructions_3">Tutorial Parte 3 \nNão todos os tubos estiverem conectados você ganha</string>
+<string name="tutorial_instructions_4">Tutorial Parte 4 \nDrag seu dedo se você deseja mover o quadro</string>
+<string name="tutorial_instructions_5">Tutorial Parte 5 \nVocê também pode aumentar e diminuir o zoom quando puxa 2 dedos</string>
+<string name="tutorial_instructions_6">Tutorial Parte 6 \nSelecione o ímã para habilitar a rotação automática</string>
+<string name="sign_in_other_error">Houve um problema com o login, tente novamente mais tarde.</string>
+<string name="sign_in_failed">Falha ao fazer login. Verifique sua conexão de rede e tente novamente.</string>
+<string name="app_misconfigured">O aplicativo está incorretamente configurado. </string>
+<string name="license_failed">A verificação da licença falhou.</string>
+<string name="unknown_error">Erro desconhecido.</string>
+<string name="UNKNOWN_ERROR">Erro desconhecido.</string>
+<string name="gamehelper_sign_in_failed">Falha ao fazer login. Verifique sua conexão de rede e tente novamente.</string>
+<string name="gamehelper_app_misconfigured">O aplicativo está incorretamente configurado. </string>
+<string name="gamehelper_license_failed">A verificação da licença falhou.</string>
+<string name="gamehelper_unknown_error">Erro desconhecido.</string>
+</resources>

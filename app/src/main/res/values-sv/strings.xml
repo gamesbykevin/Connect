@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<string name="app_name">Ansluta</string>
+<string name="button_text_next">Nästa</string>
+<string name="button_text_restart">Omstart</string>
+<string name="button_text_rate">Betygsätta</string>
+<string name="button_text_more">Mer</string>
+<string name="button_text_menu">Meny</string>
+<string name="button_text_start">Start</string>
+<string name="button_text_options">alternativ</string>
+<string name="button_text_exit">Utgång</string>
+<string name="button_text_tutorial">Handledning</string>
+<string name="button_text_play">Spela</string>
+<string name="button_text_leaderboard">leaderboard</string>
+<string name="button_text_achievements">Prestationer</string>
+<string name="vibrate_on">Vibrera: På</string>
+<string name="vibrate_off">Vibrera: Av</string>
+<string name="sound_on">Ljud: På</string>
+<string name="sound_off">Ljud av</string>
+<string name="text_header_level_select">nivåer</string>
+<string name="text_header_shape">Form:</string>
+<string name="tutorial_instructions_1">Handledning Del 1 \nTill att lösa dig måste du ansluta alla rören tillsammans</string>
+<string name="tutorial_instructions_2">Handledning Del 2 \nKontrollera rören för att rotera. </string>
+<string name="tutorial_instructions_3">Handledning Del 3 \nNär alla rör är anslutna vinner du</string>
+<string name="tutorial_instructions_4">Handledning Del 4 \nLåt fingret om du vill flytta styrelsen</string>
+<string name="tutorial_instructions_5">Handledning Del 5 \nDu kan också zooma in och ut när du klämmer fast 2 fingrar</string>
+<string name="tutorial_instructions_6">Handledning Del 6 \nVälj magnet för att aktivera automatisk rotering</string>
+<string name="sign_in_other_error">Det gick inte att logga in, var vänlig försök igen senare.</string>
+<string name="sign_in_failed">Misslyckades med att logga in. Kontrollera din nätverksanslutning och försök igen.</string>
+<string name="app_misconfigured">Programmet är felaktigt konfigurerat. </string>
+<string name="license_failed">Licenskontrollen misslyckades.</string>
+<string name="unknown_error">Okänt fel.</string>
+<string name="UNKNOWN_ERROR">Okänt fel.</string>
+<string name="gamehelper_sign_in_failed">Misslyckades med att logga in. Kontrollera din nätverksanslutning och försök igen.</string>
+<string name="gamehelper_app_misconfigured">Programmet är felaktigt konfigurerat. </string>
+<string name="gamehelper_license_failed">Licenskontrollen misslyckades.</string>
+<string name="gamehelper_unknown_error">Okänt fel.</string>
+</resources>

@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.view.View;
 
-import com.gamesbykevin.androidframeworkv2.util.UtilityHelper;
 import com.gamesbykevin.connect.R;
 import com.gamesbykevin.connect.board.Board;
 import com.gamesbykevin.connect.board.Boards;
@@ -25,9 +24,6 @@ public class MainActivity extends BaseGameActivity {
 
         //assign main layout
         setContentView(R.layout.activity_main);
-
-        //flag true so we know we loaded already
-        SplashActivity.INITIALIZE = true;
 
         if (BOARDS == null)
             BOARDS = new Boards(this);
@@ -78,8 +74,11 @@ public class MainActivity extends BaseGameActivity {
         //call parent
         super.onResume();
 
+        //stop all sound
+        super.stopSound();
+
         //resume audio
-        //super.playSong(R.raw.menu);
+        super.playSong(R.raw.menu);
     }
 
     @Override
@@ -96,6 +95,9 @@ public class MainActivity extends BaseGameActivity {
 
         //store our shape selection
         OptionsActivity.OPTION_BOARD_SHAPE = (Board.Shape)getObjectValue(R.string.game_shape_file_key, Board.Shape.class);
+
+        //play the main theme
+        playTheme();
 
         //reset to first page
         LevelSelectActivity.CURRENT_PAGE = 0;

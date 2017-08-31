@@ -286,7 +286,7 @@ public class OpenGLRenderer implements Renderer {
         //render game elements
         getGame().render(mtrxProjectionAndView);
 
-        if (DEBUG && !false) {
+        if (DEBUG) {
 
             //calculate how long it took to render a single frame
             long duration = System.currentTimeMillis() - time;

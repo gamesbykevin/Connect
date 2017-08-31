@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<string name="app_name">לְחַבֵּר</string>
+<string name="button_text_next">הַבָּא</string>
+<string name="button_text_restart">איתחול</string>
+<string name="button_text_rate">ציון</string>
+<string name="button_text_more">יותר</string>
+<string name="button_text_menu">תַפרִיט</string>
+<string name="button_text_start">הַתחָלָה</string>
+<string name="button_text_options">אפשרויות</string>
+<string name="button_text_exit">יְצִיאָה</string>
+<string name="button_text_tutorial">הדרכה</string>
+<string name="button_text_play">לְשַׂחֵק</string>
+<string name="button_text_leaderboard">לידרבורד</string>
+<string name="button_text_achievements">הישגים</string>
+<string name="vibrate_on">רטט: מופעל</string>
+<string name="vibrate_off">רטט: כבוי</string>
+<string name="sound_on">קול: מופעל</string>
+<string name="sound_off">צליל של</string>
+<string name="text_header_level_select">רמות</string>
+<string name="text_header_shape">צוּרָה:</string>
+<string name="tutorial_instructions_1">מדריך חלק 1 \n כדי לפתור עליך לחבר את כל הצינורות יחד</string>
+<string name="tutorial_instructions_2">מדריך חלק 2 \nTouch צינורות כדי לסובב. </string>
+<string name="tutorial_instructions_3">מדריך חלק 3 \nOnce כל הצינורות מחוברים אתה מנצח</string>
+<string name="tutorial_instructions_4">מדריך חלק 4 \nDrag את האצבע אם ברצונך להעביר את הלוח</string>
+<string name="tutorial_instructions_5">מדריך חלק 5 \n ניתן גם להתקרב ולהתרחק כאשר צובטים 2 אצבעות</string>
+<string name="tutorial_instructions_6">מדריך חלק 6 \n בחר את המגנט כדי לאפשר סיבוב אוטומטי</string>
+<string name="sign_in_other_error">הייתה בעיה עם הכניסה, נסה שוב מאוחר יותר.</string>
+<string name="sign_in_failed">הכניסה נכשלה. בדוק את חיבור הרשת ונסה שוב.</string>
+<string name="app_misconfigured">היישום מוגדר באופן שגוי. </string>
+<string name="license_failed">בדיקת הרישיון נכשלה.</string>
+<string name="unknown_error">שגיאה לא ידועה.</string>
+<string name="UNKNOWN_ERROR">שגיאה לא ידועה.</string>
+<string name="gamehelper_sign_in_failed">הכניסה נכשלה. בדוק את חיבור הרשת ונסה שוב.</string>
+<string name="gamehelper_app_misconfigured">היישום מוגדר באופן שגוי. </string>
+<string name="gamehelper_license_failed">בדיקת הרישיון נכשלה.</string>
+<string name="gamehelper_unknown_error">שגיאה לא ידועה.</string>
+</resources>

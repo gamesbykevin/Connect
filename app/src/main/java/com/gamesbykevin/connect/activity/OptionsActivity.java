@@ -59,7 +59,7 @@ public class OptionsActivity extends BaseActivity {
         super.onResume();
 
         //play sound
-        //super.playSong(R.raw.menu);
+        super.playSong(R.raw.menu);
 
         //flag false
         paused = false;

@@ -15,15 +15,7 @@
       },
       "oauth_client": [
         {
-          "client_id": "292633559655-ommguatvaqq9ogomc0ta717f9ubj3mu9.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.gamesbykevin.connect",
-            "certificate_hash": "aeadb1dc8a07f7ea4ca42d7fac013fed42a13d34"
-          }
-        },
-        {
-          "client_id": "292633559655-tomnmkpro3hq84o7cpr116o27e2tl26u.apps.googleusercontent.com",
+          "client_id": "292633559655-7tcochrvg4sokpapjprfoi5ampno84v2.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.gamesbykevin.connect",
@@ -31,13 +23,21 @@
           }
         },
         {
-          "client_id": "292633559655-r09qu2ps0qhmc5p6d3dbom6klisp6tel.apps.googleusercontent.com",
+          "client_id": "292633559655-3kevfnur942qduc9ojhl3nnbqvke9otn.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.gamesbykevin.connect",
+            "certificate_hash": "aeadb1dc8a07f7ea4ca42d7fac013fed42a13d34"
+          }
+        },
+        {
+          "client_id": "292633559655-e84cb971t7frqioa08kitaatkrrr3p6c.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyD1v8ofCH5zQhbHF1sEZT_dN6oXUba_mFw"
+          "current_key": "AIzaSyBlDLOG60BZ_hdoBuPeaGKtFKaZ8FqQNd8"
         }
       ],
       "services": {
@@ -48,7 +48,7 @@
           "status": 2,
           "other_platform_oauth_client": [
             {
-              "client_id": "292633559655-r09qu2ps0qhmc5p6d3dbom6klisp6tel.apps.googleusercontent.com",
+              "client_id": "292633559655-e84cb971t7frqioa08kitaatkrrr3p6c.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

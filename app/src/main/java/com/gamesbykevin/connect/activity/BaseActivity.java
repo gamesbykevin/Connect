@@ -35,7 +35,7 @@ public abstract class BaseActivity extends com.gamesbykevin.androidframeworkv2.a
     protected void onCreate(Bundle savedInstanceState) {
 
         //flag debug true
-        UtilityHelper.DEBUG = true;
+        UtilityHelper.DEBUG = false;
 
         //this is not an amazon app
         UtilityHelper.AMAZON = false;
@@ -48,7 +48,12 @@ public abstract class BaseActivity extends com.gamesbykevin.androidframeworkv2.a
 
             //create new list
             SOUND = new HashMap<>();
-            //loadSound(R.raw.ballbounce);
+            loadSound(R.raw.menu);
+            loadSound(R.raw.theme_square);
+            loadSound(R.raw.theme_hexagon);
+            loadSound(R.raw.theme_diamond);
+            loadSound(R.raw.rotate);
+            loadSound(R.raw.rotate_connect);
         }
 
         //make sure all options are entered
@@ -72,8 +77,29 @@ public abstract class BaseActivity extends com.gamesbykevin.androidframeworkv2.a
         SOUND.put(resId, MediaPlayer.create(this, resId));
     }
 
+    public void playTheme() {
+
+        //stop all audio
+        stopSound();
+
+        //start playing main song
+        switch (OptionsActivity.OPTION_BOARD_SHAPE) {
+
+            case Diamond:
+                playSong(R.raw.theme_diamond);
+                break;
+
+            case Square:
+                playSong(R.raw.theme_square);
+                break;
+
+            case Hexagon:
+                playSong(R.raw.theme_hexagon);
+                break;
+        }
+    }
+
     public void playSong(final int resId) {
-        //stopSound(R.raw.theme);
         playSound(resId, false, true);
     }
 
@@ -112,17 +138,20 @@ public abstract class BaseActivity extends com.gamesbykevin.androidframeworkv2.a
      */
     public void dispose() {
         try {
+
             //recycle parent
             super.dispose();
 
             //stop, kill all sound
             destroySound();
+
         } catch (Exception e) {
             UtilityHelper.handleException(e);
         }
     }
 
     private void destroySound() {
+
         if (SOUND != null) {
             for (Integer resId : SOUND.keySet()) {
                 stopSound(resId);
@@ -135,6 +164,7 @@ public abstract class BaseActivity extends com.gamesbykevin.androidframeworkv2.a
     }
 
     public void stopSound() {
+
         if (SOUND != null) {
             for (Integer key : SOUND.keySet()) {
                 stopSound(key);
@@ -145,9 +175,11 @@ public abstract class BaseActivity extends com.gamesbykevin.androidframeworkv2.a
     public void stopSound(final int resId) {
         try {
             if (SOUND != null && !SOUND.isEmpty() && SOUND.get(resId) != null) {
+
                 //get the song and stop if playing
                 if (SOUND.get(resId).isPlaying() || SOUND.get(resId).isLooping())
                     SOUND.get(resId).pause();
+
             }
         } catch (Exception e) {
             UtilityHelper.handleException(e);
@@ -213,6 +245,9 @@ public abstract class BaseActivity extends com.gamesbykevin.androidframeworkv2.a
 
         //call parent
         super.onPause();
+
+        //stop all sound
+        stopSound();
     }
 
     @Override

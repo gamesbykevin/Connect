@@ -125,8 +125,17 @@ public abstract class BaseGameActivity extends BaseActivity implements GameHelpe
 
     public void unlockAchievement(final int resId) {
         try {
+
             String achievementId = getString(resId);
+
+            if (DEBUG)
+                UtilityHelper.logEvent("Unlocking achievement: " + achievementId);
+
             Games.Achievements.unlock(getApiClient(), achievementId);
+
+            if (DEBUG)
+                UtilityHelper.logEvent("Done Unlocking achievement: " + achievementId);
+
         } catch (Exception e) {
             UtilityHelper.handleException(e);
         }
@@ -135,7 +144,15 @@ public abstract class BaseGameActivity extends BaseActivity implements GameHelpe
     public void incrementAchievement(final int resId, final int incrementValue) {
         try {
             String achievementId = getString(resId);
+
+            if (DEBUG)
+                UtilityHelper.logEvent("Incrementing achievement: " + achievementId + ", " + incrementValue);
+
             Games.Achievements.increment(getApiClient(), achievementId, incrementValue);
+
+            if (DEBUG)
+                UtilityHelper.logEvent("Done Incrementing achievement: " + achievementId + ", " + incrementValue);
+
         } catch (Exception e) {
             UtilityHelper.handleException(e);
         }
@@ -148,16 +165,34 @@ public abstract class BaseGameActivity extends BaseActivity implements GameHelpe
     public void trackEvent(final int resId, final int incrementValue) {
         try {
             String eventId = getString(resId);
+
+            if (DEBUG)
+                UtilityHelper.logEvent("Tracking event: " + eventId + ", " + incrementValue);
+
             Games.Events.increment(getApiClient(), eventId, incrementValue);
+
+            if (DEBUG)
+                UtilityHelper.logEvent("Done Tracking event: " + eventId + ", " + incrementValue);
+
         } catch (Exception e) {
             UtilityHelper.handleException(e);
         }
     }
 
     public void updateLeaderboard(final int resId, final long score) {
+
         try {
+
             String leaderboardId = getString(resId);
+
+            if (DEBUG)
+                UtilityHelper.logEvent("Updating leader board: " + leaderboardId + ", " + score);
+
             Games.Leaderboards.submitScore(getApiClient(), leaderboardId, score);
+
+            if (DEBUG)
+                UtilityHelper.logEvent("Done Updating leader board: " + leaderboardId + ", " + score);
+
         } catch (Exception e) {
             UtilityHelper.handleException(e);
         }
@@ -221,10 +256,15 @@ public abstract class BaseGameActivity extends BaseActivity implements GameHelpe
         if (getApiClient().isConnected()) {
             displayAchievementUI();
         } else {
-            //UtilityHelper.logEvent("beginUserInitiatedSignIn() before");
+
+            if (DEBUG)
+                UtilityHelper.logEvent("beginUserInitiatedSignIn() before");
+
             //if not connected, re-attempt google play login
             beginUserInitiatedSignIn();
-            //UtilityHelper.logEvent("beginUserInitiatedSignIn() after");
+
+            if (DEBUG)
+                UtilityHelper.logEvent("beginUserInitiatedSignIn() after");
 
             //flag that we want to open the achievements
             ACCESS_ACHIEVEMENT = true;
@@ -235,9 +275,15 @@ public abstract class BaseGameActivity extends BaseActivity implements GameHelpe
 
         if (getApiClient().isConnected()) {
 
-            //UtilityHelper.logEvent("Displaying achievement ui");
+            if (DEBUG)
+                UtilityHelper.logEvent("Displaying achievement ui");
+
             startActivityForResult(Games.Achievements.getAchievementsIntent(getApiClient()), 1);
+
         } else {
+
+            if (DEBUG)
+                UtilityHelper.logEvent("Logging in google play");
 
             //if not connected, re-attempt google play login
             beginUserInitiatedSignIn();
@@ -251,9 +297,15 @@ public abstract class BaseGameActivity extends BaseActivity implements GameHelpe
 
         if (getApiClient().isConnected()) {
 
-            //UtilityHelper.logEvent("Displaying leaderboard ui " + leaderboardId);
+            if (DEBUG)
+                UtilityHelper.logEvent("Displaying leaderboard ui " + leaderboardId);
+
             startActivityForResult(Games.Leaderboards.getLeaderboardIntent(getApiClient(), leaderboardId), 1);
+
         } else {
+
+            if (DEBUG)
+                UtilityHelper.logEvent("Logging in google play");
 
             //if not connected, re-attempt google play login
             beginUserInitiatedSignIn();
@@ -265,7 +317,9 @@ public abstract class BaseGameActivity extends BaseActivity implements GameHelpe
 
     @Override
     public void onSignInSucceeded() {
-        UtilityHelper.displayMessage(this, "Google Play login worked!");
+
+        if (DEBUG)
+            UtilityHelper.displayMessage(this, "Google Play login worked!");
 
         if (ACCESS_ACHIEVEMENT) {
 
@@ -289,7 +343,9 @@ public abstract class BaseGameActivity extends BaseActivity implements GameHelpe
 
     @Override
     public void onSignInFailed() {
-        UtilityHelper.displayMessage(this, "Google play login failed!");
+
+        if (DEBUG)
+            UtilityHelper.displayMessage(this, "Google play login failed!");
 
         //bypass auto login
         BYPASS_LOGIN = true;

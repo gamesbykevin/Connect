@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<string name="app_name">连</string>
+<string name="button_text_next">下一个</string>
+<string name="button_text_restart">重新开始</string>
+<string name="button_text_rate">率</string>
+<string name="button_text_more">更多</string>
+<string name="button_text_menu">菜单</string>
+<string name="button_text_start">开始</string>
+<string name="button_text_options">选项</string>
+<string name="button_text_exit">出口</string>
+<string name="button_text_tutorial">教程</string>
+<string name="button_text_play">玩</string>
+<string name="button_text_leaderboard">排行榜</string>
+<string name="button_text_achievements">成就</string>
+<string name="vibrate_on">振动：开</string>
+<string name="vibrate_off">振动：关</string>
+<string name="sound_on">声音：开</string>
+<string name="sound_off">声音：关</string>
+<string name="text_header_level_select">水平</string>
+<string name="text_header_shape">形状：</string>
+<string name="tutorial_instructions_1">教程第1部分\n要解决您必须将所有管道连接在一起</string>
+<string name="tutorial_instructions_2">教程第2部分\n触摸要旋转的管道。 </string>
+<string name="tutorial_instructions_3">教程第3部分\n所有管道都连接好，你赢了</string>
+<string name="tutorial_instructions_4">教程第4部分\n如果要移动电路板，请撕下您的手指</string>
+<string name="tutorial_instructions_5">教程第5部分\n您还可以在夹住2个手指时放大和缩小</string>
+<string name="tutorial_instructions_6">教程第6部分\n选择磁铁以启用自动旋转</string>
+<string name="sign_in_other_error">登录有问题，请稍后再试。</string>
+<string name="sign_in_failed">无法登录。请检查您的网络连接，然后重试。</string>
+<string name="app_misconfigured">应用程序配置不正确</string>
+<string name="license_failed">许可证检查失败。</string>
+<string name="unknown_error">未知错误。</string>
+<string name="UNKNOWN_ERROR">未知错误。</string>
+<string name="gamehelper_sign_in_failed">无法登录。请检查您的网络连接，然后重试。</string>
+<string name="gamehelper_app_misconfigured">应用程序配置不正确</string>
+<string name="gamehelper_license_failed">许可证检查失败。</string>
+<string name="gamehelper_unknown_error">未知错误。</string>
+</resources>

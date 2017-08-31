@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<string name="app_name">Pieslēgties</string>
+<string name="button_text_next">Nākamais</string>
+<string name="button_text_restart">Restartēt</string>
+<string name="button_text_rate">Likme</string>
+<string name="button_text_more">Vairāk</string>
+<string name="button_text_menu">Izvēlne</string>
+<string name="button_text_start">Sākt</string>
+<string name="button_text_options">Iespējas</string>
+<string name="button_text_exit">Izeja</string>
+<string name="button_text_tutorial">Apmācība</string>
+<string name="button_text_play">Spēlēt</string>
+<string name="button_text_leaderboard">Līderu saraksts</string>
+<string name="button_text_achievements">Sasniegumi</string>
+<string name="vibrate_on">Vibrozvans: ieslēgts</string>
+<string name="vibrate_off">Vibrozvans: izslēgts</string>
+<string name="sound_on">Skaņa: ieslēgta</string>
+<string name="sound_off">Skaņa: izslēgta</string>
+<string name="text_header_level_select">Līmeņi</string>
+<string name="text_header_shape">Forma:</string>
+<string name="tutorial_instructions_1">Tutorial Part 1 \n Lai risinātu, jums ir jāsavieno visas caurules</string>
+<string name="tutorial_instructions_2">Apmācība 2. daļa \nPiespiediet caurules, lai tās pagrieztu. </string>
+<string name="tutorial_instructions_3">Tutorial Part 3 \nPēc tam, kad visas caurules ir savienotas jūs win</string>
+<string name="tutorial_instructions_4">Tutorial 4 daļa \nIzlaidiet pirkstu, ja vēlaties pārvietot kuģa</string>
+<string name="tutorial_instructions_5">Tutorial Part 5 \nJūs varat arī tuvināt un tālināt, kad jūs saspiežat 2 pirkstus</string>
+<string name="tutorial_instructions_6">Tutorial Part 6 \nIzvēlieties magnētu, lai iespējotu automātisko pagriešanu</string>
+<string name="sign_in_other_error">Ar pierakstīšanos radās problēma. Lūdzu, vēlāk mēģiniet vēlreiz.</string>
+<string name="sign_in_failed">Nevarēja pierakstīties. Lūdzu, pārbaudiet tīkla savienojumu un mēģiniet vēlreiz.</string>
+<string name="app_misconfigured">Pieteikums ir nepareizi konfigurēts. </string>
+<string name="license_failed">Licences pārbaude neizdevās.</string>
+<string name="unknown_error">Nezināma kļūda.</string>
+<string name="UNKNOWN_ERROR">Nezināma kļūda.</string>
+<string name="gamehelper_sign_in_failed">Nevarēja pierakstīties. Lūdzu, pārbaudiet tīkla savienojumu un mēģiniet vēlreiz.</string>
+<string name="gamehelper_app_misconfigured">Pieteikums ir nepareizi konfigurēts. </string>
+<string name="gamehelper_license_failed">Licences pārbaude neizdevās.</string>
+<string name="gamehelper_unknown_error">Nezināma kļūda.</string>
+</resources>

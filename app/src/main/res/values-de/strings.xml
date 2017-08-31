@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<string name="app_name">Verbinden</string>
+<string name="button_text_next">Nächster</string>
+<string name="button_text_restart">Neustart</string>
+<string name="button_text_rate">Preis</string>
+<string name="button_text_more">Mehr</string>
+<string name="button_text_menu">Menü</string>
+<string name="button_text_start">Anfang</string>
+<string name="button_text_options">Optionen</string>
+<string name="button_text_exit">Ausgang</string>
+<string name="button_text_tutorial">Tutorial</string>
+<string name="button_text_play">Spielen</string>
+<string name="button_text_leaderboard">Bestenliste</string>
+<string name="button_text_achievements">Errungenschaften</string>
+<string name="vibrate_on">Vibrieren: Ein</string>
+<string name="vibrate_off">Vibrieren: Aus</string>
+<string name="sound_on">Ton an</string>
+<string name="sound_off">Ton aus</string>
+<string name="text_header_level_select">Ebenen</string>
+<string name="text_header_shape">Gestalten:</string>
+<string name="tutorial_instructions_1">Tutorial Teil 1 \nUm zu lösen, musst du alle Rohre miteinander verbinden</string>
+<string name="tutorial_instructions_2">Tutorial Teil 2 \nTouch die Rohre zu drehen. </string>
+<string name="tutorial_instructions_3">Tutorial Teil 3 \nOnce alle Pipes sind verbunden Sie gewinnen</string>
+<string name="tutorial_instructions_4">Tutorial Teil 4 \nDrag dein Finger, wenn du das Board bewegen willst</string>
+<string name="tutorial_instructions_5">Tutorial Teil 5 \nSie können auch vergrößern und verkleinern, wenn Sie 2 Finger einklemmen</string>
+<string name="tutorial_instructions_6">Tutorial Teil 6 \nWählen Sie den Magneten, um die automatische Drehung zu aktivieren</string>
+<string name="sign_in_other_error">Es gab ein Problem mit Anmeldung, bitte versuche es später noch einmal.</string>
+<string name="sign_in_failed">Sie haben sich nicht angemeldet. Bitte überprüfen Sie Ihre Netzwerkverbindung und versuchen Sie es erneut.</string>
+<string name="app_misconfigured">Die Anwendung ist falsch konfiguriert. </string>
+<string name="license_failed">Lizenzprüfung fehlgeschlagen.</string>
+<string name="unknown_error">Unbekannter Fehler.</string>
+<string name="UNKNOWN_ERROR">Unbekannter Fehler.</string>
+<string name="gamehelper_sign_in_failed">Sie haben sich nicht angemeldet. Bitte überprüfen Sie Ihre Netzwerkverbindung und versuchen Sie es erneut.</string>
+<string name="gamehelper_app_misconfigured">Die Anwendung ist falsch konfiguriert. </string>
+<string name="gamehelper_license_failed">Lizenzprüfung fehlgeschlagen.</string>
+<string name="gamehelper_unknown_error">Unbekannter Fehler.</string>
+</resources>

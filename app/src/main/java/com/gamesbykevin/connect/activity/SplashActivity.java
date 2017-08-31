@@ -21,7 +21,7 @@ public class SplashActivity extends BaseActivity {
     /**
      * Is this the first time we came here
      */
-    public static volatile boolean INITIALIZE = false;
+    public static boolean INITIALIZE = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +53,7 @@ public class SplashActivity extends BaseActivity {
 
                 //close the activity
                 finish();
+
             }
 
         }, delay);
@@ -63,5 +64,15 @@ public class SplashActivity extends BaseActivity {
 
         //don't allow user to press back button
         return;
+    }
+
+    @Override
+    public void onDestroy() {
+
+        //call parent
+        super.onDestroy();
+
+        //we have initialized the activity
+        INITIALIZE = true;
     }
 }

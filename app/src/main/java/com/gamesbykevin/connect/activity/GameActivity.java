@@ -1,6 +1,7 @@
 package com.gamesbykevin.connect.activity;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.opengl.GLSurfaceView;
 import android.os.Bundle;
@@ -72,6 +73,9 @@ public class GameActivity extends BaseGameActivity implements Disposable {
     //keep track of the time
     private int value1 = 0, value2 = 0, value3 = 0, value4 = 0;
 
+    //array for number images
+    private Bitmap[] images;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -101,6 +105,18 @@ public class GameActivity extends BaseGameActivity implements Disposable {
         this.time2 = (ImageView)findViewById(R.id.time2);
         this.time3 = (ImageView)findViewById(R.id.time3);
         this.time4 = (ImageView)findViewById(R.id.time4);
+
+        this.images = new Bitmap[10];
+        this.images[0] = BitmapFactory.decodeResource(getResources(), R.drawable.zero_large);
+        this.images[1] = BitmapFactory.decodeResource(getResources(), R.drawable.one_large);
+        this.images[2] = BitmapFactory.decodeResource(getResources(), R.drawable.two_large);
+        this.images[3] = BitmapFactory.decodeResource(getResources(), R.drawable.three_large);
+        this.images[4] = BitmapFactory.decodeResource(getResources(), R.drawable.four_large);
+        this.images[5] = BitmapFactory.decodeResource(getResources(), R.drawable.five_large);
+        this.images[6] = BitmapFactory.decodeResource(getResources(), R.drawable.six_large);
+        this.images[7] = BitmapFactory.decodeResource(getResources(), R.drawable.seven_large);
+        this.images[8] = BitmapFactory.decodeResource(getResources(), R.drawable.eight_large);
+        this.images[9] = BitmapFactory.decodeResource(getResources(), R.drawable.nine_large);
     }
 
     public static Game getGame() {
@@ -169,6 +185,13 @@ public class GameActivity extends BaseGameActivity implements Disposable {
             layouts = null;
         }
 
+        if (images != null) {
+            for (int i = 0; i < images.length; i++) {
+                images[i] = null;
+            }
+            images = null;
+        }
+
         glSurfaceView = null;
         layoutParams = null;
         time1 = null;
@@ -208,8 +231,8 @@ public class GameActivity extends BaseGameActivity implements Disposable {
         //resume the game object
         getGame().onResume();
 
-        //resume sound playing
-        //super.playSong(R.raw.theme);
+        //play the main theme
+        playTheme();
 
         //if the game was previously paused we need to re-initialize the views
         if (this.paused) {
@@ -460,63 +483,8 @@ public class GameActivity extends BaseGameActivity implements Disposable {
 
     private void updateImageViewTimer(final int value, final ImageView imageView) {
 
-        //resource id
-        final int resId;
-
-        //if we are at the max displayed value, everything will be 9
-        if (value1 > 9) {
-
-            resId = R.drawable.nine;
-
-        } else {
-
-            //find the appropriate drawable
-            switch (value) {
-
-                case 0:
-                    resId = R.drawable.zero;
-                    break;
-
-                case 1:
-                    resId = R.drawable.one;
-                    break;
-
-                case 2:
-                    resId = R.drawable.two;
-                    break;
-
-                case 3:
-                    resId = R.drawable.three;
-                    break;
-
-                case 4:
-                    resId = R.drawable.four;
-                    break;
-
-                case 5:
-                    resId = R.drawable.five;
-                    break;
-
-                case 6:
-                    resId = R.drawable.six;
-                    break;
-
-                case 7:
-                    resId = R.drawable.seven;
-                    break;
-
-                case 8:
-                    resId = R.drawable.eight;
-                    break;
-
-                case 9:
-                    resId = R.drawable.nine;
-                    break;
-
-                default:
-                    throw new RuntimeException("value not defined: " + value);
-            }
-        }
+        //assign the appropriate index value
+        final int index = (value1 > 9) ? 9 : value;
 
         //run on ui thread
         this.runOnUiThread(new Runnable() {
@@ -524,7 +492,7 @@ public class GameActivity extends BaseGameActivity implements Disposable {
             public void run() {
 
                 //update bitmap accordingly
-                imageView.setImageBitmap(BitmapFactory.decodeResource(getResources(), resId));
+                imageView.setImageBitmap(images[index]);
             }
         });
     }

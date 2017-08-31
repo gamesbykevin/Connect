@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<string name="app_name">जुडिये</string>
+<string name="button_text_next">आगामी</string>
+<string name="button_text_restart">पुनः आरंभ करें</string>
+<string name="button_text_rate">मूल्यांकन करें</string>
+<string name="button_text_more">अधिक</string>
+<string name="button_text_menu">मेन्यू</string>
+<string name="button_text_start">प्रारंभ</string>
+<string name="button_text_options">विकल्प</string>
+<string name="button_text_exit">बाहर जाएं</string>
+<string name="button_text_tutorial">ट्यूटोरियल</string>
+<string name="button_text_play">प्ले</string>
+<string name="button_text_leaderboard">लीडरबोर्ड</string>
+<string name="button_text_achievements">उपलब्धियां</string>
+<string name="vibrate_on">कंपन: चालू</string>
+<string name="vibrate_off">कंपन: बंद</string>
+<string name="sound_on">पर ध्वनि</string>
+<string name="sound_off">चिल्लाना</string>
+<string name="text_header_level_select">स्तर</string>
+<string name="text_header_shape">आकार:</string>
+<string name="tutorial_instructions_1">ट्यूटोरियल भाग 1 \n हल करने के लिए आपको सभी पाइप एक साथ जोड़ना होगा</string>
+<string name="tutorial_instructions_2">ट्यूटोरियल भाग 2 \n पाइप को घुमाने के लिए छूएं। </string>
+<string name="tutorial_instructions_3">ट्यूटोरियल भाग 3 \n एक बार सभी पाइप जुड़े हुए हैं, तो आप जीतते हैं</string>
+<string name="tutorial_instructions_4">ट्यूटोरियल भाग 4 \n यदि आप बोर्ड को स्थानांतरित करना चाहते हैं तो अपनी उंगली को दबाएं</string>
+<string name="tutorial_instructions_5">ट्यूटोरियल भाग 5 \n आप 2 उंगलियों को चुटकी करते समय ज़ूम इन और आउट कर सकते हैं</string>
+<string name="tutorial_instructions_6">ट्यूटोरियल भाग 6 \n स्वत: बारी बारी से सक्षम करने के लिए चुंबक का चयन करें</string>
+<string name="sign_in_other_error">साइन-इन के साथ एक समस्या थी, कृपया बाद में फिर से प्रयास करें।</string>
+<string name="sign_in_failed">साइन इन करने में विफल। कृपया अपने नेटवर्क कनेक्शन की जांच करें और फिर से प्रयास करें।</string>
+<string name="app_misconfigured">आवेदन गलत तरीके से कॉन्फ़िगर किया गया है </string>
+<string name="license_failed">लाइसेंस जांच असफल रही</string>
+<string name="unknown_error">अज्ञात त्रुटि।</string>
+<string name="UNKNOWN_ERROR">अज्ञात त्रुटि।</string>
+<string name="gamehelper_sign_in_failed">साइन इन करने में विफल। कृपया अपने नेटवर्क कनेक्शन की जांच करें और फिर से प्रयास करें।</string>
+<string name="gamehelper_app_misconfigured">आवेदन गलत तरीके से कॉन्फ़िगर किया गया है </string>
+<string name="gamehelper_license_failed">लाइसेंस जांच असफल रही</string>
+<string name="gamehelper_unknown_error">अज्ञात त्रुटि।</string>
+</resources>

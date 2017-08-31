@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<string name="app_name">Sambungkan</string>
+<string name="button_text_next">Seterusnya</string>
+<string name="button_text_restart">Mula semula</string>
+<string name="button_text_rate">Kadar</string>
+<string name="button_text_more">Lebih banyak</string>
+<string name="button_text_menu">Menu</string>
+<string name="button_text_start">Mulakan</string>
+<string name="button_text_options">Pilihan</string>
+<string name="button_text_exit">Keluar</string>
+<string name="button_text_tutorial">Tutorial</string>
+<string name="button_text_play">Bermain</string>
+<string name="button_text_leaderboard">Leaderboard</string>
+<string name="button_text_achievements">Pencapaian</string>
+<string name="vibrate_on">Getaran: Aktif</string>
+<string name="vibrate_off">Getaran: Tidak aktif</string>
+<string name="sound_on">Bunyi: Aktif</string>
+<string name="sound_off">Bunyi: Tidak aktif</string>
+<string name="text_header_level_select">Tahap</string>
+<string name="text_header_shape">Bentuk:</string>
+<string name="tutorial_instructions_1">Tutorial Bahagian 1 \nUntuk menyelesaikannya, anda perlu menyambungkan semua paip bersama-sama</string>
+<string name="tutorial_instructions_2">Tutorial Bahagian 2 \nLampu paip akan berputar. </string>
+<string name="tutorial_instructions_3">Tutorial Bahagian 3 \nSemua paip disambungkan anda menang</string>
+<string name="tutorial_instructions_4">Tutorial Bahagian 4 \nKurangkan jari anda jika anda ingin memindahkan papan</string>
+<string name="tutorial_instructions_5">Tutorial Bahagian 5 \nAnda juga boleh mengezum masuk dan keluar apabila anda mencubit 2 jari</string>
+<string name="tutorial_instructions_6">Tutorial Bahagian 6 \nPilih magnet untuk membolehkan putar auto</string>
+<string name="sign_in_other_error">Terdapat masalah dengan log masuk, sila cuba lagi kemudian.</string>
+<string name="sign_in_failed">Gagal masuk. Sila semak sambungan rangkaian anda dan cuba lagi.</string>
+<string name="app_misconfigured">Aplikasi itu dikonfigurasikan dengan salah. </string>
+<string name="license_failed">Pemeriksaan lesen gagal.</string>
+<string name="unknown_error">Ralat tidak diketahui.</string>
+<string name="UNKNOWN_ERROR">Ralat tidak diketahui.</string>
+<string name="gamehelper_sign_in_failed">Gagal masuk. Sila semak sambungan rangkaian anda dan cuba lagi.</string>
+<string name="gamehelper_app_misconfigured">Aplikasi itu dikonfigurasikan dengan salah. </string>
+<string name="gamehelper_license_failed">Pemeriksaan lesen gagal.</string>
+<string name="gamehelper_unknown_error">Ralat tidak diketahui.</string>
+</resources>

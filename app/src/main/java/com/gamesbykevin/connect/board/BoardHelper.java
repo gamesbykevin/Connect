@@ -38,6 +38,8 @@ public class BoardHelper {
     //only calculate when we need to
     protected static boolean CALCULATE_UVS = true, CALCULATE_INDICES = true, CALCULATE_VERTICES = true;
 
+    public static boolean SOUND_ROTATE = false, SOUND_ROTATE_CONNECT = false;
+
     protected static float getWidth(Board board) {
 
         //2 shapes to calculate the difference
@@ -100,10 +102,6 @@ public class BoardHelper {
         return (shape2.getY() + shape2.getHeight()) - shape1.getY();
     }
 
-    /**
-     * Make sure all connected pieces are highlighted.<br>
-     * If all are connected, the game is over
-     */
     /**
      * Check the board to see if all shapes are connected
      * @param board The board containing all our shapes
@@ -237,9 +235,22 @@ public class BoardHelper {
         //update the coordinates for everything
         updateCoordinates(board);
 
-        //only update if we want to check if game over
-        if (checkGameOver)
+        //if this was the users decision assign Game over value
+        if (checkGameOver) {
+
+            if (board.getRotationShape() != null) {
+
+                int col = (int)board.getRotationShape().getCol();
+                int row = (int)board.getRotationShape().getRow();
+
+                //which sound effect do we play?
+                SOUND_ROTATE = !(tmpConnected[row][col]);
+                SOUND_ROTATE_CONNECT = (tmpConnected[row][col]);
+            }
+
+            //is the game over
             GAME_OVER = solved;
+        }
     }
 
     /**

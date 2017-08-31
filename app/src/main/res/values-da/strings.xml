@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<string name="app_name">Forbinde</string>
+<string name="button_text_next">Næste</string>
+<string name="button_text_restart">Genstart</string>
+<string name="button_text_rate">Sats</string>
+<string name="button_text_more">Mere</string>
+<string name="button_text_menu">Menu</string>
+<string name="button_text_start">Start</string>
+<string name="button_text_options">Muligheder</string>
+<string name="button_text_exit">Afslut</string>
+<string name="button_text_tutorial">tutorial</string>
+<string name="button_text_play">Spille</string>
+<string name="button_text_leaderboard">Leaderboard</string>
+<string name="button_text_achievements">Resultater</string>
+<string name="vibrate_on">Vibrate: On</string>
+<string name="vibrate_off">Vibrere: Fra</string>
+<string name="sound_on">Lyd: Til</string>
+<string name="sound_off">Lyd: Fra</string>
+<string name="text_header_level_select">Niveauer</string>
+<string name="text_header_shape">Form:</string>
+<string name="tutorial_instructions_1">Tutorial Part 1 \nTil at løse dig skal du forbinde alle rørene sammen</string>
+<string name="tutorial_instructions_2">Tutorial Part 2 \nTilslut rørene til at rotere. </string>
+<string name="tutorial_instructions_3">Tutorial Part 3 \nNår alle rør er tilsluttet vinder du</string>
+<string name="tutorial_instructions_4">Tutorial Part 4 \nTryk fingeren, hvis du vil flytte bordet</string>
+<string name="tutorial_instructions_5">Tutorial Part 5 \nDu kan også zoome ind og ud, når du klemmer 2 fingre</string>
+<string name="tutorial_instructions_6">Tutorial Part 6 \nVælg magnet for at aktivere automatisk rotering</string>
+<string name="sign_in_other_error">Der opstod et problem med login, prøv igen senere.</string>
+<string name="sign_in_failed">Kunne ikke logge ind. Kontroller din netværksforbindelse og prøv igen.</string>
+<string name="app_misconfigured">Programmet er forkert konfigureret. </string>
+<string name="license_failed">Licenskontrollen mislykkedes.</string>
+<string name="unknown_error">Ukendt fejl.</string>
+<string name="UNKNOWN_ERROR">Ukendt fejl.</string>
+<string name="gamehelper_sign_in_failed">Kunne ikke logge ind. Kontroller din netværksforbindelse og prøv igen.</string>
+<string name="gamehelper_app_misconfigured">Programmet er forkert konfigureret. </string>
+<string name="gamehelper_license_failed">Licenskontrollen mislykkedes.</string>
+<string name="gamehelper_unknown_error">Ukendt fejl.</string>
+</resources>

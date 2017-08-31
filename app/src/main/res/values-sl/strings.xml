@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<string name="app_name">Poveži se</string>
+<string name="button_text_next">Naslednji</string>
+<string name="button_text_restart">Ponovni zagon</string>
+<string name="button_text_rate">Oceniti</string>
+<string name="button_text_more">Več</string>
+<string name="button_text_menu">Meni</string>
+<string name="button_text_start">Začni</string>
+<string name="button_text_options">Opcije</string>
+<string name="button_text_exit">Izhod</string>
+<string name="button_text_tutorial">Vadnica</string>
+<string name="button_text_play">Igraj</string>
+<string name="button_text_leaderboard">Leaderboard</string>
+<string name="button_text_achievements">Dosežki</string>
+<string name="vibrate_on">Vibriranje: Vključeno</string>
+<string name="vibrate_off">Vibriranje: izključeno</string>
+<string name="sound_on">Zvok: Vklopljen</string>
+<string name="sound_off">Zvok: Izključeno</string>
+<string name="text_header_level_select">Raven</string>
+<string name="text_header_shape">Oblika:</string>
+<string name="tutorial_instructions_1">Tutorial Part 1 \nZa reševanje morate povezati vse cevi skupaj</string>
+<string name="tutorial_instructions_2">Vadnica 2. del \nUporabite cevi za vrtenje. </string>
+<string name="tutorial_instructions_3">Vadnica 3. del \nKo so priključene vse cevi, ki jih dobite</string>
+<string name="tutorial_instructions_4">Vadnica 4. del \nPrilagajte prst, če želite premakniti ploščo</string>
+<string name="tutorial_instructions_5">Vadnica 5. del \nMorda tudi povečate ali pomanjšate, ko pritisnete dva prsta</string>
+<string name="tutorial_instructions_6">Vadnica 6. del \nIzberite magnet, da omogočite samodejno vrtenje</string>
+<string name="sign_in_other_error">Pri prijavi je prišlo do težave, poskusite znova pozneje.</string>
+<string name="sign_in_failed">Prijava ni uspela. Preverite omrežno povezavo in poskusite znova.</string>
+<string name="app_misconfigured">Aplikacija je nepravilno nastavljena. </string>
+<string name="license_failed">Preverjanje licence ni uspelo.</string>
+<string name="unknown_error">Neznana napaka.</string>
+<string name="UNKNOWN_ERROR">Neznana napaka.</string>
+<string name="gamehelper_sign_in_failed">Prijava ni uspela. Preverite omrežno povezavo in poskusite znova.</string>
+<string name="gamehelper_app_misconfigured">Aplikacija je nepravilno nastavljena. </string>
+<string name="gamehelper_license_failed">Preverjanje licence ni uspelo.</string>
+<string name="gamehelper_unknown_error">Neznana napaka.</string>
+</resources>

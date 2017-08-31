@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<string name="app_name">Csatlakozás</string>
+<string name="button_text_next">Következő</string>
+<string name="button_text_restart">Újrakezd</string>
+<string name="button_text_rate">Arány</string>
+<string name="button_text_more">Több</string>
+<string name="button_text_menu">Menü</string>
+<string name="button_text_start">Rajt</string>
+<string name="button_text_options">Lehetőségek</string>
+<string name="button_text_exit">Kijárat</string>
+<string name="button_text_tutorial">oktatói</string>
+<string name="button_text_play">Játék</string>
+<string name="button_text_leaderboard">ranglistán</string>
+<string name="button_text_achievements">Kitüntetések</string>
+<string name="vibrate_on">Rezgés: Be</string>
+<string name="vibrate_off">Rezgés: Ki</string>
+<string name="sound_on">Hang: Be</string>
+<string name="sound_off">Nyíltan beszél</string>
+<string name="text_header_level_select">Levels</string>
+<string name="text_header_shape">Alak:</string>
+<string name="tutorial_instructions_1">Tutorial 1. rész \nA megoldáshoz össze kell kötni az összes csövet</string>
+<string name="tutorial_instructions_2">2. segédanyag \nKapcsolja a csöveket forgatni. </string>
+<string name="tutorial_instructions_3">3. segédlet \nAz összes cső csatlakoztatása után nyersz</string>
+<string name="tutorial_instructions_4">4. segédlet \nAz ujját mozgassa, ha mozgatni szeretné a táblát</string>
+<string name="tutorial_instructions_5">Tutorial 5. rész \nAkkor is nagyíthatja vagy kicsinyítheti, ha 2 ujját becsípődik</string>
+<string name="tutorial_instructions_6">6. segédlet \nVálassza ki a mágnest az automatikus forgatás engedélyezéséhez</string>
+<string name="sign_in_other_error">A bejelentkezéssel kapcsolatos probléma jelentkezett, próbáld újra később.</string>
+<string name="sign_in_failed">Nem sikerült bejelentkezni. Ellenőrizze a hálózati kapcsolatot, és próbálja újra.</string>
+<string name="app_misconfigured">Az alkalmazás helytelenül van beállítva. </string>
+<string name="license_failed">A licenc ellenőrzése sikertelen.</string>
+<string name="unknown_error">Ismeretlen hiba.</string>
+<string name="UNKNOWN_ERROR">Ismeretlen hiba.</string>
+<string name="gamehelper_sign_in_failed">Nem sikerült bejelentkezni. Ellenőrizze a hálózati kapcsolatot, és próbálja újra.</string>
+<string name="gamehelper_app_misconfigured">Az alkalmazás helytelenül van beállítva. </string>
+<string name="gamehelper_license_failed">A licenc ellenőrzése sikertelen.</string>
+<string name="gamehelper_unknown_error">Ismeretlen hiba.</string>
+</resources>

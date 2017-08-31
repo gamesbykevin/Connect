@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<string name="app_name">الاتصال</string>
+<string name="button_text_next">التالى</string>
+<string name="button_text_restart">إعادة بدء</string>
+<string name="button_text_rate">معدل</string>
+<string name="button_text_more">أكثر من</string>
+<string name="button_text_menu">قائمة طعام</string>
+<string name="button_text_start">بداية</string>
+<string name="button_text_options">خيارات</string>
+<string name="button_text_exit">ىخرج</string>
+<string name="button_text_tutorial">الدورة التعليمية</string>
+<string name="button_text_play">لعب</string>
+<string name="button_text_leaderboard">المتصدرين</string>
+<string name="button_text_achievements">الإنجازات</string>
+<string name="vibrate_on">الاهتزاز: تشغيل</string>
+<string name="vibrate_off">الاهتزاز: إيقاف</string>
+<string name="sound_on">الصوت مفعل</string>
+<string name="sound_off">الصوت مقفل</string>
+<string name="text_header_level_select">مستويات</string>
+<string name="text_header_shape">شكل:</string>
+<string name="tutorial_instructions_1">الجزء التعليمي 1 \n لحل لديك لتوصيل جميع الأنابيب معا</string>
+<string name="tutorial_instructions_2">الجزء التعليمي 2 \n لمس الأنابيب لتدوير. </string>
+<string name="tutorial_instructions_3">الجزء التعليمي 3 \\ نونس يتم توصيل جميع الأنابيب لك الفوز</string>
+<string name="tutorial_instructions_4">جزء تعليمي 4 \n دراغ إصبعك إذا كنت ترغب في نقل المجلس</string>
+<string name="tutorial_instructions_5">البرنامج التعليمي الجزء 5 \n يمكنك أيضا تكبير والتصغير عند قرصة 2 الأصابع</string>
+<string name="tutorial_instructions_6">الجزء التعليمي 6 \n اختيار المغناطيس لتمكين تدوير السيارات</string>
+<string name="sign_in_other_error">حدثت مشكلة أثناء تسجيل الدخول، يرجى إعادة المحاولة لاحقا.</string>
+<string name="sign_in_failed">أخفق تسجيل الدخول. يرجى التحقق من اتصال الشبكة والمحاولة مرة أخرى.</string>
+<string name="app_misconfigured">تم تكوين التطبيق بشكل غير صحيح. </string>
+<string name="license_failed">أخفق التحقق من الترخيص.</string>
+<string name="unknown_error">خطأ غير معروف.</string>
+<string name="UNKNOWN_ERROR">خطأ غير معروف.</string>
+<string name="gamehelper_sign_in_failed">أخفق تسجيل الدخول. يرجى التحقق من اتصال الشبكة والمحاولة مرة أخرى.</string>
+<string name="gamehelper_app_misconfigured">تم تكوين التطبيق بشكل غير صحيح. </string>
+<string name="gamehelper_license_failed">أخفق التحقق من الترخيص.</string>
+<string name="gamehelper_unknown_error">خطأ غير معروف.</string>
+</resources>

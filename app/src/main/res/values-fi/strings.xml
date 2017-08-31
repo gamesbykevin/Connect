@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<string name="app_name">Kytkeä</string>
+<string name="button_text_next">Seuraava</string>
+<string name="button_text_restart">Uudelleenkäynnistää</string>
+<string name="button_text_rate">nopeus</string>
+<string name="button_text_more">Lisää</string>
+<string name="button_text_menu">valikko</string>
+<string name="button_text_start">alkaa</string>
+<string name="button_text_options">vaihtoehdot</string>
+<string name="button_text_exit">poistuminen</string>
+<string name="button_text_tutorial">oppitunti</string>
+<string name="button_text_play">pelata</string>
+<string name="button_text_leaderboard">leaderboard</string>
+<string name="button_text_achievements">saavutukset</string>
+<string name="vibrate_on">Värähtele: On</string>
+<string name="vibrate_off">Värinä: Ei käytössä</string>
+<string name="sound_on">Ääni: Käytössä</string>
+<string name="sound_off">Ääni: Pois</string>
+<string name="text_header_level_select">tasot</string>
+<string name="text_header_shape">Muoto:</string>
+<string name="tutorial_instructions_1">Ohjaava osa 1 \nVoit ratkaista sinun täytyy yhdistää kaikki putket yhteen</string>
+<string name="tutorial_instructions_2">Oppitunti Osa 2 \nTuota kiertämällä putket. </string>
+<string name="tutorial_instructions_3">Ohjaava osa 3 \nJos kaikki putket ovat yhteydessä voitat</string>
+<string name="tutorial_instructions_4">Oppitunti Osa 4 \nPaina sormesi, jos haluat siirtää levyä</string>
+<string name="tutorial_instructions_5">Oppaat Osa 5 \nVoit zoomata ja ulos myös, kun napautat 2 sormea</string>
+<string name="tutorial_instructions_6">Oppitunti Osa 6 \nValitse magneetti, jotta automaattinen kiertäminen</string>
+<string name="sign_in_other_error">Kirjautumisessa oli ongelma, yritä myöhemmin uudelleen.</string>
+<string name="sign_in_failed">Kirjautuminen epäonnistui. Tarkista verkkoyhteys ja yritä uudelleen.</string>
+<string name="app_misconfigured">Sovellus on määritetty väärin. </string>
+<string name="license_failed">Lisenssien tarkistus epäonnistui.</string>
+<string name="unknown_error">Tuntematon virhe.</string>
+<string name="UNKNOWN_ERROR">Tuntematon virhe.</string>
+<string name="gamehelper_sign_in_failed">Kirjautuminen epäonnistui. Tarkista verkkoyhteys ja yritä uudelleen.</string>
+<string name="gamehelper_app_misconfigured">Sovellus on määritetty väärin. </string>
+<string name="gamehelper_license_failed">Lisenssien tarkistus epäonnistui.</string>
+<string name="gamehelper_unknown_error">Tuntematon virhe.</string>
+</resources>

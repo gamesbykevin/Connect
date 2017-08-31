@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<string name="app_name">Свържете</string>
+<string name="button_text_next">Следващия</string>
+<string name="button_text_restart">Рестартирам</string>
+<string name="button_text_rate">скорост</string>
+<string name="button_text_more">| Повече ▼</string>
+<string name="button_text_menu">Меню</string>
+<string name="button_text_start">начало</string>
+<string name="button_text_options">Настроики</string>
+<string name="button_text_exit">изход</string>
+<string name="button_text_tutorial">настойнически</string>
+<string name="button_text_play">играя</string>
+<string name="button_text_leaderboard">Табло</string>
+<string name="button_text_achievements">Постижения</string>
+<string name="vibrate_on">Вибриране: Вкл</string>
+<string name="vibrate_off">Вибриране: Изключено</string>
+<string name="sound_on">Звук: Вкл</string>
+<string name="sound_off">Изключен звук</string>
+<string name="text_header_level_select">нива</string>
+<string name="text_header_shape">Оформете:</string>
+<string name="tutorial_instructions_1">Инструкция част 1 \nЗа да разрешите, трябва да свържете всички тръби заедно</string>
+<string name="tutorial_instructions_2">Инстр. Част 2 \nНатиснете тръбите за завъртане. </string>
+<string name="tutorial_instructions_3">Инструкция част 3 \nСлед като всички тръби са свързани вие печелите</string>
+<string name="tutorial_instructions_4">Инструкция част 4 \nЗавъртете пръста си, ако искате да преместите борда</string>
+<string name="tutorial_instructions_5">Инструкция част 5 \nМожете също да увеличавате и увеличавате при захващане с 2 пръста</string>
+<string name="tutorial_instructions_6">Инструкция част 6 \nИзберете магнита, за да разрешите автоматично завъртане</string>
+<string name="sign_in_other_error">Възникна проблем при влизане в профила, моля, опитайте отново по-късно.</string>
+<string name="sign_in_failed">Присъединяването не бе успешно. Проверете връзката си в мрежата и опитайте отново.</string>
+<string name="app_misconfigured">Приложението е неправилно конфигурирано. </string>
+<string name="license_failed">Проверката на лиценза се провали.</string>
+<string name="unknown_error">Неизвестна грешка.</string>
+<string name="UNKNOWN_ERROR">Неизвестна грешка.</string>
+<string name="gamehelper_sign_in_failed">Присъединяването не бе успешно. Проверете връзката си в мрежата и опитайте отново.</string>
+<string name="gamehelper_app_misconfigured">Приложението е неправилно конфигурирано. </string>
+<string name="gamehelper_license_failed">Проверката на лиценза се провали.</string>
+<string name="gamehelper_unknown_error">Неизвестна грешка.</string>
+</resources>
