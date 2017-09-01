@@ -17,7 +17,7 @@ import com.gamesbykevin.connect.fragment.TutorialPageFragment;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TutorialActivity extends FragmentActivity {
+public class TutorialActivity extends BaseActivity {
 
     //our pager object that allows horizontal swiping
     private ViewPager customPager;
@@ -49,7 +49,11 @@ public class TutorialActivity extends FragmentActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        //call parent
         super.onCreate(savedInstanceState);
+
+        //inflate content view
         setContentView(R.layout.activity_tutorial);
 
         //get our pages container
@@ -78,6 +82,13 @@ public class TutorialActivity extends FragmentActivity {
     }
 
     @Override
+    public void onPause() {
+
+        //call parent
+        super.onPause();
+    }
+
+    @Override
     public void onStart() {
 
         //call parent
@@ -89,6 +100,9 @@ public class TutorialActivity extends FragmentActivity {
 
         //call parent
         super.onResume();
+
+        //resume audio
+        super.playSong(R.raw.menu);
 
         //make sure the current page is displayed
         getCustomPager().setCurrentItem(CURRENT_PAGE);

@@ -137,6 +137,7 @@ public abstract class BaseActivity extends com.gamesbykevin.androidframeworkv2.a
      * Release all resources in BaseActivity
      */
     public void dispose() {
+
         try {
 
             //recycle parent
@@ -179,7 +180,6 @@ public abstract class BaseActivity extends com.gamesbykevin.androidframeworkv2.a
                 //get the song and stop if playing
                 if (SOUND.get(resId).isPlaying() || SOUND.get(resId).isLooping())
                     SOUND.get(resId).pause();
-
             }
         } catch (Exception e) {
             UtilityHelper.handleException(e);
@@ -265,6 +265,7 @@ public abstract class BaseActivity extends com.gamesbykevin.androidframeworkv2.a
         this.runOnUiThread(new Runnable() {
             @Override
             public void run() {
+
                 //assign visibility accordingly
                 layoutView.setVisibility(visibility);
 

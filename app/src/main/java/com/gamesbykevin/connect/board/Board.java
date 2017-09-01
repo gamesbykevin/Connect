@@ -385,52 +385,58 @@ public class Board implements ICommon {
         if (!getMaze().isGenerated())
             return;
 
-        //set the correct texture for rendering
-        GLES20.glActiveTexture(GLES20.GL_TEXTURE0);
+        try {
 
-        //bind the texture that we need only once
-        switch (getType()) {
+            //set the correct texture for rendering
+            GLES20.glActiveTexture(GLES20.GL_TEXTURE0);
 
-            case Square:
-                GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, Textures.TEXTURE_ID_SQUARE);
-                break;
+            //bind the texture that we need only once
+            switch (getType()) {
 
-            case Hexagon:
-                GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, Textures.TEXTURE_ID_HEXAGON);
-                break;
+                case Square:
+                    GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, Textures.TEXTURE_ID_SQUARE);
+                    break;
 
-            case Diamond:
-                GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, Textures.TEXTURE_ID_DIAMOND);
-                break;
+                case Hexagon:
+                    GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, Textures.TEXTURE_ID_HEXAGON);
+                    break;
+
+                case Diamond:
+                    GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, Textures.TEXTURE_ID_DIAMOND);
+                    break;
+            }
+
+            if (getUvs() == null || getIndices() == null || getVertices() == null) {
+
+                //if null we need to setup the coordinates
+                updateCoordinates(this);
+            } else if (getRotationShape() != null) {
+
+                //if a shape is rotating we need to update the coordinates
+                updateShape(this, getRotationShape());
+            }
+
+            //only do these calculations when necessary
+            if (CALCULATE_UVS) {
+                getSquare().setupImage(getUvs());
+                CALCULATE_UVS = false;
+            }
+
+            if (CALCULATE_INDICES) {
+                getSquare().setupTriangle(getIndices());
+                CALCULATE_INDICES = false;
+            }
+
+            if (CALCULATE_VERTICES) {
+                getSquare().setupVertices(getVertices());
+                CALCULATE_VERTICES = false;
+            }
+
+            //make a single render call to render everything
+            getSquare().render(m);
+
+        } catch (Exception e) {
+            UtilityHelper.handleException(e);
         }
-
-        if (getUvs() == null || getIndices() == null || getVertices() == null) {
-
-            //if null we need to setup the coordinates
-            updateCoordinates(this);
-        } else if (getRotationShape() != null) {
-
-            //if a shape is rotating we need to update the coordinates
-            updateShape(this, getRotationShape());
-        }
-
-        //only do these calculations when necessary
-        if (CALCULATE_UVS) {
-            getSquare().setupImage(getUvs());
-            CALCULATE_UVS = false;
-        }
-
-        if (CALCULATE_INDICES) {
-            getSquare().setupTriangle(getIndices());
-            CALCULATE_INDICES = false;
-        }
-
-        if (CALCULATE_VERTICES) {
-            getSquare().setupVertices(getVertices());
-            CALCULATE_VERTICES = false;
-        }
-
-        //make a single render call to render everything
-        getSquare().render(m);
     }
 }
