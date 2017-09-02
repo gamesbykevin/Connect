@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.view.View;
 
+import com.gamesbykevin.androidframeworkv2.util.UtilityHelper;
 import com.gamesbykevin.connect.R;
 import com.gamesbykevin.connect.board.Board;
 import com.gamesbykevin.connect.board.Boards;
@@ -63,9 +64,6 @@ public class MainActivity extends BaseGameActivity {
 
         //call parent
         super.onPause();
-
-        //stop all sound
-        super.stopSound();
     }
 
     @Override
@@ -84,8 +82,21 @@ public class MainActivity extends BaseGameActivity {
     @Override
     public void onBackPressed() {
 
-        //don't do anything, force user to hit android home button or exit button to leave
-        return;
+        //no need to bypass login in the future
+        BYPASS_LOGIN = false;
+
+        //finish activity
+        super.finish();
+
+        try {
+            //close all activities
+            ActivityCompat.finishAffinity(this);
+        } catch (Exception e) {
+            UtilityHelper.handleException(e);
+        }
+
+        //sign out of google play services
+        super.signOut();
     }
 
     public void onClickStart(View view) {
@@ -103,7 +114,7 @@ public class MainActivity extends BaseGameActivity {
         LevelSelectActivity.CURRENT_PAGE = 0;
 
         //start game
-        startActivity(new Intent(this, SplashActivity.class));
+        startActivity(new Intent(this, OtherActivity.class));
     }
 
     public void onClickTutorial(View view) {
@@ -116,24 +127,6 @@ public class MainActivity extends BaseGameActivity {
 
         //start options activity
         startActivity(new Intent(this, OptionsActivity.class));
-    }
-
-    public void onClickExit(View view) {
-
-        //no need to bypass login in the future
-        BYPASS_LOGIN = false;
-
-        //flag false
-        SplashActivity.INITIALIZE = false;
-
-        //finish activity
-        super.finish();
-
-        //close all activities
-        ActivityCompat.finishAffinity(this);
-
-        //sign out of google play services
-        super.signOut();
     }
 
     /**

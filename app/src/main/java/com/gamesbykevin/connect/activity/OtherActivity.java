@@ -6,12 +6,12 @@ import android.os.Handler;
 
 import com.gamesbykevin.connect.R;
 
-public class SplashActivity extends BaseActivity {
+public class OtherActivity extends BaseActivity {
 
     /**
-     * The amount of time to display the splash screen (in milliseconds)
+     * After we initialize how long should we delay
      */
-    public static final long SPLASH_DELAY = 2500L;
+    public static final long DEFAULT_DELAY = 350L;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,8 +19,8 @@ public class SplashActivity extends BaseActivity {
         //call parent
         super.onCreate(savedInstanceState);
 
-        //assign our layout
-        setContentView(R.layout.activity_splash);
+        //inflate layout
+        setContentView(R.layout.activity_other);
     }
 
     @Override
@@ -36,14 +36,14 @@ public class SplashActivity extends BaseActivity {
             public void run() {
 
                 //start the new activity
-                startActivity(new Intent(SplashActivity.this, MainActivity.class));
+                startActivity(new Intent(OtherActivity.this, LevelSelectActivity.class));
 
                 //close the activity
                 finish();
 
             }
 
-        }, SPLASH_DELAY);
+        }, DEFAULT_DELAY);
     }
 
     @Override

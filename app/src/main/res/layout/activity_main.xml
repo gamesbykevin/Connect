@@ -23,9 +23,6 @@
         <TableRow style="@style/RowMenu">
             <Button android:id="@+id/ButtonTutorial" style="@style/ButtonMenu" android:text="@string/button_text_tutorial" android:onClick="onClickTutorial" />
         </TableRow>
-        <TableRow style="@style/RowMenu">
-            <Button android:id="@+id/ButtonExit" style="@style/ButtonMenu" android:text="@string/button_text_exit" android:onClick="onClickExit" />
-        </TableRow>
     </TableLayout>
 
     <include layout="@layout/layout_social_icons" />
