@@ -5,12 +5,12 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
-import com.gamesbykevin.androidframeworkv2.util.UtilityHelper;
+import com.gamesbykevin.connect.util.UtilityHelper;
 import com.gamesbykevin.connect.activity.BaseActivity;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.games.Games;
 
-import static com.gamesbykevin.androidframeworkv2.util.UtilityHelper.DEBUG;
+import static com.gamesbykevin.connect.util.UtilityHelper.DEBUG;
 
 /**
  * Created by Kevin on 8/1/2017.
@@ -18,33 +18,33 @@ import static com.gamesbykevin.androidframeworkv2.util.UtilityHelper.DEBUG;
 public abstract class BaseGameActivity extends BaseActivity implements GameHelper.GameHelperListener {
 
     // The game helper object. This class is mainly a wrapper around this object.
-    protected GameHelper mHelper;
+    private GameHelper mHelper;
 
     // We expose these constants here because we don't want users of this class
     // to have to know about GameHelper at all.
-    public static final int CLIENT_GAMES = GameHelper.CLIENT_GAMES;
-    public static final int CLIENT_PLUS = GameHelper.CLIENT_PLUS;
-    public static final int CLIENT_ALL = GameHelper.CLIENT_ALL;
+    private static final int CLIENT_GAMES = GameHelper.CLIENT_GAMES;
+    private static final int CLIENT_PLUS = GameHelper.CLIENT_PLUS;
+    private static final int CLIENT_ALL = GameHelper.CLIENT_ALL;
 
     // Requested clients. By default, that's just the games client.
-    protected int mRequestedClients = CLIENT_GAMES;
+    private int mRequestedClients = CLIENT_GAMES;
 
     private final static String TAG = "BaseGameActivity";
 
     /**
      * Did we want to access the achievements
      */
-    public boolean ACCESS_ACHIEVEMENT = false;
+    protected boolean ACCESS_ACHIEVEMENT = false;
 
     /**
      * Did we want to access the leader boards
      */
-    public boolean ACCESS_LEADERBOARD = false;
+    protected boolean ACCESS_LEADERBOARD = false;
 
     /**
      * The leader board id we want to display
      */
-    public static String LEADERBOARD_ID = "";
+    protected static String LEADERBOARD_ID = "";
 
     /**
      * Do we skip future login? (this is in case the player does not want to sign in)
@@ -78,11 +78,11 @@ public abstract class BaseGameActivity extends BaseActivity implements GameHelpe
      * @param requestedClients A combination of the flags CLIENT_GAMES, CLIENT_PLUS
      *         or CLIENT_ALL to request all available clients.
      */
-    protected void setRequestedClients(int requestedClients) {
+    private void setRequestedClients(int requestedClients) {
         mRequestedClients = requestedClients;
     }
 
-    public GameHelper getGameHelper() {
+    protected GameHelper getGameHelper() {
         if (mHelper == null) {
             mHelper = new GameHelper(this, mRequestedClients);
             mHelper.enableDebugLog(DEBUG);
@@ -119,7 +119,7 @@ public abstract class BaseGameActivity extends BaseActivity implements GameHelpe
         mHelper.onActivityResult(request, response, data);
     }
 
-    public GoogleApiClient getApiClient() {
+    protected GoogleApiClient getApiClient() {
         return getGameHelper().getApiClient();
     }
 
@@ -271,7 +271,7 @@ public abstract class BaseGameActivity extends BaseActivity implements GameHelpe
         }
     }
 
-    public void displayAchievementUI() {
+    protected void displayAchievementUI() {
 
         if (getApiClient().isConnected()) {
 
@@ -293,7 +293,7 @@ public abstract class BaseGameActivity extends BaseActivity implements GameHelpe
         }
     }
 
-    public void displayLeaderboardUI(final String leaderboardId) {
+    protected void displayLeaderboardUI(final String leaderboardId) {
 
         if (getApiClient().isConnected()) {
 

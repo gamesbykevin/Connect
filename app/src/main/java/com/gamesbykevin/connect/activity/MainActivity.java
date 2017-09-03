@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.view.View;
 
-import com.gamesbykevin.androidframeworkv2.util.UtilityHelper;
+import com.gamesbykevin.connect.util.UtilityHelper;
 import com.gamesbykevin.connect.R;
 import com.gamesbykevin.connect.board.Board;
 import com.gamesbykevin.connect.board.Boards;

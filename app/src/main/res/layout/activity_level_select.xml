@@ -8,6 +8,7 @@
 
     <!-- Level Select Text -->
     <ImageView
+        android:contentDescription="@null"
         android:src="@drawable/select_level"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -2,13 +2,11 @@
 <resources>
 <string name="app_name">Menghubungkan</string>
 <string name="button_text_next">Berikutnya</string>
-<string name="button_text_restart">Mengulang kembali</string>
 <string name="button_text_rate">Menilai</string>
 <string name="button_text_more">Lebih</string>
 <string name="button_text_menu">Menu</string>
 <string name="button_text_start">Mulai</string>
 <string name="button_text_options">Pilihan</string>
-<string name="button_text_exit">Keluar</string>
 <string name="button_text_tutorial">Tutorial</string>
 <string name="button_text_play">Bermain</string>
 <string name="button_text_leaderboard">Papan peringkat</string>
@@ -17,7 +15,6 @@
 <string name="vibrate_off">Getar: Mati</string>
 <string name="sound_on">Suara: Aktif</string>
 <string name="sound_off">Memperdengarkan</string>
-<string name="text_header_level_select">Tingkat</string>
 <string name="text_header_shape">Bentuk:</string>
 <string name="tutorial_instructions_1">Tutorial Bagian 1 \nUntuk mengatasinya Anda harus menghubungkan semua pipa bersama-sama</string>
 <string name="tutorial_instructions_2">Tutorial Bagian 2 \nTentuh pipa untuk memutar. </string>

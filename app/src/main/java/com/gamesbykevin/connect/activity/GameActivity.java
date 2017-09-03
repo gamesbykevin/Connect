@@ -12,7 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.ToggleButton;
 
 import com.gamesbykevin.androidframeworkv2.base.Disposable;
-import com.gamesbykevin.androidframeworkv2.util.UtilityHelper;
+import com.gamesbykevin.connect.util.UtilityHelper;
 import com.gamesbykevin.connect.activity.LevelSelectActivity.Level;
 import com.gamesbykevin.connect.R;
 import com.gamesbykevin.connect.board.Board;
@@ -27,7 +27,7 @@ import java.util.Random;
 
 import static com.gamesbykevin.connect.activity.LevelSelectActivity.PAGES;
 import static com.gamesbykevin.connect.game.Game.STEP;
-import static com.gamesbykevin.androidframeworkv2.util.UtilityHelper.DEBUG;
+import static com.gamesbykevin.connect.util.UtilityHelper.DEBUG;
 import static com.gamesbykevin.connect.activity.LevelSelectActivity.CURRENT_PAGE;
 
 public class GameActivity extends BaseGameActivity implements Disposable {
@@ -329,7 +329,7 @@ public class GameActivity extends BaseGameActivity implements Disposable {
         if (this.buttonAutoRotate != null) {
 
             //assign auto rotate value
-            getGame().AUTO_ROTATE = buttonAutoRotate.isChecked();
+            Game.AUTO_ROTATE = buttonAutoRotate.isChecked();
 
             //update button according to boolean value setting
             updateAutoRotateButton();
@@ -343,7 +343,7 @@ public class GameActivity extends BaseGameActivity implements Disposable {
             buttonAutoRotate = (ToggleButton)findViewById(R.id.ButtonAutoRotate);
 
         if (buttonAutoRotate != null) {
-            buttonAutoRotate.setChecked(getGame().AUTO_ROTATE);
+            buttonAutoRotate.setChecked(Game.AUTO_ROTATE);
             buttonAutoRotate.setBackgroundResource((buttonAutoRotate.isChecked()) ? R.drawable.rotate_on : R.drawable.rotate_off);
         }
     }

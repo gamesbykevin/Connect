@@ -2,13 +2,11 @@
 <resources>
 <string name="app_name">pripojiť</string>
 <string name="button_text_next">Ďalšie</string>
-<string name="button_text_restart">Reštart</string>
 <string name="button_text_rate">rýchlosť</string>
 <string name="button_text_more">viac</string>
 <string name="button_text_menu">Ponuka</string>
 <string name="button_text_start">štart</string>
 <string name="button_text_options">možnosti</string>
-<string name="button_text_exit">Východ</string>
 <string name="button_text_tutorial">cvičenie</string>
 <string name="button_text_play">hrať</string>
 <string name="button_text_leaderboard">leaderboard</string>
@@ -17,7 +15,6 @@
 <string name="vibrate_off">Vibrovanie: Vypnuté</string>
 <string name="sound_on">Zvuk: Zapnutý</string>
 <string name="sound_off">Vypnúť zvuk</string>
-<string name="text_header_level_select">úrovne</string>
 <string name="text_header_shape">tvar:</string>
 <string name="tutorial_instructions_1">Výučba Časť 1 \nPre riešenie musíte spojiť všetky potrubia dohromady</string>
 <string name="tutorial_instructions_2">Výučba Časť 2 \nPosuňte potrubie na otáčanie. </string>

@@ -2,13 +2,11 @@
 <resources>
 <string name="app_name">잇다</string>
 <string name="button_text_next">다음 것</string>
-<string name="button_text_restart">재시작</string>
 <string name="button_text_rate">율</string>
 <string name="button_text_more">더</string>
 <string name="button_text_menu">메뉴</string>
 <string name="button_text_start">스타트</string>
 <string name="button_text_options">옵션</string>
-<string name="button_text_exit">출구</string>
 <string name="button_text_tutorial">지도 시간</string>
 <string name="button_text_play">놀이</string>
 <string name="button_text_leaderboard">리더 보드</string>
@@ -17,7 +15,6 @@
 <string name="vibrate_off">진동 : 꺼짐</string>
 <string name="sound_on">소리 : 켜기</string>
 <string name="sound_off">음소거</string>
-<string name="text_header_level_select">레벨</string>
 <string name="text_header_shape">모양:</string>
 <string name="tutorial_instructions_1">튜토리얼 1 부 \n 해결하려면 모든 파이프를 연결해야합니다.</string>
 <string name="tutorial_instructions_2">튜토리얼 파트 2 \n 회전 할 파이프를 터치하십시오. </string>

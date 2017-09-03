@@ -2,13 +2,11 @@
 <resources>
 <string name="app_name">соединять</string>
 <string name="button_text_next">следующий</string>
-<string name="button_text_restart">Перезапуск</string>
 <string name="button_text_rate">Ставка</string>
 <string name="button_text_more">Больше</string>
 <string name="button_text_menu">Меню</string>
 <string name="button_text_start">Начало</string>
 <string name="button_text_options">Опции</string>
-<string name="button_text_exit">Выход</string>
 <string name="button_text_tutorial">Руководство</string>
 <string name="button_text_play">Играть</string>
 <string name="button_text_leaderboard">Leaderboard</string>
@@ -17,7 +15,6 @@
 <string name="vibrate_off">Вибрация: выкл.</string>
 <string name="sound_on">Звучать на</string>
 <string name="sound_off">Без звука</string>
-<string name="text_header_level_select">Уровни</string>
 <string name="text_header_shape">Форма:</string>
 <string name="tutorial_instructions_1">Учебное пособие Часть 1 \nЧтобы решить, что вам нужно соединить все трубы вместе</string>
 <string name="tutorial_instructions_2">Учебное пособие Часть 2 \nВыберите трубы для вращения. </string>

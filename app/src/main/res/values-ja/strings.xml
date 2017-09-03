@@ -2,13 +2,11 @@
 <resources>
 <string name="app_name">接続する</string>
 <string name="button_text_next">次</string>
-<string name="button_text_restart">再起動</string>
 <string name="button_text_rate">レート</string>
 <string name="button_text_more">もっと</string>
 <string name="button_text_menu">メニュー</string>
 <string name="button_text_start">開始</string>
 <string name="button_text_options">オプション</string>
-<string name="button_text_exit">出口</string>
 <string name="button_text_tutorial">チュートリアル</string>
 <string name="button_text_play">遊びます</string>
 <string name="button_text_leaderboard">リーダーボード</string>
@@ -17,7 +15,6 @@
 <string name="vibrate_off">振動：オフ</string>
 <string name="sound_on">サウンド：オン</string>
 <string name="sound_off">サウンド：オフ</string>
-<string name="text_header_level_select">レベル</string>
 <string name="text_header_shape">形状：</string>
 <string name="tutorial_instructions_1">チュートリアルパート1 \n解決するには、すべてのパイプを一緒に接続する必要があります</string>
 <string name="tutorial_instructions_2">チュートリアルパート2 \n回転するパイプをタッチします。 </string>

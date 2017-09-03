@@ -2,13 +2,11 @@
 <resources>
 <string name="app_name">الاتصال</string>
 <string name="button_text_next">التالى</string>
-<string name="button_text_restart">إعادة بدء</string>
 <string name="button_text_rate">معدل</string>
 <string name="button_text_more">أكثر من</string>
 <string name="button_text_menu">قائمة طعام</string>
 <string name="button_text_start">بداية</string>
 <string name="button_text_options">خيارات</string>
-<string name="button_text_exit">ىخرج</string>
 <string name="button_text_tutorial">الدورة التعليمية</string>
 <string name="button_text_play">لعب</string>
 <string name="button_text_leaderboard">المتصدرين</string>
@@ -17,7 +15,6 @@
 <string name="vibrate_off">الاهتزاز: إيقاف</string>
 <string name="sound_on">الصوت مفعل</string>
 <string name="sound_off">الصوت مقفل</string>
-<string name="text_header_level_select">مستويات</string>
 <string name="text_header_shape">شكل:</string>
 <string name="tutorial_instructions_1">الجزء التعليمي 1 \n لحل لديك لتوصيل جميع الأنابيب معا</string>
 <string name="tutorial_instructions_2">الجزء التعليمي 2 \n لمس الأنابيب لتدوير. </string>

@@ -2,13 +2,11 @@
 <resources>
 <string name="app_name">Csatlakozás</string>
 <string name="button_text_next">Következő</string>
-<string name="button_text_restart">Újrakezd</string>
 <string name="button_text_rate">Arány</string>
 <string name="button_text_more">Több</string>
 <string name="button_text_menu">Menü</string>
 <string name="button_text_start">Rajt</string>
 <string name="button_text_options">Lehetőségek</string>
-<string name="button_text_exit">Kijárat</string>
 <string name="button_text_tutorial">oktatói</string>
 <string name="button_text_play">Játék</string>
 <string name="button_text_leaderboard">ranglistán</string>
@@ -17,7 +15,6 @@
 <string name="vibrate_off">Rezgés: Ki</string>
 <string name="sound_on">Hang: Be</string>
 <string name="sound_off">Nyíltan beszél</string>
-<string name="text_header_level_select">Levels</string>
 <string name="text_header_shape">Alak:</string>
 <string name="tutorial_instructions_1">Tutorial 1. rész \nA megoldáshoz össze kell kötni az összes csövet</string>
 <string name="tutorial_instructions_2">2. segédanyag \nKapcsolja a csöveket forgatni. </string>

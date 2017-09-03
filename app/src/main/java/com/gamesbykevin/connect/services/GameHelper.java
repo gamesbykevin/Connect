@@ -25,7 +25,7 @@ import com.google.android.gms.plus.Plus;
 
 import java.util.ArrayList;
 
-import static com.gamesbykevin.androidframeworkv2.util.UtilityHelper.AMAZON;
+import static com.gamesbykevin.connect.util.UtilityHelper.AMAZON;
 import static com.gamesbykevin.connect.services.BaseGameActivity.BYPASS_LOGIN;
 
 

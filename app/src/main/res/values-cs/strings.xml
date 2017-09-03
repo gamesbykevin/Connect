@@ -2,13 +2,11 @@
 <resources>
 <string name="app_name">Připojit</string>
 <string name="button_text_next">další</string>
-<string name="button_text_restart">Restartujte</string>
 <string name="button_text_rate">Hodnotit</string>
 <string name="button_text_more">Více</string>
 <string name="button_text_menu">Jídelní lístek</string>
 <string name="button_text_start">Start</string>
 <string name="button_text_options">Možnosti</string>
-<string name="button_text_exit">Výstup</string>
 <string name="button_text_tutorial">Tutorial</string>
 <string name="button_text_play">Hrát si</string>
 <string name="button_text_leaderboard">Leaderboard</string>
@@ -17,7 +15,6 @@
 <string name="vibrate_off">Vibrace: Vypnuto</string>
 <string name="sound_on">Zvuk: Zapnuto</string>
 <string name="sound_off">Zvuk: Vypnuto</string>
-<string name="text_header_level_select">Úrovně</string>
 <string name="text_header_shape">Tvar:</string>
 <string name="tutorial_instructions_1">Výuka Část 1 \nPro řešení musíte spojit všechny potrubí dohromady</string>
 <string name="tutorial_instructions_2">Výuka část 2 \nTouchujte potrubí, aby se otáčely. </string>

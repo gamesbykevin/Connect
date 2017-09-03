@@ -3,8 +3,6 @@ package com.gamesbykevin.connect.opengl;
 import android.opengl.GLES20;
 
 import com.gamesbykevin.connect.board.Board;
-import com.gamesbykevin.connect.board.BoardHelper;
-import com.gamesbykevin.connect.entity.Entity;
 
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
@@ -18,7 +16,6 @@ public class Square {
 
     private float[] vertices;
     private short[] indices;
-    private float[] uvs;
     private FloatBuffer vertexBuffer;
     private ShortBuffer drawListBuffer;
     private FloatBuffer uvBuffer;
@@ -43,7 +40,7 @@ public class Square {
 
     public void setupImage(float[] tmp) {
 
-        this.uvs = tmp;
+        float[] uvs = tmp;
 
         //the texture buffer
         ByteBuffer bb = ByteBuffer.allocateDirect(tmp.length * 4);

@@ -2,13 +2,11 @@
 <resources>
 <string name="app_name">לְחַבֵּר</string>
 <string name="button_text_next">הַבָּא</string>
-<string name="button_text_restart">איתחול</string>
 <string name="button_text_rate">ציון</string>
 <string name="button_text_more">יותר</string>
 <string name="button_text_menu">תַפרִיט</string>
 <string name="button_text_start">הַתחָלָה</string>
 <string name="button_text_options">אפשרויות</string>
-<string name="button_text_exit">יְצִיאָה</string>
 <string name="button_text_tutorial">הדרכה</string>
 <string name="button_text_play">לְשַׂחֵק</string>
 <string name="button_text_leaderboard">לידרבורד</string>
@@ -17,7 +15,6 @@
 <string name="vibrate_off">רטט: כבוי</string>
 <string name="sound_on">קול: מופעל</string>
 <string name="sound_off">צליל של</string>
-<string name="text_header_level_select">רמות</string>
 <string name="text_header_shape">צוּרָה:</string>
 <string name="tutorial_instructions_1">מדריך חלק 1 \n כדי לפתור עליך לחבר את כל הצינורות יחד</string>
 <string name="tutorial_instructions_2">מדריך חלק 2 \nTouch צינורות כדי לסובב. </string>

@@ -2,13 +2,11 @@
 <resources>
 <string name="app_name">Forbinde</string>
 <string name="button_text_next">Næste</string>
-<string name="button_text_restart">Genstart</string>
 <string name="button_text_rate">Sats</string>
 <string name="button_text_more">Mere</string>
 <string name="button_text_menu">Menu</string>
 <string name="button_text_start">Start</string>
 <string name="button_text_options">Muligheder</string>
-<string name="button_text_exit">Afslut</string>
 <string name="button_text_tutorial">tutorial</string>
 <string name="button_text_play">Spille</string>
 <string name="button_text_leaderboard">Leaderboard</string>
@@ -17,7 +15,6 @@
 <string name="vibrate_off">Vibrere: Fra</string>
 <string name="sound_on">Lyd: Til</string>
 <string name="sound_off">Lyd: Fra</string>
-<string name="text_header_level_select">Niveauer</string>
 <string name="text_header_shape">Form:</string>
 <string name="tutorial_instructions_1">Tutorial Part 1 \nTil at løse dig skal du forbinde alle rørene sammen</string>
 <string name="tutorial_instructions_2">Tutorial Part 2 \nTilslut rørene til at rotere. </string>

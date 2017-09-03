@@ -2,13 +2,11 @@
 <resources>
 <string name="app_name">Poveži se</string>
 <string name="button_text_next">Naslednji</string>
-<string name="button_text_restart">Ponovni zagon</string>
 <string name="button_text_rate">Oceniti</string>
 <string name="button_text_more">Več</string>
 <string name="button_text_menu">Meni</string>
 <string name="button_text_start">Začni</string>
 <string name="button_text_options">Opcije</string>
-<string name="button_text_exit">Izhod</string>
 <string name="button_text_tutorial">Vadnica</string>
 <string name="button_text_play">Igraj</string>
 <string name="button_text_leaderboard">Leaderboard</string>
@@ -17,7 +15,6 @@
 <string name="vibrate_off">Vibriranje: izključeno</string>
 <string name="sound_on">Zvok: Vklopljen</string>
 <string name="sound_off">Zvok: Izključeno</string>
-<string name="text_header_level_select">Raven</string>
 <string name="text_header_shape">Oblika:</string>
 <string name="tutorial_instructions_1">Tutorial Part 1 \nZa reševanje morate povezati vse cevi skupaj</string>
 <string name="tutorial_instructions_2">Vadnica 2. del \nUporabite cevi za vrtenje. </string>

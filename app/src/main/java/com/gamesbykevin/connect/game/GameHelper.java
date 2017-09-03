@@ -2,8 +2,8 @@ package com.gamesbykevin.connect.game;
 
 import android.opengl.GLES20;
 
+import com.gamesbykevin.connect.base.Entity;
 import com.gamesbykevin.connect.board.Board;
-import com.gamesbykevin.connect.entity.Entity;
 import com.gamesbykevin.connect.opengl.Square;
 
 import static com.gamesbykevin.connect.activity.GameActivity.getGame;
@@ -109,7 +109,7 @@ public final class GameHelper
      * Render the game accordingly
      * @throws Exception
      */
-    public static final void render(float[] m) {
+    public static void render(float[] m) {
 
 		//make sure we are supporting alpha for transparency
         GLES20.glEnable(GLES20.GL_BLEND);

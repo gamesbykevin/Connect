@@ -14,10 +14,10 @@
                         <LinearLayout android:orientation="horizontal" android:gravity="center" android:paddingTop="10dp">
 
                                 <!--Level # -->
-                                <ImageView style="@style/LevelSelectCustomText" android:id="@+id/levelNumber" />
+                                <ImageView android:contentDescription="@null" style="@style/LevelSelectCustomText" android:id="@+id/levelNumber" />
 
                                 <!-- sample shape -->
-                                <ImageView style="@style/LevelSelectImage" android:id="@+id/levelSelectShape" />
+                                <ImageView android:contentDescription="@null" style="@style/LevelSelectImage" android:id="@+id/levelSelectShape" />
 
                         </LinearLayout>
 
@@ -25,22 +25,22 @@
 
                 <!-- Level size -->
                 <TableRow style="@style/RowLevelSelect">
-                        <ImageView style="@style/LevelSelectCustomText" android:id="@+id/levelSize" />
+                        <ImageView android:contentDescription="@null" style="@style/LevelSelectCustomText" android:id="@+id/levelSize" />
                 </TableRow>
 
                 <!-- Best Header -->
                 <TableRow style="@style/RowLevelSelect">
-                        <ImageView style="@style/LevelSelectCustomText" android:src="@drawable/best" />
+                        <ImageView android:contentDescription="@null" style="@style/LevelSelectCustomText" android:src="@drawable/best" />
                 </TableRow>
 
                 <!-- Personal Best -->
                 <TableRow style="@style/RowLevelSelect">
                         <LinearLayout android:gravity="center_horizontal" android:layout_gravity="center_horizontal">
-                                <ImageView style="@style/LevelSelectCustomText" android:id="@+id/bestTime1" android:src="@drawable/na" />
-                                <ImageView style="@style/LevelSelectCustomText" android:id="@+id/bestTime2" android:src="@drawable/na" />
-                                <ImageView style="@style/LevelSelectCustomText" android:src="@drawable/colon" />
-                                <ImageView style="@style/LevelSelectCustomText" android:id="@+id/bestTime3" android:src="@drawable/na" />
-                                <ImageView style="@style/LevelSelectCustomText" android:id="@+id/bestTime4" android:src="@drawable/na" />
+                                <ImageView android:contentDescription="@null" style="@style/LevelSelectCustomText" android:id="@+id/bestTime1" android:src="@drawable/na" />
+                                <ImageView android:contentDescription="@null" style="@style/LevelSelectCustomText" android:id="@+id/bestTime2" android:src="@drawable/na" />
+                                <ImageView android:contentDescription="@null" style="@style/LevelSelectCustomText" android:src="@drawable/colon" />
+                                <ImageView android:contentDescription="@null" style="@style/LevelSelectCustomText" android:id="@+id/bestTime3" android:src="@drawable/na" />
+                                <ImageView android:contentDescription="@null" style="@style/LevelSelectCustomText" android:id="@+id/bestTime4" android:src="@drawable/na" />
                         </LinearLayout>
                 </TableRow>
 
@@ -56,6 +56,6 @@
 
         </TableLayout>
 
-        <ImageView android:id="@+id/overlayDisabled" style="@style/LevelSelectDisabled" />
+        <ImageView android:contentDescription="@null" android:id="@+id/overlayDisabled" style="@style/LevelSelectDisabled" />
 
 </RelativeLayout>

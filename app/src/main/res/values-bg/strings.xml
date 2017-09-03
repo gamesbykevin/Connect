@@ -2,13 +2,11 @@
 <resources>
 <string name="app_name">Свържете</string>
 <string name="button_text_next">Следващия</string>
-<string name="button_text_restart">Рестартирам</string>
 <string name="button_text_rate">скорост</string>
 <string name="button_text_more">| Повече ▼</string>
 <string name="button_text_menu">Меню</string>
 <string name="button_text_start">начало</string>
 <string name="button_text_options">Настроики</string>
-<string name="button_text_exit">изход</string>
 <string name="button_text_tutorial">настойнически</string>
 <string name="button_text_play">играя</string>
 <string name="button_text_leaderboard">Табло</string>
@@ -17,7 +15,6 @@
 <string name="vibrate_off">Вибриране: Изключено</string>
 <string name="sound_on">Звук: Вкл</string>
 <string name="sound_off">Изключен звук</string>
-<string name="text_header_level_select">нива</string>
 <string name="text_header_shape">Оформете:</string>
 <string name="tutorial_instructions_1">Инструкция част 1 \nЗа да разрешите, трябва да свържете всички тръби заедно</string>
 <string name="tutorial_instructions_2">Инстр. Част 2 \nНатиснете тръбите за завъртане. </string>

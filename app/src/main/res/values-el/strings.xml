@@ -2,13 +2,11 @@
 <resources>
 <string name="app_name">Συνδέω</string>
 <string name="button_text_next">επόμενος</string>
-<string name="button_text_restart">Επανεκκίνηση</string>
 <string name="button_text_rate">Τιμή</string>
 <string name="button_text_more">Περισσότερο</string>
 <string name="button_text_menu">Μενού</string>
 <string name="button_text_start">Αρχή</string>
 <string name="button_text_options">Επιλογές</string>
-<string name="button_text_exit">Εξοδος</string>
 <string name="button_text_tutorial">Φροντιστήριο</string>
 <string name="button_text_play">Παίζω</string>
 <string name="button_text_leaderboard">Leaderboard</string>
@@ -17,7 +15,6 @@
 <string name="vibrate_off">Δόνηση: Απενεργοποίηση</string>
 <string name="sound_on">Ήχος: Ενεργοποίηση</string>
 <string name="sound_off">Χωρίς ήχο</string>
-<string name="text_header_level_select">Επίπεδα</string>
 <string name="text_header_shape">Σχήμα:</string>
 <string name="tutorial_instructions_1">Tutorial Part 1 \nΓια να λύσετε πρέπει να συνδέσετε όλες τις σωληνώσεις μεταξύ τους</string>
 <string name="tutorial_instructions_2">Tutorial Part 2 \nΑκουμπήστε τους σωλήνες για περιστροφή. </string>

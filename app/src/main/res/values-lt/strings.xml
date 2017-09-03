@@ -2,13 +2,11 @@
 <resources>
 <string name="app_name">Prisijungti</string>
 <string name="button_text_next">Kitas</string>
-<string name="button_text_restart">Perkrauti</string>
 <string name="button_text_rate">Įvertinti</string>
 <string name="button_text_more">Daugiau</string>
 <string name="button_text_menu">Meniu</string>
 <string name="button_text_start">Pradėti</string>
 <string name="button_text_options">Nustatymai</string>
-<string name="button_text_exit">Išeiti</string>
 <string name="button_text_tutorial">Pamoka</string>
 <string name="button_text_play">Groti</string>
 <string name="button_text_leaderboard">\"Leaderboard\"</string>
@@ -17,7 +15,6 @@
 <string name="vibrate_off">Vibracija: išjungta</string>
 <string name="sound_on">Garsas: on</string>
 <string name="sound_off">Garsas išjungtas</string>
-<string name="text_header_level_select">Lygiai</string>
 <string name="text_header_shape">Figūra:</string>
 <string name="tutorial_instructions_1">Tutorial 1 dalis \nGalite išspręsti, kad turite visus vamzdžius sujungti</string>
 <string name="tutorial_instructions_2">Mokomoji medžiaga, 2 dalis \nPaspauskite vamzdžius pasukti. </string>

@@ -1,7 +1,7 @@
 package com.gamesbykevin.connect.shape;
 
+import com.gamesbykevin.connect.base.Entity;
 import com.gamesbykevin.connect.activity.GameActivity;
-import com.gamesbykevin.connect.entity.Entity;
 
 import static com.gamesbykevin.connect.board.BoardHelper.DIMENSION;
 

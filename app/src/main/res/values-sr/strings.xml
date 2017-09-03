@@ -2,13 +2,11 @@
 <resources>
 <string name="app_name">Повежите се</string>
 <string name="button_text_next">Следећи</string>
-<string name="button_text_restart">Поново покренути</string>
 <string name="button_text_rate">Оцените</string>
 <string name="button_text_more">Више</string>
 <string name="button_text_menu">Мени</string>
 <string name="button_text_start">Почетак</string>
 <string name="button_text_options">Опције</string>
-<string name="button_text_exit">Изађи</string>
 <string name="button_text_tutorial">Приручник</string>
 <string name="button_text_play">Игра</string>
 <string name="button_text_leaderboard">Леадербоард</string>
@@ -17,7 +15,6 @@
 <string name="vibrate_off">Вибрирање: Искључено</string>
 <string name="sound_on">Звук: укључен</string>
 <string name="sound_off">Звук: Искључено</string>
-<string name="text_header_level_select">Нивои</string>
 <string name="text_header_shape">Облик:</string>
 <string name="tutorial_instructions_1">Туториал Парт 1 \\ нТо ријешити морате повезати све цијеви заједно</string>
 <string name="tutorial_instructions_2">Туториал Парт 2 \\ нУпустите цеви да се ротирају. </string>

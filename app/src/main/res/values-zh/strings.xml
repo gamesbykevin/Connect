@@ -2,13 +2,11 @@
 <resources>
 <string name="app_name">连</string>
 <string name="button_text_next">下一个</string>
-<string name="button_text_restart">重新开始</string>
 <string name="button_text_rate">率</string>
 <string name="button_text_more">更多</string>
 <string name="button_text_menu">菜单</string>
 <string name="button_text_start">开始</string>
 <string name="button_text_options">选项</string>
-<string name="button_text_exit">出口</string>
 <string name="button_text_tutorial">教程</string>
 <string name="button_text_play">玩</string>
 <string name="button_text_leaderboard">排行榜</string>
@@ -17,7 +15,6 @@
 <string name="vibrate_off">振动：关</string>
 <string name="sound_on">声音：开</string>
 <string name="sound_off">声音：关</string>
-<string name="text_header_level_select">水平</string>
 <string name="text_header_shape">形状：</string>
 <string name="tutorial_instructions_1">教程第1部分\n要解决您必须将所有管道连接在一起</string>
 <string name="tutorial_instructions_2">教程第2部分\n触摸要旋转的管道。 </string>

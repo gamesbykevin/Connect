@@ -2,13 +2,11 @@
 <resources>
 <string name="app_name">bağlamak</string>
 <string name="button_text_next">Sonraki</string>
-<string name="button_text_restart">Tekrar başlat</string>
 <string name="button_text_rate">oran</string>
 <string name="button_text_more">Daha</string>
 <string name="button_text_menu">Menü</string>
 <string name="button_text_start">Başlama</string>
 <string name="button_text_options">Seçenekler</string>
-<string name="button_text_exit">çıkış</string>
 <string name="button_text_tutorial">Eğitimi</string>
 <string name="button_text_play">Oyun</string>
 <string name="button_text_leaderboard">Liderler Sıralaması</string>
@@ -17,7 +15,6 @@
 <string name="vibrate_off">Titreşim: Kapalı</string>
 <string name="sound_on">Ses açık</string>
 <string name="sound_off">Sesi kapamak</string>
-<string name="text_header_level_select">Seviyeleri</string>
 <string name="text_header_shape">Şekil:</string>
 <string name="tutorial_instructions_1">Eğitici Bölüm 1 \nTüm çözmek için tüm boruları birbirine bağlamanız gerekir</string>
 <string name="tutorial_instructions_2">Eğitici Bölüm 2 \n Döndürülecek boruları dokunun. </string>

@@ -2,13 +2,11 @@
 <resources>
 <string name="app_name">Spojiti</string>
 <string name="button_text_next">Sljedeći</string>
-<string name="button_text_restart">Ponovno pokretanje</string>
 <string name="button_text_rate">Stopa</string>
 <string name="button_text_more">Više</string>
 <string name="button_text_menu">Jelovnik </string>
 <string name="button_text_start">Početak</string>
 <string name="button_text_options">Opcije</string>
-<string name="button_text_exit">Izlaz </string>
 <string name="button_text_tutorial">Vodič</string>
 <string name="button_text_play">Igrati</string>
 <string name="button_text_leaderboard">Vodeći</string>
@@ -17,7 +15,6 @@
 <string name="vibrate_off">Vibriraj: Isključeno</string>
 <string name="sound_on">Zvuk: uključen</string>
 <string name="sound_off">Zvuk isključen</string>
-<string name="text_header_level_select">razine</string>
 <string name="text_header_shape">Oblik:</string>
 <string name="tutorial_instructions_1">Tutorial Dio 1 \nZa rješavanje morate povezati sve cijevi zajedno</string>
 <string name="tutorial_instructions_2">Tutorial Dio 2 \nDodirite cijevi da biste zakretali. </string>

@@ -2,13 +2,11 @@
 <resources>
 <string name="app_name">Ansluta</string>
 <string name="button_text_next">Nästa</string>
-<string name="button_text_restart">Omstart</string>
 <string name="button_text_rate">Betygsätta</string>
 <string name="button_text_more">Mer</string>
 <string name="button_text_menu">Meny</string>
 <string name="button_text_start">Start</string>
 <string name="button_text_options">alternativ</string>
-<string name="button_text_exit">Utgång</string>
 <string name="button_text_tutorial">Handledning</string>
 <string name="button_text_play">Spela</string>
 <string name="button_text_leaderboard">leaderboard</string>
@@ -17,7 +15,6 @@
 <string name="vibrate_off">Vibrera: Av</string>
 <string name="sound_on">Ljud: På</string>
 <string name="sound_off">Ljud av</string>
-<string name="text_header_level_select">nivåer</string>
 <string name="text_header_shape">Form:</string>
 <string name="tutorial_instructions_1">Handledning Del 1 \nTill att lösa dig måste du ansluta alla rören tillsammans</string>
 <string name="tutorial_instructions_2">Handledning Del 2 \nKontrollera rören för att rotera. </string>

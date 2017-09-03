@@ -2,13 +2,11 @@
 <resources>
 <string name="app_name">Relier</string>
 <string name="button_text_next">Prochain</string>
-<string name="button_text_restart">Redémarrer</string>
 <string name="button_text_rate">Taux</string>
 <string name="button_text_more">Plus</string>
 <string name="button_text_menu">Menu</string>
 <string name="button_text_start">Début</string>
 <string name="button_text_options">Options</string>
-<string name="button_text_exit">Sortie</string>
 <string name="button_text_tutorial">Didacticiel</string>
 <string name="button_text_play">Jouer</string>
 <string name="button_text_leaderboard">Tableau de classement</string>
@@ -17,7 +15,6 @@
 <string name="vibrate_off">Vibrer: désactivé</string>
 <string name="sound_on">Son: Oui</string>
 <string name="sound_off">Son: désactivé</string>
-<string name="text_header_level_select">Les niveaux</string>
 <string name="text_header_shape">Forme:</string>
 <string name="tutorial_instructions_1">Didacticiel Partie 1 \nPour résoudre, vous devez connecter tous les tuyaux ensemble</string>
 <string name="tutorial_instructions_2">Didacticiel Partie 2 \nTouchez les tuyaux pour faire pivoter. </string>

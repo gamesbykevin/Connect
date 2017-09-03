@@ -2,13 +2,11 @@
 <resources>
 <string name="app_name">Kytkeä</string>
 <string name="button_text_next">Seuraava</string>
-<string name="button_text_restart">Uudelleenkäynnistää</string>
 <string name="button_text_rate">nopeus</string>
 <string name="button_text_more">Lisää</string>
 <string name="button_text_menu">valikko</string>
 <string name="button_text_start">alkaa</string>
 <string name="button_text_options">vaihtoehdot</string>
-<string name="button_text_exit">poistuminen</string>
 <string name="button_text_tutorial">oppitunti</string>
 <string name="button_text_play">pelata</string>
 <string name="button_text_leaderboard">leaderboard</string>
@@ -17,7 +15,6 @@
 <string name="vibrate_off">Värinä: Ei käytössä</string>
 <string name="sound_on">Ääni: Käytössä</string>
 <string name="sound_off">Ääni: Pois</string>
-<string name="text_header_level_select">tasot</string>
 <string name="text_header_shape">Muoto:</string>
 <string name="tutorial_instructions_1">Ohjaava osa 1 \nVoit ratkaista sinun täytyy yhdistää kaikki putket yhteen</string>
 <string name="tutorial_instructions_2">Oppitunti Osa 2 \nTuota kiertämällä putket. </string>

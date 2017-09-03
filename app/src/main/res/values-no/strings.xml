@@ -2,13 +2,11 @@
 <resources>
 <string name="app_name">Koble</string>
 <string name="button_text_next">neste</string>
-<string name="button_text_restart">Omstart</string>
 <string name="button_text_rate">Sats</string>
 <string name="button_text_more">Mer</string>
 <string name="button_text_menu">Meny</string>
 <string name="button_text_start">Start</string>
 <string name="button_text_options">alternativer</string>
-<string name="button_text_exit">Exit</string>
 <string name="button_text_tutorial">Opplæringen</string>
 <string name="button_text_play">Spille</string>
 <string name="button_text_leaderboard">Leaderboard</string>
@@ -17,7 +15,6 @@
 <string name="vibrate_off">Vibrer: Av</string>
 <string name="sound_on">Lyd: På</string>
 <string name="sound_off">Lyden av</string>
-<string name="text_header_level_select">nivåer</string>
 <string name="text_header_shape">Form:</string>
 <string name="tutorial_instructions_1">Tutorial Part 1 \nTil å løse deg må du koble alle rørene sammen</string>
 <string name="tutorial_instructions_2">Opplæringsdel 2 \nKontroll rørene for å rotere. </string>

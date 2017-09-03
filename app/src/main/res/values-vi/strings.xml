@@ -2,13 +2,11 @@
 <resources>
 <string name="app_name">Kết nối</string>
 <string name="button_text_next">Kế tiếp</string>
-<string name="button_text_restart">Khởi động lại</string>
 <string name="button_text_rate">Tỷ lệ</string>
 <string name="button_text_more">Hơn</string>
 <string name="button_text_menu">Thực đơn</string>
 <string name="button_text_start">Khởi đầu</string>
 <string name="button_text_options">Tùy chọn</string>
-<string name="button_text_exit">Lối thoát</string>
 <string name="button_text_tutorial">Hướng dẫn</string>
 <string name="button_text_play">Chơi</string>
 <string name="button_text_leaderboard">Bảng xếp hạng</string>
@@ -17,7 +15,6 @@
 <string name="vibrate_off">Rung: Tắt</string>
 <string name="sound_on">Âm thanh: Bật</string>
 <string name="sound_off">Âm thanh: Tắt</string>
-<string name="text_header_level_select">Trình độ</string>
 <string name="text_header_shape">Hình dạng:</string>
 <string name="tutorial_instructions_1">Hướng dẫn Phần 1 \nĐể giải quyết bạn phải kết nối tất cả các đường ống với nhau</string>
 <string name="tutorial_instructions_2">Hướng dẫn Phần 2 \nTouch các đường ống để xoay. </string>

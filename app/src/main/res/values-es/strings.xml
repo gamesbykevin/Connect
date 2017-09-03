@@ -2,13 +2,11 @@
 <resources>
 <string name="app_name">Conectar</string>
 <string name="button_text_next">Siguiente</string>
-<string name="button_text_restart">Reiniciar</string>
 <string name="button_text_rate">Tarifa</string>
 <string name="button_text_more">Más</string>
 <string name="button_text_menu">Menú</string>
 <string name="button_text_start">comienzo</string>
 <string name="button_text_options">Opciones</string>
-<string name="button_text_exit">Salida</string>
 <string name="button_text_tutorial">Tutorial</string>
 <string name="button_text_play">Jugar</string>
 <string name="button_text_leaderboard">Tabla de clasificación</string>
@@ -17,7 +15,6 @@
 <string name="vibrate_off">Vibrar: Desactivado</string>
 <string name="sound_on">Sonido encendido</string>
 <string name="sound_off">Sonido apagado</string>
-<string name="text_header_level_select">Niveles</string>
 <string name="text_header_shape">Forma:</string>
 <string name="tutorial_instructions_1">Tutorial Parte 1 \nPara resolver tienes que conectar todos los tubos juntos</string>
 <string name="tutorial_instructions_2">Tutorial Parte 2 \nToque las tuberías para girar. </string>

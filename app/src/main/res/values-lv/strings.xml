@@ -2,13 +2,11 @@
 <resources>
 <string name="app_name">Pieslēgties</string>
 <string name="button_text_next">Nākamais</string>
-<string name="button_text_restart">Restartēt</string>
 <string name="button_text_rate">Likme</string>
 <string name="button_text_more">Vairāk</string>
 <string name="button_text_menu">Izvēlne</string>
 <string name="button_text_start">Sākt</string>
 <string name="button_text_options">Iespējas</string>
-<string name="button_text_exit">Izeja</string>
 <string name="button_text_tutorial">Apmācība</string>
 <string name="button_text_play">Spēlēt</string>
 <string name="button_text_leaderboard">Līderu saraksts</string>
@@ -17,7 +15,6 @@
 <string name="vibrate_off">Vibrozvans: izslēgts</string>
 <string name="sound_on">Skaņa: ieslēgta</string>
 <string name="sound_off">Skaņa: izslēgta</string>
-<string name="text_header_level_select">Līmeņi</string>
 <string name="text_header_shape">Forma:</string>
 <string name="tutorial_instructions_1">Tutorial Part 1 \n Lai risinātu, jums ir jāsavieno visas caurules</string>
 <string name="tutorial_instructions_2">Apmācība 2. daļa \nPiespiediet caurules, lai tās pagrieztu. </string>

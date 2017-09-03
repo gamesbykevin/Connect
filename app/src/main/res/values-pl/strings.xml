@@ -2,13 +2,11 @@
 <resources>
 <string name="app_name">Połączyć</string>
 <string name="button_text_next">Następny</string>
-<string name="button_text_restart">Uruchom ponownie</string>
 <string name="button_text_rate">Oceniać</string>
 <string name="button_text_more">Jeszcze</string>
 <string name="button_text_menu">Menu</string>
 <string name="button_text_start">Początek</string>
 <string name="button_text_options">Opcje</string>
-<string name="button_text_exit">Wyjście</string>
 <string name="button_text_tutorial">Seminarium</string>
 <string name="button_text_play">Grać</string>
 <string name="button_text_leaderboard">Tablica wyników</string>
@@ -17,7 +15,6 @@
 <string name="vibrate_off">Wibracja: Wył</string>
 <string name="sound_on">Dzwięk włączony</string>
 <string name="sound_off">Wyłączyć dzwięk</string>
-<string name="text_header_level_select">Poziomy</string>
 <string name="text_header_shape">Kształt:</string>
 <string name="tutorial_instructions_1">Część samouczka 1 \n Aby rozwiązać problem, musisz połączyć wszystkie rury</string>
 <string name="tutorial_instructions_2">Część samouczka 2 \nPodłącz rury, które mają zostać obrócone. </string>

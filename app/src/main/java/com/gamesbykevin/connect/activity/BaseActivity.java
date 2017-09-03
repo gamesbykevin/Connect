@@ -3,14 +3,13 @@ package com.gamesbykevin.connect.activity;
 import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.util.SparseArray;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.gamesbykevin.androidframeworkv2.util.UtilityHelper;
+import com.gamesbykevin.connect.util.UtilityHelper;
 import com.gamesbykevin.connect.R;
 import com.gamesbykevin.connect.board.Board;
-
-import java.util.HashMap;
 
 import static android.view.View.INVISIBLE;
 import static android.view.View.VISIBLE;
@@ -21,15 +20,15 @@ import static android.view.View.VISIBLE;
 public abstract class BaseActivity extends com.gamesbykevin.androidframeworkv2.activity.BaseActivity {
 
     //our social media urls etc....
-    public static final String URL_YOUTUBE = "https://youtube.com/gamesbykevin";
-    public static final String URL_FACEBOOK = "https://facebook.com/gamesbykevin";
-    public static final String URL_TWITTER = "https://twitter.com/gamesbykevin";
-    public static final String URL_INSTAGRAM = "https://www.instagram.com/gamesbykevin";
-    public static final String URL_WEBSITE = "http://gamesbykevin.com";
-    public static final String URL_RATE = "https://play.google.com/store/apps/details?id=com.gamesbykevin.connect";
+    private static final String URL_YOUTUBE = "https://youtube.com/gamesbykevin";
+    private static final String URL_FACEBOOK = "https://facebook.com/gamesbykevin";
+    private static final String URL_TWITTER = "https://twitter.com/gamesbykevin";
+    private static final String URL_INSTAGRAM = "https://www.instagram.com/gamesbykevin";
+    private static final String URL_WEBSITE = "http://gamesbykevin.com";
+    private static final String URL_RATE = "https://play.google.com/store/apps/details?id=com.gamesbykevin.connect";
 
     //collection of music
-    private static HashMap<Integer, MediaPlayer> SOUND;
+    private static SparseArray<MediaPlayer> SOUND;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +46,7 @@ public abstract class BaseActivity extends com.gamesbykevin.androidframeworkv2.a
         if (SOUND == null) {
 
             //create new list
-            SOUND = new HashMap<>();
+            SOUND = new SparseArray<>();
             loadSound(R.raw.menu);
             loadSound(R.raw.theme_square);
             loadSound(R.raw.theme_hexagon);
@@ -77,7 +76,7 @@ public abstract class BaseActivity extends com.gamesbykevin.androidframeworkv2.a
         SOUND.put(resId, MediaPlayer.create(this, resId));
     }
 
-    public void playTheme() {
+    protected void playTheme() {
 
         //stop all audio
         stopSound();
@@ -99,7 +98,7 @@ public abstract class BaseActivity extends com.gamesbykevin.androidframeworkv2.a
         }
     }
 
-    public void playSong(final int resId) {
+    protected void playSong(final int resId) {
         playSound(resId, false, true);
     }
 
@@ -107,11 +106,11 @@ public abstract class BaseActivity extends com.gamesbykevin.androidframeworkv2.a
         playSound(resId, false, false);
     }
 
-    public void playSound(final int resId, boolean restart, boolean loop) {
+    private void playSound(final int resId, boolean restart, boolean loop) {
 
         try {
             //if there is no sound, we can't play it
-            if (SOUND == null || SOUND.isEmpty())
+            if (SOUND == null || SOUND.size() < 1)
                 return;
 
             //we can't play if the sound is not enabled
@@ -154,9 +153,10 @@ public abstract class BaseActivity extends com.gamesbykevin.androidframeworkv2.a
     private void destroySound() {
 
         if (SOUND != null) {
-            for (Integer resId : SOUND.keySet()) {
-                stopSound(resId);
-                SOUND.get(resId).release();
+            for (int i = 0; i < SOUND.size(); i++) {
+                final int key = SOUND.keyAt(i);
+                stopSound(key);
+                SOUND.get(key).release();
             }
 
             SOUND.clear();
@@ -164,18 +164,19 @@ public abstract class BaseActivity extends com.gamesbykevin.androidframeworkv2.a
         }
     }
 
-    public void stopSound() {
+    protected void stopSound() {
 
         if (SOUND != null) {
-            for (Integer key : SOUND.keySet()) {
+            for (int i = 0; i < SOUND.size(); i++) {
+                final int key = SOUND.keyAt(i);
                 stopSound(key);
             }
         }
     }
 
-    public void stopSound(final int resId) {
+    private void stopSound(final int resId) {
         try {
-            if (SOUND != null && !SOUND.isEmpty() && SOUND.get(resId) != null) {
+            if (SOUND != null && SOUND.size() > 0 && SOUND.get(resId) != null) {
 
                 //get the song and stop if playing
                 if (SOUND.get(resId).isPlaying() || SOUND.get(resId).isLooping())

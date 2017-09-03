@@ -2,13 +2,11 @@
 <resources>
 <string name="app_name">Collegare</string>
 <string name="button_text_next">Il prossimo</string>
-<string name="button_text_restart">Ricomincia</string>
 <string name="button_text_rate">Vota</string>
 <string name="button_text_more">Di Più</string>
 <string name="button_text_menu">Menu</string>
 <string name="button_text_start">Inizio</string>
 <string name="button_text_options">Opzioni</string>
-<string name="button_text_exit">Uscita</string>
 <string name="button_text_tutorial">lezione</string>
 <string name="button_text_play">Giocare</string>
 <string name="button_text_leaderboard">Classifica</string>
@@ -17,7 +15,6 @@
 <string name="vibrate_off">Vibrare: Spento</string>
 <string name="sound_on">Suono acceso</string>
 <string name="sound_off">Audio Disattivato</string>
-<string name="text_header_level_select">livelli</string>
 <string name="text_header_shape">Forma:</string>
 <string name="tutorial_instructions_1">Tutorial Parte 1 \nPer risolvere dovete collegare insieme tutti i tubi</string>
 <string name="tutorial_instructions_2">Tutorial Parte 2 \nUtilizzare i tubi per ruotare. </string>

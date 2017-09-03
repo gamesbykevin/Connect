@@ -2,13 +2,11 @@
 <resources>
 <string name="app_name">जुडिये</string>
 <string name="button_text_next">आगामी</string>
-<string name="button_text_restart">पुनः आरंभ करें</string>
 <string name="button_text_rate">मूल्यांकन करें</string>
 <string name="button_text_more">अधिक</string>
 <string name="button_text_menu">मेन्यू</string>
 <string name="button_text_start">प्रारंभ</string>
 <string name="button_text_options">विकल्प</string>
-<string name="button_text_exit">बाहर जाएं</string>
 <string name="button_text_tutorial">ट्यूटोरियल</string>
 <string name="button_text_play">प्ले</string>
 <string name="button_text_leaderboard">लीडरबोर्ड</string>
@@ -17,7 +15,6 @@
 <string name="vibrate_off">कंपन: बंद</string>
 <string name="sound_on">पर ध्वनि</string>
 <string name="sound_off">चिल्लाना</string>
-<string name="text_header_level_select">स्तर</string>
 <string name="text_header_shape">आकार:</string>
 <string name="tutorial_instructions_1">ट्यूटोरियल भाग 1 \n हल करने के लिए आपको सभी पाइप एक साथ जोड़ना होगा</string>
 <string name="tutorial_instructions_2">ट्यूटोरियल भाग 2 \n पाइप को घुमाने के लिए छूएं। </string>

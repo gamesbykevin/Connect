@@ -21,9 +21,6 @@ public class TutorialPageFragment extends Fragment {
     //the fragment's page number
     private int pageNumber;
 
-    //store our view reference
-    private ViewGroup view;
-
     /**
      * Factory method for this fragment class.
      * @param pageNumber The desired page #
@@ -54,10 +51,10 @@ public class TutorialPageFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         //inflate the layout to access the ui elements
-        this.view = (ViewGroup) inflater.inflate(R.layout.fragment_tutorial_page, container, false);
+        ViewGroup view = (ViewGroup) inflater.inflate(R.layout.fragment_tutorial_page, container, false);
 
-        ImageView imageView = (ImageView)view.findViewById(R.id.tutorialImage);
-        TextView textView = (TextView)view.findViewById(R.id.instructionsText);
+        ImageView imageView = (ImageView) view.findViewById(R.id.tutorialImage);
+        TextView textView = (TextView) view.findViewById(R.id.instructionsText);
 
         final int resIdImage;
         final int resIdText;

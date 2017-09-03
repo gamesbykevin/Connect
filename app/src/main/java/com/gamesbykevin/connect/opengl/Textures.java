@@ -7,10 +7,10 @@ import android.opengl.GLES20;
 import android.opengl.GLUtils;
 import android.opengl.Matrix;
 
-import com.gamesbykevin.androidframeworkv2.util.UtilityHelper;
+import com.gamesbykevin.connect.util.UtilityHelper;
 import com.gamesbykevin.connect.R;
 
-import static com.gamesbykevin.androidframeworkv2.util.UtilityHelper.DEBUG;
+import static com.gamesbykevin.connect.util.UtilityHelper.DEBUG;
 
 /**
  * Created by Kevin on 7/23/2017.

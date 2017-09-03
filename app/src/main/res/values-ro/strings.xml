@@ -2,13 +2,11 @@
 <resources>
 <string name="app_name">Conectați</string>
 <string name="button_text_next">Următor →</string>
-<string name="button_text_restart">Repornire</string>
 <string name="button_text_rate">rată</string>
 <string name="button_text_more">Mai Mult</string>
 <string name="button_text_menu">Meniul</string>
 <string name="button_text_start">start</string>
 <string name="button_text_options">Opțiuni</string>
-<string name="button_text_exit">Ieșire</string>
 <string name="button_text_tutorial">Tutorial</string>
 <string name="button_text_play">a juca</string>
 <string name="button_text_leaderboard">Leaderboard</string>
@@ -17,7 +15,6 @@
 <string name="vibrate_off">Vibrați: Oprit</string>
 <string name="sound_on">Sunet: Activat</string>
 <string name="sound_off">Fara sunet</string>
-<string name="text_header_level_select">niveluri</string>
 <string name="text_header_shape">Formă:</string>
 <string name="tutorial_instructions_1">Tutorial Partea 1 \nPentru a rezolva trebuie să conectați toate conductele împreună</string>
 <string name="tutorial_instructions_2">Tutorial Partea 2 \nAduceți robinetul să se rotească. </string>

@@ -3,7 +3,7 @@ package com.gamesbykevin.connect.board;
 import android.content.SharedPreferences;
 
 import com.gamesbykevin.androidframeworkv2.base.Disposable;
-import com.gamesbykevin.androidframeworkv2.util.UtilityHelper;
+import com.gamesbykevin.connect.util.UtilityHelper;
 import com.gamesbykevin.connect.R;
 import com.gamesbykevin.connect.activity.BaseActivity;
 import com.google.gson.reflect.TypeToken;
@@ -12,7 +12,7 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import static com.gamesbykevin.androidframeworkv2.util.UtilityHelper.DEBUG;
+import static com.gamesbykevin.connect.util.UtilityHelper.DEBUG;
 
 /**
  * Created by Kevin on 8/27/2017.
@@ -20,11 +20,10 @@ import static com.gamesbykevin.androidframeworkv2.util.UtilityHelper.DEBUG;
 
 public class Boards implements Disposable {
 
-    //base activity reference
-    private final BaseActivity activity;
-
     //this will contain all the stats for our levels
     private HashMap<Board.Shape, ArrayList<Integer>> data;
+
+    private final String statsKey;
 
     public Boards(BaseActivity activity) {
 
@@ -34,12 +33,12 @@ public class Boards implements Disposable {
         //get our data from the shared preferences
         this.data = (HashMap<Board.Shape, ArrayList<Integer>>)activity.getObjectValue(R.string.game_stats_file_key, type);
 
+        //get the stats key
+        this.statsKey = activity.getString(R.string.game_stats_file_key);
+
         //if still null create hash map
         if (this.data == null)
             this.data = new HashMap<>();
-
-        //store activity reference
-        this.activity = activity;
     }
 
     @Override
@@ -139,20 +138,20 @@ public class Boards implements Disposable {
     /**
      * Store the data in the shared preferences
      */
-    public void save() {
+    private void save() {
 
         //get the editor so we can change the shared preferences
-        SharedPreferences.Editor editor = activity.getSharedPreferences().edit();
+        SharedPreferences.Editor editor = BaseActivity.getSharedPreferences().edit();
 
         //convert object to json string
-        final String json = activity.GSON.toJson(data);
+        final String json = BaseActivity.GSON.toJson(data);
 
         //print data
         if (DEBUG)
             UtilityHelper.logEvent(json);
 
         //convert to json string and store in preferences
-        editor.putString(activity.getString(R.string.game_stats_file_key), json);
+        editor.putString(statsKey, json);
 
         //make it final by committing the change
         editor.commit();

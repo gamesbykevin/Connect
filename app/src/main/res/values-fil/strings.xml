@@ -2,13 +2,11 @@
 <resources>
 <string name="app_name">Ikonekta</string>
 <string name="button_text_next">Susunod</string>
-<string name="button_text_restart">I-restart</string>
 <string name="button_text_rate">Rate</string>
 <string name="button_text_more">Higit pa</string>
 <string name="button_text_menu">Menu</string>
 <string name="button_text_start">Magsimula</string>
 <string name="button_text_options">Mga Opsyon</string>
-<string name="button_text_exit">Lumabas</string>
 <string name="button_text_tutorial">Pagtuturo</string>
 <string name="button_text_play">Maglaro</string>
 <string name="button_text_leaderboard">Leaderboard</string>
@@ -17,7 +15,6 @@
 <string name="vibrate_off">Mag-vibrate: Naka-off</string>
 <string name="sound_on">Tunog: Bukas</string>
 <string name="sound_off">Tunog: Sarado</string>
-<string name="text_header_level_select">Mga Antas</string>
 <string name="text_header_shape">Hugis:</string>
 <string name="tutorial_instructions_1">Tutorial Part 1 \nUpang malutas kailangan mong ikonekta ang lahat ng mga tubo magkasama</string>
 <string name="tutorial_instructions_2">Tutorial Part 2 \nTingnan ang mga pipa upang iikot. </string>

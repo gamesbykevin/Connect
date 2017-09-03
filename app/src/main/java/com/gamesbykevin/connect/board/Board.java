@@ -2,10 +2,10 @@ package com.gamesbykevin.connect.board;
 
 import android.opengl.GLES20;
 
+import com.gamesbykevin.connect.base.Entity;
 import com.gamesbykevin.androidframeworkv2.maze.Maze;
 import com.gamesbykevin.androidframeworkv2.maze.algorithm.Prims;
-import com.gamesbykevin.androidframeworkv2.util.UtilityHelper;
-import com.gamesbykevin.connect.entity.Entity;
+import com.gamesbykevin.connect.util.UtilityHelper;
 import com.gamesbykevin.connect.opengl.Textures;
 import com.gamesbykevin.connect.shape.CustomShape;
 import com.gamesbykevin.connect.activity.GameActivity;

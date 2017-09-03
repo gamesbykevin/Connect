@@ -2,7 +2,7 @@ package com.gamesbykevin.connect.opengl;
 
 import android.opengl.GLES20;
 
-import com.gamesbykevin.androidframeworkv2.util.UtilityHelper;
+import com.gamesbykevin.connect.util.UtilityHelper;
 
 /**
  * Created by Kevin on 8/13/2017.

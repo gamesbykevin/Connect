@@ -5,11 +5,11 @@ import android.opengl.GLSurfaceView;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 
-import com.gamesbykevin.androidframeworkv2.base.Entity;
-import com.gamesbykevin.androidframeworkv2.util.UtilityHelper;
+import com.gamesbykevin.connect.base.Entity;
+import com.gamesbykevin.connect.util.UtilityHelper;
 import com.gamesbykevin.connect.game.Game;
 
-import static com.gamesbykevin.androidframeworkv2.util.UtilityHelper.DEBUG;
+import static com.gamesbykevin.connect.util.UtilityHelper.DEBUG;
 import static com.gamesbykevin.connect.activity.GameActivity.getGame;
 import static com.gamesbykevin.connect.game.Game.ZOOM_SCALE_MOTION_X;
 import static com.gamesbykevin.connect.game.Game.ZOOM_SCALE_MOTION_Y;
@@ -78,9 +78,6 @@ public class OpenGLSurfaceView extends GLSurfaceView implements Runnable {
     //keep track of time for debug purposes
     private long timestamp = System.currentTimeMillis();
 
-    //store context to access resources
-    private final Context activity;
-
     //how many fingers are touching the screen
     private int fingers = 0;
 
@@ -125,9 +122,6 @@ public class OpenGLSurfaceView extends GLSurfaceView implements Runnable {
         //call parent constructor
         super(activity, attrs);
 
-        //store our activity reference
-        this.activity = activity;
-
         //create an OpenGL ES 1.0 context.
         setEGLContextClientVersion(OPEN_GL_VERSION);
 
@@ -135,7 +129,7 @@ public class OpenGLSurfaceView extends GLSurfaceView implements Runnable {
         setPreserveEGLContextOnPause(true);
 
         //create a new instance of our renderer
-        this.openGlRenderer = new OpenGLRenderer(this.activity);
+        this.openGlRenderer = new OpenGLRenderer(activity);
 
         //set the renderer for drawing on the gl surface view
         setRenderer(getOpenGlRenderer());
@@ -251,7 +245,7 @@ public class OpenGLSurfaceView extends GLSurfaceView implements Runnable {
         remaining = (remaining <= 0) ? 1 : remaining;
 
         //sleep the thread to maintain a steady game speed
-        this.thread.sleep(remaining);
+        thread.sleep(remaining);
 
         //if debugging track performance
         if (DEBUG)
@@ -286,7 +280,7 @@ public class OpenGLSurfaceView extends GLSurfaceView implements Runnable {
         try
         {
             //if we aren't updating the game
-            if (getGame().STEP != Game.Step.Updating)
+            if (Game.STEP != Game.Step.Updating)
                 return true;
 
             //we can't continue if the textures have not yet loaded
@@ -375,12 +369,12 @@ public class OpenGLSurfaceView extends GLSurfaceView implements Runnable {
                                     if (pinchDistance > distance) {
 
                                         //if the distance is greater we are zooming in
-                                        getOpenGlRenderer().adjustZoom(ZOOM_RATIO_ADJUST);
+                                        OpenGLRenderer.adjustZoom(ZOOM_RATIO_ADJUST);
 
                                     } else {
 
                                         //if the distance is shorter we are zooming out
-                                        getOpenGlRenderer().adjustZoom(-ZOOM_RATIO_ADJUST);
+                                        OpenGLRenderer.adjustZoom(-ZOOM_RATIO_ADJUST);
                                     }
 
                                     //reset pinch distance so if doesn't zoom too fast
@@ -438,8 +432,8 @@ public class OpenGLSurfaceView extends GLSurfaceView implements Runnable {
 
                 //adjust the coordinates based on the window displayed
                 if (getOpenGlRenderer() != null) {
-                    adjustX += getOpenGlRenderer().LEFT;
-                    adjustY += getOpenGlRenderer().TOP;
+                    adjustX += OpenGLRenderer.LEFT;
+                    adjustY += OpenGLRenderer.TOP;
                 }
 
                 //update game accordingly

@@ -5,12 +5,12 @@ import android.opengl.GLES20;
 import android.opengl.GLSurfaceView.Renderer;
 import android.opengl.Matrix;
 
-import com.gamesbykevin.androidframeworkv2.util.UtilityHelper;
+import com.gamesbykevin.connect.util.UtilityHelper;
 
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
 
-import static com.gamesbykevin.androidframeworkv2.util.UtilityHelper.DEBUG;
+import static com.gamesbykevin.connect.util.UtilityHelper.DEBUG;
 import static com.gamesbykevin.connect.activity.GameActivity.getGame;
 import static com.gamesbykevin.connect.game.Game.RESET_ZOOM;
 
@@ -163,6 +163,10 @@ public class OpenGLRenderer implements Renderer {
         ZOOM_SCALE_MOTION_X = ((float)NEW_WIDTH  / (float)screenWidth);
         ZOOM_SCALE_MOTION_Y = ((float)NEW_HEIGHT / (float)screenHeight);
 
+        //update the offset (x, y)
+        //OFFSET_X = ;
+        //OFFSET_Y = ;
+
         //every time we zoom, reset the offset (x, y)
         OFFSET_X = 0f;
         OFFSET_Y = 0f;
@@ -222,8 +226,8 @@ public class OpenGLRenderer implements Renderer {
     public void onSurfaceChanged(GL10 unused, int width, int height) {
 
         //store screen dimensions
-        this.screenWidth = width;
-        this.screenHeight = height;
+        screenWidth = width;
+        screenHeight = height;
 
         //make the viewport fullscreen on the users phone by using their screen width/height
         GLES20.glViewport(0, 0, (int)screenWidth, (int)screenHeight);
@@ -249,8 +253,8 @@ public class OpenGLRenderer implements Renderer {
         Matrix.multiplyMM(mtrxProjectionAndView, 0, mtrxProjection, 0, mtrxView, 0);
 
         //store the ratio when touching the screen
-        this.originalScaleMotionX = (float)WIDTH  / (float)screenWidth;
-        this.originalScaleMotionY = (float)HEIGHT / (float)screenHeight;
+        originalScaleMotionX = (float)WIDTH  / (float)screenWidth;
+        originalScaleMotionY = (float)HEIGHT / (float)screenHeight;
 
         //set the zoom values same as original
         if (RESET_ZOOM)

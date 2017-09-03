@@ -2,13 +2,11 @@
 <resources>
 <string name="app_name">ต่อ</string>
 <string name="button_text_next">ต่อไป</string>
-<string name="button_text_restart">เริ่มต้นใหม่</string>
 <string name="button_text_rate">อัตรา</string>
 <string name="button_text_more">มากกว่า</string>
 <string name="button_text_menu">เมนู</string>
 <string name="button_text_start">เริ่มต้น</string>
 <string name="button_text_options">ตัวเลือก</string>
-<string name="button_text_exit">ทางออก</string>
 <string name="button_text_tutorial">เกี่ยวกับการสอน</string>
 <string name="button_text_play">เล่น</string>
 <string name="button_text_leaderboard">ลีดเดอร์บอร์ด</string>
@@ -17,7 +15,6 @@
 <string name="vibrate_off">สั่น: ปิด</string>
 <string name="sound_on">เสียง: เปิด</string>
 <string name="sound_off">ปิดเสียง</string>
-<string name="text_header_level_select">ระดับ</string>
 <string name="text_header_shape">รูปร่าง:</string>
 <string name="tutorial_instructions_1">บทที่ 1 บทที่ 1 \n หากต้องการแก้ปัญหาให้เชื่อมต่อท่อทั้งหมดเข้าด้วยกัน</string>
 <string name="tutorial_instructions_2">บทที่ 2 การสอน \n แตะท่อเพื่อหมุน </string>

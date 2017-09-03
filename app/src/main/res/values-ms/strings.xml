@@ -2,13 +2,11 @@
 <resources>
 <string name="app_name">Sambungkan</string>
 <string name="button_text_next">Seterusnya</string>
-<string name="button_text_restart">Mula semula</string>
 <string name="button_text_rate">Kadar</string>
 <string name="button_text_more">Lebih banyak</string>
 <string name="button_text_menu">Menu</string>
 <string name="button_text_start">Mulakan</string>
 <string name="button_text_options">Pilihan</string>
-<string name="button_text_exit">Keluar</string>
 <string name="button_text_tutorial">Tutorial</string>
 <string name="button_text_play">Bermain</string>
 <string name="button_text_leaderboard">Leaderboard</string>
@@ -17,7 +15,6 @@
 <string name="vibrate_off">Getaran: Tidak aktif</string>
 <string name="sound_on">Bunyi: Aktif</string>
 <string name="sound_off">Bunyi: Tidak aktif</string>
-<string name="text_header_level_select">Tahap</string>
 <string name="text_header_shape">Bentuk:</string>
 <string name="tutorial_instructions_1">Tutorial Bahagian 1 \nUntuk menyelesaikannya, anda perlu menyambungkan semua paip bersama-sama</string>
 <string name="tutorial_instructions_2">Tutorial Bahagian 2 \nLampu paip akan berputar. </string>

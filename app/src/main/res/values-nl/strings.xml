@@ -2,13 +2,11 @@
 <resources>
 <string name="app_name">Aansluiten</string>
 <string name="button_text_next">volgende</string>
-<string name="button_text_restart">Herstarten</string>
 <string name="button_text_rate">tarief</string>
 <string name="button_text_more">Meer</string>
 <string name="button_text_menu">Menu</string>
 <string name="button_text_start">Begin</string>
 <string name="button_text_options">opties</string>
-<string name="button_text_exit">Uitgang</string>
 <string name="button_text_tutorial">Tutorial</string>
 <string name="button_text_play">Spelen</string>
 <string name="button_text_leaderboard">Scorebord</string>
@@ -17,7 +15,6 @@
 <string name="vibrate_off">Vibreren: Uit</string>
 <string name="sound_on">Geluid aan</string>
 <string name="sound_off">Geluid uit</string>
-<string name="text_header_level_select">levels</string>
 <string name="text_header_shape">Vorm:</string>
 <string name="tutorial_instructions_1">Tutorial Deel 1 \nOm u op te lossen moet u alle leidingen samen verbinden</string>
 <string name="tutorial_instructions_2">Tutorial Part 2 \nPijp de leidingen om te draaien. </string>

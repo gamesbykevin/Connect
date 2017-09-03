@@ -1,7 +1,7 @@
 package com.gamesbykevin.connect.board;
 
 import com.gamesbykevin.androidframeworkv2.maze.Room;
-import com.gamesbykevin.androidframeworkv2.util.UtilityHelper;
+import com.gamesbykevin.connect.util.UtilityHelper;
 import com.gamesbykevin.connect.shape.CustomShape;
 import com.gamesbykevin.connect.shape.Diamond;
 import com.gamesbykevin.connect.shape.Hexagon;
@@ -644,7 +644,7 @@ public class BoardHelper {
         }
     }
 
-    private static final void addShape(Board board, Room room, float x, float y, int col, int row, int index) {
+    private static void addShape(Board board, Room room, float x, float y, int col, int row, int index) {
 
         CustomShape tmp = null;
 

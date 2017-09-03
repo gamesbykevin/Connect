@@ -6,7 +6,7 @@
     android:visibility="invisible">
 
     <ToggleButton
-        android:layout_marginLeft="30dp"
+        android:layout_marginStart="30dp"
         android:layout_marginBottom="20dp"
         android:layout_width="50dp"
         android:layout_height="50dp"
@@ -16,23 +16,23 @@
         android:textOff=""
         android:textOn=""
         android:layout_gravity="bottom"
-        android:gravity="left"
+        android:gravity="start"
         android:onClick="onClickAutoRotate"
         android:id="@+id/ButtonAutoRotate"
         />
 
     <LinearLayout
-        android:layout_marginRight="10dp"
+        android:layout_marginEnd="10dp"
         android:layout_marginTop="10dp"
-        android:gravity="right"
+        android:gravity="end"
         android:layout_gravity="top"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-            <ImageView style="@style/LevelSelectCustomText" android:id="@+id/time1" android:src="@drawable/zero_large" />
-            <ImageView style="@style/LevelSelectCustomText" android:id="@+id/time2" android:src="@drawable/zero_large" />
-            <ImageView style="@style/LevelSelectCustomText" android:src="@drawable/colon_large" />
-            <ImageView style="@style/LevelSelectCustomText" android:id="@+id/time3" android:src="@drawable/zero_large" />
-            <ImageView style="@style/LevelSelectCustomText" android:id="@+id/time4" android:src="@drawable/zero_large" />
+            <ImageView android:contentDescription="@null" style="@style/LevelSelectCustomText" android:id="@+id/time1" android:src="@drawable/zero_large" />
+            <ImageView android:contentDescription="@null" style="@style/LevelSelectCustomText" android:id="@+id/time2" android:src="@drawable/zero_large" />
+            <ImageView android:contentDescription="@null" style="@style/LevelSelectCustomText" android:src="@drawable/colon_large" />
+            <ImageView android:contentDescription="@null" style="@style/LevelSelectCustomText" android:id="@+id/time3" android:src="@drawable/zero_large" />
+            <ImageView android:contentDescription="@null" style="@style/LevelSelectCustomText" android:id="@+id/time4" android:src="@drawable/zero_large" />
     </LinearLayout>
 
 
