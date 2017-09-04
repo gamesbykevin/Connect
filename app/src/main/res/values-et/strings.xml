@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<string name="button_text_next">Järgmine</string>
+<string name="button_text_rate">Hinda</string>
+<string name="button_text_more">Veel</string>
+<string name="button_text_menu">Menüü</string>
+<string name="button_text_start">Alusta</string>
+<string name="button_text_options">Valikud</string>
+<string name="button_text_tutorial">Juhendaja</string>
+<string name="button_text_play">Mängi</string>
+<string name="button_text_leaderboard">Leaderboard</string>
+<string name="button_text_achievements">Saavutused</string>
+<string name="exit_prompt">Väljumiseks vajutage uuesti</string>
+<string name="vibrate_on">Vibreerima: sisse lülitatud</string>
+<string name="vibrate_off">Vibreerima: välja lülitatud</string>
+<string name="sound_on">Heli: On</string>
+<string name="sound_off">Heli: väljas</string>
+<string name="text_header_shape">Kuju:</string>
+<string name="tutorial_instructions_1">Juhendaja 1. osa \\ nKõik lahenduseks peate ühendama kõik torud</string>
+<string name="tutorial_instructions_2">Juhendaja 2. osa \\ nToordige torusid pöörlema. </string>
+<string name="tutorial_instructions_3">Õpetus 3. osa \\ nKui kõik torud on ühendatud, võite</string>
+<string name="tutorial_instructions_4">Juhendaja 4. osa \\ nTühista sõrm, kui soovite lauda teisaldada</string>
+<string name="tutorial_instructions_5">Juhendaja 5. osa \\ nSammu saab ka suurendada ja vähendada, kui sa 2 sõrme pritsid</string>
+<string name="tutorial_instructions_6">Õpetus 6. osa \\ nVali automaatrežiimi lubamiseks magnet</string>
+<string name="sign_in_other_error">Sisselogimisega tekkis probleem, palun proovige hiljem uuesti.</string>
+<string name="sign_in_failed">Sisselogimine ebaõnnestus. Kontrollige oma võrguühendust ja proovige uuesti.</string>
+<string name="app_misconfigured">Rakendus on valesti seadistatud. </string>
+<string name="license_failed">Litsentside kontroll nurjus.</string>
+<string name="unknown_error">Tundmatu viga.</string>
+<string name="UNKNOWN_ERROR">Tundmatu viga.</string>
+<string name="gamehelper_sign_in_failed">Sisselogimine ebaõnnestus. Kontrollige oma võrguühendust ja proovige uuesti.</string>
+<string name="gamehelper_app_misconfigured">Rakendus on valesti seadistatud. </string>
+<string name="gamehelper_license_failed">Litsentside kontroll nurjus.</string>
+<string name="gamehelper_unknown_error">Tundmatu viga.</string>
+</resources>

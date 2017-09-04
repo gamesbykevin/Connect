@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<string name="button_text_next">ਅਗਲਾ</string>
+<string name="button_text_rate">ਰੇਟ</string>
+<string name="button_text_more">ਹੋਰ</string>
+<string name="button_text_menu">ਮੀਨੂ</string>
+<string name="button_text_start">ਸ਼ੁਰੂ ਕਰੋ</string>
+<string name="button_text_options">ਚੋਣਾਂ</string>
+<string name="button_text_tutorial">ਟਿਊਟੋਰਿਅਲ</string>
+<string name="button_text_play">ਖੇਡੋ</string>
+<string name="button_text_leaderboard">ਲੀਡਰਬੋਰਡ</string>
+<string name="button_text_achievements">ਪ੍ਰਾਪਤੀਆਂ</string>
+<string name="exit_prompt">ਬਾਹਰ ਜਾਣ ਲਈ ਦੁਬਾਰਾ ਦਬਾਓ</string>
+<string name="vibrate_on">ਵਾਈਬ੍ਰੇਟ: ਚਾਲੂ</string>
+<string name="vibrate_off">ਵਾਈਬ੍ਰੇਟ: ਬੰਦ</string>
+<string name="sound_on">ਅਵਾਜ਼: ਚਾਲੂ</string>
+<string name="sound_off">ਅਵਾਜ਼: ਬੰਦ</string>
+<string name="text_header_shape">ਆਕਾਰ:</string>
+<string name="tutorial_instructions_1">ਟਿਊਟੋਰਿਅਲ ਭਾਗ 1 \\ n ਹੱਲ ਕਰਨ ਲਈ ਤੁਹਾਨੂੰ ਸਾਰੇ ਪਾਈਪਾਂ ਨੂੰ ਇਕੱਠੇ ਜੋੜਨਾ ਪੈਂਦਾ ਹੈ</string>
+<string name="tutorial_instructions_2">ਟਿਊਟੋਰਿਅਲ ਭਾਗ 2 \\ n ਪਾਈਪਾਂ ਨੂੰ ਘੁੰਮਾਉਣ ਲਈ ਛੋਹਵੋ. </string>
+<string name="tutorial_instructions_3">ਟਿਊਟੋਰਿਅਲ ਭਾਗ 3 \\ n ਜਦੋਂ ਸਾਰੀਆਂ ਪਾਈਪਾਂ ਨਾਲ ਕੁਨੈਕਟ ਹੋਣ ਤੋਂ ਬਾਅਦ ਤੁਸੀਂ ਜਿੱਤ ਜਾਂਦੇ ਹੋ</string>
+<string name="tutorial_instructions_4">ਟਿਊਟੋਰਿਅਲ ਭਾਗ 4 \\ n ਜੇ ਤੁਸੀਂ ਬੋਰਡ ਨੂੰ ਮੂਵ ਕਰਨਾ ਚਾਹੁੰਦੇ ਹੋ ਤਾਂ ਆਪਣੀ ਉਂਗਲੀ ਨੂੰ ਖੋਦੋ</string>
+<string name="tutorial_instructions_5">ਟਿਊਟੋਰਿਅਲ ਭਾਗ 5 \\ n ਜਦੋਂ ਤੁਸੀਂ 2 ਅੰਗਣਾਂ ਨੂੰ ਵੱਢੋਗੇ ਤਾਂ ਤੁਸੀਂ ਜ਼ੂਮ ਇਨ ਅਤੇ ਆਊਟ ਵੀ ਕਰ ਸਕਦੇ ਹੋ</string>
+<string name="tutorial_instructions_6">ਟਿਊਟੋਰਿਅਲ ਭਾਗ 6 \\ n ਆਟੋ ਰੋਟੇਟ ਨੂੰ ਯੋਗ ਕਰਨ ਲਈ ਚੁੰਬਕ ਚੁਣੋ</string>
+<string name="sign_in_other_error">ਸਾਈਨ-ਇਨ ਕਰਨ ਦੇ ਨਾਲ ਕੋਈ ਸਮੱਸਿਆ ਸੀ, ਕਿਰਪਾ ਕਰਕੇ ਬਾਅਦ ਵਿੱਚ ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ.</string>
+<string name="sign_in_failed">ਸਾਈਨ ਇਨ ਕਰਨ ਵਿੱਚ ਅਸਫਲ. ਕਿਰਪਾ ਕਰਕੇ ਆਪਣੇ ਨੈਟਵਰਕ ਕਨੈਕਸ਼ਨ ਦੀ ਜਾਂਚ ਕਰੋ ਅਤੇ ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ.</string>
+<string name="app_misconfigured">ਐਪਲੀਕੇਸ਼ਨ ਗਲਤ ਤਰੀਕੇ ਨਾਲ ਸੰਰਚਿਤ ਕੀਤੀ ਗਈ ਹੈ. </string>
+<string name="license_failed">ਲਾਇਸੈਂਸ ਜਾਂਚ ਫੇਲ੍ਹ ਹੋਈ.</string>
+<string name="unknown_error">ਅਣਜਾਣੀ ਗਲਤੀ.</string>
+<string name="UNKNOWN_ERROR">ਅਣਜਾਣੀ ਗਲਤੀ.</string>
+<string name="gamehelper_sign_in_failed">ਸਾਈਨ ਇਨ ਕਰਨ ਵਿੱਚ ਅਸਫਲ. ਕਿਰਪਾ ਕਰਕੇ ਆਪਣੇ ਨੈਟਵਰਕ ਕਨੈਕਸ਼ਨ ਦੀ ਜਾਂਚ ਕਰੋ ਅਤੇ ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ.</string>
+<string name="gamehelper_app_misconfigured">ਐਪਲੀਕੇਸ਼ਨ ਗਲਤ ਤਰੀਕੇ ਨਾਲ ਸੰਰਚਿਤ ਕੀਤੀ ਗਈ ਹੈ. </string>
+<string name="gamehelper_license_failed">ਲਾਇਸੈਂਸ ਜਾਂਚ ਫੇਲ੍ਹ ਹੋਈ.</string>
+<string name="gamehelper_unknown_error">ਅਣਜਾਣੀ ਗਲਤੀ.</string>
+</resources>

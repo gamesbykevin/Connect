@@ -10,6 +10,8 @@ import com.gamesbykevin.connect.util.UtilityHelper;
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
 
+import static com.gamesbykevin.connect.opengl.OpenGLSurfaceView.OFFSET_ORIGINAL_X;
+import static com.gamesbykevin.connect.opengl.OpenGLSurfaceView.OFFSET_ORIGINAL_Y;
 import static com.gamesbykevin.connect.util.UtilityHelper.DEBUG;
 import static com.gamesbykevin.connect.activity.GameActivity.getGame;
 import static com.gamesbykevin.connect.game.Game.RESET_ZOOM;
@@ -125,6 +127,8 @@ public class OpenGLRenderer implements Renderer {
         ZOOM_RATIO = ZOOM_DEFAULT;
         OFFSET_X = 0;
         OFFSET_Y = 0;
+        OFFSET_ORIGINAL_X = OFFSET_X;
+        OFFSET_ORIGINAL_Y = OFFSET_Y;
 
         //reset the display window
         LEFT = 0f;
@@ -164,12 +168,8 @@ public class OpenGLRenderer implements Renderer {
         ZOOM_SCALE_MOTION_Y = ((float)NEW_HEIGHT / (float)screenHeight);
 
         //update the offset (x, y)
-        //OFFSET_X = ;
-        //OFFSET_Y = ;
-
-        //every time we zoom, reset the offset (x, y)
-        OFFSET_X = 0f;
-        OFFSET_Y = 0f;
+        OFFSET_X = OFFSET_ORIGINAL_X * ZOOM_SCALE_MOTION_X;
+        OFFSET_Y = OFFSET_ORIGINAL_Y * ZOOM_SCALE_MOTION_Y;
 
         //calculate the zoom screen
         LEFT = mx - (NEW_WIDTH / 2);

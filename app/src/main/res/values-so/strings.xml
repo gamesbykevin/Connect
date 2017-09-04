@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<string name="button_text_next">Xiga</string>
+<string name="button_text_rate">Heerka</string>
+<string name="button_text_more">More</string>
+<string name="button_text_menu">Muujinta</string>
+<string name="button_text_start">Bilow</string>
+<string name="button_text_options">Fursadaha</string>
+<string name="button_text_tutorial">Tababar</string>
+<string name="button_text_play">Ciyaar</string>
+<string name="button_text_leaderboard">Hogaamiyaha</string>
+<string name="button_text_achievements">Guulaha</string>
+<string name="exit_prompt">Riix mar labaad si aad uga baxdo</string>
+<string name="vibrate_on">Tijaabi: On</string>
+<string name="vibrate_off">Tijaabi: Ka bax</string>
+<string name="sound_on">Muuqaalka: On</string>
+<string name="sound_off">Codka: Ka bax</string>
+<string name="text_header_shape">Qaab:</string>
+<string name="tutorial_instructions_1">Tababarka Qaybta 1aad \"Waxaad xallineysaa inaad isku xirto dhamaan tuubooyinka</string>
+<string name="tutorial_instructions_2">Tababarka Qaybta 2 \\ n Ku dhaji tuubooyinka si aad u leexiso. </string>
+<string name="tutorial_instructions_3">Tababarka Qaybta 3 \\ nDhammaan dhammaan tuubooyinka ayaa ku xiran inaad ku guuleysato</string>
+<string name="tutorial_instructions_4">Tababarka Qaybta 4aad Fartaada saar haddii aad rabto inaad u gudubto guddiga</string>
+<string name="tutorial_instructions_5">Tababarka Qaybta 5aad ■ Waxaad sidoo kale geli kartaa oo geli kartaa markaad qalloociso 2 farood</string>
+<string name="tutorial_instructions_6">Tababarka Qaybta 6 \\ n U xulo magnetka si aad ugu dhiirigeliso wadada baabuurta</string>
+<string name="sign_in_other_error">Waxaa jiray arrin la xiriirta saxiix, fadlan isku day markale.</string>
+<string name="sign_in_failed">Ku guul daraysatay inaad saxiixdo. Fadlan hubi xiriirinta shabakadaada oo mar kale isku day.</string>
+<string name="app_misconfigured">Codsiga si qaldan loo qaabeeyey. </string>
+<string name="license_failed">Jeega shatiga wuu guuldareystay</string>
+<string name="unknown_error">Qalad aan la aqoon.</string>
+<string name="UNKNOWN_ERROR">Qalad aan la aqoon.</string>
+<string name="gamehelper_sign_in_failed">Ku guul daraysatay inaad saxiixdo. Fadlan hubi xiriirinta shabakadaada oo mar kale isku day.</string>
+<string name="gamehelper_app_misconfigured">Codsiga si qaldan loo qaabeeyey. </string>
+<string name="gamehelper_license_failed">Jeega shatiga wuu guuldareystay</string>
+<string name="gamehelper_unknown_error">Qalad aan la aqoon.</string>
+</resources>

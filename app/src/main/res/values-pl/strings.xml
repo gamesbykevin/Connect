@@ -11,6 +11,7 @@
 <string name="button_text_play">Grać</string>
 <string name="button_text_leaderboard">Tablica wyników</string>
 <string name="button_text_achievements">Osiągnięcia</string>
+<string name="exit_prompt">Naciśnij ponownie, aby wyjść</string>
 <string name="vibrate_on">Wibracja: Włącz</string>
 <string name="vibrate_off">Wibracja: Wył</string>
 <string name="sound_on">Dzwięk włączony</string>

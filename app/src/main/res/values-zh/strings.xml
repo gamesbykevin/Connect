@@ -11,6 +11,7 @@
 <string name="button_text_play">玩</string>
 <string name="button_text_leaderboard">排行榜</string>
 <string name="button_text_achievements">成就</string>
+<string name="exit_prompt">再按一次退出</string>
 <string name="vibrate_on">振动：开</string>
 <string name="vibrate_off">振动：关</string>
 <string name="sound_on">声音：开</string>

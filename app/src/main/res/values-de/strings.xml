@@ -11,6 +11,7 @@
 <string name="button_text_play">Spielen</string>
 <string name="button_text_leaderboard">Bestenliste</string>
 <string name="button_text_achievements">Errungenschaften</string>
+<string name="exit_prompt">Zum Verlassen erneut drücken</string>
 <string name="vibrate_on">Vibrieren: Ein</string>
 <string name="vibrate_off">Vibrieren: Aus</string>
 <string name="sound_on">Ton an</string>

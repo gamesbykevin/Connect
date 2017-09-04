@@ -11,6 +11,7 @@
 <string name="button_text_play">Spelen</string>
 <string name="button_text_leaderboard">Scorebord</string>
 <string name="button_text_achievements">Prestaties</string>
+<string name="exit_prompt">Druk opnieuw om te verlaten</string>
 <string name="vibrate_on">Vibreren: Aan</string>
 <string name="vibrate_off">Vibreren: Uit</string>
 <string name="sound_on">Geluid aan</string>

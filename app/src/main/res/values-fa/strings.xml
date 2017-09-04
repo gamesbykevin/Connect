@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<string name="button_text_next">بعد</string>
+<string name="button_text_rate">نرخ</string>
+<string name="button_text_more">بیش</string>
+<string name="button_text_menu">فهرست</string>
+<string name="button_text_start">شروع کنید</string>
+<string name="button_text_options">گزینه ها</string>
+<string name="button_text_tutorial">آموزش</string>
+<string name="button_text_play">بازی</string>
+<string name="button_text_leaderboard">قهرمانی</string>
+<string name="button_text_achievements">دستاوردها</string>
+<string name="exit_prompt">دوباره برای خروج فشار دهید</string>
+<string name="vibrate_on">ارتعاش: روشن</string>
+<string name="vibrate_off">ارتعاش: خاموش</string>
+<string name="sound_on">صدا: روشن است</string>
+<string name="sound_off">قطع صدا</string>
+<string name="text_header_shape">شکل:</string>
+<string name="tutorial_instructions_1">بخش آموزشی 1 \\ n برای حل این مسئله شما باید همه لوله ها را با هم وصل کنید</string>
+<string name="tutorial_instructions_2">بخش آموزشی 2 \\ n لوله را برای چرخش لمس کنید. </string>
+<string name="tutorial_instructions_3">بخش آموزشی 3 \\ n پس از اینکه همه لوله ها متصل به شما پیروز می شوند</string>
+<string name="tutorial_instructions_4">قسمت آموزش بخش 4 \\ n اگر میخواهید هیئت مدیره را حرکت دهید، انگشت خود را بردارید</string>
+<string name="tutorial_instructions_5">قسمت آموزش بخش 5 \\ n همچنین هنگامی که شما 2 انگشت خرج می کنید، می توانید بزرگنمایی کنید</string>
+<string name="tutorial_instructions_6">بخش آموزشی 6 \\ n برای فعال کردن چرخش خودکار، آهنربا را انتخاب کنید</string>
+<string name="sign_in_other_error">یک مشکل با ورود به سیستم وجود داشت، لطفا بعدا دوباره امتحان کنید.</string>
+<string name="sign_in_failed">ورود به سیستم موفق نشد. لطفا اتصال شبکه خود را بررسی کنید و دوباره امتحان کنید.</string>
+<string name="app_misconfigured">برنامه نادرست پیکربندی شده است. </string>
+<string name="license_failed">بررسی مجوز انجام نشد</string>
+<string name="unknown_error">خطای ناشناخته.</string>
+<string name="UNKNOWN_ERROR">خطای ناشناخته.</string>
+<string name="gamehelper_sign_in_failed">ورود به سیستم موفق نشد. لطفا اتصال شبکه خود را بررسی کنید و دوباره امتحان کنید.</string>
+<string name="gamehelper_app_misconfigured">برنامه نادرست پیکربندی شده است. </string>
+<string name="gamehelper_license_failed">بررسی مجوز انجام نشد</string>
+<string name="gamehelper_unknown_error">خطای ناشناخته.</string>
+</resources>

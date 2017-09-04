@@ -11,6 +11,7 @@
 <string name="button_text_play">Игра</string>
 <string name="button_text_leaderboard">Леадербоард</string>
 <string name="button_text_achievements">Достигнућа</string>
+<string name="exit_prompt">Притисните поново да изађете</string>
 <string name="vibrate_on">Вибрирање: укључено</string>
 <string name="vibrate_off">Вибрирање: Искључено</string>
 <string name="sound_on">Звук: укључен</string>

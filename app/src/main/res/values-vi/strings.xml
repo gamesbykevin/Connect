@@ -11,6 +11,7 @@
 <string name="button_text_play">Chơi</string>
 <string name="button_text_leaderboard">Bảng xếp hạng</string>
 <string name="button_text_achievements">Thành tựu</string>
+<string name="exit_prompt">Nhấn lại để thoát</string>
 <string name="vibrate_on">Rung: Bật</string>
 <string name="vibrate_off">Rung: Tắt</string>
 <string name="sound_on">Âm thanh: Bật</string>

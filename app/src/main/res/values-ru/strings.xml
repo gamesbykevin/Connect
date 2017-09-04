@@ -11,6 +11,7 @@
 <string name="button_text_play">Играть</string>
 <string name="button_text_leaderboard">Leaderboard</string>
 <string name="button_text_achievements">достижения</string>
+<string name="exit_prompt">Нажмите еще раз, чтобы выйти</string>
 <string name="vibrate_on">Вибрация: включена</string>
 <string name="vibrate_off">Вибрация: выкл.</string>
 <string name="sound_on">Звучать на</string>

@@ -11,6 +11,7 @@
 <string name="button_text_play">Jouer</string>
 <string name="button_text_leaderboard">Tableau de classement</string>
 <string name="button_text_achievements">Réalisations</string>
+<string name="exit_prompt">Appuyez à nouveau pour quitter</string>
 <string name="vibrate_on">Vibrer: Oui</string>
 <string name="vibrate_off">Vibrer: désactivé</string>
 <string name="sound_on">Son: Oui</string>

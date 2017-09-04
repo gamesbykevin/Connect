@@ -11,6 +11,7 @@
 <string name="button_text_play">hrať</string>
 <string name="button_text_leaderboard">leaderboard</string>
 <string name="button_text_achievements">úspechy</string>
+<string name="exit_prompt">Opätovným stlačením opustíte</string>
 <string name="vibrate_on">Vibrovanie: Zapnuté</string>
 <string name="vibrate_off">Vibrovanie: Vypnuté</string>
 <string name="sound_on">Zvuk: Zapnutý</string>

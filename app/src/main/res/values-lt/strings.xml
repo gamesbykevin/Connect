@@ -11,6 +11,7 @@
 <string name="button_text_play">Groti</string>
 <string name="button_text_leaderboard">\"Leaderboard\"</string>
 <string name="button_text_achievements">Pasiekimai</string>
+<string name="exit_prompt">Paspauskite dar kartą, kad išeitumėte</string>
 <string name="vibrate_on">Vibracija: įjungta</string>
 <string name="vibrate_off">Vibracija: išjungta</string>
 <string name="sound_on">Garsas: on</string>

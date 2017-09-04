@@ -11,6 +11,7 @@
 <string name="button_text_play">Giocare</string>
 <string name="button_text_leaderboard">Classifica</string>
 <string name="button_text_achievements">realizzazioni</string>
+<string name="exit_prompt">Premere nuovamente per uscire</string>
 <string name="vibrate_on">Vibrare: Sì</string>
 <string name="vibrate_off">Vibrare: Spento</string>
 <string name="sound_on">Suono acceso</string>

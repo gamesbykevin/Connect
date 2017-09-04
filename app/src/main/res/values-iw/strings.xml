@@ -11,6 +11,7 @@
 <string name="button_text_play">לְשַׂחֵק</string>
 <string name="button_text_leaderboard">לידרבורד</string>
 <string name="button_text_achievements">הישגים</string>
+<string name="exit_prompt">לחץ שוב על מנת לצאת</string>
 <string name="vibrate_on">רטט: מופעל</string>
 <string name="vibrate_off">רטט: כבוי</string>
 <string name="sound_on">קול: מופעל</string>

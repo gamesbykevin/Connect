@@ -11,6 +11,7 @@
 <string name="button_text_play">a juca</string>
 <string name="button_text_leaderboard">Leaderboard</string>
 <string name="button_text_achievements">Realizări</string>
+<string name="exit_prompt">Apăsați din nou pentru a ieși</string>
 <string name="vibrate_on">Vibrați: Pornit</string>
 <string name="vibrate_off">Vibrați: Oprit</string>
 <string name="sound_on">Sunet: Activat</string>

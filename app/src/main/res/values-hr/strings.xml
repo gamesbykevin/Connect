@@ -11,6 +11,7 @@
 <string name="button_text_play">Igrati</string>
 <string name="button_text_leaderboard">Vodeći</string>
 <string name="button_text_achievements">Dostignuća</string>
+<string name="exit_prompt">Pritisnite ponovno za izlaz</string>
 <string name="vibrate_on">Vibriraj: On</string>
 <string name="vibrate_off">Vibriraj: Isključeno</string>
 <string name="sound_on">Zvuk: uključen</string>

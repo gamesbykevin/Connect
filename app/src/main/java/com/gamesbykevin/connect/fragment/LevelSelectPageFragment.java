@@ -44,6 +44,7 @@ public class LevelSelectPageFragment extends Fragment {
         args.putInt(ARG_PAGE, pageNumber);
         fragment.setArguments(args);
         return fragment;
+
     }
 
     public LevelSelectPageFragment() {

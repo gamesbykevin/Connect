@@ -11,6 +11,7 @@
 <string name="button_text_play">pelata</string>
 <string name="button_text_leaderboard">leaderboard</string>
 <string name="button_text_achievements">saavutukset</string>
+<string name="exit_prompt">Poistu painamalla uudelleen</string>
 <string name="vibrate_on">Värähtele: On</string>
 <string name="vibrate_off">Värinä: Ei käytössä</string>
 <string name="sound_on">Ääni: Käytössä</string>

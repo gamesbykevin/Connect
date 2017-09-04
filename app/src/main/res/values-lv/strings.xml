@@ -11,6 +11,7 @@
 <string name="button_text_play">Spēlēt</string>
 <string name="button_text_leaderboard">Līderu saraksts</string>
 <string name="button_text_achievements">Sasniegumi</string>
+<string name="exit_prompt">Nospiediet vēlreiz, lai izietu</string>
 <string name="vibrate_on">Vibrozvans: ieslēgts</string>
 <string name="vibrate_off">Vibrozvans: izslēgts</string>
 <string name="sound_on">Skaņa: ieslēgta</string>

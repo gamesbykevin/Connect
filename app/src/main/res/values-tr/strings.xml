@@ -11,6 +11,7 @@
 <string name="button_text_play">Oyun</string>
 <string name="button_text_leaderboard">Liderler Sıralaması</string>
 <string name="button_text_achievements">Başarılar</string>
+<string name="exit_prompt">Çıkmak için tekrar basın</string>
 <string name="vibrate_on">Titreşim: Açık</string>
 <string name="vibrate_off">Titreşim: Kapalı</string>
 <string name="sound_on">Ses açık</string>

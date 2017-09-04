@@ -11,6 +11,7 @@
 <string name="button_text_play">Toque</string>
 <string name="button_text_leaderboard">Entre os melhores</string>
 <string name="button_text_achievements">Realizações</string>
+<string name="exit_prompt">Pressione novamente para sair</string>
 <string name="vibrate_on">Vibrar: Ligado</string>
 <string name="vibrate_off">Vibrar: Desligado</string>
 <string name="sound_on">Som ligado</string>

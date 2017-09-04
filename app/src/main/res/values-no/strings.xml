@@ -11,6 +11,7 @@
 <string name="button_text_play">Spille</string>
 <string name="button_text_leaderboard">Leaderboard</string>
 <string name="button_text_achievements">prestasjoner</string>
+<string name="exit_prompt">Trykk igjen for å avslutte</string>
 <string name="vibrate_on">Vibrer: På</string>
 <string name="vibrate_off">Vibrer: Av</string>
 <string name="sound_on">Lyd: På</string>

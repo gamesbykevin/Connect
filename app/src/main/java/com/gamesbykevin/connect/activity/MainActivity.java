@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.view.View;
+import android.widget.Toast;
 
 import com.gamesbykevin.connect.util.UtilityHelper;
 import com.gamesbykevin.connect.R;
@@ -16,6 +17,9 @@ public class MainActivity extends BaseGameActivity {
 
     //keep track of our stats and the levels we have completed
     private static Boards BOARDS;
+
+    //did we prompt the user before exiting the app
+    private boolean promptExit = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,26 +81,48 @@ public class MainActivity extends BaseGameActivity {
 
         //resume audio
         super.playSong(R.raw.menu);
+
+        //flag prompt false
+        promptExit = false;
     }
 
     @Override
     public void onBackPressed() {
 
-        //no need to bypass login in the future
-        BYPASS_LOGIN = false;
-
-        //finish activity
-        super.finish();
-
         try {
-            //close all activities
-            ActivityCompat.finishAffinity(this);
-        } catch (Exception e) {
-            UtilityHelper.handleException(e);
-        }
 
-        //sign out of google play services
-        super.signOut();
+            //if we already prompted the user, exit the app
+            if (promptExit) {
+
+                //no need to bypass login in the future
+                BYPASS_LOGIN = false;
+
+                //finish activity
+                super.finish();
+
+                //close all activities
+                ActivityCompat.finishAffinity(this);
+
+                //sign out of google play services
+                super.signOut();
+
+            } else {
+
+                //prompt the user if they want to exit
+                Toast.makeText(this, getString(R.string.exit_prompt), Toast.LENGTH_SHORT).show();
+
+                //flag that we have prompted the user
+                promptExit = true;
+            }
+
+        } catch (Exception e) {
+
+            //handle exception
+            UtilityHelper.handleException(e);
+
+            //finish activity anyways
+            super.finish();
+        }
     }
 
     public void onClickStart(View view) {

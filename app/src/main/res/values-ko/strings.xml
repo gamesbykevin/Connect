@@ -11,6 +11,7 @@
 <string name="button_text_play">놀이</string>
 <string name="button_text_leaderboard">리더 보드</string>
 <string name="button_text_achievements">업적</string>
+<string name="exit_prompt">종료하려면 다시 누릅니다.</string>
 <string name="vibrate_on">진동 : 켜기</string>
 <string name="vibrate_off">진동 : 꺼짐</string>
 <string name="sound_on">소리 : 켜기</string>

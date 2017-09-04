@@ -11,6 +11,7 @@
 <string name="button_text_play">遊びます</string>
 <string name="button_text_leaderboard">リーダーボード</string>
 <string name="button_text_achievements">業績</string>
+<string name="exit_prompt">もう一度押すと終了します。</string>
 <string name="vibrate_on">振動：オン</string>
 <string name="vibrate_off">振動：オフ</string>
 <string name="sound_on">サウンド：オン</string>

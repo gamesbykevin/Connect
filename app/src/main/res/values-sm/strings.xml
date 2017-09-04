@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<string name="button_text_next">Le isi</string>
+<string name="button_text_rate">Tau</string>
+<string name="button_text_more">Faʻatele</string>
+<string name="button_text_menu">Toto</string>
+<string name="button_text_start">Amata</string>
+<string name="button_text_options">Filifiliga</string>
+<string name="button_text_tutorial">Tutorial</string>
+<string name="button_text_play">Taalo</string>
+<string name="button_text_leaderboard">Leaderboard</string>
+<string name="button_text_achievements">Ausia</string>
+<string name="exit_prompt">Toe oomi e toe alu</string>
+<string name="vibrate_on">Viivili: On</string>
+<string name="vibrate_off">Viivili: Ave</string>
+<string name="sound_on">Leo: On</string>
+<string name="sound_off">Leo: Ave</string>
+<string name="text_header_shape">Faiga:</string>
+<string name="tutorial_instructions_1">Tutorial Part 1 \\ nI le faʻamautinoa o oe e faʻafesoʻotaʻi uma paipa</string>
+<string name="tutorial_instructions_2">Tutorial Part 2 \\ nTuch paipa e sui ai. </string>
+<string name="tutorial_instructions_3">Tutorial Part 3 \\ nO taimi uma e fesoʻotaʻi ai paipa uma e te manumalo ai</string>
+<string name="tutorial_instructions_4">Tutorial Part 4 \\ nPalu lou tamatamailima pe afai e te manaʻo e aveese le laupapa</string>
+<string name="tutorial_instructions_5">Tutorial Part 5 \\ nE mafai foi ona e sau i fafo ma fafo pe ae togi 2 tamatamailima</string>
+<string name="tutorial_instructions_6">Tutorial Vaega 6 \\ n Filifili le maneta ina ia mafai ai e le auto ona sui</string>
+<string name="sign_in_other_error">Sa i ai se faʻafitauli e iai le sainiga, faʻamolemole toe taumafai mulimuli ane.</string>
+<string name="sign_in_failed">Ua le mafai ona e sainia. Faamolemole siaki lau fesoʻotaiga fesoʻotaʻiga ma toe taumafai.</string>
+<string name="app_misconfigured">Ua le saʻo le fetuunaiga o le talosaga. </string>
+<string name="license_failed">Lave siaki laisene.</string>
+<string name="unknown_error">Faʻamatalaga le iloa.</string>
+<string name="UNKNOWN_ERROR">Faʻamatalaga le iloa.</string>
+<string name="gamehelper_sign_in_failed">Ua le mafai ona e sainia. Faamolemole siaki lau fesoʻotaiga fesoʻotaʻiga ma toe taumafai.</string>
+<string name="gamehelper_app_misconfigured">Ua le saʻo le fetuunaiga o le talosaga. </string>
+<string name="gamehelper_license_failed">Lave siaki laisene.</string>
+<string name="gamehelper_unknown_error">Faʻamatalaga le iloa.</string>
+</resources>

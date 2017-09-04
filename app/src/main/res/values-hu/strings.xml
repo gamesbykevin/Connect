@@ -11,6 +11,7 @@
 <string name="button_text_play">Játék</string>
 <string name="button_text_leaderboard">ranglistán</string>
 <string name="button_text_achievements">Kitüntetések</string>
+<string name="exit_prompt">Nyomja meg újra a kilépéshez</string>
 <string name="vibrate_on">Rezgés: Be</string>
 <string name="vibrate_off">Rezgés: Ki</string>
 <string name="sound_on">Hang: Be</string>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<string name="button_text_next">Հաջորդը</string>
+<string name="button_text_rate">Գնահատել</string>
+<string name="button_text_more">Ավելին</string>
+<string name="button_text_menu">Մենյու</string>
+<string name="button_text_start">Սկսեք</string>
+<string name="button_text_options">Ընտրանքներ</string>
+<string name="button_text_tutorial">Tutorial</string>
+<string name="button_text_play">Խաղալ</string>
+<string name="button_text_leaderboard">Առաջատար սեղան</string>
+<string name="button_text_achievements">Ձեռքբերումներ</string>
+<string name="exit_prompt">Սեղմեք կրկին դուրս գալու համար</string>
+<string name="vibrate_on">Թրթռում: On</string>
+<string name="vibrate_off">Թրթռանք `Off</string>
+<string name="sound_on">Ձայն</string>
+<string name="sound_off">Ձայն</string>
+<string name="text_header_shape">Ձեւը `</string>
+<string name="tutorial_instructions_1">Tutorial մաս 1 \\ n Որպեսզի լուծել ձեր բոլոր խողովակները միաձուլեք</string>
+<string name="tutorial_instructions_2">Tutorial Մաս 2 \\ n Խողովակները պտտելու համար: </string>
+<string name="tutorial_instructions_3">Tutorial Part 3 \\ n Երբ բոլոր խողովակները կապված են, դուք հաղթում եք</string>
+<string name="tutorial_instructions_4">Tutorial 4-րդ մասը. \\ N Նստեք ձեր մատը, եթե ցանկանում եք տեղափոխել խորհուրդը</string>
+<string name="tutorial_instructions_5">Tutorial Մաս 5 \\ n Դուք կարող եք նաեւ մեծացնել եւ դուրս գալ, երբ երկու մատը կրակում եք</string>
+<string name="tutorial_instructions_6">Tutorial Մաս 6 \\ n Ընտրեք մագնիսը `ավտոմատ պտտվելու համար</string>
+<string name="sign_in_other_error">Մուտք գործելու հետ կապված խնդիր առաջացավ, փորձեք ավելի ուշ:</string>
+<string name="sign_in_failed">Չհաջողվեց մուտք գործել: Խնդրում ենք ստուգել ձեր ցանցային կապը եւ կրկին փորձեք:</string>
+<string name="app_misconfigured">Դիմումը սխալ է կազմաձեւված: </string>
+<string name="license_failed">Լիցենզիայի ստուգումը չի հաջողվել:</string>
+<string name="unknown_error">Անհայտ սխալ.</string>
+<string name="UNKNOWN_ERROR">Անհայտ սխալ.</string>
+<string name="gamehelper_sign_in_failed">Չհաջողվեց մուտք գործել: Խնդրում ենք ստուգել ձեր ցանցային կապը եւ կրկին փորձեք:</string>
+<string name="gamehelper_app_misconfigured">Դիմումը սխալ է կազմաձեւված: </string>
+<string name="gamehelper_license_failed">Լիցենզիայի ստուգումը չի հաջողվել:</string>
+<string name="gamehelper_unknown_error">Անհայտ սխալ.</string>
+</resources>

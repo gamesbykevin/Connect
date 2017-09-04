@@ -11,6 +11,7 @@
 <string name="button_text_play">Spela</string>
 <string name="button_text_leaderboard">leaderboard</string>
 <string name="button_text_achievements">Prestationer</string>
+<string name="exit_prompt">Tryck igen för att avsluta</string>
 <string name="vibrate_on">Vibrera: På</string>
 <string name="vibrate_off">Vibrera: Av</string>
 <string name="sound_on">Ljud: På</string>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<string name="button_text_next">შემდეგი</string>
+<string name="button_text_rate">შეფასება</string>
+<string name="button_text_more">სხვა</string>
+<string name="button_text_menu">მენიუ</string>
+<string name="button_text_start">დაწყება</string>
+<string name="button_text_options">პარამეტრები</string>
+<string name="button_text_tutorial">სამეურვეო</string>
+<string name="button_text_play">ითამაშეთ</string>
+<string name="button_text_leaderboard">ლიდერი</string>
+<string name="button_text_achievements">მიღწევები</string>
+<string name="exit_prompt">დააჭირეთ კვლავ გასასვლელად</string>
+<string name="vibrate_on">ვიბრაცია: ჩართვა</string>
+<string name="vibrate_off">ვიბრაცია: გამორთვა</string>
+<string name="sound_on">ხმოვანი: On</string>
+<string name="sound_off">ხმის: გამორთვა</string>
+<string name="text_header_shape">ფორმა:</string>
+<string name="tutorial_instructions_1">სამეურვეო ნაწილი 1 \\ n გადაწყვიტოს თქვენ უნდა დააკავშირებს ყველა მილები ერთად</string>
+<string name="tutorial_instructions_2">სამეურვეო ნაწილი 2 \\ n ჩაწერეთ მილები როტაცია. </string>
+<string name="tutorial_instructions_3">სამეურვეო ნაწილი 3 \\ n ერთხელ მილები უკავშირდება თქვენ გაიმარჯვებთ</string>
+<string name="tutorial_instructions_4">სამეურვეო ნაწილი 4 \\ n თქვენი თითის თუ გსურთ გადაადგილება ფორუმში</string>
+<string name="tutorial_instructions_5">სამეურვეო ნაწილი 5 \\ n თქვენ ასევე შეგიძლიათ დააინსტალიროთ და გათიშეთ, როცა 2 თითის ჩასმა</string>
+<string name="tutorial_instructions_6">სამეურვეო ნაწილი 6 \\ n შეარჩიეთ მაგნიტი ავტომატური როტაციისთვის</string>
+<string name="sign_in_other_error">სისტემაში შესული იყო საკითხი, გთხოვთ, სცადოთ მოგვიანებით.</string>
+<string name="sign_in_failed">ვერ მოხერხდა შესვლა. გთხოვთ, შეამოწმოთ თქვენი ქსელის კავშირი და ისევ სცადოთ.</string>
+<string name="app_misconfigured">განცხადება არასწორად არის დაკონფიგურირებული. </string>
+<string name="license_failed">ლიცენზიის შემოწმება ვერ მოხერხდა.</string>
+<string name="unknown_error">უცნობი შეცდომა.</string>
+<string name="UNKNOWN_ERROR">უცნობი შეცდომა.</string>
+<string name="gamehelper_sign_in_failed">ვერ მოხერხდა შესვლა. გთხოვთ, შეამოწმოთ თქვენი ქსელის კავშირი და ისევ სცადოთ.</string>
+<string name="gamehelper_app_misconfigured">განცხადება არასწორად არის დაკონფიგურირებული. </string>
+<string name="gamehelper_license_failed">ლიცენზიის შემოწმება ვერ მოხერხდა.</string>
+<string name="gamehelper_unknown_error">უცნობი შეცდომა.</string>
+</resources>

@@ -11,6 +11,7 @@
 <string name="button_text_play">เล่น</string>
 <string name="button_text_leaderboard">ลีดเดอร์บอร์ด</string>
 <string name="button_text_achievements">ผู้ชนะ</string>
+<string name="exit_prompt">กดอีกครั้งเพื่อออก</string>
 <string name="vibrate_on">สั่น: เปิด</string>
 <string name="vibrate_off">สั่น: ปิด</string>
 <string name="sound_on">เสียง: เปิด</string>

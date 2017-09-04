@@ -11,6 +11,7 @@
 <string name="button_text_play">Maglaro</string>
 <string name="button_text_leaderboard">Leaderboard</string>
 <string name="button_text_achievements">Mga nagawa</string>
+<string name="exit_prompt">Pindutin muli upang lumabas</string>
 <string name="vibrate_on">Mag-vibrate: Bukas</string>
 <string name="vibrate_off">Mag-vibrate: Naka-off</string>
 <string name="sound_on">Tunog: Bukas</string>

@@ -11,6 +11,7 @@
 <string name="button_text_play">Грати</string>
 <string name="button_text_leaderboard">Лідерський план</string>
 <string name="button_text_achievements">Досягнення</string>
+<string name="exit_prompt">Натисніть ще раз, щоб вийти</string>
 <string name="vibrate_on">Вібросигнал: Увімкнено</string>
 <string name="vibrate_off">Вібросигнал: вимкнено</string>
 <string name="sound_on">Звук: увімкнено</string>

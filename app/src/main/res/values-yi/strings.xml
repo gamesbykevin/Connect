@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<string name="button_text_next">ווייַטער</string>
+<string name="button_text_rate">קורס</string>
+<string name="button_text_more">מער</string>
+<string name="button_text_menu">מעניו</string>
+<string name="button_text_start">אָנהייב</string>
+<string name="button_text_options">אָפּציעס</string>
+<string name="button_text_tutorial">טוטאָריאַל</string>
+<string name="button_text_play">שפּיל</string>
+<string name="button_text_leaderboard">Leaderboard</string>
+<string name="button_text_achievements">דערגרייכונגען</string>
+<string name="exit_prompt">דרוק ווידער צו אַרויסגאַנג</string>
+<string name="vibrate_on">Vibrate: On</string>
+<string name="vibrate_off">ווייבריישאַן: אַוועק</string>
+<string name="sound_on">געזונט: אויף</string>
+<string name="sound_off">געזונט: אַוועק</string>
+<string name="text_header_shape">פאָרעם:</string>
+<string name="tutorial_instructions_1">טוטאָריאַל חלק 1 \\ n סאָלווע איר האָבן צו פאַרבינדן אַלע די פּייפּס צוזאַמען</string>
+<string name="tutorial_instructions_2">טוטאָריאַל חלק 2 \\ n טאָוטש די פּייפּס צו דרייען. </string>
+<string name="tutorial_instructions_3">טוטאָריאַל חלק 3 \\ נאָן אַלע פּייפּס זענען פארבונדן איר געווינען</string>
+<string name="tutorial_instructions_4">טוטאָריאַל חלק 4 \\ nדרינג דיין פינגער אויב איר ווילן צו רירן די ברעט</string>
+<string name="tutorial_instructions_5">טוטאָריאַל חלק 5 \\ nאיר קענען אויך פארגרעסער אין און אויס ווען איר קניפּ 2 פינגער</string>
+<string name="tutorial_instructions_6">טוטאָריאַל חלק 6 \\ n אויסקלייַבן די מאַגנעט צו געבן אָטאַמאַטיק דרייען</string>
+<string name="sign_in_other_error">עס איז געווען אַ אַרויסגעבן מיט צייכן-אין, ביטע פּרובירן ווידער שפּעטער.</string>
+<string name="sign_in_failed">ניט אַנדערש צו צייכן אין. ביטע טשעק דיין נעץ קשר און פּרובירן ווידער.</string>
+<string name="app_misconfigured">די אַפּלאַקיישאַן איז פאַלש קאַנפיגיערד. </string>
+<string name="license_failed">דערלויבעניש טשעק אַנדערש.</string>
+<string name="unknown_error">Unknown error.</string>
+<string name="UNKNOWN_ERROR">Unknown error.</string>
+<string name="gamehelper_sign_in_failed">ניט אַנדערש צו צייכן אין. ביטע טשעק דיין נעץ קשר און פּרובירן ווידער.</string>
+<string name="gamehelper_app_misconfigured">די אַפּלאַקיישאַן איז פאַלש קאַנפיגיערד. </string>
+<string name="gamehelper_license_failed">דערלויבעניש טשעק אַנדערש.</string>
+<string name="gamehelper_unknown_error">Unknown error.</string>
+</resources>

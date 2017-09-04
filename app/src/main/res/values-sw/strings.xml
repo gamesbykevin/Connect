@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<string name="button_text_next">Ifuatayo</string>
+<string name="button_text_rate">Kiwango</string>
+<string name="button_text_more">Zaidi</string>
+<string name="button_text_menu">Menyu</string>
+<string name="button_text_start">Anza</string>
+<string name="button_text_options">Chaguo</string>
+<string name="button_text_tutorial">Mafunzo</string>
+<string name="button_text_play">Jaribu</string>
+<string name="button_text_leaderboard">Kiongozi wa kiongozi</string>
+<string name="button_text_achievements">Mafanikio</string>
+<string name="exit_prompt">Bonyeza tena ili uondoke</string>
+<string name="vibrate_on">Viburisha: On</string>
+<string name="vibrate_off">Vibisha: Huru</string>
+<string name="sound_on">Sauti: On</string>
+<string name="sound_off">Sauti: Huru</string>
+<string name="text_header_shape">Sura:</string>
+<string name="tutorial_instructions_1">Sehemu ya Tutorial 1 \\ n Ili kutatua unapaswa kuunganisha mabomba yote pamoja</string>
+<string name="tutorial_instructions_2">Sehemu ya Tutorial 2 \\ nTupa mabomba ya kugeuka. </string>
+<string name="tutorial_instructions_3">Sehemu ya Tutorial 3 \\ nKama mabomba yote yanakusanyika unashinda</string>
+<string name="tutorial_instructions_4">Sehemu ya Tutorial 4 \\ nDrag kidole chako kama unataka kusonga bodi</string>
+<string name="tutorial_instructions_5">Sehemu ya Tutorial 5 \\ nUnaweza pia kuvuta na nje wakati unganisha vidole viwili</string>
+<string name="tutorial_instructions_6">Sehemu ya Tutorial 6 \\ n Chagua sumaku ili kuwezesha mzunguko wa auto</string>
+<string name="sign_in_other_error">Kulikuwa na suala la kuingia, tafadhali jaribu tena baadaye.</string>
+<string name="sign_in_failed">Imeshindwa kuingia. Tafadhali angalia uunganisho wako wa mtandao na ujaribu tena.</string>
+<string name="app_misconfigured">Maombi hayajakamilika. </string>
+<string name="license_failed">Cheti ya leseni imeshindwa.</string>
+<string name="unknown_error">Hitilafu isiyojulikana.</string>
+<string name="UNKNOWN_ERROR">Hitilafu isiyojulikana.</string>
+<string name="gamehelper_sign_in_failed">Imeshindwa kuingia. Tafadhali angalia uunganisho wako wa mtandao na ujaribu tena.</string>
+<string name="gamehelper_app_misconfigured">Maombi hayajakamilika. </string>
+<string name="gamehelper_license_failed">Cheti ya leseni imeshindwa.</string>
+<string name="gamehelper_unknown_error">Hitilafu isiyojulikana.</string>
+</resources>

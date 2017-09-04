@@ -105,6 +105,9 @@ public class OpenGLSurfaceView extends GLSurfaceView implements Runnable {
     //do we offset the render for our game
     public static float OFFSET_X = 0.0f, OFFSET_Y = 0.0f;
 
+    //do we offset the render for our game
+    public static float OFFSET_ORIGINAL_X = 0.0f, OFFSET_ORIGINAL_Y = 0.0f;
+
     //are we zooming?
     private boolean zooming = false;
 
@@ -407,6 +410,10 @@ public class OpenGLSurfaceView extends GLSurfaceView implements Runnable {
 
                             //flag that we are dragging
                             dragging = true;
+
+                            //keep track of original coordinates
+                            OFFSET_ORIGINAL_X += xDiff;
+                            OFFSET_ORIGINAL_Y += yDiff;
 
                             //if one finger is moved, offset the x,y coordinates
                             OFFSET_X += (xDiff * ZOOM_SCALE_MOTION_X);

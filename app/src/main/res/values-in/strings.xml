@@ -11,6 +11,7 @@
 <string name="button_text_play">Bermain</string>
 <string name="button_text_leaderboard">Papan peringkat</string>
 <string name="button_text_achievements">Prestasi</string>
+<string name="exit_prompt">Tekan lagi untuk keluar</string>
 <string name="vibrate_on">Getar: Aktif</string>
 <string name="vibrate_off">Getar: Mati</string>
 <string name="sound_on">Suara: Aktif</string>

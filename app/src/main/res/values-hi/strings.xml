@@ -11,6 +11,7 @@
 <string name="button_text_play">प्ले</string>
 <string name="button_text_leaderboard">लीडरबोर्ड</string>
 <string name="button_text_achievements">उपलब्धियां</string>
+<string name="exit_prompt">बाहर निकलने के लिए फिर से दबाएं</string>
 <string name="vibrate_on">कंपन: चालू</string>
 <string name="vibrate_off">कंपन: बंद</string>
 <string name="sound_on">पर ध्वनि</string>

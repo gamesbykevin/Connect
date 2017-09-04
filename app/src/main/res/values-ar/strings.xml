@@ -11,6 +11,7 @@
 <string name="button_text_play">لعب</string>
 <string name="button_text_leaderboard">المتصدرين</string>
 <string name="button_text_achievements">الإنجازات</string>
+<string name="exit_prompt">اضغط مرة أخرى للخروج</string>
 <string name="vibrate_on">الاهتزاز: تشغيل</string>
 <string name="vibrate_off">الاهتزاز: إيقاف</string>
 <string name="sound_on">الصوت مفعل</string>

@@ -11,6 +11,7 @@
 <string name="button_text_play">Παίζω</string>
 <string name="button_text_leaderboard">Leaderboard</string>
 <string name="button_text_achievements">Επιτεύγματα</string>
+<string name="exit_prompt">Πατήστε ξανά για έξοδο</string>
 <string name="vibrate_on">Δόνηση: Ενεργοποίηση</string>
 <string name="vibrate_off">Δόνηση: Απενεργοποίηση</string>
 <string name="sound_on">Ήχος: Ενεργοποίηση</string>
