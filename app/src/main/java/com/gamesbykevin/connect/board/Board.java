@@ -14,6 +14,7 @@ import com.gamesbykevin.connect.shape.Diamond;
 import com.gamesbykevin.connect.shape.Hexagon;
 import com.gamesbykevin.connect.shape.Square;
 
+import static com.gamesbykevin.androidframeworkv2.activity.BaseActivity.getSharedPreferences;
 import static com.gamesbykevin.connect.activity.GameActivity.getRandomObject;
 import static com.gamesbykevin.connect.board.BoardHelper.CALCULATE_INDICES;
 import static com.gamesbykevin.connect.board.BoardHelper.CALCULATE_UVS;
@@ -23,6 +24,7 @@ import static com.gamesbykevin.connect.board.BoardHelper.checkBoard;
 import static com.gamesbykevin.connect.board.BoardHelper.updateCoordinates;
 import static com.gamesbykevin.connect.board.BoardHelper.updateShape;
 import static com.gamesbykevin.connect.game.Game.AUTO_ROTATE;
+import static com.gamesbykevin.connect.game.GameHelper.RESUME_SAVE;
 import static com.gamesbykevin.connect.game.GameHelper.getSquare;
 
 /**
@@ -94,15 +96,14 @@ public class Board implements ICommon {
         return this.maze;
     }
 
-    protected CustomShape[][] getShapes() {
+    public CustomShape[][] getShapes() {
         return this.shapes;
     }
 
-    /**
-     * Touch the board and rotate the selected shape
-     * @param x x-coordinate
-     * @param y y-coordinate
-     */
+    public void setShapes(CustomShape[][] shapes) {
+        this.shapes = shapes;
+    }
+
     /**
      * Touch the board and rotate the selected shape
      * @param x x-coordinate
@@ -115,8 +116,8 @@ public class Board implements ICommon {
         if (getRotationShape() != null)
             return false;
 
-        for (int col = 0; col < getMaze().getCols(); col++) {
-            for (int row = 0; row < getMaze().getRows(); row++) {
+        for (int col = 0; col < getShapes()[0].length; col++) {
+            for (int row = 0; row < getShapes().length; row++) {
                 CustomShape shape = getShapes()[row][col];
 
                 if (shape != null && !shape.hasRotate() && shape.contains(x, y)) {
@@ -156,8 +157,8 @@ public class Board implements ICommon {
 
         if (getShapes() != null) {
 
-            for (int col = 0; col < getMaze().getCols(); col++) {
-                for (int row = 0; row < getMaze().getRows(); row++) {
+            for (int col = 0; col < getShapes()[0].length; col++) {
+                for (int row = 0; row < getShapes().length; row++) {
 
                     try {
                         CustomShape shape = getShapes()[row][col];
@@ -193,7 +194,7 @@ public class Board implements ICommon {
 
         try {
 
-            if (!getMaze().isGenerated()) {
+            if (!RESUME_SAVE && !getMaze().isGenerated()) {
 
                 //keep generating until generated
                 while (!getMaze().isGenerated()) {
@@ -357,13 +358,16 @@ public class Board implements ICommon {
             //flag the rotation shape null
             setRotationShape(null);
 
-            //reset the shapes
-            for (int col = 0; col < getMaze().getCols(); col++) {
-                for (int row = 0; row < getMaze().getRows(); row++) {
+            if (!RESUME_SAVE) {
 
-                    //reset if not null
-                    if (getShapes()[row][col] != null)
-                        getShapes()[row][col].reset();
+                //reset the shapes
+                for (int col = 0; col < getShapes()[0].length; col++) {
+                    for (int row = 0; row < getShapes().length; row++) {
+
+                        //reset if not null
+                        if (getShapes()[row][col] != null)
+                            getShapes()[row][col].reset();
+                    }
                 }
             }
 
@@ -380,10 +384,13 @@ public class Board implements ICommon {
         //if these are null or not ready, we can't continue
         if (getShapes() == null)
             return;
-        if (getMaze() == null)
-            return;
-        if (!getMaze().isGenerated())
-            return;
+
+        if (!RESUME_SAVE) {
+            if (getMaze() == null)
+                return;
+            if (!getMaze().isGenerated())
+                return;
+        }
 
         try {
 
@@ -410,6 +417,7 @@ public class Board implements ICommon {
 
                 //if null we need to setup the coordinates
                 updateCoordinates(this);
+
             } else if (getRotationShape() != null) {
 
                 //if a shape is rotating we need to update the coordinates

@@ -9,30 +9,27 @@ import com.gamesbykevin.connect.opengl.OpenGLRenderer;
 import com.gamesbykevin.connect.opengl.OpenGLSurfaceView;
 import com.gamesbykevin.connect.services.AchievementHelper;
 import com.gamesbykevin.connect.services.LeaderboardHelper;
+import com.gamesbykevin.connect.shape.CustomShape;
+import com.gamesbykevin.connect.shape.Diamond;
+import com.gamesbykevin.connect.shape.Hexagon;
+import com.gamesbykevin.connect.shape.Square;
 
+import static com.gamesbykevin.androidframeworkv2.activity.BaseActivity.GSON;
+import static com.gamesbykevin.androidframeworkv2.activity.BaseActivity.getSharedPreferences;
 import static com.gamesbykevin.connect.activity.LevelSelectActivity.CURRENT_PAGE;
 import static com.gamesbykevin.connect.activity.MainActivity.getBoards;
+import static com.gamesbykevin.connect.board.BoardHelper.CALCULATE_INDICES;
+import static com.gamesbykevin.connect.board.BoardHelper.CALCULATE_UVS;
+import static com.gamesbykevin.connect.board.BoardHelper.CALCULATE_VERTICES;
 import static com.gamesbykevin.connect.board.BoardHelper.SOUND_ROTATE;
 import static com.gamesbykevin.connect.board.BoardHelper.SOUND_ROTATE_CONNECT;
 import static com.gamesbykevin.connect.game.GameHelper.FRAMES;
 import static com.gamesbykevin.connect.game.GameHelper.GAME_OVER;
 import static com.gamesbykevin.connect.game.GameHelper.GAME_OVER_DELAY_FRAMES;
+import static com.gamesbykevin.connect.game.GameHelper.RESUME_SAVE;
+import static com.gamesbykevin.connect.game.GameHelper.getSquare;
 import static com.gamesbykevin.connect.game.GameHelper.zoomOut;
 import static com.gamesbykevin.connect.opengl.OpenGLRenderer.LOADED;
-import static com.gamesbykevin.connect.opengl.OpenGLRenderer.ZOOM_DEFAULT;
-import static com.gamesbykevin.connect.opengl.OpenGLRenderer.adjustZoom;
-import static com.gamesbykevin.connect.opengl.OpenGLRenderer.mx;
-import static com.gamesbykevin.connect.opengl.OpenGLRenderer.my;
-import static com.gamesbykevin.connect.opengl.OpenGLRenderer.resetZoom;
-import static com.gamesbykevin.connect.opengl.OpenGLSurfaceView.HEIGHT;
-import static com.gamesbykevin.connect.opengl.OpenGLSurfaceView.OFFSET_X;
-import static com.gamesbykevin.connect.opengl.OpenGLSurfaceView.OFFSET_Y;
-import static com.gamesbykevin.connect.opengl.OpenGLRenderer.LEFT;
-import static com.gamesbykevin.connect.opengl.OpenGLRenderer.RIGHT;
-import static com.gamesbykevin.connect.opengl.OpenGLRenderer.TOP;
-import static com.gamesbykevin.connect.opengl.OpenGLRenderer.BOTTOM;
-import static com.gamesbykevin.connect.opengl.OpenGLSurfaceView.WIDTH;
-
 
 /**
  * Created by Kevin on 7/19/2017.
@@ -121,11 +118,64 @@ public class Game implements IGame {
         //keep track of how many games are played
         activity.trackEvent(R.string.event_games_played);
 
-        //set the type of shape we will be playing with
-        getBoard().setType((Board.Shape)activity.getObjectValue(R.string.game_shape_file_key, Board.Shape.class));
+        if (RESUME_SAVE) {
 
-        //reset the board
-        getBoard().reset();
+            //set the type of shape we will be playing with
+            getBoard().setType((Board.Shape)GSON.fromJson(getSharedPreferences().getString(activity.getString(R.string.saved_game_shape_key), ""), Board.Shape.class));
+
+            //reset the board
+            getBoard().reset();
+
+            Board.Shape tmp = GSON.fromJson(getSharedPreferences().getString(activity.getString(R.string.saved_game_shape_key), ""), Board.Shape.class);
+
+            CustomShape[][] shapes;
+
+            switch (tmp) {
+
+                case Hexagon:
+
+                    //assign our shapes
+                    CustomShape.ROTATION_ANGLE = Hexagon.ROTATION_ANGLE_DEFAULT;
+                    shapes = (Hexagon[][])activity.getObjectValue(R.string.saved_game_shapes_key, Hexagon[][].class);
+                    break;
+
+                case Square:
+
+                    //assign our shapes
+                    CustomShape.ROTATION_ANGLE = Square.ROTATION_ANGLE_DEFAULT;
+                    shapes = (Square[][])activity.getObjectValue(R.string.saved_game_shapes_key, Square[][].class);
+                    break;
+
+                case Diamond:
+
+                    //assign our shapes
+                    CustomShape.ROTATION_ANGLE = Diamond.ROTATION_ANGLE_DEFAULT;
+                    shapes = (Diamond[][])activity.getObjectValue(R.string.saved_game_shapes_key, Diamond[][].class);
+                    break;
+
+                default:
+                    throw new RuntimeException("Enum key not defined: " + tmp);
+            }
+
+            //assign our shapes
+            getBoard().setShapes(shapes);
+
+            getSquare().setupImage(getBoard().getUvs());
+            getSquare().setupTriangle(getBoard().getIndices());
+            getSquare().setupVertices(getBoard().getVertices());
+
+            CALCULATE_UVS = true;
+            CALCULATE_VERTICES = true;
+            CALCULATE_INDICES = true;
+
+        } else {
+
+            //set the type of shape we will be playing with
+            getBoard().setType((Board.Shape) activity.getObjectValue(R.string.game_shape_file_key, Board.Shape.class));
+
+            //reset the board
+            getBoard().reset();
+        }
     }
 
     public void update() throws Exception {
@@ -167,6 +217,12 @@ public class Game implements IGame {
 
                 //if the game is over, move to the next step
                 if (GAME_OVER) {
+
+                    //make sure we aren't resuming a saved game
+                    RESUME_SAVE = false;
+
+                    //remove any saved puzzle
+                    activity.clearSave();
 
                     //unlock any achievements we achieved
                     AchievementHelper.completedGame(activity, getBoard());

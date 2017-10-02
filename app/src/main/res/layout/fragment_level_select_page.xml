@@ -30,7 +30,7 @@
 
                 <!-- Best Header -->
                 <TableRow style="@style/RowLevelSelect">
-                        <ImageView android:contentDescription="@null" style="@style/LevelSelectCustomText" android:src="@drawable/best" />
+                        <ImageView android:contentDescription="@null" style="@style/LevelSelectCustomText" android:src="@drawable/best" android:id="@+id/imageViewBest" />
                 </TableRow>
 
                 <!-- Personal Best -->

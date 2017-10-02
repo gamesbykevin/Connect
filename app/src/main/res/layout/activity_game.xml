@@ -18,6 +18,9 @@
     <!-- Game over layout(s) -->
     <include layout="@layout/layout_game_over_default" android:id="@+id/gameOverLayoutDefault" />
 
+    <!-- Prompt user layout -->
+    <include layout="@layout/layout_game_prompt" android:id="@+id/layoutGamePrompt" />
+
     <!-- Splash page layout -->
     <include layout="@layout/activity_splash" android:id="@+id/loadingScreenLayout" />
 </merge>

@@ -12,8 +12,11 @@ import android.widget.ImageView;
 import com.gamesbykevin.connect.R;
 import com.gamesbykevin.connect.activity.LevelSelectActivity;
 import com.gamesbykevin.connect.activity.OptionsActivity;
+import com.gamesbykevin.connect.board.Board;
 
 import static android.view.View.GONE;
+import static com.gamesbykevin.androidframeworkv2.activity.BaseActivity.GSON;
+import static com.gamesbykevin.androidframeworkv2.activity.BaseActivity.getSharedPreferences;
 import static com.gamesbykevin.connect.activity.MainActivity.getBoards;
 
 /**
@@ -31,6 +34,9 @@ public class LevelSelectPageFragment extends Fragment {
 
     //store our view reference
     private ViewGroup view;
+
+    //are we resuming a saved game?
+    private boolean resume = false;
 
     /**
      * Factory method for this fragment class.
@@ -53,10 +59,15 @@ public class LevelSelectPageFragment extends Fragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+
+        //call parent
         super.onCreate(savedInstanceState);
 
         //get the arguments passed
         this.pageNumber = getArguments().getInt(ARG_PAGE);
+
+        //are we resuming a saved game?
+        resume = (this.pageNumber >= LevelSelectActivity.Level.values().length);
     }
 
     @Override
@@ -65,11 +76,11 @@ public class LevelSelectPageFragment extends Fragment {
         //inflate the layout to access the ui elements
         this.view = (ViewGroup) inflater.inflate(R.layout.fragment_level_select_page, container, false);
 
-        //display the level # image
-        setupImageViewLevelNumber((ImageView)view.findViewById(R.id.levelNumber));
-
         //make sure the correct level size is shown
         setupImageViewLevelSize((ImageView)view.findViewById(R.id.levelSize), LevelSelectActivity.Level.values()[getPageNumber()]);
+
+        //display the level # image
+        setupImageViewLevelNumber((ImageView)view.findViewById(R.id.levelNumber));
 
         //make sure the correct image shape is shown
         setupImageViewShape((ImageView)view.findViewById(R.id.levelSelectShape));
@@ -84,42 +95,65 @@ public class LevelSelectPageFragment extends Fragment {
         //call parent
         super.onResume();
 
-        //update best time
-        int seconds = getBoards().getTime(OptionsActivity.OPTION_BOARD_SHAPE, getPageNumber());
-
-        //how much time is remaining
-        int remaining = seconds;
+        //get our ui buttons so we can manipulate
+        Button buttonLeader = (Button) view.findViewById(R.id.buttonLeaderboard);
+        Button buttonPlay = (Button) view.findViewById(R.id.buttonPlay);
+        ImageView imageOverlay = (ImageView) view.findViewById(R.id.overlayDisabled);
+        ImageView bestTimeView = (ImageView) view.findViewById(R.id.imageViewBest);
 
         //each digit for our time
         int value1 = -1, value2 = -1, value3 = -1, value4 = -1;
 
-        //get our ui buttons so we can manipulate
-        Button buttonLeader = (Button)view.findViewById(R.id.buttonLeaderboard);
-        Button buttonPlay = (Button)view.findViewById(R.id.buttonPlay);
-        ImageView imageOverlay = (ImageView)view.findViewById(R.id.overlayDisabled);
+        if (resume) {
 
-        //calculate each number for minutes and seconds
-        if (seconds > 0) {
-            value1 = (int) (remaining / 600); //minutes 10's
-            remaining = remaining - (value1 * 600); //take away the remaining
-            value2 = (int) (remaining / 60); //minutes 1's
-            remaining = remaining - (value2 * 60);
-            value3 = (int) (remaining / 10); //seconds 10's
-            remaining = remaining - (value3 * 10);
-            value4 = remaining;
-        }
-
-        //is this level enabled
-        if (getBoards().getSize(OptionsActivity.OPTION_BOARD_SHAPE) >= getPageNumber()) {
-            //make sure buttons are enabled
-            buttonLeader.setEnabled(true);
-            buttonPlay.setEnabled(true);
+            //update the buttons correctly
+            buttonLeader.setVisibility(View.INVISIBLE);
+            buttonPlay.setText(getString(R.string.button_text_resume));
             imageOverlay.setVisibility(View.GONE);
+            bestTimeView.setVisibility(View.INVISIBLE);
+
+            //get the time from our shared preferences
+            String[] data = getSharedPreferences().getString(getString(R.string.saved_game_timer_key), "").split(",");
+
+            //load the time value
+            value1 = Integer.parseInt(data[0]);
+            value2 = Integer.parseInt(data[1]);
+            value3 = Integer.parseInt(data[2]);
+            value4 = Integer.parseInt(data[3]);
+
         } else {
-            //disable everything
-            buttonLeader.setEnabled(false);
-            buttonPlay.setEnabled(false);
-            imageOverlay.setVisibility(View.VISIBLE);
+
+            //update best time
+            int seconds = getBoards().getTime(OptionsActivity.OPTION_BOARD_SHAPE, getPageNumber());
+
+            //how much time is remaining
+            int remaining = seconds;
+
+            //calculate each number for minutes and seconds
+            if (seconds > 0) {
+                value1 = (int) (remaining / 600); //minutes 10's
+                remaining = remaining - (value1 * 600); //take away the remaining
+                value2 = (int) (remaining / 60); //minutes 1's
+                remaining = remaining - (value2 * 60);
+                value3 = (int) (remaining / 10); //seconds 10's
+                remaining = remaining - (value3 * 10);
+                value4 = remaining;
+            }
+
+            //is this level enabled
+            if (getBoards().getSize(OptionsActivity.OPTION_BOARD_SHAPE) >= getPageNumber()) {
+
+                //make sure buttons are enabled
+                buttonLeader.setEnabled(true);
+                buttonPlay.setEnabled(true);
+                imageOverlay.setVisibility(View.GONE);
+            } else {
+
+                //disable everything
+                buttonLeader.setEnabled(false);
+                buttonPlay.setEnabled(false);
+                imageOverlay.setVisibility(View.VISIBLE);
+            }
         }
 
         //update the timer ui
@@ -133,7 +167,11 @@ public class LevelSelectPageFragment extends Fragment {
      * Returns the page number represented by this fragment object.
      */
     public int getPageNumber() {
-        return pageNumber;
+        if (resume) {
+            return getSharedPreferences().getInt(getString(R.string.saved_game_level_key), 0);
+        } else {
+            return pageNumber;
+        }
     }
 
     private void setupImageViewLevelSize(ImageView imageView, LevelSelectActivity.Level level) {
@@ -251,8 +289,15 @@ public class LevelSelectPageFragment extends Fragment {
         //the image resource id
         int resId;
 
+        //get the shape
+        Board.Shape tmp = OptionsActivity.OPTION_BOARD_SHAPE;
+
+        //if resuming saved game, get shape from shared preferences
+        if (resume)
+            tmp = GSON.fromJson(getSharedPreferences().getString(getString(R.string.saved_game_shape_key), ""), Board.Shape.class);
+
         //set the correct image
-        switch (OptionsActivity.OPTION_BOARD_SHAPE) {
+        switch (tmp) {
 
             case Square:
                 if (getPageNumber() == 0) {

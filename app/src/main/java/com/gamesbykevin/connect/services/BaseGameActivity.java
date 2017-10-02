@@ -124,7 +124,12 @@ public abstract class BaseGameActivity extends BaseActivity implements GameHelpe
     }
 
     public void unlockAchievement(final int resId) {
+
         try {
+
+            //don't continue if not connected
+            if (!getApiClient().isConnected())
+                return;
 
             String achievementId = getString(resId);
 
@@ -142,7 +147,13 @@ public abstract class BaseGameActivity extends BaseActivity implements GameHelpe
     }
 
     public void incrementAchievement(final int resId, final int incrementValue) {
+
         try {
+
+            //don't continue if not connected
+            if (!getApiClient().isConnected())
+                return;
+
             String achievementId = getString(resId);
 
             if (DEBUG)
@@ -163,7 +174,13 @@ public abstract class BaseGameActivity extends BaseActivity implements GameHelpe
     }
 
     public void trackEvent(final int resId, final int incrementValue) {
+
         try {
+
+            //don't continue if not connected
+            if (!getApiClient().isConnected())
+                return;
+
             String eventId = getString(resId);
 
             if (DEBUG)
@@ -182,6 +199,10 @@ public abstract class BaseGameActivity extends BaseActivity implements GameHelpe
     public void updateLeaderboard(final int resId, final long score) {
 
         try {
+
+            //don't continue if not connected
+            if (!getApiClient().isConnected())
+                return;
 
             String leaderboardId = getString(resId);
 
@@ -250,6 +271,11 @@ public abstract class BaseGameActivity extends BaseActivity implements GameHelpe
         return mHelper.getSignInError();
     }
 
+    public void onClickLeaderboards(View view) {
+        LEADERBOARD_ID = null;
+        this.displayLeaderboardUI(null);
+    }
+
     public void onClickAchievements(View view) {
 
         //if we are connected, display default achievements ui
@@ -297,10 +323,14 @@ public abstract class BaseGameActivity extends BaseActivity implements GameHelpe
 
         if (getApiClient().isConnected()) {
 
-            if (DEBUG)
+            if (DEBUG && leaderboardId != null)
                 UtilityHelper.logEvent("Displaying leaderboard ui " + leaderboardId);
 
-            startActivityForResult(Games.Leaderboards.getLeaderboardIntent(getApiClient(), leaderboardId), 1);
+            if (leaderboardId == null || leaderboardId.trim().length() < 1) {
+                startActivityForResult(Games.Leaderboards.getAllLeaderboardsIntent(getApiClient()), 1);
+            } else {
+                startActivityForResult(Games.Leaderboards.getLeaderboardIntent(getApiClient(), leaderboardId), 1);
+            }
 
         } else {
 

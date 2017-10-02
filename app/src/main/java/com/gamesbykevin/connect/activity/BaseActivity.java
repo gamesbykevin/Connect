@@ -278,4 +278,8 @@ public abstract class BaseActivity extends com.gamesbykevin.androidframeworkv2.a
             }
         });
     }
+
+    public boolean hasSavedGame() {
+        return getSharedPreferences().contains(getString(R.string.saved_game_shape_key));
+    }
 }

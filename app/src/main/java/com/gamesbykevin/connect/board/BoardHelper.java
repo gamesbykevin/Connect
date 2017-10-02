@@ -36,7 +36,7 @@ public class BoardHelper {
     private static boolean[][] tmpConnected;
 
     //only calculate when we need to
-    protected static boolean CALCULATE_UVS = true, CALCULATE_INDICES = true, CALCULATE_VERTICES = true;
+    public static boolean CALCULATE_UVS = true, CALCULATE_INDICES = true, CALCULATE_VERTICES = true;
 
     public static boolean SOUND_ROTATE = false, SOUND_ROTATE_CONNECT = false;
 
@@ -50,17 +50,17 @@ public class BoardHelper {
 
             case Square:
                 shape1 = board.getShapes()[0][0];
-                shape2 = board.getShapes()[0][board.getMaze().getCols() - 1];
+                shape2 = board.getShapes()[0][board.getShapes()[0].length - 1];
                 break;
 
             case Diamond:
-                shape1 = board.getShapes()[board.getMaze().getRows() - 1][0];
-                shape2 = board.getShapes()[0][board.getMaze().getCols() - 1];
+                shape1 = board.getShapes()[board.getShapes().length - 1][0];
+                shape2 = board.getShapes()[0][board.getShapes()[0].length - 1];
                 break;
 
             case Hexagon:
                 shape1 = board.getShapes()[0][0];
-                shape2 = board.getShapes()[1][board.getMaze().getCols() - 1];
+                shape2 = board.getShapes()[1][board.getShapes()[0].length - 1];
                 break;
 
             default:
@@ -81,17 +81,17 @@ public class BoardHelper {
 
             case Square:
                 shape1 = board.getShapes()[0][0];
-                shape2 = board.getShapes()[board.getMaze().getRows() - 1][0];
+                shape2 = board.getShapes()[board.getShapes().length - 1][0];
                 break;
 
             case Diamond:
                 shape1 = board.getShapes()[0][0];
-                shape2 = board.getShapes()[board.getMaze().getRows() - 1][board.getMaze().getCols() - 1];
+                shape2 = board.getShapes()[board.getShapes().length - 1][board.getShapes()[0].length - 1];
                 break;
 
             case Hexagon:
                 shape1 = board.getShapes()[0][0];
-                shape2 = board.getShapes()[board.getMaze().getRows() - 1][0];
+                shape2 = board.getShapes()[board.getShapes().length - 1][0];
                 break;
 
             default:
@@ -110,8 +110,8 @@ public class BoardHelper {
     protected static void checkBoard(Board board, boolean checkGameOver) {
 
         //create array if not instantiated or if the size doesn't match
-        if (tmpConnected == null || tmpConnected.length != board.getMaze().getRows() || tmpConnected[0].length != board.getMaze().getCols()) {
-            tmpConnected = new boolean[board.getMaze().getRows()][board.getMaze().getCols()];
+        if (tmpConnected == null || tmpConnected.length != board.getShapes().length || tmpConnected[0].length != board.getShapes()[0].length) {
+            tmpConnected = new boolean[board.getShapes().length][board.getShapes()[0].length];
 
             //flag to recalculate
             CALCULATE_VERTICES = true;
@@ -120,8 +120,8 @@ public class BoardHelper {
         }
 
         //mark all shapes not connected at first
-        for (int col = 0; col < board.getMaze().getCols(); col++) {
-            for (int row = 0; row < board.getMaze().getRows(); row++) {
+        for (int col = 0; col < board.getShapes()[0].length; col++) {
+            for (int row = 0; row < board.getShapes().length; row++) {
                 tmpConnected[row][col] = false;
             }
         }
@@ -213,8 +213,8 @@ public class BoardHelper {
         boolean solved = true;
 
         //connect all shapes accordingly and check if the game is over
-        for (int col = 0; col < board.getMaze().getCols(); col++) {
-            for (int row = 0; row < board.getMaze().getRows(); row++) {
+        for (int col = 0; col < board.getShapes()[0].length; col++) {
+            for (int row = 0; row < board.getShapes().length; row++) {
 
                 CustomShape shape = board.getShapes()[row][col];
 
@@ -471,7 +471,7 @@ public class BoardHelper {
     }
 
     public static int getStartX(Board board, int screenWidth) {
-        return getStartX(board.getType(), screenWidth, board.getMaze().getCols(), board.getMaze().getRows(), DIMENSION, DIMENSION);
+        return getStartX(board.getType(), screenWidth, board.getShapes()[0].length, board.getShapes().length, DIMENSION, DIMENSION);
     }
 
     protected static int getStartX(Board.Shape type, int screenWidth, int cols, int rows, int w, int h) {
@@ -496,7 +496,7 @@ public class BoardHelper {
     }
 
     public static int getStartY(Board board, int screenHeight) {
-        return getStartY(board.getType(), screenHeight, board.getMaze().getCols(), board.getMaze().getRows(), DIMENSION, DIMENSION);
+        return getStartY(board.getType(), screenHeight, board.getShapes()[0].length, board.getShapes().length, DIMENSION, DIMENSION);
     }
 
     protected static int getStartY(Board.Shape type, int screenHeight, int cols, int rows, int w, int h) {
@@ -622,14 +622,14 @@ public class BoardHelper {
         }
 
         //start coordinates
-        final int sx = BoardHelper.getStartX(board.getType(), WIDTH, board.getMaze().getCols(), board.getMaze().getRows(), w, h);
-        final int sy = BoardHelper.getStartY(board.getType(), HEIGHT, board.getMaze().getCols(), board.getMaze().getRows(), w, h);
+        final int sx = BoardHelper.getStartX(board.getType(), WIDTH, board.getShapes()[0].length, board.getShapes().length, w, h);
+        final int sy = BoardHelper.getStartY(board.getType(), HEIGHT, board.getShapes()[0].length, board.getShapes().length, w, h);
 
         int index = 0;
 
-        for (int col = 0; col < board.getMaze().getCols(); col++) {
+        for (int col = 0; col < board.getShapes()[0].length; col++) {
 
-            for (int row = 0; row < board.getMaze().getRows(); row++) {
+            for (int row = 0; row < board.getShapes().length; row++) {
 
                 //calculate coordinates
                 x = sx + BoardHelper.getX(board.getType(), col, row, w, h);

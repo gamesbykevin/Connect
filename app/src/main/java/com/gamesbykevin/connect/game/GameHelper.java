@@ -69,6 +69,11 @@ public final class GameHelper
     //keep track of elapsed frames
     public static int FRAMES = 0;
 
+    /**
+     * Are we resuming a saved game?
+     */
+    public static boolean RESUME_SAVE = false;
+
     public static void dispose() {
         squareBackground = null;
         square = null;

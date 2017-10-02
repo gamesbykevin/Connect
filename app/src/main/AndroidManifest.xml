@@ -39,6 +39,7 @@
                 <category android:name="android.intent.category.HOME"/>
             </intent-filter>
         </activity>
+
         <activity
             android:name=".activity.SplashActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
@@ -55,11 +56,13 @@
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"/>
+
         <activity
             android:name=".activity.GameActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"/>
+
         <activity
             android:name=".activity.LevelSelectActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"

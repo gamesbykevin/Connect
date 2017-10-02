@@ -1,6 +1,7 @@
 package com.gamesbykevin.connect.activity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.opengl.GLSurfaceView;
@@ -12,6 +13,9 @@ import android.widget.LinearLayout;
 import android.widget.ToggleButton;
 
 import com.gamesbykevin.androidframeworkv2.base.Disposable;
+import com.gamesbykevin.connect.shape.Diamond;
+import com.gamesbykevin.connect.shape.Hexagon;
+import com.gamesbykevin.connect.shape.Square;
 import com.gamesbykevin.connect.util.UtilityHelper;
 import com.gamesbykevin.connect.activity.LevelSelectActivity.Level;
 import com.gamesbykevin.connect.R;
@@ -25,8 +29,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import static com.gamesbykevin.connect.activity.LevelSelectActivity.LEVEL_INDEX;
 import static com.gamesbykevin.connect.activity.LevelSelectActivity.PAGES;
 import static com.gamesbykevin.connect.game.Game.STEP;
+import static com.gamesbykevin.connect.game.GameHelper.GAME_OVER;
+import static com.gamesbykevin.connect.game.GameHelper.RESUME_SAVE;
 import static com.gamesbykevin.connect.util.UtilityHelper.DEBUG;
 import static com.gamesbykevin.connect.activity.LevelSelectActivity.CURRENT_PAGE;
 
@@ -58,6 +65,7 @@ public class GameActivity extends BaseGameActivity implements Disposable {
     public enum Screen {
         Loading,
         Ready,
+        Prompt,
         GameOver
     }
 
@@ -99,6 +107,7 @@ public class GameActivity extends BaseGameActivity implements Disposable {
         this.layouts.add((LinearLayout)findViewById(R.id.gameOverLayoutDefault));
         this.layouts.add((LinearLayout)findViewById(R.id.loadingScreenLayout));
         this.layouts.add((LinearLayout)findViewById(R.id.layoutGameControls));
+        this.layouts.add((LinearLayout)findViewById(R.id.layoutGamePrompt));
 
         //out time image references
         this.time1 = (ImageView)findViewById(R.id.time1);
@@ -293,6 +302,11 @@ public class GameActivity extends BaseGameActivity implements Disposable {
                 setLayoutVisibility((ViewGroup)findViewById(R.id.gameOverLayoutDefault), true);
                 break;
 
+            //show save prompt
+            case Prompt:
+                setLayoutVisibility((ViewGroup)findViewById(R.id.layoutGamePrompt), true);
+                break;
+
             //don't re-enable anything
             case Ready:
                 setLayoutVisibility((ViewGroup)findViewById(R.id.layoutGameControls), true);
@@ -314,14 +328,45 @@ public class GameActivity extends BaseGameActivity implements Disposable {
     @Override
     public void onBackPressed() {
 
-        //show loading screen while we reset
-        setScreen(Screen.Loading);
+        //don't do anything here if the game is over
+        if (GAME_OVER)
+            return;
 
-        //move step to do nothing
-        STEP = Step.Start;
+        switch (getScreen()) {
 
-        //call parent
-        super.onBackPressed();
+            case Ready:
+
+                //check if the game has started to prompt the user if they want to save;
+                if (getGame() != null && (RESUME_SAVE || getGame().getBoard().getMaze().isGenerated())) {
+
+                    //what prompt image do we display to the user
+                    ((ImageView)findViewById(R.id.imageViewPrompt)).setImageResource(hasSavedGame() ? R.drawable.save_overwrite : R.drawable.save);
+
+                    //display save prompt
+                    setScreen(Screen.Prompt);
+
+                    //don't continue
+                    return;
+                }
+                break;
+
+            //don't do anything when prompted or game over
+            case GameOver:
+            case Prompt:
+                break;
+
+            default:
+
+                //show loading screen while we reset
+                setScreen(Screen.Loading);
+
+                //move step to do nothing
+                STEP = Step.Start;
+
+                //call parent
+                super.onBackPressed();
+                break;
+        }
     }
 
     public void onClickAutoRotate(View view) {
@@ -348,6 +393,125 @@ public class GameActivity extends BaseGameActivity implements Disposable {
         }
     }
 
+    public void onClickConfirm(View view) {
+
+        //save game to shared preferences
+        savePuzzle();
+
+        //go back to level select page
+        exit();
+    }
+
+    public void onClickNo(View view) {
+        //go back to level select page
+        exit();
+    }
+
+    private void exit() {
+
+        //go to the level select activity
+        startActivity(new Intent(GameActivity.this, LevelSelectActivity.class));
+
+        //make sure we finish this activity
+        finish();
+    }
+
+    /**
+     * Save the puzzle for future play
+     */
+    public void savePuzzle() {
+
+        //our shared preferences editor
+        SharedPreferences.Editor editor;
+
+        boolean result = false;
+
+        //get the previous settings (if they exist)
+        String tmpShapesData = null;
+        String tmpShapeData = null;
+        String tmpTimerData = null;
+        int tmpLevelIndex = -1;
+
+        try {
+
+            //get the editor so we can change the shared preferences
+            editor = getSharedPreferences().edit();
+
+            //get the current saved settings
+            tmpShapesData = getSharedPreferences().getString(getString(R.string.saved_game_shapes_key), null);
+            tmpShapeData = getSharedPreferences().getString(getString(R.string.saved_game_shape_key), null);
+            tmpTimerData = getSharedPreferences().getString(getString(R.string.saved_game_timer_key), null);
+            tmpLevelIndex = getSharedPreferences().getInt(getString(R.string.saved_game_level_key), -1);
+
+            editor.putString(getString(R.string.saved_game_shapes_key), GSON.toJson(getGame().getBoard().getShapes()));
+            editor.putString(getString(R.string.saved_game_shape_key), GSON.toJson(OptionsActivity.OPTION_BOARD_SHAPE));
+            editor.putString(getString(R.string.saved_game_timer_key), value1 + "," + value2 + "," + value3 + "," + value4);
+            editor.putInt(getString(R.string.saved_game_level_key), LEVEL_INDEX);
+
+            //save changes
+            result = editor.commit();
+
+            //if not successful, try to commit again
+            if (!result) {
+                editor.putString(getString(R.string.saved_game_shapes_key), GSON.toJson(getGame().getBoard().getShapes()));
+                editor.putString(getString(R.string.saved_game_shape_key), GSON.toJson(OptionsActivity.OPTION_BOARD_SHAPE));
+                editor.putString(getString(R.string.saved_game_timer_key), value1 + "," + value2 + "," + value3 + "," + value4);
+                editor.putInt(getString(R.string.saved_game_level_key), LEVEL_INDEX);
+                result = editor.commit();
+            }
+
+        } catch (Exception e) {
+
+            UtilityHelper.handleException(e);
+
+            editor = null;
+        }
+
+        //if the save was not successful, try to save the old settings
+        if (!result) {
+
+            //if previous values exist, try to save those
+            if (tmpTimerData != null && tmpTimerData.trim().length() > 0 &&
+                    tmpShapesData == null && tmpShapesData.trim().length() > 0 &&
+                    tmpShapeData == null && tmpShapeData.trim().length() > 0 && tmpLevelIndex > -1) {
+                if (editor == null)
+                    editor = getSharedPreferences().edit();
+
+                editor.putString(getString(R.string.saved_game_timer_key), tmpTimerData);
+                editor.putString(getString(R.string.saved_game_shapes_key), tmpShapesData);
+                editor.putString(getString(R.string.saved_game_shape_key), tmpShapeData);
+                editor.putInt(getString(R.string.saved_game_level_key), tmpLevelIndex);
+
+                //save changes once more
+                result = editor.commit();
+            }
+        }
+
+        //go back to the level select activity
+        exit();
+    }
+
+    public void clearSave() {
+
+        //don't remove the preferences if the game is not over
+        if (!GAME_OVER)
+            return;
+
+        RESUME_SAVE = false;
+
+        //get the editor so we can change the shared preferences
+        SharedPreferences.Editor editor = getSharedPreferences().edit();
+
+        //remove all saved puzzle information
+        editor.remove(getString(R.string.saved_game_shape_key));
+        editor.remove(getString(R.string.saved_game_shapes_key));
+        editor.remove(getString(R.string.saved_game_timer_key));
+        editor.remove(getString(R.string.saved_game_level_key));
+
+        //save changes
+        editor.commit();
+    }
+
     public void onClickMenu(View view) {
 
         //go back to the main game menu
@@ -360,10 +524,9 @@ public class GameActivity extends BaseGameActivity implements Disposable {
         if (getApiClient().isConnected()) {
             displayAchievementUI();
         } else {
-            //UtilityHelper.logEvent("beginUserInitiatedSignIn() before");
+
             //if not connected, re-attempt google play login
             beginUserInitiatedSignIn();
-            //UtilityHelper.logEvent("beginUserInitiatedSignIn() after");
 
             //flag that we want to open the achievements
             ACCESS_ACHIEVEMENT = true;
@@ -397,11 +560,25 @@ public class GameActivity extends BaseGameActivity implements Disposable {
      */
     public void resetTimer() {
 
-        //reset time values
-        value1 = 0;
-        value2 = 0;
-        value3 = 0;
-        value4 = 0;
+        if (RESUME_SAVE) {
+
+            //get the time from our shared preferences
+            String[] data = getSharedPreferences().getString(getString(R.string.saved_game_timer_key), "").split(",");
+
+            //load the time value
+            value1 = Integer.parseInt(data[0]);
+            value2 = Integer.parseInt(data[1]);
+            value3 = Integer.parseInt(data[2]);
+            value4 = Integer.parseInt(data[3]);
+
+        } else {
+
+            //reset time values
+            value1 = 0;
+            value2 = 0;
+            value3 = 0;
+            value4 = 0;
+        }
 
         //also reset the ui timer as well
         updateImageViewTimer(value1, time1);

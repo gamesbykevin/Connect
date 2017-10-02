@@ -1,6 +1,5 @@
 package com.gamesbykevin.connect.activity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -17,10 +16,8 @@ import com.gamesbykevin.connect.R;
 import com.gamesbykevin.connect.board.Board;
 import com.gamesbykevin.connect.fragment.LevelSelectPageFragment;
 import com.gamesbykevin.connect.game.Game;
+import com.gamesbykevin.connect.game.GameHelper;
 import com.gamesbykevin.connect.services.BaseGameActivity;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Kevin on 8/23/2017.
@@ -66,9 +63,14 @@ public class LevelSelectActivity extends BaseGameActivity {
     }
 
     /**
+     * The selected level index
+     */
+    public static int LEVEL_INDEX;
+
+    /**
      * The total number of pages/levels
      */
-    public static final int PAGES = Level.values().length;
+    public static int PAGES = Level.values().length;
 
     /**
      * Spacing between each pager dot
@@ -81,9 +83,6 @@ public class LevelSelectActivity extends BaseGameActivity {
     //temp value to check if we tried to scroll out of bounds
     private static int TMP_CURRENT_PAGE = 0;
 
-    //our list of pages for the pager
-    private List<LevelSelectPageFragment> fragments;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -93,14 +92,15 @@ public class LevelSelectActivity extends BaseGameActivity {
         //set the appropriate content view
         setContentView(R.layout.activity_level_select);
 
+        //if there is a saved game, add a page
+        if (super.hasSavedGame())
+            PAGES++;
+
         //get our pages container
         listPageContainer = (LinearLayout)findViewById(R.id.listPageContainer);
 
         //get our view pager
         customPager = (ViewPager) findViewById(R.id.customPager);
-
-        //create new array list
-        fragments = new ArrayList<>();
 
         //create and assign our adapter
         getCustomPager().setAdapter(new LevelSelectPagerAdapter(getFragmentManager()));
@@ -145,17 +145,12 @@ public class LevelSelectActivity extends BaseGameActivity {
         super.onDestroy();
 
         customPager = null;
-        fragments = null;
         listPageContainer = null;
         listPageImages = null;
     }
 
     private ViewPager getCustomPager() {
         return this.customPager;
-    }
-
-    private List<LevelSelectPageFragment> getFragments() {
-        return this.fragments;
     }
 
     private void addPagerListener() {
@@ -278,20 +273,8 @@ public class LevelSelectActivity extends BaseGameActivity {
         @Override
         public Fragment getItem(int position) {
 
-            //check to see if we already have the fragment
-            for (int i = 0; i < getFragments().size(); i++) {
-                if (getFragments().get(i).getPageNumber() == position)
-                    return getFragments().get(position);
-            }
-
-            //create it since the fragment does not exist
-            LevelSelectPageFragment fragment = LevelSelectPageFragment.create(position);
-
-            //add to array list
-            getFragments().add(fragment);
-
             //return result
-            return fragment;
+            return LevelSelectPageFragment.create(position);
         }
 
         @Override
@@ -306,8 +289,25 @@ public class LevelSelectActivity extends BaseGameActivity {
      */
     public void onClickPlay(View view) {
 
+        //get the index of the level selection
+        int index = getCustomPager().getCurrentItem();
+
+        //the selected level
+        Level level;
+
+        //if the user selected to resume a saved level
+        if (index >= Level.values().length) {
+            index = getSharedPreferences().getInt(getString(R.string.saved_game_level_key), 0);
+            GameHelper.RESUME_SAVE = true;
+        } else {
+            GameHelper.RESUME_SAVE = false;
+        }
+
         //the level is determined  by the current page
-        Level level = Level.values()[getCustomPager().getCurrentItem()];
+        level = Level.values()[index];
+
+        //store the level index should we choose to change it
+        LEVEL_INDEX = index;
 
         //set board size
         Board.BOARD_COLS = level.getCols();
@@ -476,10 +476,10 @@ public class LevelSelectActivity extends BaseGameActivity {
                 throw new RuntimeException("Shape not defined: " + OptionsActivity.OPTION_BOARD_SHAPE);
         }
 
-        //save the leaderboard id
+        //save the leader board id
         LEADERBOARD_ID = getString(resId);
 
-        //display the leaderboard
+        //display the leader board
         displayLeaderboardUI(LEADERBOARD_ID);
     }
 

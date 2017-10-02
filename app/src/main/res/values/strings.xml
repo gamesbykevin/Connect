@@ -7,6 +7,12 @@
     <string name="game_stats_file_key" translatable="false">com.gamesbykevin.connect.GAME_STATS_FILE_KEY</string>
     <string name="game_shape_file_key" translatable="false">com.gamesbykevin.connect.SHAPE_FILE_KEY</string>
 
+    <!-- these are so we can save our current game -->
+    <string name="saved_game_shape_key" translatable="false">com.gamesbykevin.connect.SAVED_SHAPE_KEY</string>
+    <string name="saved_game_shapes_key" translatable="false">com.gamesbykevin.connect.SAVED_SHAPES_KEY</string>
+    <string name="saved_game_timer_key" translatable="false">com.gamesbykevin.connect.SAVED_TIMER_KEY</string>
+    <string name="saved_game_level_key" translatable="false">com.gamesbykevin.connect.SAVED_LEVEL_KEY</string>
+
     <!-- button text -->
     <string name="button_text_next">Next</string>
     <string name="button_text_rate">Rate</string>
@@ -18,6 +24,9 @@
     <string name="button_text_play">Play</string>
     <string name="button_text_leaderboard">Leaderboard</string>
     <string name="button_text_achievements">Achievements</string>
+    <string name="button_text_yes">Yes</string>
+    <string name="button_text_no">No</string>
+    <string name="button_text_resume">Resume</string>
 
     <!-- prompt to exit -->
     <string name="exit_prompt">Press again to exit</string>
