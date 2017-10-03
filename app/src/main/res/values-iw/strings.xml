@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-<string name="app_name">לְחַבֵּר</string>
 <string name="button_text_next">הַבָּא</string>
 <string name="button_text_rate">ציון</string>
 <string name="button_text_more">יותר</string>
@@ -11,6 +10,9 @@
 <string name="button_text_play">לְשַׂחֵק</string>
 <string name="button_text_leaderboard">לידרבורד</string>
 <string name="button_text_achievements">הישגים</string>
+<string name="button_text_yes">כן</string>
+<string name="button_text_no">לא</string>
+<string name="button_text_resume">קורות חיים</string>
 <string name="exit_prompt">לחץ שוב על מנת לצאת</string>
 <string name="vibrate_on">רטט: מופעל</string>
 <string name="vibrate_off">רטט: כבוי</string>
@@ -20,7 +22,7 @@
 <string name="tutorial_instructions_1">מדריך חלק 1 \n כדי לפתור עליך לחבר את כל הצינורות יחד</string>
 <string name="tutorial_instructions_2">מדריך חלק 2 \nTouch צינורות כדי לסובב. </string>
 <string name="tutorial_instructions_3">מדריך חלק 3 \nOnce כל הצינורות מחוברים אתה מנצח</string>
-<string name="tutorial_instructions_4">מדריך חלק 4 \nDrag את האצבע אם ברצונך להעביר את הלוח</string>
+<string name="tutorial_instructions_4">מדריך חלק 4 \n הנח את האצבע שלך אם ברצונך להעביר את הלוח</string>
 <string name="tutorial_instructions_5">מדריך חלק 5 \n ניתן גם להתקרב ולהתרחק כאשר צובטים 2 אצבעות</string>
 <string name="tutorial_instructions_6">מדריך חלק 6 \n בחר את המגנט כדי לאפשר סיבוב אוטומטי</string>
 <string name="sign_in_other_error">הייתה בעיה עם הכניסה, נסה שוב מאוחר יותר.</string>

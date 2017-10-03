@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-<string name="app_name">Forbinde</string>
 <string name="button_text_next">Næste</string>
 <string name="button_text_rate">Sats</string>
 <string name="button_text_more">Mere</string>
@@ -11,8 +10,11 @@
 <string name="button_text_play">Spille</string>
 <string name="button_text_leaderboard">Leaderboard</string>
 <string name="button_text_achievements">Resultater</string>
+<string name="button_text_yes">Ja</string>
+<string name="button_text_no">Ingen</string>
+<string name="button_text_resume">Genoptag</string>
 <string name="exit_prompt">Tryk igen for at afslutte</string>
-<string name="vibrate_on">Vibrate: On</string>
+<string name="vibrate_on">Vibrere: Til</string>
 <string name="vibrate_off">Vibrere: Fra</string>
 <string name="sound_on">Lyd: Til</string>
 <string name="sound_off">Lyd: Fra</string>

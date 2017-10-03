@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 <string name="button_text_next">Næst</string>
-<string name="button_text_rate">Rate</string>
+<string name="button_text_rate">Gefa einkunn</string>
 <string name="button_text_more">Meira</string>
 <string name="button_text_menu">Valmynd</string>
 <string name="button_text_start">Byrja</string>
@@ -10,18 +10,21 @@
 <string name="button_text_play">Leika</string>
 <string name="button_text_leaderboard">Leaderboard</string>
 <string name="button_text_achievements">Árangur</string>
+<string name="button_text_yes">Já</string>
+<string name="button_text_no">Nr</string>
+<string name="button_text_resume">Halda áfram</string>
 <string name="exit_prompt">Ýttu aftur til að hætta</string>
 <string name="vibrate_on">Vibrate: On</string>
 <string name="vibrate_off">Vibrate: Off</string>
 <string name="sound_on">Hljóð: Á</string>
 <string name="sound_off">Hljóð: Off</string>
 <string name="text_header_shape">Móta:</string>
-<string name="tutorial_instructions_1">Tutorial Part 1 \\ nTil að leysa þig þarftu að tengja alla rörin saman</string>
-<string name="tutorial_instructions_2">Námskeið Part 2 \\ nSmelltu á pípurnar til að snúa. </string>
-<string name="tutorial_instructions_3">Námskeið Part 3 \\ nÞegar allt rör er tengt sem þú vinnur</string>
-<string name="tutorial_instructions_4">Námskeið Part 4 \\ nFráðu fingurinn ef þú vilt færa borðið</string>
-<string name="tutorial_instructions_5">Námskeið Part 5 \\ nÞú getur einnig súmma inn og út þegar þú klípar 2 fingur</string>
-<string name="tutorial_instructions_6">Kennsla hluti 6 \\ nVeldu segullina til að virkja sjálfvirka snúning</string>
+<string name="tutorial_instructions_1">Tutorial Part 1 \nTil að leysa þig þarftu að tengja alla rörin saman</string>
+<string name="tutorial_instructions_2">Námskeið Part 2 \nTengdu pípurnar til að snúa. </string>
+<string name="tutorial_instructions_3">Námskeið Part 3 \nÞegar allt rör er tengt sem þú vinnur</string>
+<string name="tutorial_instructions_4">Námskeið Part 4 \nFráðu fingurinn ef þú vilt færa borðið</string>
+<string name="tutorial_instructions_5">Námskeið 5 hluti \nÞú getur líka súmað inn og út þegar þú klípar 2 fingur</string>
+<string name="tutorial_instructions_6">Námskeið Part 6 \nVeldu segullina til að virkja sjálfvirka snúning</string>
 <string name="sign_in_other_error">Vandamál kom upp við innskráningu, vinsamlegast reyndu aftur síðar.</string>
 <string name="sign_in_failed">Mistókst að skrá þig inn. Vinsamlegast athugaðu nettengingu og reyndu aftur.</string>
 <string name="app_misconfigured">Forritið er rangt stillt. </string>

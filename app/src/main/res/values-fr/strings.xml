@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-<string name="app_name">Relier</string>
 <string name="button_text_next">Prochain</string>
 <string name="button_text_rate">Taux</string>
 <string name="button_text_more">Plus</string>
@@ -11,6 +10,9 @@
 <string name="button_text_play">Jouer</string>
 <string name="button_text_leaderboard">Tableau de classement</string>
 <string name="button_text_achievements">Réalisations</string>
+<string name="button_text_yes">Oui</string>
+<string name="button_text_no">Non</string>
+<string name="button_text_resume">CV</string>
 <string name="exit_prompt">Appuyez à nouveau pour quitter</string>
 <string name="vibrate_on">Vibrer: Oui</string>
 <string name="vibrate_off">Vibrer: désactivé</string>
@@ -20,8 +22,8 @@
 <string name="tutorial_instructions_1">Didacticiel Partie 1 \nPour résoudre, vous devez connecter tous les tuyaux ensemble</string>
 <string name="tutorial_instructions_2">Didacticiel Partie 2 \nTouchez les tuyaux pour faire pivoter. </string>
 <string name="tutorial_instructions_3">Tutoriel Partie 3 \nSous tous les tuyaux sont connectés, vous gagnez</string>
-<string name="tutorial_instructions_4">Tutoriel Partie 4 \nDragez votre doigt si vous voulez déplacer le tableau</string>
-<string name="tutorial_instructions_5">Tutorial Part 5 \nVous pouvez également effectuer un zoom avant et arrière lorsque vous pincer 2 doigts</string>
+<string name="tutorial_instructions_4">Tutoriel Partie 4 \nDraguez votre doigt si vous voulez déplacer le tableau</string>
+<string name="tutorial_instructions_5">Tutoriel Partie 5 \nVous pouvez également faire un zoom avant et arrière lorsque vous appuyez deux doigts</string>
 <string name="tutorial_instructions_6">Tutoriel Partie 6 \nSélectionnez l\'aimant pour activer la rotation automatique</string>
 <string name="sign_in_other_error">Il y a eu un problème avec la connexion, réessayez plus tard.</string>
 <string name="sign_in_failed">Échec de la connexion. Veuillez vérifier votre connexion réseau et réessayer.</string>

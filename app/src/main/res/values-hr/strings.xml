@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-<string name="app_name">Spojiti</string>
 <string name="button_text_next">Sljedeći</string>
 <string name="button_text_rate">Stopa</string>
 <string name="button_text_more">Više</string>
@@ -11,17 +10,20 @@
 <string name="button_text_play">Igrati</string>
 <string name="button_text_leaderboard">Vodeći</string>
 <string name="button_text_achievements">Dostignuća</string>
+<string name="button_text_yes">Da</string>
+<string name="button_text_no">Ne</string>
+<string name="button_text_resume">rezime</string>
 <string name="exit_prompt">Pritisnite ponovno za izlaz</string>
 <string name="vibrate_on">Vibriraj: On</string>
 <string name="vibrate_off">Vibriraj: Isključeno</string>
-<string name="sound_on">Zvuk: uključen</string>
+<string name="sound_on">Zvuk: On</string>
 <string name="sound_off">Zvuk isključen</string>
 <string name="text_header_shape">Oblik:</string>
-<string name="tutorial_instructions_1">Tutorial Dio 1 \nZa rješavanje morate povezati sve cijevi zajedno</string>
-<string name="tutorial_instructions_2">Tutorial Dio 2 \nDodirite cijevi da biste zakretali. </string>
-<string name="tutorial_instructions_3">Tutorial Dio 3 \nKad su sve cijevi spojene, pobjeđujete</string>
+<string name="tutorial_instructions_1">Vodič Dio 1 \nZa rješavanje morate spojiti sve cijevi zajedno</string>
+<string name="tutorial_instructions_2">Tutorial Dio 2 \nDodirite cijevi da biste zakrenuli. </string>
+<string name="tutorial_instructions_3">Tutorial Dio 3 \nNakon što su sve cijevi povezane, osvojite</string>
 <string name="tutorial_instructions_4">Tutorial Dio 4 \nDrag prstom ako želite premjestiti ploču</string>
-<string name="tutorial_instructions_5">Vodič Dio 5 \nMožete povećavati i smanjivati ​​veličinu pri prstima prstiju</string>
+<string name="tutorial_instructions_5">Vodič Dio 5 \nMožete i povećati i smanjivati ​​veličinu pri prstima prstiju</string>
 <string name="tutorial_instructions_6">Tutorial Dio 6 \nOdaberite magnet da biste omogućili automatsko zakretanje</string>
 <string name="sign_in_other_error">Došlo je do problema s prijavom, pokušajte ponovo kasnije.</string>
 <string name="sign_in_failed">Prijava nije uspjela. Provjerite mrežnu vezu i pokušajte ponovo.</string>

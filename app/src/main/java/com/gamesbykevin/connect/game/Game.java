@@ -23,6 +23,7 @@ import static com.gamesbykevin.connect.board.BoardHelper.CALCULATE_UVS;
 import static com.gamesbykevin.connect.board.BoardHelper.CALCULATE_VERTICES;
 import static com.gamesbykevin.connect.board.BoardHelper.SOUND_ROTATE;
 import static com.gamesbykevin.connect.board.BoardHelper.SOUND_ROTATE_CONNECT;
+import static com.gamesbykevin.connect.board.BoardHelper.checkBoard;
 import static com.gamesbykevin.connect.game.GameHelper.FRAMES;
 import static com.gamesbykevin.connect.game.GameHelper.GAME_OVER;
 import static com.gamesbykevin.connect.game.GameHelper.GAME_OVER_DELAY_FRAMES;
@@ -168,6 +169,9 @@ public class Game implements IGame {
             CALCULATE_VERTICES = true;
             CALCULATE_INDICES = true;
 
+            //check the board
+            checkBoard(getBoard(), false);
+
         } else {
 
             //set the type of shape we will be playing with
@@ -218,11 +222,9 @@ public class Game implements IGame {
                 //if the game is over, move to the next step
                 if (GAME_OVER) {
 
-                    //make sure we aren't resuming a saved game
-                    RESUME_SAVE = false;
-
-                    //remove any saved puzzle
-                    activity.clearSave();
+                    //if resuming save, set the correct page #
+                    if (RESUME_SAVE)
+                        CURRENT_PAGE = getSharedPreferences().getInt(activity.getString(R.string.saved_game_page_key), 0);
 
                     //unlock any achievements we achieved
                     AchievementHelper.completedGame(activity, getBoard());
@@ -293,8 +295,14 @@ public class Game implements IGame {
                 FRAMES++;
 
                 //switch to game over screen if enough time passed and we haven't set yet
-                if (FRAMES >= GAME_OVER_DELAY_FRAMES && activity.getScreen() != Screen.GameOver)
+                if (FRAMES >= GAME_OVER_DELAY_FRAMES && activity.getScreen() != Screen.GameOver) {
+
+                    //go to game over screen
                     activity.setScreen(Screen.GameOver);
+
+                    //remove any existing saved puzzle
+                    activity.clearSave();
+                }
                 break;
         }
     }

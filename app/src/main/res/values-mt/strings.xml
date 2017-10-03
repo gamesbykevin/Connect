@@ -10,6 +10,9 @@
 <string name="button_text_play">Play</string>
 <string name="button_text_leaderboard">Leaderboard</string>
 <string name="button_text_achievements">Kisbiet</string>
+<string name="button_text_yes">Iva</string>
+<string name="button_text_no">Nru</string>
+<string name="button_text_resume">Kompli</string>
 <string name="exit_prompt">Erġa \'stampa għall-ħruġ</string>
 <string name="vibrate_on">Vibra: Fuq</string>
 <string name="vibrate_off">Ibiddel: Mitfi</string>
@@ -17,19 +20,19 @@
 <string name="sound_off">Sound: Mitfi</string>
 <string name="text_header_shape">Forma:</string>
 <string name="tutorial_instructions_1">Tutorja Parti 1 \nGħaslu ssolvi għandek tqabbad il-pajpijiet kollha flimkien</string>
-<string name="tutorial_instructions_2">Tutorja Parti 2 \nTagħmel il-pajpijiet li jduru. </string>
+<string name="tutorial_instructions_2">Tutorja Parti 2 \nTagħmel il-pajpijiet biex iduru. </string>
 <string name="tutorial_instructions_3">Tutorja Parti 3 \nWara li l-pajpijiet kollha huma konnessi irbaħ</string>
-<string name="tutorial_instructions_4">Tutorial Parti 4 \n Agħti s-saba \'tiegħek jekk trid timxi l-bord</string>
+<string name="tutorial_instructions_4">Tutorial Parti 4 \n Agħti s-saba \'tiegħek jekk trid tibgħat il-bord</string>
 <string name="tutorial_instructions_5">Tutorial Parti 5 \nTista \'wkoll tizda\' u tintefa \'meta tiċċekja 2 swaba\'</string>
-<string name="tutorial_instructions_6">Tutorja Parti 6 \nSelett il-kalamita biex iddawwar auto</string>
+<string name="tutorial_instructions_6">Tutorja Parti 6 \nSelektja l-kalamita biex iddawwar auto</string>
 <string name="sign_in_other_error">Kien hemm kwistjoni bl-iffirmar, jekk jogħġbok erġa \'pprova aktar tard.</string>
-<string name="sign_in_failed">Ma rnexxiliex tiffirma. Jekk jogħġbok iċċekkja l-konnessjoni tan-netwerk tiegħek u erġa \'pprova.</string>
+<string name="sign_in_failed">Naqas milli jiffirma. Jekk jogħġbok iċċekkja l-konnessjoni tan-netwerk tiegħek u erġa \'pprova.</string>
 <string name="app_misconfigured">L-applikazzjoni hija kkonfigurata ħażin. </string>
-<string name="license_failed">Liċenzja tal-liċenzja fallew</string>
+<string name="license_failed">Il-kontroll tal-liċenzja falla.</string>
 <string name="unknown_error">Żball mhux magħruf.</string>
 <string name="UNKNOWN_ERROR">Żball mhux magħruf.</string>
-<string name="gamehelper_sign_in_failed">Ma rnexxiliex tiffirma. Jekk jogħġbok iċċekkja l-konnessjoni tan-netwerk tiegħek u erġa \'pprova.</string>
+<string name="gamehelper_sign_in_failed">Naqas milli jiffirma. Jekk jogħġbok iċċekkja l-konnessjoni tan-netwerk tiegħek u erġa \'pprova.</string>
 <string name="gamehelper_app_misconfigured">L-applikazzjoni hija kkonfigurata ħażin. </string>
-<string name="gamehelper_license_failed">Liċenzja tal-liċenzja fallew</string>
+<string name="gamehelper_license_failed">Il-kontroll tal-liċenzja falla.</string>
 <string name="gamehelper_unknown_error">Żball mhux magħruf.</string>
 </resources>

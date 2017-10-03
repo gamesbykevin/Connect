@@ -107,7 +107,7 @@ public class BoardHelper {
      * @param board The board containing all our shapes
      * @param checkGameOver Do we want to check if the board is solved?
      */
-    protected static void checkBoard(Board board, boolean checkGameOver) {
+    public static void checkBoard(Board board, final boolean checkGameOver) {
 
         //create array if not instantiated or if the size doesn't match
         if (tmpConnected == null || tmpConnected.length != board.getShapes().length || tmpConnected[0].length != board.getShapes()[0].length) {

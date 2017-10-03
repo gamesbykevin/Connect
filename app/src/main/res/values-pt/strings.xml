@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-<string name="app_name">Conectar</string>
 <string name="button_text_next">Próximo</string>
 <string name="button_text_rate">Taxa</string>
 <string name="button_text_more">Mais</string>
@@ -11,6 +10,9 @@
 <string name="button_text_play">Toque</string>
 <string name="button_text_leaderboard">Entre os melhores</string>
 <string name="button_text_achievements">Realizações</string>
+<string name="button_text_yes">sim</string>
+<string name="button_text_no">Não</string>
+<string name="button_text_resume">Currículo</string>
 <string name="exit_prompt">Pressione novamente para sair</string>
 <string name="vibrate_on">Vibrar: Ligado</string>
 <string name="vibrate_off">Vibrar: Desligado</string>

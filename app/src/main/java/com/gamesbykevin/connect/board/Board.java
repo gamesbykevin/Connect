@@ -14,7 +14,6 @@ import com.gamesbykevin.connect.shape.Diamond;
 import com.gamesbykevin.connect.shape.Hexagon;
 import com.gamesbykevin.connect.shape.Square;
 
-import static com.gamesbykevin.androidframeworkv2.activity.BaseActivity.getSharedPreferences;
 import static com.gamesbykevin.connect.activity.GameActivity.getRandomObject;
 import static com.gamesbykevin.connect.board.BoardHelper.CALCULATE_INDICES;
 import static com.gamesbykevin.connect.board.BoardHelper.CALCULATE_UVS;
@@ -386,10 +385,12 @@ public class Board implements ICommon {
             return;
 
         if (!RESUME_SAVE) {
+
             if (getMaze() == null)
                 return;
             if (!getMaze().isGenerated())
                 return;
+
         }
 
         try {

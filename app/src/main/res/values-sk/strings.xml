@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-<string name="app_name">pripojiť</string>
 <string name="button_text_next">Ďalšie</string>
 <string name="button_text_rate">rýchlosť</string>
 <string name="button_text_more">viac</string>
@@ -11,6 +10,9 @@
 <string name="button_text_play">hrať</string>
 <string name="button_text_leaderboard">leaderboard</string>
 <string name="button_text_achievements">úspechy</string>
+<string name="button_text_yes">Áno</string>
+<string name="button_text_no">žiadny</string>
+<string name="button_text_resume">Pokračovať</string>
 <string name="exit_prompt">Opätovným stlačením opustíte</string>
 <string name="vibrate_on">Vibrovanie: Zapnuté</string>
 <string name="vibrate_off">Vibrovanie: Vypnuté</string>

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-<string name="app_name">Verbinden</string>
 <string name="button_text_next">Nächster</string>
 <string name="button_text_rate">Preis</string>
 <string name="button_text_more">Mehr</string>
@@ -11,6 +10,9 @@
 <string name="button_text_play">Spielen</string>
 <string name="button_text_leaderboard">Bestenliste</string>
 <string name="button_text_achievements">Errungenschaften</string>
+<string name="button_text_yes">Ja</string>
+<string name="button_text_no">Nein</string>
+<string name="button_text_resume">Fortsetzen</string>
 <string name="exit_prompt">Zum Verlassen erneut drücken</string>
 <string name="vibrate_on">Vibrieren: Ein</string>
 <string name="vibrate_off">Vibrieren: Aus</string>

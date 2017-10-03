@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-<string name="app_name">जुडिये</string>
 <string name="button_text_next">आगामी</string>
 <string name="button_text_rate">मूल्यांकन करें</string>
 <string name="button_text_more">अधिक</string>
@@ -11,6 +10,9 @@
 <string name="button_text_play">प्ले</string>
 <string name="button_text_leaderboard">लीडरबोर्ड</string>
 <string name="button_text_achievements">उपलब्धियां</string>
+<string name="button_text_yes">हाँ</string>
+<string name="button_text_no">नहीं</string>
+<string name="button_text_resume">बायोडाटा</string>
 <string name="exit_prompt">बाहर निकलने के लिए फिर से दबाएं</string>
 <string name="vibrate_on">कंपन: चालू</string>
 <string name="vibrate_off">कंपन: बंद</string>
@@ -24,12 +26,12 @@
 <string name="tutorial_instructions_5">ट्यूटोरियल भाग 5 \n आप 2 उंगलियों को चुटकी करते समय ज़ूम इन और आउट कर सकते हैं</string>
 <string name="tutorial_instructions_6">ट्यूटोरियल भाग 6 \n स्वत: बारी बारी से सक्षम करने के लिए चुंबक का चयन करें</string>
 <string name="sign_in_other_error">साइन-इन के साथ एक समस्या थी, कृपया बाद में फिर से प्रयास करें।</string>
-<string name="sign_in_failed">साइन इन करने में विफल। कृपया अपने नेटवर्क कनेक्शन की जांच करें और फिर से प्रयास करें।</string>
+<string name="sign_in_failed">साइन इन करने में असफल। कृपया अपने नेटवर्क कनेक्शन की जांच करें और फिर से प्रयास करें।</string>
 <string name="app_misconfigured">आवेदन गलत तरीके से कॉन्फ़िगर किया गया है </string>
 <string name="license_failed">लाइसेंस जांच असफल रही</string>
 <string name="unknown_error">अज्ञात त्रुटि।</string>
 <string name="UNKNOWN_ERROR">अज्ञात त्रुटि।</string>
-<string name="gamehelper_sign_in_failed">साइन इन करने में विफल। कृपया अपने नेटवर्क कनेक्शन की जांच करें और फिर से प्रयास करें।</string>
+<string name="gamehelper_sign_in_failed">साइन इन करने में असफल। कृपया अपने नेटवर्क कनेक्शन की जांच करें और फिर से प्रयास करें।</string>
 <string name="gamehelper_app_misconfigured">आवेदन गलत तरीके से कॉन्फ़िगर किया गया है </string>
 <string name="gamehelper_license_failed">लाइसेंस जांच असफल रही</string>
 <string name="gamehelper_unknown_error">अज्ञात त्रुटि।</string>

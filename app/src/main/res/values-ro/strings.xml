@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-<string name="app_name">Conectați</string>
 <string name="button_text_next">Următor →</string>
 <string name="button_text_rate">rată</string>
 <string name="button_text_more">Mai Mult</string>
@@ -11,6 +10,9 @@
 <string name="button_text_play">a juca</string>
 <string name="button_text_leaderboard">Leaderboard</string>
 <string name="button_text_achievements">Realizări</string>
+<string name="button_text_yes">da</string>
+<string name="button_text_no">Nu</string>
+<string name="button_text_resume">Relua</string>
 <string name="exit_prompt">Apăsați din nou pentru a ieși</string>
 <string name="vibrate_on">Vibrați: Pornit</string>
 <string name="vibrate_off">Vibrați: Oprit</string>

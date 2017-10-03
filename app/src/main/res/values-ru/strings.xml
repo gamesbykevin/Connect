@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-<string name="app_name">соединять</string>
 <string name="button_text_next">следующий</string>
 <string name="button_text_rate">Ставка</string>
 <string name="button_text_more">Больше</string>
@@ -11,6 +10,9 @@
 <string name="button_text_play">Играть</string>
 <string name="button_text_leaderboard">Leaderboard</string>
 <string name="button_text_achievements">достижения</string>
+<string name="button_text_yes">да</string>
+<string name="button_text_no">нет</string>
+<string name="button_text_resume">Продолжить</string>
 <string name="exit_prompt">Нажмите еще раз, чтобы выйти</string>
 <string name="vibrate_on">Вибрация: включена</string>
 <string name="vibrate_off">Вибрация: выкл.</string>
@@ -20,9 +22,9 @@
 <string name="tutorial_instructions_1">Учебное пособие Часть 1 \nЧтобы решить, что вам нужно соединить все трубы вместе</string>
 <string name="tutorial_instructions_2">Учебное пособие Часть 2 \nВыберите трубы для вращения. </string>
 <string name="tutorial_instructions_3">Учебник Часть 3 \nПосле того, как все каналы подключены, вы выигрываете</string>
-<string name="tutorial_instructions_4">Учебник Часть 4 \nНажмите пальцем, если вы хотите переместить панель</string>
+<string name="tutorial_instructions_4">Учебное пособие Часть 4 \nНажмите пальцем, если вы хотите переместить панель</string>
 <string name="tutorial_instructions_5">Учебное пособие Часть 5 \nВы можете также увеличивать и уменьшать масштаб, когда вы зажимаете 2 пальца</string>
-<string name="tutorial_instructions_6">Учебное пособие Часть 6 \nВыберите магнит, чтобы включить автоматический поворот</string>
+<string name="tutorial_instructions_6">Учебник Часть 6 \nВыберите магнит, чтобы включить автоматический поворот</string>
 <string name="sign_in_other_error">Возникла проблема со входом в систему, повторите попытку позже.</string>
 <string name="sign_in_failed">Не удалось войти в систему. Проверьте подключение к сети и повторите попытку.</string>
 <string name="app_misconfigured">Приложение неправильно настроено. </string>

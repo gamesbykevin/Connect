@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-<string name="app_name">الاتصال</string>
 <string name="button_text_next">التالى</string>
 <string name="button_text_rate">معدل</string>
 <string name="button_text_more">أكثر من</string>
@@ -11,6 +10,9 @@
 <string name="button_text_play">لعب</string>
 <string name="button_text_leaderboard">المتصدرين</string>
 <string name="button_text_achievements">الإنجازات</string>
+<string name="button_text_yes">نعم فعلا</string>
+<string name="button_text_no">لا</string>
+<string name="button_text_resume">استئنف</string>
 <string name="exit_prompt">اضغط مرة أخرى للخروج</string>
 <string name="vibrate_on">الاهتزاز: تشغيل</string>
 <string name="vibrate_off">الاهتزاز: إيقاف</string>

@@ -93,8 +93,14 @@ public class LevelSelectActivity extends BaseGameActivity {
         setContentView(R.layout.activity_level_select);
 
         //if there is a saved game, add a page
-        if (super.hasSavedGame())
-            PAGES++;
+        if (hasSavedGame()) {
+
+            //increase # of pages if there is a saved game
+            PAGES = Level.values().length + 1;
+
+            //default that as the current page
+            CURRENT_PAGE = PAGES - 1;
+        }
 
         //get our pages container
         listPageContainer = (LinearLayout)findViewById(R.id.listPageContainer);

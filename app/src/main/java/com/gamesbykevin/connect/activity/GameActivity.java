@@ -431,6 +431,7 @@ public class GameActivity extends BaseGameActivity implements Disposable {
         String tmpShapeData = null;
         String tmpTimerData = null;
         int tmpLevelIndex = -1;
+        int tmpCurrentPage = -1;
 
         try {
 
@@ -442,11 +443,13 @@ public class GameActivity extends BaseGameActivity implements Disposable {
             tmpShapeData = getSharedPreferences().getString(getString(R.string.saved_game_shape_key), null);
             tmpTimerData = getSharedPreferences().getString(getString(R.string.saved_game_timer_key), null);
             tmpLevelIndex = getSharedPreferences().getInt(getString(R.string.saved_game_level_key), -1);
+            tmpCurrentPage = getSharedPreferences().getInt(getString(R.string.saved_game_page_key), -1);
 
             editor.putString(getString(R.string.saved_game_shapes_key), GSON.toJson(getGame().getBoard().getShapes()));
-            editor.putString(getString(R.string.saved_game_shape_key), GSON.toJson(OptionsActivity.OPTION_BOARD_SHAPE));
+            editor.putString(getString(R.string.saved_game_shape_key), GSON.toJson(getGame().getBoard().getType()));
             editor.putString(getString(R.string.saved_game_timer_key), value1 + "," + value2 + "," + value3 + "," + value4);
             editor.putInt(getString(R.string.saved_game_level_key), LEVEL_INDEX);
+            editor.putInt(getString(R.string.saved_game_page_key), CURRENT_PAGE >= Level.values().length ? LEVEL_INDEX : CURRENT_PAGE);
 
             //save changes
             result = editor.commit();
@@ -454,9 +457,10 @@ public class GameActivity extends BaseGameActivity implements Disposable {
             //if not successful, try to commit again
             if (!result) {
                 editor.putString(getString(R.string.saved_game_shapes_key), GSON.toJson(getGame().getBoard().getShapes()));
-                editor.putString(getString(R.string.saved_game_shape_key), GSON.toJson(OptionsActivity.OPTION_BOARD_SHAPE));
+                editor.putString(getString(R.string.saved_game_shape_key), GSON.toJson(getGame().getBoard().getType()));
                 editor.putString(getString(R.string.saved_game_timer_key), value1 + "," + value2 + "," + value3 + "," + value4);
                 editor.putInt(getString(R.string.saved_game_level_key), LEVEL_INDEX);
+                editor.putInt(getString(R.string.saved_game_page_key), CURRENT_PAGE >= Level.values().length ? LEVEL_INDEX : CURRENT_PAGE);
                 result = editor.commit();
             }
 
@@ -473,7 +477,7 @@ public class GameActivity extends BaseGameActivity implements Disposable {
             //if previous values exist, try to save those
             if (tmpTimerData != null && tmpTimerData.trim().length() > 0 &&
                     tmpShapesData == null && tmpShapesData.trim().length() > 0 &&
-                    tmpShapeData == null && tmpShapeData.trim().length() > 0 && tmpLevelIndex > -1) {
+                    tmpShapeData == null && tmpShapeData.trim().length() > 0 && tmpLevelIndex > -1 && tmpCurrentPage > -1) {
                 if (editor == null)
                     editor = getSharedPreferences().edit();
 
@@ -481,6 +485,7 @@ public class GameActivity extends BaseGameActivity implements Disposable {
                 editor.putString(getString(R.string.saved_game_shapes_key), tmpShapesData);
                 editor.putString(getString(R.string.saved_game_shape_key), tmpShapeData);
                 editor.putInt(getString(R.string.saved_game_level_key), tmpLevelIndex);
+                editor.putInt(getString(R.string.saved_game_page_key), tmpCurrentPage);
 
                 //save changes once more
                 result = editor.commit();
@@ -499,6 +504,9 @@ public class GameActivity extends BaseGameActivity implements Disposable {
 
         RESUME_SAVE = false;
 
+        //update the number of pages left
+        PAGES = Level.values().length;
+
         //get the editor so we can change the shared preferences
         SharedPreferences.Editor editor = getSharedPreferences().edit();
 
@@ -507,6 +515,7 @@ public class GameActivity extends BaseGameActivity implements Disposable {
         editor.remove(getString(R.string.saved_game_shapes_key));
         editor.remove(getString(R.string.saved_game_timer_key));
         editor.remove(getString(R.string.saved_game_level_key));
+        editor.remove(getString(R.string.saved_game_page_key));
 
         //save changes
         editor.commit();
@@ -539,8 +548,11 @@ public class GameActivity extends BaseGameActivity implements Disposable {
         CURRENT_PAGE++;
 
         //if the page is at the end, start over
-        if (CURRENT_PAGE >= PAGES)
+        if (CURRENT_PAGE >= Level.values().length)
             CURRENT_PAGE = 0;
+
+        //also change the level index
+        LEVEL_INDEX = CURRENT_PAGE;
 
         Level level = Level.values()[CURRENT_PAGE];
 

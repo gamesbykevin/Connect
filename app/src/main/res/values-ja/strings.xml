@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-<string name="app_name">接続する</string>
 <string name="button_text_next">次</string>
 <string name="button_text_rate">レート</string>
 <string name="button_text_more">もっと</string>
@@ -10,8 +9,11 @@
 <string name="button_text_tutorial">チュートリアル</string>
 <string name="button_text_play">遊びます</string>
 <string name="button_text_leaderboard">リーダーボード</string>
-<string name="button_text_achievements">業績</string>
-<string name="exit_prompt">もう一度押すと終了します。</string>
+<string name="button_text_achievements">実績</string>
+<string name="button_text_yes">はい</string>
+<string name="button_text_no">いいえ</string>
+<string name="button_text_resume">履歴書</string>
+<string name="exit_prompt">終了するにはもう一度押す</string>
 <string name="vibrate_on">振動：オン</string>
 <string name="vibrate_off">振動：オフ</string>
 <string name="sound_on">サウンド：オン</string>
@@ -24,12 +26,12 @@
 <string name="tutorial_instructions_5">チュートリアルパート5 \nまた、2本の指を挟んでズームイン/ズームアウトすることもできます</string>
 <string name="tutorial_instructions_6">チュートリアルパート6 \nマグネットを選択して自動回転を有効にする</string>
 <string name="sign_in_other_error">ログインに問題がありました。後でもう一度お試しください。</string>
-<string name="sign_in_failed">ログインに失敗しました。ネットワーク接続を確認してもう一度お試しください。</string>
+<string name="sign_in_failed">ログインに失敗しました。ネットワーク接続を確認して、もう一度お試しください。</string>
 <string name="app_misconfigured">アプリケーションが正しく構成されていません。</string>
 <string name="license_failed">ライセンスの確認に失敗しました。</string>
 <string name="unknown_error">不明なエラー。</string>
 <string name="UNKNOWN_ERROR">不明なエラー。</string>
-<string name="gamehelper_sign_in_failed">ログインに失敗しました。ネットワーク接続を確認してもう一度お試しください。</string>
+<string name="gamehelper_sign_in_failed">ログインに失敗しました。ネットワーク接続を確認して、もう一度お試しください。</string>
 <string name="gamehelper_app_misconfigured">アプリケーションが正しく構成されていません。</string>
 <string name="gamehelper_license_failed">ライセンスの確認に失敗しました。</string>
 <string name="gamehelper_unknown_error">不明なエラー。</string>

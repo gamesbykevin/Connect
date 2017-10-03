@@ -10,6 +10,9 @@
 <string name="button_text_play">Play</string>
 <string name="button_text_leaderboard">Leaderboard</string>
 <string name="button_text_achievements">Achievements</string>
+<string name="button_text_yes">Yes</string>
+<string name="button_text_no">No</string>
+<string name="button_text_resume">Resume</string>
 <string name="exit_prompt">Press again to exit</string>
 <string name="vibrate_on">Vibrate: On</string>
 <string name="vibrate_off">Vibrate: Off</string>

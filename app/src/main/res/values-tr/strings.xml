@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-<string name="app_name">bağlamak</string>
 <string name="button_text_next">Sonraki</string>
 <string name="button_text_rate">oran</string>
 <string name="button_text_more">Daha</string>
@@ -11,6 +10,9 @@
 <string name="button_text_play">Oyun</string>
 <string name="button_text_leaderboard">Liderler Sıralaması</string>
 <string name="button_text_achievements">Başarılar</string>
+<string name="button_text_yes">Evet</string>
+<string name="button_text_no">Yok hayır</string>
+<string name="button_text_resume">Devam et</string>
 <string name="exit_prompt">Çıkmak için tekrar basın</string>
 <string name="vibrate_on">Titreşim: Açık</string>
 <string name="vibrate_off">Titreşim: Kapalı</string>

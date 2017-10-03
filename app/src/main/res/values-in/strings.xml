@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-<string name="app_name">Menghubungkan</string>
 <string name="button_text_next">Berikutnya</string>
 <string name="button_text_rate">Menilai</string>
 <string name="button_text_more">Lebih</string>
@@ -11,6 +10,9 @@
 <string name="button_text_play">Bermain</string>
 <string name="button_text_leaderboard">Papan peringkat</string>
 <string name="button_text_achievements">Prestasi</string>
+<string name="button_text_yes">iya nih</string>
+<string name="button_text_no">Tidak</string>
+<string name="button_text_resume">Lanjut</string>
 <string name="exit_prompt">Tekan lagi untuk keluar</string>
 <string name="vibrate_on">Getar: Aktif</string>
 <string name="vibrate_off">Getar: Mati</string>

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-<string name="app_name">Свържете</string>
 <string name="button_text_next">Следващия</string>
 <string name="button_text_rate">скорост</string>
 <string name="button_text_more">| Повече ▼</string>
@@ -11,6 +10,9 @@
 <string name="button_text_play">играя</string>
 <string name="button_text_leaderboard">Табло</string>
 <string name="button_text_achievements">Постижения</string>
+<string name="button_text_yes">да</string>
+<string name="button_text_no">Не</string>
+<string name="button_text_resume">Продължи</string>
 <string name="exit_prompt">Натиснете отново, за да излезете</string>
 <string name="vibrate_on">Вибриране: Вкл</string>
 <string name="vibrate_off">Вибриране: Изключено</string>
@@ -22,7 +24,7 @@
 <string name="tutorial_instructions_3">Инструкция част 3 \nСлед като всички тръби са свързани вие печелите</string>
 <string name="tutorial_instructions_4">Инструкция част 4 \nЗавъртете пръста си, ако искате да преместите борда</string>
 <string name="tutorial_instructions_5">Инструкция част 5 \nМожете също да увеличавате и увеличавате при захващане с 2 пръста</string>
-<string name="tutorial_instructions_6">Инструкция част 6 \nИзберете магнита, за да разрешите автоматично завъртане</string>
+<string name="tutorial_instructions_6">Инструкция част 6 \nИзберете магнита, за да разрешите автоматичното завъртане</string>
 <string name="sign_in_other_error">Възникна проблем при влизане в профила, моля, опитайте отново по-късно.</string>
 <string name="sign_in_failed">Присъединяването не бе успешно. Проверете връзката си в мрежата и опитайте отново.</string>
 <string name="app_misconfigured">Приложението е неправилно конфигурирано. </string>

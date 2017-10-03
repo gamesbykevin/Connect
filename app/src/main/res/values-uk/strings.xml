@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-<string name="app_name">Підключіться</string>
 <string name="button_text_next">Далі</string>
 <string name="button_text_rate">Оцінити</string>
 <string name="button_text_more">Більше</string>
@@ -11,6 +10,9 @@
 <string name="button_text_play">Грати</string>
 <string name="button_text_leaderboard">Лідерський план</string>
 <string name="button_text_achievements">Досягнення</string>
+<string name="button_text_yes">Так</string>
+<string name="button_text_no">Немає</string>
+<string name="button_text_resume">Резюме</string>
 <string name="exit_prompt">Натисніть ще раз, щоб вийти</string>
 <string name="vibrate_on">Вібросигнал: Увімкнено</string>
 <string name="vibrate_off">Вібросигнал: вимкнено</string>
@@ -18,11 +20,11 @@
 <string name="sound_off">Звук: вимкнено</string>
 <string name="text_header_shape">Форма:</string>
 <string name="tutorial_instructions_1">Підручник Частина 1 \nЩоб вирішити, вам доведеться з\'єднати всі труби разом</string>
-<string name="tutorial_instructions_2">Підручник Частина 2 \nДодайте труби до повороту. </string>
+<string name="tutorial_instructions_2">Підручник Частина 2 \nДозвольте трубам обертати. </string>
 <string name="tutorial_instructions_3">Підручник з розділу 3 \nКоли всі труби з\'єднані ви виграєте</string>
 <string name="tutorial_instructions_4">Підручник Частина 4 \nНатисніть палець, щоб перемістити дошку</string>
-<string name="tutorial_instructions_5">Підручник з розділу 5 \nВи можете також збільшувати масштаб і зменшувати його, коли ви стискаєте 2 пальця</string>
-<string name="tutorial_instructions_6">Підручник з розділу 6 \nВиберіть магніт для автоматичного обертання</string>
+<string name="tutorial_instructions_5">Підручник з розділу 5 \nВи також можете збільшувати та зменшувати масштаб, коли ви стискаєте 2 пальця</string>
+<string name="tutorial_instructions_6">Підручник з розділу 6 \nВиберіть магніт, щоб увімкнути автоматичне обертання</string>
 <string name="sign_in_other_error">Виникла проблема з входом, спробуйте пізніше.</string>
 <string name="sign_in_failed">Не вдалося ввійти. Перевірте з\'єднання з мережею та повторіть спробу.</string>
 <string name="app_misconfigured">Програма неправильно налаштована. </string>

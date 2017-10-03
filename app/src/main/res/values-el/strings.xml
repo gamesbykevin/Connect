@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-<string name="app_name">Συνδέω</string>
 <string name="button_text_next">επόμενος</string>
 <string name="button_text_rate">Τιμή</string>
 <string name="button_text_more">Περισσότερο</string>
@@ -11,6 +10,9 @@
 <string name="button_text_play">Παίζω</string>
 <string name="button_text_leaderboard">Leaderboard</string>
 <string name="button_text_achievements">Επιτεύγματα</string>
+<string name="button_text_yes">Ναί</string>
+<string name="button_text_no">Οχι</string>
+<string name="button_text_resume">ΒΙΟΓΡΑΦΙΚΟ</string>
 <string name="exit_prompt">Πατήστε ξανά για έξοδο</string>
 <string name="vibrate_on">Δόνηση: Ενεργοποίηση</string>
 <string name="vibrate_off">Δόνηση: Απενεργοποίηση</string>

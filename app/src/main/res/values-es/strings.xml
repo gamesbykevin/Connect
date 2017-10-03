@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-<string name="app_name">Conectar</string>
 <string name="button_text_next">Siguiente</string>
 <string name="button_text_rate">Tarifa</string>
 <string name="button_text_more">Más</string>
@@ -11,25 +10,28 @@
 <string name="button_text_play">Jugar</string>
 <string name="button_text_leaderboard">Tabla de clasificación</string>
 <string name="button_text_achievements">Logros</string>
+<string name="button_text_yes">Sí</string>
+<string name="button_text_no">No</string>
+<string name="button_text_resume">Currículum</string>
 <string name="exit_prompt">Oprima de nuevo para salir</string>
-<string name="vibrate_on">Vibrar: Encendido</string>
-<string name="vibrate_off">Vibrar: Desactivado</string>
+<string name="vibrate_on">Vibrar: Activado</string>
+<string name="vibrate_off">Vibrar: desactivado</string>
 <string name="sound_on">Sonido encendido</string>
 <string name="sound_off">Sonido apagado</string>
 <string name="text_header_shape">Forma:</string>
 <string name="tutorial_instructions_1">Tutorial Parte 1 \nPara resolver tienes que conectar todos los tubos juntos</string>
 <string name="tutorial_instructions_2">Tutorial Parte 2 \nToque las tuberías para girar. </string>
-<string name="tutorial_instructions_3">Tutorial Parte 3 \nCuando todas las tuberías estén conectadas, usted gana</string>
+<string name="tutorial_instructions_3">Tutorial Parte 3 \nCuando todas las tuberías estén conectadas, ganas</string>
 <string name="tutorial_instructions_4">Tutorial Parte 4 \nDrag un dedo si quieres mover el tablero</string>
 <string name="tutorial_instructions_5">Tutorial Parte 5 \nTambién puede acercar y alejar cuando pellizca 2 dedos</string>
-<string name="tutorial_instructions_6">Tutorial Parte 6 \nSeleccione el imán para activar la rotación automática</string>
-<string name="sign_in_other_error">Se produjo un problema con el inicio de sesión. Vuelve a intentarlo más tarde.</string>
-<string name="sign_in_failed">No se pudo iniciar sesión. Compruebe la conexión de red y vuelva a intentarlo.</string>
+<string name="tutorial_instructions_6">Tutorial Parte 6 \nSeleccione el imán para habilitar la rotación automática</string>
+<string name="sign_in_other_error">Se ha producido un problema con el inicio de sesión. Vuelve a intentarlo más tarde.</string>
+<string name="sign_in_failed">No se pudo iniciar sesión. Compruebe la conexión de red e inténtelo de nuevo.</string>
 <string name="app_misconfigured">La aplicación está configurada incorrectamente. </string>
 <string name="license_failed">Error en la comprobación de la licencia.</string>
 <string name="unknown_error">Error desconocido.</string>
 <string name="UNKNOWN_ERROR">Error desconocido.</string>
-<string name="gamehelper_sign_in_failed">No se pudo iniciar sesión. Compruebe la conexión de red y vuelva a intentarlo.</string>
+<string name="gamehelper_sign_in_failed">No se pudo iniciar sesión. Compruebe la conexión de red e inténtelo de nuevo.</string>
 <string name="gamehelper_app_misconfigured">La aplicación está configurada incorrectamente. </string>
 <string name="gamehelper_license_failed">Error en la comprobación de la licencia.</string>
 <string name="gamehelper_unknown_error">Error desconocido.</string>

@@ -10,6 +10,9 @@
 <string name="button_text_play">Luaj</string>
 <string name="button_text_leaderboard">Fituesit</string>
 <string name="button_text_achievements">Arritjet</string>
+<string name="button_text_yes">po</string>
+<string name="button_text_no">jo</string>
+<string name="button_text_resume">Vazhdoj</string>
 <string name="exit_prompt">Shtypni përsëri për të dalë</string>
 <string name="vibrate_on">Vibrate: Po</string>
 <string name="vibrate_off">Dridhje: Jo</string>
@@ -17,12 +20,12 @@
 <string name="sound_off">Zëri: Po</string>
 <string name="text_header_shape">Shape:</string>
 <string name="tutorial_instructions_1">Tutorial Pjesa 1 \nPër të zgjidhur duhet t\'i lidhësh të gjitha tubat së bashku</string>
-<string name="tutorial_instructions_2">Udhëzues Pjesa 2 \nThoni tubat për të rrotulluar. </string>
+<string name="tutorial_instructions_2">Udhëzuesi Pjesa 2 \nThoni tubat për të rrotulluar. </string>
 <string name="tutorial_instructions_3">Tutorial Pjesa 3 \nKur të gjitha tubacionet janë të lidhura ju fitoni</string>
 <string name="tutorial_instructions_4">Tutorial Pjesa 4 \nThironi gishtin nëse doni të lëvizni bordin</string>
-<string name="tutorial_instructions_5">Pjesa e Tutorial 5 \nJu gjithashtu mund të zmadhoni dhe zvogëloni kur pinni 2 gishta</string>
+<string name="tutorial_instructions_5">Tutorial Pjesa 5 \nJu gjithashtu mund të zmadhoni dhe zvogëloni kur pinni 2 gishta</string>
 <string name="tutorial_instructions_6">Pjesa Tutorial 6 \nZgjidhni magnetin për të aktivizuar rrotullimin e veturës</string>
-<string name="sign_in_other_error">Kishte një problem me hyrjen, ju lutem provoni përsëri më vonë.</string>
+<string name="sign_in_other_error">Kishte një problem me identifikimin, ju lutem provoni përsëri më vonë.</string>
 <string name="sign_in_failed">Dështoi në identifikimin. Kontrollo lidhjen tënde të rrjetit dhe provo përsëri.</string>
 <string name="app_misconfigured">Aplikacioni është konfiguruar gabimisht. </string>
 <string name="license_failed">Kontrolli i licencës dështoi.</string>

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-<string name="app_name">Ikonekta</string>
 <string name="button_text_next">Susunod</string>
 <string name="button_text_rate">Rate</string>
 <string name="button_text_more">Higit pa</string>
@@ -11,17 +10,20 @@
 <string name="button_text_play">Maglaro</string>
 <string name="button_text_leaderboard">Leaderboard</string>
 <string name="button_text_achievements">Mga nagawa</string>
+<string name="button_text_yes">Oo</string>
+<string name="button_text_no">Hindi</string>
+<string name="button_text_resume">Ipagpatuloy</string>
 <string name="exit_prompt">Pindutin muli upang lumabas</string>
-<string name="vibrate_on">Mag-vibrate: Bukas</string>
+<string name="vibrate_on">Mag-vibrate: Sa</string>
 <string name="vibrate_off">Mag-vibrate: Naka-off</string>
 <string name="sound_on">Tunog: Bukas</string>
 <string name="sound_off">Tunog: Sarado</string>
 <string name="text_header_shape">Hugis:</string>
 <string name="tutorial_instructions_1">Tutorial Part 1 \nUpang malutas kailangan mong ikonekta ang lahat ng mga tubo magkasama</string>
-<string name="tutorial_instructions_2">Tutorial Part 2 \nTingnan ang mga pipa upang iikot. </string>
+<string name="tutorial_instructions_2">Tutorial Part 2 \nTingnan ang mga pipa upang paikutin. </string>
 <string name="tutorial_instructions_3">Tutorial Part 3 \nAng lahat ng mga tubo ay nakakonekta sa iyo manalo</string>
 <string name="tutorial_instructions_4">Tutorial Part 4 \nDrag ang iyong daliri kung gusto mong ilipat ang board</string>
-<string name="tutorial_instructions_5">Tutorial Part 5 Maaari ka ring mag-zoom in at out kapag pinch mo ang 2 daliri</string>
+<string name="tutorial_instructions_5">Tutorial Part 5 Maaari mo ring mag-zoom in at out kapag pinch mo ang 2 daliri</string>
 <string name="tutorial_instructions_6">Tutorial Part 6 \nPiliin ang magnet upang paganahin ang auto rotate</string>
 <string name="sign_in_other_error">Nagkaroon ng isyu sa pag-sign in, pakisubukang muli sa ibang pagkakataon.</string>
 <string name="sign_in_failed">Nabigong mag-sign in. Pakitingnan ang iyong koneksyon sa network at subukang muli.</string>

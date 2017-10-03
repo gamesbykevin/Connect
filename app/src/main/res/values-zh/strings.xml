@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-<string name="app_name">连</string>
 <string name="button_text_next">下一个</string>
 <string name="button_text_rate">率</string>
 <string name="button_text_more">更多</string>
@@ -11,6 +10,9 @@
 <string name="button_text_play">玩</string>
 <string name="button_text_leaderboard">排行榜</string>
 <string name="button_text_achievements">成就</string>
+<string name="button_text_yes">是</string>
+<string name="button_text_no">没有</string>
+<string name="button_text_resume">恢复</string>
 <string name="exit_prompt">再按一次退出</string>
 <string name="vibrate_on">振动：开</string>
 <string name="vibrate_off">振动：关</string>

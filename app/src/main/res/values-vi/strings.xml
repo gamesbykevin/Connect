@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-<string name="app_name">Kết nối</string>
 <string name="button_text_next">Kế tiếp</string>
 <string name="button_text_rate">Tỷ lệ</string>
 <string name="button_text_more">Hơn</string>
@@ -11,6 +10,9 @@
 <string name="button_text_play">Chơi</string>
 <string name="button_text_leaderboard">Bảng xếp hạng</string>
 <string name="button_text_achievements">Thành tựu</string>
+<string name="button_text_yes">Vâng</string>
+<string name="button_text_no">Không</string>
+<string name="button_text_resume">Tiếp tục</string>
 <string name="exit_prompt">Nhấn lại để thoát</string>
 <string name="vibrate_on">Rung: Bật</string>
 <string name="vibrate_off">Rung: Tắt</string>
@@ -19,7 +21,7 @@
 <string name="text_header_shape">Hình dạng:</string>
 <string name="tutorial_instructions_1">Hướng dẫn Phần 1 \nĐể giải quyết bạn phải kết nối tất cả các đường ống với nhau</string>
 <string name="tutorial_instructions_2">Hướng dẫn Phần 2 \nTouch các đường ống để xoay. </string>
-<string name="tutorial_instructions_3">Hướng dẫn Phần 3 \nKhi tất cả các ống nối được nối, bạn sẽ thắng</string>
+<string name="tutorial_instructions_3">Hướng dẫn Phần 3 \nKhi tất cả các ống nối được kết nối, bạn sẽ thắng</string>
 <string name="tutorial_instructions_4">Hướng dẫn Phần 4 \nKéo ngón tay của bạn nếu bạn muốn di chuyển bảng</string>
 <string name="tutorial_instructions_5">Hướng dẫn Phần 5 \nBạn cũng có thể phóng to và thu nhỏ khi bạn chụm 2 ngón tay</string>
 <string name="tutorial_instructions_6">Hướng dẫn Phần 6 \nChọn nam châm để bật tự động xoay</string>

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-<string name="app_name">Collegare</string>
 <string name="button_text_next">Il prossimo</string>
 <string name="button_text_rate">Vota</string>
 <string name="button_text_more">Di Più</string>
@@ -11,6 +10,9 @@
 <string name="button_text_play">Giocare</string>
 <string name="button_text_leaderboard">Classifica</string>
 <string name="button_text_achievements">realizzazioni</string>
+<string name="button_text_yes">sì</string>
+<string name="button_text_no">No</string>
+<string name="button_text_resume">Curriculum vitae</string>
 <string name="exit_prompt">Premere nuovamente per uscire</string>
 <string name="vibrate_on">Vibrare: Sì</string>
 <string name="vibrate_off">Vibrare: Spento</string>
@@ -20,17 +22,17 @@
 <string name="tutorial_instructions_1">Tutorial Parte 1 \nPer risolvere dovete collegare insieme tutti i tubi</string>
 <string name="tutorial_instructions_2">Tutorial Parte 2 \nUtilizzare i tubi per ruotare. </string>
 <string name="tutorial_instructions_3">Tutorial Part 3 \nAllora tutti i tubi sono collegati si vince</string>
-<string name="tutorial_instructions_4">Tutorial Parte 4 \nAvanza il dito se si desidera spostare la scheda</string>
+<string name="tutorial_instructions_4">Tutorial Parte 4 \nAvanza il dito se volete spostare la scheda</string>
 <string name="tutorial_instructions_5">Tutorial Parte 5 \nSi puoi anche ingrandire e spegnere quando si pizzicano 2 dita</string>
 <string name="tutorial_instructions_6">Tutorial Part 6 \nSelezionare il magnete per abilitare la rotazione automatica</string>
 <string name="sign_in_other_error">Si è verificato un problema con il login, riprova più tardi.</string>
 <string name="sign_in_failed">Impossibile accedere. Controllare la connessione di rete e riprovare.</string>
 <string name="app_misconfigured">L\'applicazione è configurata in modo errato. </string>
-<string name="license_failed">La verifica della licenza è fallita.</string>
+<string name="license_failed">Il controllo della licenza non è riuscito</string>
 <string name="unknown_error">Errore sconosciuto.</string>
 <string name="UNKNOWN_ERROR">Errore sconosciuto.</string>
 <string name="gamehelper_sign_in_failed">Impossibile accedere. Controllare la connessione di rete e riprovare.</string>
 <string name="gamehelper_app_misconfigured">L\'applicazione è configurata in modo errato. </string>
-<string name="gamehelper_license_failed">La verifica della licenza è fallita.</string>
+<string name="gamehelper_license_failed">Il controllo della licenza non è riuscito</string>
 <string name="gamehelper_unknown_error">Errore sconosciuto.</string>
 </resources>

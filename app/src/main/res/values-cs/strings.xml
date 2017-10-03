@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-<string name="app_name">Připojit</string>
 <string name="button_text_next">další</string>
 <string name="button_text_rate">Hodnotit</string>
 <string name="button_text_more">Více</string>
@@ -11,16 +10,19 @@
 <string name="button_text_play">Hrát si</string>
 <string name="button_text_leaderboard">Leaderboard</string>
 <string name="button_text_achievements">Úspěchy</string>
-<string name="exit_prompt">Dalším stisknutím opustíte</string>
+<string name="button_text_yes">Ano</string>
+<string name="button_text_no">Ne</string>
+<string name="button_text_resume">Životopis</string>
+<string name="exit_prompt">Opětovným stisknutím opustíte</string>
 <string name="vibrate_on">Vibrace: Zapnuto</string>
 <string name="vibrate_off">Vibrace: Vypnuto</string>
 <string name="sound_on">Zvuk: Zapnuto</string>
 <string name="sound_off">Zvuk: Vypnuto</string>
 <string name="text_header_shape">Tvar:</string>
 <string name="tutorial_instructions_1">Výuka Část 1 \nPro řešení musíte spojit všechny potrubí dohromady</string>
-<string name="tutorial_instructions_2">Výuka část 2 \nTouchujte potrubí, aby se otáčely. </string>
+<string name="tutorial_instructions_2">Výuka část 2 \nTouchujte potrubí tak, aby se otáčely. </string>
 <string name="tutorial_instructions_3">Tutorial Part 3 \nJakmile jsou všechny potrubí připojeny, vyhrajete</string>
-<string name="tutorial_instructions_4">Výukový program část 4 \nOdstraňte prst, pokud chcete přesunout desku</string>
+<string name="tutorial_instructions_4">Výuka část 4 \nOdstraňte prst, pokud chcete přesunout desku</string>
 <string name="tutorial_instructions_5">Výuka část 5 \nMůžete také přiblížit a oddálit, když stisknete 2 prsty</string>
 <string name="tutorial_instructions_6">Výuka Část 6 \nVyberte magnet pro automatické otáčení</string>
 <string name="sign_in_other_error">Při přihlášení došlo k problému, zkuste to prosím později.</string>

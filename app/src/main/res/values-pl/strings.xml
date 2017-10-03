@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-<string name="app_name">Połączyć</string>
 <string name="button_text_next">Następny</string>
 <string name="button_text_rate">Oceniać</string>
 <string name="button_text_more">Jeszcze</string>
@@ -11,17 +10,20 @@
 <string name="button_text_play">Grać</string>
 <string name="button_text_leaderboard">Tablica wyników</string>
 <string name="button_text_achievements">Osiągnięcia</string>
+<string name="button_text_yes">tak</string>
+<string name="button_text_no">Nie</string>
+<string name="button_text_resume">Wznawianie</string>
 <string name="exit_prompt">Naciśnij ponownie, aby wyjść</string>
 <string name="vibrate_on">Wibracja: Włącz</string>
 <string name="vibrate_off">Wibracja: Wył</string>
 <string name="sound_on">Dzwięk włączony</string>
 <string name="sound_off">Wyłączyć dzwięk</string>
 <string name="text_header_shape">Kształt:</string>
-<string name="tutorial_instructions_1">Część samouczka 1 \n Aby rozwiązać problem, musisz połączyć wszystkie rury</string>
-<string name="tutorial_instructions_2">Część samouczka 2 \nPodłącz rury, które mają zostać obrócone. </string>
-<string name="tutorial_instructions_3">Część samouczka 3 \nPodłącz wszystkie przewody, które wygrasz</string>
+<string name="tutorial_instructions_1">Część samouczka 1 \n Aby rozwiązać problem, należy połączyć wszystkie rury</string>
+<string name="tutorial_instructions_2">Samouczek Część 2 \nPodłącz rury, które mają zostać obrócone. </string>
+<string name="tutorial_instructions_3">Część samouczka 3 \nPowiedz się, że wszystkie rury są połączone, wygrasz</string>
 <string name="tutorial_instructions_4">Poradnik Część 4 \nWybierz palec, jeśli chcesz przenieść płytę</string>
-<string name="tutorial_instructions_5">Część samouczka 5 \nMożesz też powiększać i pomniejszać, kiedy szczypi się dwoma palcami</string>
+<string name="tutorial_instructions_5">Część samouczka 5 \nMożesz również powiększyć i wysuć, gdy szczypczysz 2 palce</string>
 <string name="tutorial_instructions_6">Samouczek Część 6 \nWybierz magnes, aby włączyć automatyczne obracanie</string>
 <string name="sign_in_other_error">Wystąpił problem z zalogowaniem się, spróbuj ponownie później.</string>
 <string name="sign_in_failed">Nie udało się zalogować. Sprawdź połączenie sieciowe i spróbuj ponownie.</string>

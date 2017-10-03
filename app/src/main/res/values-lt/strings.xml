@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-<string name="app_name">Prisijungti</string>
 <string name="button_text_next">Kitas</string>
 <string name="button_text_rate">Įvertinti</string>
 <string name="button_text_more">Daugiau</string>
@@ -11,6 +10,9 @@
 <string name="button_text_play">Groti</string>
 <string name="button_text_leaderboard">\"Leaderboard\"</string>
 <string name="button_text_achievements">Pasiekimai</string>
+<string name="button_text_yes">Taip</string>
+<string name="button_text_no">Ne</string>
+<string name="button_text_resume">Tęsti</string>
 <string name="exit_prompt">Paspauskite dar kartą, kad išeitumėte</string>
 <string name="vibrate_on">Vibracija: įjungta</string>
 <string name="vibrate_off">Vibracija: išjungta</string>
@@ -18,18 +20,18 @@
 <string name="sound_off">Garsas išjungtas</string>
 <string name="text_header_shape">Figūra:</string>
 <string name="tutorial_instructions_1">Tutorial 1 dalis \nGalite išspręsti, kad turite visus vamzdžius sujungti</string>
-<string name="tutorial_instructions_2">Mokomoji medžiaga, 2 dalis \nPaspauskite vamzdžius pasukti. </string>
+<string name="tutorial_instructions_2">Pamokos dalis 2 \nPaspauskite vamzdžius pasukti. </string>
 <string name="tutorial_instructions_3">Mokomoji medžiaga 3 dalis \nKai visi vamzdžiai yra prijungiami, jūs laiminate</string>
 <string name="tutorial_instructions_4">Tutorial 4 dalis \nDragkite pirštą, jei norite perkelti lentą</string>
-<string name="tutorial_instructions_5">Tutorial dalis 5 \nJūs taip pat galite priartinti ir išmaityti, kai jūs 2 žingsniai</string>
-<string name="tutorial_instructions_6">Tutorial dalis 6 \nPasirinkite magnetą, kad galėtumėte automatiškai pasukti</string>
-<string name="sign_in_other_error">Su prisijungimo problema kilo problema. Bandykite dar kartą vėliau.</string>
-<string name="sign_in_failed">Nepavyko prisijungti. Patikrinkite tinklo ryšį ir bandykite dar kartą.</string>
+<string name="tutorial_instructions_5">Tutorial dalis 5 \nJūs taip pat galite priartinti ir išmaitinti, kai įstrigdote 2 pirštus</string>
+<string name="tutorial_instructions_6">Tutorial dalis 6 \nSirinkite magnetą, kad galėtumėte automatiškai pasukti</string>
+<string name="sign_in_other_error">Su prisijungimo problema kilo. Prašome bandykite dar kartą vėliau.</string>
+<string name="sign_in_failed">Nepavyko prisijungti. Patikrinkite savo tinklo ryšį ir bandykite dar kartą.</string>
 <string name="app_misconfigured">Paraiška neteisingai sukonfigūruota. </string>
 <string name="license_failed">Licencijos patikrinimas nepavyko.</string>
 <string name="unknown_error">Nežinoma klaida.</string>
 <string name="UNKNOWN_ERROR">Nežinoma klaida.</string>
-<string name="gamehelper_sign_in_failed">Nepavyko prisijungti. Patikrinkite tinklo ryšį ir bandykite dar kartą.</string>
+<string name="gamehelper_sign_in_failed">Nepavyko prisijungti. Patikrinkite savo tinklo ryšį ir bandykite dar kartą.</string>
 <string name="gamehelper_app_misconfigured">Paraiška neteisingai sukonfigūruota. </string>
 <string name="gamehelper_license_failed">Licencijos patikrinimas nepavyko.</string>
 <string name="gamehelper_unknown_error">Nežinoma klaida.</string>

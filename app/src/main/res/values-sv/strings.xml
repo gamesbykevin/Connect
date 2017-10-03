@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-<string name="app_name">Ansluta</string>
 <string name="button_text_next">Nästa</string>
 <string name="button_text_rate">Betygsätta</string>
 <string name="button_text_more">Mer</string>
@@ -11,13 +10,16 @@
 <string name="button_text_play">Spela</string>
 <string name="button_text_leaderboard">leaderboard</string>
 <string name="button_text_achievements">Prestationer</string>
+<string name="button_text_yes">Ja</string>
+<string name="button_text_no">Nej</string>
+<string name="button_text_resume">Återuppta</string>
 <string name="exit_prompt">Tryck igen för att avsluta</string>
 <string name="vibrate_on">Vibrera: På</string>
 <string name="vibrate_off">Vibrera: Av</string>
 <string name="sound_on">Ljud: På</string>
 <string name="sound_off">Ljud av</string>
 <string name="text_header_shape">Form:</string>
-<string name="tutorial_instructions_1">Handledning Del 1 \nTill att lösa dig måste du ansluta alla rören tillsammans</string>
+<string name="tutorial_instructions_1">Handledning Del 1 \nFör att lösa dig måste du ansluta alla rören tillsammans</string>
 <string name="tutorial_instructions_2">Handledning Del 2 \nKontrollera rören för att rotera. </string>
 <string name="tutorial_instructions_3">Handledning Del 3 \nNär alla rör är anslutna vinner du</string>
 <string name="tutorial_instructions_4">Handledning Del 4 \nLåt fingret om du vill flytta styrelsen</string>

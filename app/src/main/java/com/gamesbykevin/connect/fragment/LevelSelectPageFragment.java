@@ -168,7 +168,7 @@ public class LevelSelectPageFragment extends Fragment {
      */
     public int getPageNumber() {
         if (resume) {
-            return getSharedPreferences().getInt(getString(R.string.saved_game_level_key), 0);
+            return getSharedPreferences().getInt(getString(R.string.saved_game_page_key), 0);
         } else {
             return pageNumber;
         }
